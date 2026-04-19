@@ -7,637 +7,686 @@ lang: en
 
 <div class="content">
 
-In part 2, we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part, we will take a look at a few other ways.
+### Class Components
 
-### Ready-made UI libraries
+During the course, we have only used React components having been defined as JavaScript functions. This was not possible without the [hook](https://reactjs.org/docs/hooks-intro.html) functionality that came with version 16.8 of React. Before, when defining a component that uses state, one had to define it using JavaScript's [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class) syntax.
 
-One approach to defining styles for an application is to use a ready-made "UI framework".
+It is beneficial to at least be familiar with Class Components to some extent since the world contains a lot of old React code, which will probably never be completely rewritten using the updated syntax.
 
-One of the first widely popular UI frameworks was the [Bootstrap](https://getbootstrap.com/) toolkit created by Twitter which may still be the most popular. Recently, there has been an explosion in the number of new UI frameworks that have entered the arena. The selection is so vast that there is little hope of creating an exhaustive list of options.
+Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are taken from [here](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).
 
-Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes because, in this context, we are not talking about React components. Usually, UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework in the application.
-
-Many UI frameworks have React-friendly versions where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
-
-Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://mui.com/). We will use both frameworks to add similar styles to the application we made in the [React Router](/en/part7/react_router) section of the course material.
-
-### React Bootstrap
-
-Let's start by taking a look at Bootstrap with the help of the [react-bootstrap](https://react-bootstrap.github.io/) package.
-
-Let's install the package with the command:
-
-```bash
-npm install react-bootstrap
-```
-
-Then let's add a [link for loading the CSS stylesheet](https://react-bootstrap.github.io/docs/getting-started/introduction#stylesheets) for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
+The initial version of the Class Component looks like this
 
 ```js
-<head>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-    crossorigin="anonymous"
-  />
-  // ...
-</head>
-```
+import React from 'react'
 
-When we reload the application, we notice that it already looks a bit more stylish:
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
-![browser notes app with bootstrap](../../images/7/5ea.png)
-
-In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
-
-```js
-const App = () => {
-  // ...
-
-  return (
-    <div className="container"> // highlight-line
-      // ...
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+      </div>
+    )
+  }
 }
+
+export default App
 ```
 
-We notice that this already affected the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
+The component now has a [constructor](https://react.dev/reference/react/Component#constructor), in which nothing happens at the moment, and contains the method [render](https://react.dev/reference/react/Component#render). As one might guess, render defines how and what is rendered to the screen.
 
-![browser notes app with margin spacing](../../images/7/6ea.png)
-
-#### Tables
-
-Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/docs/components/table/) component for this purpose, so there is no need to define CSS classes separately.
+Let's define a state for the list of anecdotes and the currently-visible anecdote. In contrast to when using the [useState](https://react.dev/reference/react/useState) hook, Class Components only contain one state. So if the state is made up of multiple "parts", they should be stored as properties of the state. The state is initialized in the constructor:
 
 ```js
-const Notes = ({ notes }) => (
-  <div>
-    <h2>Notes</h2>
-    <Table striped> // highlight-line
-      <tbody>
-        {notes.map(note =>
-          <tr key={note.id}>
-            <td>
-              <Link to={`/notes/${note.id}`}>
-                {note.content}
-              </Link>
-            </td>
-            <td>
-              {note.user}
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </Table>
-  </div>
-)
-```
+class App extends React.Component {
+  constructor(props) {
+    super(props)
 
-The appearance of the application is quite stylish:
-
-![browser notes tab with built-in table](../../images/7/7e.png)
-
-Notice that the React Bootstrap components have to be imported separately from the library as shown below:
-
-```js
-import { Table } from 'react-bootstrap'
-```
-
-#### Forms
-
-Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/).
-
-React Bootstrap provides built-in [components](https://react-bootstrap.github.io/docs/forms/overview/) for creating forms (although the documentation for them is slightly lacking):
-
-```js
-const Login = (props) => {
-  // ...
-  return (
-    <div>
-      <h2>login</h2>
-      <Form onSubmit={onSubmit}>
-        <Form.Group>
-          <Form.Label>username:</Form.Label>
-          <Form.Control
-            type="text"
-            name="username"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>password:</Form.Label>
-          <Form.Control
-            type="password"
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          login
-        </Button>
-      </Form>
-    </div>
-  )
-}
-```
-
-The number of components we need to import increases:
-
-```js
-import { Table, Form, Button } from 'react-bootstrap'
-```
-
-After switching over to the Bootstrap form, our improved application looks like this:
-
-![browser notes app with bootstrap login](../../images/7/8ea.png)
-
-#### Notification
-
-Now that the login form is in better shape, let's take a look at improving our application's notifications:
-
-![browser notes app with bootstrap notification](../../images/7/9ea.png)
-
-Let's add a message for the notification when a user logs into the application. We will store it in the _message_ variable in the <i>App</i> component's state:
-
-```js
-const App = () => {
-  const [notes, setNotes] = useState([
-    // ...
-  ])
-
-  const [user, setUser] = useState(null)
-  const [message, setMessage] = useState(null) // highlight-line
-
-  const login = (user) => {
-    setUser(user)
     // highlight-start
-    setMessage(`welcome ${user}`)
-    setTimeout(() => {
-      setMessage(null)
-    }, 10000)
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
     // highlight-end
   }
+
+  render() {
+  // highlight-start
+    if (this.state.anecdotes.length === 0) {
+      return <div>no anecdotes...</div>
+    }
+  // highlight-end
+
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+        // highlight-start
+        <div>
+          {this.state.anecdotes[this.state.current].content}
+        </div>
+        <button>next</button>
+        // highlight-end
+      </div>
+    )
+  }
+}
+```
+
+The component state is in the instance variable <i>this.state</i>. The state is an object having two properties. <i>this.state.anecdotes</i> is the list of anecdotes and <i>this.state.current</i> is the index of the currently-shown anecdote.
+
+In Functional components, the right place for fetching data from a server is inside an [effect hook](https://react.dev/reference/react/useEffect), which is executed when a component renders or less frequently if necessary, e.g. only in combination with the first render.
+
+The [lifecycle methods](https://react.dev/reference/react/Component#adding-lifecycle-methods-to-a-class-component) of Class Components offer corresponding functionality. The correct place to trigger the fetching of data from a server is inside the lifecycle method [componentDidMount](https://react.dev/reference/react/Component#componentdidmount), which is executed once right after the first time a component renders:
+
+```js
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
+  }
+
+  // highlight-start
+  componentDidMount = () => {
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      this.setState({ anecdotes: response.data })
+    })
+  }
+  // highlight-end
+
   // ...
 }
 ```
 
-We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/docs/components/alerts/):
+The callback function of the HTTP request updates the component state using the method [setState](https://react.dev/reference/react/Component#setstate). The method only touches the keys that have been defined in the object passed to the method as an argument. The value for the key <i>current</i> remains unchanged.
+
+Calling the method setState always triggers the rerender of the Class Component, i.e. calling the method <i>render</i>.
+
+We'll finish off the component with the ability to change the shown anecdote. The following is the code for the entire component with the addition highlighted:
 
 ```js
-<div className="container">
-// highlight-start
-  {(message &&
-    <Alert variant="success">
-      {message}
-    </Alert>
-  )}
-// highlight-end
-  // ...
-</div>
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
+  }
+
+  componentDidMount = () => {
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      this.setState({ anecdotes: response.data })
+    })
+  }
+
+  // highlight-start
+  handleClick = () => {
+    const current = Math.floor(
+      Math.random() * this.state.anecdotes.length
+    )
+    this.setState({ current })
+  }
+  // highlight-end
+
+  render() {
+    if (this.state.anecdotes.length === 0 ) {
+      return <div>no anecdotes...</div>
+    }
+
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+        <div>{this.state.anecdotes[this.state.current].content}</div>
+        <button onClick={this.handleClick}>next</button> // highlight-line
+      </div>
+    )
+  }
+}
 ```
 
-#### Navigation structure
-
-Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/docs/components/navbar/#responsive-behaviors). Through trial and error, we end up with a working solution despite the cryptic documentation:
+For comparison, here is the same application as a Functional component:
 
 ```js
-<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="me-auto">
-      <Nav.Link href="#" as="span">
-        <Link style={padding} to="/">home</Link>
-      </Nav.Link>
-      <Nav.Link href="#" as="span">
-        <Link style={padding} to="/notes">notes</Link>
-      </Nav.Link>
-      <Nav.Link href="#" as="span">
-        <Link style={padding} to="/users">users</Link>
-      </Nav.Link>
-      <Nav.Link href="#" as="span">
-        {user
-          ? <em style={padding}>{user} logged in</em>
-          : <Link style={padding} to="/login">login</Link>
-        }
-      </Nav.Link>
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
-```
-
-The resulting layout has a very clean and pleasing appearance:
-
-![browser notes app bootstrap black navigation bar](../../images/7/10ea.png)
-
-If the viewport of the browser is narrowed, we notice that the menu "collapses" and it can be expanded by clicking the "hamburger" button:
-
-![browser notes app with hamburger menu](../../images/7/11ea.png)
-
-Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes.
-
-Chrome's developer tools make it possible to simulate using our application in the browser of different mobile clients:
-
-![chrome devtools with mobile browser preview of notes app](../../images/7/12ea.png)
-
-You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
-
-### Material UI
-
-As our second example, we will look into the [MaterialUI](https://mui.com/) React library, which implements the [Material Design](https://material.io/) visual language developed by Google.
-
-Install the library with the command
-
-```bash
-npm install @mui/material @emotion/react @emotion/styled
-```
-
-Now let's use MaterialUI to do the same modifications to the code we did earlier with Bootstrap.
-
-Render the contents of the whole application within a [Container](https://mui.com/components/container/):
-
-```js
-import { Container } from '@mui/material'
-
 const App = () => {
-  // ...
-  return (
-    <Container>
-      // ...
-    </Container>
-  )
-}
-```
+  const [anecdotes, setAnecdotes] = useState([])
+  const [current, setCurrent] = useState(0)
 
-#### Table
+  useEffect(() =>{
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      setAnecdotes(response.data)
+    })
+  },[])
 
-Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://mui.com/material-ui/react-table/#simple-table):
+  const handleClick = () => {
+    setCurrent(Math.round(Math.random() * (anecdotes.length - 1)))
+  }
 
-```js
-const Notes = ({ notes }) => (
-  <div>
-    <h2>Notes</h2>
-
-    <TableContainer component={Paper}>
-      <Table>
-        <TableBody>
-          {notes.map(note => (
-            <TableRow key={note.id}>
-              <TableCell>
-                <Link to={`/notes/${note.id}`}>{note.content}</Link>
-              </TableCell>
-              <TableCell>
-                {note.user}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  </div>
-)
-```
-
-The table looks like so:
-
-![browser notes materialUI table](../../images/7/63eb.png)
-
-One less pleasant feature of Material UI is that each component has to be imported separately. The import list for the notes page is quite long:
-
-```js
-import {
-  Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Paper,
-} from '@mui/material'
-```
-
-#### Form
-
-Next, let's make the login form in the <i>Login</i> view better using the [TextField](https://mui.com/material-ui/react-text-field/) and [Button](https://mui.com/material-ui/api/button/) components:
-
-```js
-const Login = (props) => {
-  const navigate = useNavigate()
-
-  const onSubmit = (event) => {
-    event.preventDefault()
-    props.onLogin('mluukkai')
-    navigate('/')
+  if (anecdotes.length === 0) {
+    return <div>no anecdotes...</div>
   }
 
   return (
     <div>
-      <h2>login</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          <TextField label="username" />
-        </div>
-        <div>
-          <TextField label="password" type='password' />
-        </div>
-        <div>
-          <Button variant="contained" color="primary" type="submit">
-            login
-          </Button>
-        </div>
-      </form>
+      <h1>anecdote of the day</h1>
+      <div>{anecdotes[current].content}</div>
+      <button onClick={handleClick}>next</button>
     </div>
   )
 }
 ```
 
-The result is:
+In the case of our example, the differences were minor. The biggest difference between Functional components and Class components is mainly that the state of a Class component is a single object, and that the state is updated using the method <i>setState</i>, while in Functional components the state can consist of multiple different variables, with all of them having their own update function.
 
-![browser notes app materialUI login form](../../images/7/64ea.png)
+In 2026, Class Components are largely a historical artifact. All modern React development uses Functional components with hooks, and there is no rational reason to reach for a Class component when writing new code. The React documentation itself treats Class components as a legacy API.
 
-MaterialUI, unlike Bootstrap, does not provide a component for the form itself. The form here is an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
+### Error boundary
 
-Remember to import all the components used in the form.
+Even though Class Components are largely obsolete, there is one situation where you still cannot avoid them: [error boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary). An error boundary is a component that catches JavaScript errors anywhere in its child component tree and displays a fallback UI instead of crashing the whole application. As of 2026, React has not yet introduced a hook-based alternative for this, so error boundaries must still be implemented as Class components.
 
-#### Notification
-
-The notification displayed on login can be done using the [Alert](https://mui.com/material-ui/react-alert/) component, which is quite similar to Bootstrap's equivalent component:
+An error boundary looks like this:
 
 ```js
-<div>
-// highlight-start
-  {(message &&
-    <Alert severity="success">
-      {message}
-    </Alert>
-  )}
-// highlight-end
-</div>
-```
+import React from 'react'
 
-Alert is quite stylish:
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false, error: null }
+  }
 
-![browser notes app materialUI notifications](../../images/7/65ea.png)
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error }
+  }
 
-#### Navigation structure
+  componentDidCatch(error, info) {
+    console.error('ErrorBoundary caught an error', error, info)
+  }
 
-We can implement navigation using the [AppBar](https://mui.com/material-ui/react-app-bar/) component.
-
-If we use the example code from the documentation
-
-```js
-<AppBar position="static">
-  <Toolbar>
-    <IconButton edge="start" color="inherit" aria-label="menu">
-    </IconButton>
-    <Button color="inherit">
-      <Link to="/">home</Link>
-    </Button>
-    <Button color="inherit">
-      <Link to="/notes">notes</Link>
-    </Button>
-    <Button color="inherit">
-      <Link to="/users">users</Link>
-    </Button>  
-    <Button color="inherit">
-      {user
-        ? <em>{user} logged in</em>
-        : <Link to="/login">login</Link>
-      }
-    </Button>                
-  </Toolbar>
-</AppBar>
-```
-
-we do get working navigation, but it could look better
-
-![browser notes app materialUI blue navbar](../../images/7/66ea.png)
-
-We can find a better way in the [documentation](https://mui.com/material-ui/integrations/routing/#button). We can use [component props](https://mui.com/material-ui/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered.
-
-By defining
-
-```js
-<Button color="inherit" component={Link} to="/">
-  home
-</Button>
-```
-
-the _Button_ component is rendered so that its root component is react-router-dom's _Link_, which receives its path as the prop field _to_.
-
-The code for the navigation bar is the following:
-
-```js
-<AppBar position="static">
-  <Toolbar>
-    <Button color="inherit" component={Link} to="/">
-      home
-    </Button>
-    <Button color="inherit" component={Link} to="/notes">
-      notes
-    </Button>
-    <Button color="inherit" component={Link} to="/users">
-      users
-    </Button>   
-    {user
-      ? <em>{user} logged in</em>
-      : <Button color="inherit" component={Link} to="/login">
-          login
-        </Button>
-    }                              
-  </Toolbar>
-</AppBar>
-```
-
-and it looks like we want it to:
-
-![browser notes app MaterialUI blue nav bar white text](../../images/7/67ea.png)
-
-The code of the application can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
-
-### Closing thoughts
-
-The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.
-I have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's.
-According to <https://www.npmtrends.com/> which tracks the popularity of different npm-libraries, MaterialUI passed react-bootstrap in popularity at the end of 2018:
-
-![npmtrends of materialUI vs bootstrap](../../images/7/68ea.png)
-
-In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
-
-Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) library, we could have just as well used Bootstrap directly by defining CSS classes for our application's HTML elements. Instead of defining the table with the <i>Table</i> component:
-
-```js
-<Table striped>
-  // ...
-</Table>
-```
-
-We could have used a regular HTML <i>table</i> and added the required CSS class:
-
-```js
-<table className="table striped">
-  // ...
-</table>
-```
-
-The benefit of using the React Bootstrap library is not that evident from this example.
-
-In addition to making the frontend code more compact and readable, another benefit of using React UI framework libraries is that they include the JavaScript that is needed to make specific components work. Some Bootstrap components require a few unpleasant [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) that we would prefer not to include in our React applications.
-
-Some potential downsides to using UI frameworks through integration libraries instead of using them "directly" are that integration libraries may have unstable APIs and poor documentation. The situation with [Semantic UI React](https://react.semantic-ui.com) is a lot better than with many other UI frameworks, as it is an official React integration library.
-
-There is also the question of whether or not UI framework libraries should be used in the first place. It is up to everyone to form their own opinion, but for people lacking knowledge in CSS and web design, they are very useful tools.
-
-### Other UI frameworks
-
-Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material for adding it.
-
-- <https://bulma.io/>
-- <https://ant.design/>
-- <https://get.foundation/>
-- <https://chakra-ui.com/>
-- <https://tailwindcss.com/>
-- <https://semantic-ui.com/>
-- <https://mantine.dev/>
-- <https://react.fluentui.dev/>
-- <https://storybook.js.org>
-- <https://www.primefaces.org/primereact/>
-- <https://v2.grommet.io>
-- <https://blueprintjs.com>
-- <https://evergreen.segment.com>
-- <https://www.radix-ui.com/>
-- <https://react-spectrum.adobe.com/react-aria/index.html>
-- <https://master.co/>
-- <https://nextui.org/>
-- <https://daisyui.com/>
-- <https://ui.shadcn.com/>
-- <https://www.tremor.so/>
-- <https://headlessui.com/>
-
-### Styled components
-
-There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at.
-
-The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) that were introduced in ES6.
-
-Let's make a few changes to the styles of our application with the help of styled components. First, install the package with the command:
-
-```bash
-npm install styled-components
-```
-
-Then let's define two components with styles:
-
-```js
-import styled from 'styled-components'
-
-const Button = styled.button`
-  background: Bisque;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid Chocolate;
-  border-radius: 3px;
-`
-
-const Input = styled.input`
-  margin: 0.25em;
-`
-```
-
-The code above creates styled versions of the <i>button</i> and <i>input</i> HTML elements and then assigns them to the <i>Button</i> and <i>Input</i> variables.
-
-The syntax for defining the styles is quite interesting, as the CSS rules are defined inside of backticks.
-
-The styled components that we defined work exactly like regular <i>button</i> and <i>input</i> elements, and they can be used in the same way:
-
-```js
-const Login = (props) => {
-  // ...
-  return (
-    <div>
-      <h2>login</h2>
-      <form onSubmit={onSubmit}>
+  render() {
+    if (this.state.hasError) {
+      return (
         <div>
-          username:
-          <Input /> // highlight-line
+          <h2>Something went wrong.</h2>
+          <p>{this.state.error.message}</p>
+          <button onClick={() => this.setState({ hasError: false, error: null })}>
+            try again
+          </button>
         </div>
-        <div>
-          password:
-          <Input type='password' /> // highlight-line
-        </div>
-        <Button type="submit" primary=''>login</Button> // highlight-line
-      </form>
-    </div>
-  )
+      )
+    }
+
+    return this.props.children
+  }
 }
+
+export default ErrorBoundary
 ```
 
-Let's create a few more components for styling this application which will be styled versions of <i>div</i> elements:
+The two key lifecycle methods are <i>getDerivedStateFromError</i>, which updates state so the next render shows the fallback UI, and <i>componentDidCatch</i>, which is a good place to log the error to an error reporting service.
 
-```js
-const Page = styled.div`
-  padding: 1em;
-  background: papayawhip;
-`
-
-const Navigation = styled.div`
-  background: BurlyWood;
-  padding: 1em;
-`
-
-const Footer = styled.div`
-  background: Chocolate;
-  padding: 1em;
-  margin-top: 1em;
-`
-```
-
-Let's use the components in our application:
+You can wrap any part of your component tree with an error boundary to contain failures to that subtree:
 
 ```js
 const App = () => {
-  // ...
-
   return (
-     <Page> // highlight-line
-      <Navigation> // highlight-line
-        <Link style={padding} to="/">home</Link>
-        <Link style={padding} to="/notes">notes</Link>
-        <Link style={padding} to="/users">users</Link>
-        {user
-          ? <em>{user} logged in</em>
-          : <Link style={padding} to="/login">login</Link>
-        }
-      </Navigation> // highlight-line
-      
-      <Routes>
-        <Route path="/notes/:id" element={<Note note={note} />} />  
-        <Route path="/notes" element={<Notes notes={notes} />} />   
-        <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
-        <Route path="/login" element={<Login onLogin={login} />} />
-        <Route path="/" element={<Home />} />      
-      </Routes>
-
-      <Footer> // highlight-line
-        <em>Note app, Department of Computer Science 2022</em>
-      </Footer> // highlight-line
-    </Page> // highlight-line
+    <div>
+      <ErrorBoundary>
+        <Notes />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Persons />
+      </ErrorBoundary>
+    </div>
   )
 }
 ```
 
-The appearance of the resulting application is shown below:
+If <i>Notes</i> throws an error, only that section shows the fallback. <i>Persons</i> continues to work normally.
 
-![browser notes app styled components](../../images/7/18ea.png)
+Because this is the one remaining use case for Class components, many projects use  the [react-error-boundary](https://github.com/bvaughn/react-error-boundary) library, which wraps the class-based machinery behind a convenient Functional component API so you never have to write a Class component yourself.
 
-Styled components have seen consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles in React applications.
+### Frontend and backend in the same repository
 
-</div>
+During the course, we have created the frontend and backend into separate repositories. This is a very typical approach. However, we did the deployment by [copying](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend) the bundled frontend code into the backend repository. A possibly better approach would have been to deploy the frontend code separately.
 
-<div class="tasks">
+Sometimes the entire application is put into a single repository. A common and clean way to do this with a modern stack is to keep the Vite frontend in a <i>client</i> directory and the Express backend in a <i>server</i> directory, each with their own <i>package.json</i>. The root of the repository gets a third <i>package.json</i> that acts as a convenience wrapper with scripts to run both together.
 
-### Exercises
+A minimal layout of such a [repository](https://github.com/fullstack-hy2020/monorepo) looks like this:
 
-The exercises related to the topics presented here can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
+```
+app/
+  package.json        (root, scripts only)
+  client/
+    package.json      (Vite + React)
+    vite.config.js
+    src/
+      App.jsx
+  server/
+    package.json      (Express)
+    index.js
+```
+
+The Express server in <i>server/index.js</i> serves the API and, in production, also serves the built frontend from the <i>client/dist</i> directory:
+
+```js
+const express = require('express')
+const path = require('path')
+
+const app = express()
+
+app.use(express.json())
+
+app.get('/api/ping', (req, res) => {
+  res.json({ message: 'pong', time: new Date().toISOString() })
+})
+
+// serve the built Vite frontend in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/dist')))
+  app.get('/*splat', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+  })
+}
+
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => console.log(`server running on port ${PORT}`))
+```
+
+During development, the Vite dev server runs on its own port and needs to forward API requests to Express. This is configured in <i>client/vite.config.js</i>:
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3001',
+    },
+  },
+})
+```
+
+With the proxy in place, a frontend fetch to <i>/api/ping</i> is automatically forwarded to the Express server during development, so you never have to hard-code the backend URL.
+
+The root <i>package.json</i> ties everything together with a couple of scripts:
+
+```json
+{
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "NODE_ENV=production npm start --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
+```
+
+There are couple things interesting here.
+
+The <i>dev</i> script uses [concurrently](https://github.com/open-cli-tools/concurrently), a small utility that runs multiple commands at the same time and merges their output into a single terminal stream. Without it you would have to open two separate terminals, one for the backend and one for the frontend. 
+
+The <i>--prefix</i> flag tells npm which subdirectory to treat as the working directory for that command, so <i>npm run dev --prefix server</i> is equivalent to <i>cd server && npm run dev</i>. 
+
+Running <i>npm run dev</i> from the root therefore starts both the Vite dev server and Express in parallel with a single command. In this mode, Vite serves the frontend with hot module replacement: when you edit a React component, the browser updates instantly without a full page reload. The Express server runs separately and the Vite proxy forwards <i>/api</i> requests to it.
+
+Running <i>npm run build</i> compiles the frontend into the <i>client/dist</i> directory. After that, <i>npm start</i> sets <i>NODE_ENV=production</i> and starts Express, which picks up the static files from <i>client/dist</i> and serves both the API and the frontend from a single port. This is the setup you would use when deploying to a server.
+
+Because each part of the project has its own <i>package.json</i>, you need to be explicit about which one you are targeting when installing new packages. The same <i>--prefix</i> flag works for <i>npm install</i> as well:
+
+```bash
+npm install axios --prefix client     # add to the frontend
+npm install mongoose --prefix server  # add to the backend
+```
+
+Alternatively, you can simply <i>cd</i> into the directory and run <i>npm install</i> from there as you normally would.
+
+### Organization of code in React application
+
+In most applications during this course, we followed the convention of placing components in a <i>components</i> directory, hooks in <i>hooks</i>, and server communication code in <i>services</i>. For the BlogList app that might look like this:
+
+```
+src/
+  App.jsx
+  components/
+    Blog.jsx
+    BlogList.jsx
+    LoginForm.jsx
+    Notification.jsx
+  hooks/
+    useField.js
+  services/
+    blogs.js
+    users.js
+  stores/
+    blogStore.js
+    notificationStore.js
+```
+
+This flat, type-based grouping works well for small applications. 
+
+When the app uses routing, it is common to add a <i>pages</i> directory (sometimes called <i>views</i>) for the top-level route components, keeping reusable UI components in <i>components</i>. This convention is used by frameworks such as [Next.js](https://nextjs.org/docs/pages/building-your-application/routing) and is described in the [React FAQ on file structure](https://legacy.reactjs.org/docs/faq-structure.html):
+
+```
+src/
+  App.jsx
+  pages/
+    HomePage.jsx
+    BlogPage.jsx
+    UserPage.jsx
+  components/
+    Blog.jsx
+    BlogList.jsx
+    LoginForm.jsx
+    Notification.jsx
+  hooks/
+    useField.js
+  services/
+    blogs.js
+    users.js
+  stores/
+    blogStore.js
+    notificationStore.js
+```
+
+As the codebase grows further, however, a change to a single feature may still touch files scattered across every directory, and both <i>components</i> and <i>pages</i> can become hard to navigate.
+
+A common response to this is to group files by <i>feature</i> instead. The [Feature-Sliced Design](https://feature-sliced.design/) methodology formalises this approach, and the [bulletproof-react](https://github.com/alan2207/bulletproof-react) project is a widely-referenced example of applying it in practice:
+
+```
+src/
+  App.jsx
+  features/
+    blogs/
+      Blog.jsx
+      BlogList.jsx
+      blogService.js
+      blogStore.js
+    users/
+      UserList.jsx
+      userService.js
+    notifications/
+      Notification.jsx
+      notificationStore.js
+  hooks/
+    useField.js
+```
+
+Everything related to blogs lives together, so adding or changing a feature means working in one place rather than several. There is no single correct way to organize a larger project, and the right choice depends on the size and nature of the application.
+
+### Changes on the server
+
+The applications we build during this course fetch data from the server when the page loads and after user actions, but they have no way of learning about changes made by other users. If a fellow user adds a new blog post, our frontend simply does not know about it until the page is refreshed. How can we keep the UI in sync with a server that changes independently?
+
+The simplest approach is [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)): the frontend repeatedly asks the server for fresh data at a fixed interval, for example using [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval). Polling is easy to implement but wasteful, because most requests return nothing new.
+
+A cleaner alternative is [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), which open a persistent two-way connection between the browser and the server. The server can then push updates to connected clients the moment something changes, without the client having to ask. WebSockets are now supported by all modern browsers.
+
+Working directly with the WebSocket API can be cumbersome. The [Socket.io](https://socket.io/) library wraps it with a higher-level API and adds automatic reconnection and other conveniences.
+
+In [part 8](/en/part8) we look at GraphQL, which includes a subscription mechanism that lets the server notify clients about data changes in a structured way.
+
+### React/node-application security
+
+So far during the course, we have not touched on information security much. We do not have much time for this now either, but fortunately, University of Helsinki has a MOOC course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) for this important topic.
+
+We will, however, take a look at some things specific to this course.
+
+The Open Web Application Security Project, otherwise known as [OWASP](https://www.owasp.org), publishes an annual list of the most common security risks in Web applications. The most recent list can be found [here](https://owasp.org/Top10/). The same risks can be found from one year to another.
+
+At the top of the list, we find <i>injection</i>, which means that e.g. text sent using a form in an application is interpreted completely differently than the software developer had intended. The most famous type of injection is probably [SQL injection](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work).
+
+For example, imagine that the following SQL query is executed in a vulnerable application:
+
+```js
+let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
+```
+
+Now let's assume that a malicious user <i>Arto Hellas</i> would define their name as
+
+```
+Arto Hell-as'; DROP TABLE Users; --
+```
+
+so that the name would contain a single quote <code>'</code>, which is the beginning and end character of a SQL string. As a result of this, two SQL operations would be executed, the second of which would destroy the database table <i>Users</i>:
+
+```sql
+SELECT * FROM Users WHERE name = 'Arto Hell-as'; DROP TABLE Users; --'
+```
+
+SQL injections are prevented using [parameterized queries](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f). With them, user input isn't mixed with the SQL query, but the database itself inserts the input values at placeholders in the query (usually <code>?</code>):
+
+```js
+execute("SELECT * FROM Users WHERE name = ?", [userName])
+```
+
+Injection attacks are also possible in NoSQL databases. However, mongoose prevents them by [sanitizing](https://zanon.io/posts/nosql-injection-in-mongodb) the queries. More on the topic can be found e.g. [here](https://web.archive.org/web/20220901024441/https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
+
+<i>Cross-site scripting (XSS)</i> is an attack where it is possible to inject malicious JavaScript code into a legitimate web application. The malicious code would then be executed in the browser of the victim. If we try to inject the following into e.g. the notes application:
+
+```html
+<script>
+  alert('Evil XSS attack')
+</script>
+```
+
+the code is not executed, but is only rendered as 'text' on the page:
+
+![browser showing notes with XSS attempt](../../images/7/32e.png)
+
+since React [takes care of sanitizing data in variables](https://legacy.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Some versions of React [have been vulnerable](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) to XSS attacks. The security holes have of course been patched, but there is no guarantee that there couldn't be any more.
+
+One needs to remain vigilant when using libraries; if there are security updates to those libraries, it is advisable to update those libraries in one's applications. Security updates for Express are found in the [library's documentation](https://expressjs.com/en/advanced/security-updates.html) and the ones for Node are found in [this blog](https://nodejs.org/en/blog/vulnerability/).
+
+You can check how up-to-date your dependencies are using the command
+
+```bash
+npm outdated --depth 0
+```
+
+The one-year-old project that is used in [part 9](/en/part9) of this course already has quite a few outdated dependencies:
+
+![npm outdated output of patientor](../../images/7/33x.png)
+
+The dependencies can be brought up to date by updating the file <i>package.json</i>. The best way to do that is by using a tool called <i>npm-check-updates</i>. It can be installed globally by running the command:
+
+```bash
+npm install -g npm-check-updates
+```
+
+Using this tool, the up-to-dateness of dependencies is checked in the following way:
+
+```bash
+$ npm-check-updates
+Checking ...\my-app\package.json
+[====================] 11/11 100%
+
+ @testing-library/react       ^14.0.0  →  ^15.0.0
+ @testing-library/user-event  ^14.4.3  →  ^14.5.2
+ react                        ^18.2.0  →  ^19.0.0
+ vite                          ^5.0.0  →   ^6.0.0
+
+Run ncu -u to upgrade package.json
+```
+
+The file <i>package.json</i> is brought up to date by running the command <i>ncu -u</i>.
+
+```bash
+$ ncu -u
+Upgrading ...\my-app\package.json
+[====================] 11/11 100%
+
+ @testing-library/react       ^14.0.0  →  ^15.0.0
+ @testing-library/user-event  ^14.4.3  →  ^14.5.2
+ react                        ^18.2.0  →  ^19.0.0
+ vite                          ^5.0.0  →   ^6.0.0
+
+Run npm install to install new versions.
+```
+
+Then it is time to update the dependencies by running the command <i>npm install</i>. However, old versions of the dependencies are not necessarily a security risk.
+
+The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of dependencies. It compares the version numbers of the dependencies in your application to a list of the version numbers of dependencies containing known security threats in a centralized error database.
+
+Running <i>npm audit</i> on the same project, it prints a long list of complaints and suggested fixes.
+Below is a part of the report:
+
+```js
+$ patientor npm audit
+
+... many lines removed ...
+
+url-parse  <1.5.2
+Severity: moderate
+Open redirect in url-parse - https://github.com/advisories/GHSA-hh27-ffr2-f2jc
+fix available via `npm audit fix`
+node_modules/url-parse
+
+ws  6.0.0 - 6.2.1 || 7.0.0 - 7.4.5
+Severity: moderate
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+fix available via `npm audit fix`
+node_modules/webpack-dev-server/node_modules/ws
+node_modules/ws
+
+120 vulnerabilities (102 moderate, 16 high, 2 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+```
+
+After only one year, the code is full of small security threats. Luckily, there are only 2 critical threats.  Let's run <i>npm audit fix</i> as the report suggests:
+
+```js
+$ npm audit fix
+
++ mongoose@5.9.1
+added 19 packages from 8 contributors, removed 8 packages and updated 15 packages in 7.325s
+fixed 354 of 416 vulnerabilities in 20047 scanned packages
+  1 package update for 62 vulns involved breaking changes
+  (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
+```
+
+62 threats remain because, by default, <i>audit fix</i> does not update dependencies if their <i>major</i> version number has increased.  Updating these dependencies could lead to the whole application breaking down.
+
+The source for the critical bug is the library [immer](https://github.com/immerjs/immer)
+
+```js
+immer  <9.0.6
+Severity: critical
+Prototype Pollution in immer - https://github.com/advisories/GHSA-33f9-j839-rf8h
+fix available via `npm audit fix --force`
+Will install react-scripts@5.0.0, which is a breaking change
+```
+
+Running <i>npm audit fix --force</i> would upgrade the library version but would also upgrade the library <i>react-scripts</i> and that would potentially break down the development environment. So we will leave the library upgrades for later...
+
+One of the threats mentioned in the list from OWASP is <i>Broken Authentication</i> and the related <i>Broken Access Control</i>. The token-based authentication we have been using is fairly robust if the application is being used on the traffic-encrypting HTTPS protocol. When implementing access control, one should e.g. remember to not only check a user's identity in the browser but also on the server. Bad security would be to prevent some actions to be taken only by hiding the execution options in the code of the browser.
+
+On Mozilla's MDN, there is a very good [Website security guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), which brings up this very important topic:
+
+![screenshot of website security from MDN](../../images/7/34.png)
+
+The documentation for Express includes a section on security: [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html), which is worth a read. It is also recommended to add a library called [Helmet](https://helmetjs.github.io/) to the backend. It includes a set of middleware that eliminates some security vulnerabilities in Express applications.
+
+Using the ESlint [security-plugin](https://github.com/nodesecurity/eslint-plugin-security) is also worth doing.
+
+### Current trends
+
+Finally, let's take a look at some technology of tomorrow (or, actually, already today), and the directions in which Web development is heading.
+
+#### Typed versions of JavaScript
+
+The [dynamic typing](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) of JavaScript can lead to subtle bugs that are only discovered at runtime. In part 5, we touched on [PropTypes](/en/part5/props_children_and_proptypes#prop-types) as a way to add runtime type checks to component props, but PropTypes have largely fallen out of use as the ecosystem has moved toward [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking).
+
+[TypeScript](https://www.typescriptlang.org/), developed by Microsoft, has become the de facto standard for typed JavaScript. It catches type errors at compile time rather than at runtime, provides excellent editor tooling, and is now used by the majority of new React projects. TypeScript is covered in [part 9](/en/part9).
+
+#### Server-side rendering and React Server Components
+
+React components do not have to run in the browser. They can also be rendered on the [server](https://react.dev/reference/react-dom/server), which sends ready-made HTML to the client instead of a blank page that JavaScript must fill in. This <i>server-side rendering</i> (SSR) improves perceived load time and is important for Search Engine Optimization (SEO), since search engine crawlers see fully rendered content without having to execute JavaScript.
+
+The more recent and significant development is [React Server Components](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) (RSC), introduced in React 18 and now a core part of the React architecture. A Server Component runs exclusively on the server and is never sent to the browser as JavaScript. It can read directly from a database or file system, keep secrets out of the client bundle, and stream its output to the browser. The browser receives these components as rendered data, not as executable code. <i>Client Components</i>, annotated with <code>'use client'</code>, still run in the browser and handle interactivity as before. In an RSC application most components are Server Components by default, with Client Components used only where user interaction is needed.
+
+[Next.js](https://nextjs.org/) has become the standard framework for building React applications that require server-side behaviour. Its App Router (introduced in Next.js 13) is built around React Server Components and provides file-based routing, nested layouts, server actions for mutating data, and built-in support for static generation and incremental static regeneration. In 2026, Next.js is the first choice for any React project where SSR, SEO, or full-stack capabilities matter.
+
+#### Microservice architecture
+
+During this course, we have only scratched the surface of the server end of things. In our applications, we had a <i>monolithic</i> backend, meaning one application making up a whole and running on a single server, serving only a few API endpoints.
+
+As the application grows, the monolithic backend approach starts turning problematic both in terms of performance and maintainability.
+
+A [microservice architecture](https://martinfowler.com/articles/microservices.html) (microservices) is a way of composing the backend of an application from many separate, independent services, which communicate with each other over the network. An individual microservice's purpose is to take care of a particular logical functional whole. In a pure microservice architecture, the services do not use a shared database.
+
+For example, the bloglist application could consist of two services: one handling the user and another taking care of the blogs. The responsibility of the user service would be user registration and user authentication, while the blog service would take care of operations related to the blogs.
+
+The image below visualizes the difference between the structure of an application based on a microservice architecture and one based on a more traditional monolithic structure:
+
+![microservices vs traditional approach diagram](../../images/7/36.png)
+
+The role of the frontend (enclosed by a square in the picture) does not differ much between the two models. There is often a so-called [API gateway](http://microservices.io/patterns/apigateway) between the microservices and the frontend, which provides an illusion of a more traditional "everything on the same server" API. [Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19), among others, uses this type of approach.
+
+Microservice architectures emerged and evolved for the needs of large internet-scale applications. The trend was set by Amazon far before the appearance of the term microservice. The critical starting point was an email sent to all employees in 2002 by Amazon CEO Jeff Bezos:
+
+> All teams will henceforth expose their data and functionality through service interfaces.
+>
+> Teams must communicate with each other through these interfaces.
+>
+> There will be no other form of inter-process communication allowed: no direct linking, no direct reads of another team’s data store, no shared-memory model, no back-doors whatsoever. The only communication allowed is via service interface calls over the network.
+>
+> It doesn’t matter what technology you use.
+>
+> All service interfaces, without exception, must be designed from the ground up to be externalize-able. That is to say, the team must plan and design to be able to expose the interface to developers in the outside world.
+>
+> No exceptions.
+>
+> Anyone who doesn’t do this will be fired. Thank you; have a nice day!
+
+Nowadays, one of the biggest forerunners in the use of microservices is [Netflix](https://www.infoq.com/presentations/netflix-chaos-microservices).
+
+The use of microservices has steadily been gaining hype to be kind of a [silver bullet](https://en.wikipedia.org/wiki/No_Silver_Bullet) of today, which is being offered as a solution to almost every kind of problem. However, there are several challenges when it comes to applying a microservice architecture, and it might make sense to go [monolith first](https://martinfowler.com/bliki/MonolithFirst.html) by initially making a traditional all-encompassing backend. Or maybe [not](https://martinfowler.com/articles/dont-start-monolith.html). There are a bunch of different opinions on the subject. Both links lead to Martin Fowler's site; as we can see, even the wise are not entirely sure which one of the right ways is more right.
+
+Unfortunately, we cannot dive deeper into this important topic during this course. Even a cursory look at the topic would require at least 5 more weeks.
+
+#### Serverless
+
+After the release of Amazon's [lambda](https://aws.amazon.com/lambda/) service at the end of 2014, a new trend started to emerge in web application development: [serverless](https://serverless.com/).
+
+The main thing about lambda, and nowadays also Google's [Cloud functions](https://cloud.google.com/functions/) as well as [similar functionality in Azure](https://azure.microsoft.com/en-us/services/functions/), is that it enables <i>the execution of individual functions</i> in the cloud. Before, the smallest executable unit in the cloud was a single <i>process</i>, e.g. a runtime environment running a Node backend.
+
+E.g. Using Amazon's [API gateway](https://aws.amazon.com/api-gateway/) it is possible to make serverless applications where the requests to the defined HTTP API get responses directly from cloud functions. Usually, the functions already operate using stored data in the databases of the cloud service.
+
+Serverless is not about there not being a server in applications, but about how the server is defined. Software developers can shift their programming efforts to a higher level of abstraction as there is no longer a need to programmatically define the routing of HTTP requests, database relations, etc., since the cloud infrastructure provides all of this. Cloud functions also lend themselves to creating a well-scaling system, e.g. Amazon's Lambda can execute a massive amount of cloud functions per second. All of this happens automatically through the infrastructure and there is no need to initiate new servers, etc.
+
+### Useful libraries and further reading
+
+The JavaScript developer community has produced a large variety of useful libraries. Before writing something from scratch it is always worth checking whether a well-maintained solution already exists.
+
+You can take advantage of your React know-how when developing mobile applications using [React Native](https://reactnative.dev/), which is the topic of [part 10](/en/part10) of the course.
+
+The course itself continues beyond part 7: [part 8](/en/part8) covers GraphQL, [part 9](/en/part9) TypeScript, [part 10](/en/part10) React Native, [part 11](/en/part11) CI/CD, and [part 12](/en/part12) containers. The full course contents are listed on the [course page](/en/#course-contents).
+
+The following external resources are good places to go deeper on React patterns, code quality, and the broader ecosystem:
+
+- [Patterns.dev](https://www.patterns.dev/) covers modern React and JavaScript patterns in depth. For a curated collection of React-specific techniques, [React bits](https://vasanthk.gitbooks.io/react-bits/) is a useful companion.
+- [Overreacted](https://overreacted.io/) is the blog of Dan Abramov, one of the original React core team members. The articles go deep into React's design decisions and mental models, and are worth reading even when they are a few years old.
+- [Kent C. Dodds](https://kentcdodds.com/blog) writes extensively about React best practices, testing, and component design. His posts on testing philosophy in particular have shaped how the community thinks about frontend tests.
+- [Tao of React](https://alexkondov.com/tao-of-react/) is a short, opinionated guide to structuring React applications that covers components, state, props, and project layout in a pragmatic way.
+- [Reactiflux](https://www.reactiflux.com/) is a large React developer community on Discord, and a good place to ask questions after the course ends. Many open-source libraries maintain their own channels there.
 
 </div>

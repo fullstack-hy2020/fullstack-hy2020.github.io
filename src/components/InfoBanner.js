@@ -16,7 +16,9 @@ const InfoBanner = ({ visible, onHide }) => {
     flexWrap: 'wrap',
     flexDirection: 'row',
     alignContent: 'space-between',
-    backgroundColor: 'var(--color-background)',
+    backgroundColor: '#fff3cd',
+    borderColor: '#ffc107',
+    color: '#5a4000',
     zIndex: 2147483647,
   };
 
@@ -47,19 +49,20 @@ const InfoBanner = ({ visible, onHide }) => {
       <div style={textStyle}>
         <div style={{ marginBottom: 20 }}>
           <div style={{ marginBottom: 10 }}>
-            Material of Part 13 has been moved to <a style={linkStyle} href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases</a>
+            Material of Part 9 has been moved to <a style={linkStyle} 
+                href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript"
+              >
+                https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript
+              </a>
           </div>
           <div style={{ marginBottom: 10 }}>
-            The content and exercises are still same, there is a change how exercises are submitted.
-          </div>
-          <div>
-            The old content is still found <a style={linkStyle} href="https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/7599b17c02b056fcad4f12d8708f0e07980b7564/src/content/13">here</a>. 
+            There are some notable changes in the content. If you have already started this part, and advanced beyond the first exercises, you may continue following the old material, it shall remain here until 1st May 2026.
           </div>
         </div>
       </div>
       <div style={buttonDiv}>
         <button style={buttonStyle} onClick={onHide}>
-          x
+          <div style={textStyle}>x</div>
         </button>
       </div>
     </div>

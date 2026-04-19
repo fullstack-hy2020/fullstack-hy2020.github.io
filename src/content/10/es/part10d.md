@@ -1015,7 +1015,7 @@ Debido a que los componentes con estilo procesan las definiciones de estilo, es 
 
 > react-spring es una librería de animación basada en la física de spring que debería cubrir la mayoría de tus necesidades de animación relacionadas con la interfaz de usuario. Le brinda herramientas lo suficientemente flexibles para transmitir con confianza sus ideas en interfaces móviles.
 
-[React-spring](https://www.react-spring.io/) es una librería que proporciona una [ hook API](https://www.react-spring.io/docs/hooks/basics) limpia para animar componentes React Native.
+[React-spring](https://www.react-spring.dev/) es una librería que proporciona una [ hook API](https://www.react-spring.dev/docs/hooks/basics) limpia para animar componentes React Native.
 
 #### Navegación React
 

@@ -19,22 +19,14 @@ E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampa
 
 Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit saattavat olla epäluotettavia eli englanniksi [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), osa testeistä menee välillä läpi ja välillä ei, vaikka koodissa ei muuttuisi mikään.
 
-Tämän hetken kaksi ehkä helppokäyttöisintä kirjastoa End to End -testaukseen ovat [Cypress](https://www.cypress.io/) ja [Playwright](https://playwright.dev/).
+Tämän hetken kaksi ehkä helppokäyttöisintä kirjastoa End to End -testaukseen ovat [Playwright](https://playwright.dev/) ja [Cypress](https://www.cypress.io/).
 
 Sivun [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) statistiikasta näemme, että Playwright on ohittanut Cypressin latausmäärissä vuoden 2024 aikana ja sen suosio jatkaa edelleen kasvuaan.
-![cypress vs playwright in npm trends](../../images/5/cvsp.png)
+![cypress vs playwright in npm trends](../../images/5/pwc.png)
 
-Tällä kurssilla on jo vuosia käytetty Cypressiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playwrightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. Playwright on kuitenkin nyt kurssin ensisijaisesti suosittelema E2E-kirjasto.
-
-Jos valintasi on Playwright, jatka eteenpäin. Jos päädyt käyttämään Cypressiä, mene [tänne](/osa5/end_to_end_testaus_cypress).
-
-### Playwright
+Tällä kurssilla käytettiin aiemmin Cypressiä, muutama vuosi sitten kurssin valinnaksi tuli Playwrightiin.
 
 [Playwright](https://playwright.dev/) on siis End to end -testien uusi tulokas, jonka suosio lähti vuoden 2023 loppupuolella räjähdysmäiseen nousuun. Playwright on käytön helppoudessa suurin piirtein Cypressin tasolla. Toimintaperiaatteeltaan kirjastot poikkeavat hieman toisistaan.  Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Playwrightin testit taas suoritetaan Node-prosessissa, joka on yhteydessä selaimeen ohjelmointirajapintojen kautta.
-
-Kirjastojen vertailuista on kirjoitettu monia blogeja, esim. [tämä](https://www.lambdatest.com/blog/cypress-vs-playwright/) ja [tämä](https://www.browserstack.com/guide/playwright-vs-cypress).
-
-On vaikea sanoa kumpi kirjastoista on parempi. Eräs Playwrightin etu on sen selaintuki, Playwright tukee Chromea, Firefoxia ja Webkit-pohjaisia selaimia kuten Safaria. Nykyisin Cypress sisältää tuen kaikkiin näihin selaimiin, Webkit-tuki on tosin vasta kokeellinen ja ei tue kaikkia Cypressin ominaisuuksia. Oma preferenssini kallisuu kirjoitushetkellä (1.3.2024) hieman Playwrightin puolelle.
 
 Tutustutaan nyt Playwrightin käyttöön.
 
@@ -1305,7 +1297,5 @@ Tee testi, joka varmistaa, että vain blogin lisännyt käyttäjä näkee blogin
 Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
 
 <i>Tämä tehtävä on edellisiä huomattavasti haastavampi.</i>
-
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

@@ -9,11 +9,11 @@ lang: es
 
 ### Componentes de clase
 
-Durante el curso solo hemos utilizado componentes de React que se han definido como funciones de Javascript. Esto no fue posible sin la funcionalidad de [hooks](https://reactjs.org/docs/hooks-intro.html) que venía con la versión 16.8 de React. Antes, al definir un componente que usa estado, uno tenía que definirlo usando la sintaxis de Javascript de [Clase](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class).
+Durante el curso solo hemos utilizado componentes de React que se han definido como funciones de Javascript. Esto no fue posible sin la funcionalidad de [hook](https://reactjs.org/docs/hooks-intro.html) que llegó con la versión 16.8 de React. Antes, al definir un componente que usa estado, había que hacerlo usando la sintaxis de [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class) de Javascript.
 
 Es beneficioso al menos estar familiarizado con los componentes de clase hasta cierto punto, ya que el mundo contiene una gran cantidad de código React antiguo, que probablemente nunca se reescribirá por completo con la sintaxis actualizada.
 
-Conozcamos las características principales de los componentes de clase produciendo otra aplicación, que ya nos es muy familiar, la de anécdotas. Almacenamos las anécdotas en el archivo<i>db.json</i> usando <i>json-server</i>. El contenido del archivo se extrae de [aquí](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+Conozcamos las principales características de los componentes de clase produciendo otra aplicación de anécdotas, muy familiar para nosotros. Almacenamos las anécdotas en el archivo <i>db.json</i> usando <i>json-server</i>. El contenido del archivo se toma de [aquí](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).
 
 La versión inicial del componente de clase se ve así
 
@@ -39,7 +39,7 @@ export default App
 
 El componente ahora tiene un [constructor](https://react.dev/reference/react/Component#constructor), en el que no sucede nada en este momento, y contiene el método [render](https://react.dev/reference/react/Component#render). Como se puede suponer, render define cómo y qué se renderiza en la pantalla.
 
-Definamos un estado para la lista de anécdotas y la anécdota actualmente visible. A diferencia de cuando se usa el hook [useState](https://reactjs.org/docs/hooks-state.html), los componentes de clase solo contienen un estado. Por tanto, si el estado se compone de varias "partes", deben almacenarse como propiedades del estado. El estado se inicializa en el constructor:
+Definamos un estado para la lista de anécdotas y la anécdota actualmente visible. A diferencia de cuando se usa el hook [useState](https://react.dev/reference/react/useState), los componentes de clase solo contienen un estado. Por tanto, si el estado se compone de varias "partes", deben almacenarse como propiedades del estado. El estado se inicializa en el constructor:
 
 ```js
 class App extends React.Component {
@@ -80,7 +80,7 @@ El estado del componente está en la variable de instancia _this.state_. El esta
 
 En componentes funcionales, el lugar adecuado para obtener datos de un servidor es dentro de un [effect hook](https://react.dev/reference/react/useEffect), que se ejecuta cuando un componente se renderiza o con menos frecuencia si es necesario, por ejemplo, solo en combinación con el primer renderizado.
 
-Los [métodos de ciclo de vida](https://react.dev/reference/react/Component#adding-lifecycle-methods-to-a-class-component) de componentes de clase ofrecen la funcionalidad correspondiente. El lugar correcto para desencadenar la obtención de datos de un servidor es dentro del método de ciclo de vida [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), que se ejecuta una vez justo después de la primera vez que se renderiza un componente:
+Los [métodos de ciclo de vida](https://react.dev/reference/react/Component#adding-lifecycle-methods-to-a-class-component) de los componentes de clase ofrecen la funcionalidad correspondiente. El lugar correcto para desencadenar la obtención de datos de un servidor es dentro del método de ciclo de vida [componentDidMount](https://react.dev/reference/react/Component#componentdidmount), que se ejecuta una vez justo después de que un componente se renderiza por primera vez:
 
 ```js
 class App extends React.Component {
@@ -192,7 +192,7 @@ Un beneficio notable de usar componentes funcionales es no tener que lidiar con 
 
 En mi opinión, y la opinión de muchos otros, los componentes de clase básicamente no ofrecen beneficios sobre los componentes funcionales mejorados con hooks, con la excepción del llamado mecanismo de [error boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary), que actualmente (15 de febrero de 2021) aún no está en uso por componentes funcionales.
 
-Al escribir código nuevo, [no hay ninguna razón racional para usar Componentes de Clase](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) si el proyecto usa React con un número de versión 16.8 o superior. Por otro lado, actualmente [no hay necesidad de reescribir todo el código React antiguo](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) como componentes funcionales.
+Al escribir código nuevo, [no hay ninguna razón racional para usar componentes de clase](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) si el proyecto usa React con una versión 16.8 o superior. Por otro lado, [actualmente no hay necesidad de reescribir todo el código React antiguo](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) como componentes funcionales.
 
 ### Organización del código en la aplicación de React
 
@@ -247,12 +247,6 @@ Cuando el estado de la aplicación cambia, los componentes definen un <i>nuevo v
 Es posible que en el material no hayamos puesto suficiente énfasis en el hecho de que React es principalmente una librería para administrar la creación de vistas para una aplicación. Si nos fijamos en el patrón de [Modelo Vista Controlador](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador) tradicional, entonces el dominio de React sería la <i>Vista</i>. React tiene un área de aplicación más estrecha que, por ejemplo, [Angular](https://angular.io/), que es un framework de Frontend MVC que lo abarca todo. Por lo tanto, React no es un <i>framework</i>, sino que es una <i>librería</i>.
 
 En aplicaciones pequeñas, los datos manejados por la aplicación se almacenan en el estado de los componentes de React, por lo que en este escenario el estado de los componentes se puede considerar como <i>modelos</i> de una arquitectura MVC.
-
-Sin embargo, la arquitectura MVC no se suele mencionar cuando se habla de aplicaciones React. Además, si usamos Redux, las aplicaciones siguen la arquitectura [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview/) y el papel de React se centra aún más en la creación de vistas. La lógica de negocio de la aplicación se maneja utilizando los creadores de acciones y estados de Redux. Si usamos [Redux Thunk](/es/part6/comunicarse_con_el_servidor_en_una_aplicacion_redux#acciones-asincronas-y-redux-thunk), que vimos en la parte 6, entonces la lógica de negocio puede separarse casi por completo del código de React.
-
-Debido a que tanto React como [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview/) fueron creados en Facebook, se podría decir que usar React solo como una librería de UI es el caso de uso previsto. Seguir la arquitectura Flux agrega un poco de complejidad a la aplicación, y si estamos hablando de una pequeña aplicación o prototipo, podría ser una buena idea usar React "incorrectamente", ya que la [sobre-ingeniería](https://es.wikipedia.org/wiki/Sobreingenier%C3%ADa) rara vez produce un resultado óptimo.
-
-El ultimo capítulo de la [parte 6](/es/part6/react_query_use_reducer_y_el_contexto) cubre las nuevas tendencias de gestión de estado en React. Las funciones de hooks de React <i>useReducer</i> y <i>useContext</i> proporcionan una versión liviana de Redux. <i>React Query</i>, por otro lado, es una librería que resuelve muchos de los problemas asociados con el manejo del estado en el servidor, eliminando la necesidad de que una aplicación React almacene los datos obtenidos del servidor directamente en el estado del frontend.
 
 ### Seguridad en aplicaciones React/node
 

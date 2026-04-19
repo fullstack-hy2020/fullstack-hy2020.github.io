@@ -6,6 +6,6 @@ lang: fi
 
 <div class="intro">
 
-Kurssin yhdestoista, CI/CD:tä käsittelevä osa löytyy [englanninkielisestä kurssimateriaalista](/en/part11).
+Osan materiaali siirtynyt osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration</a>
 
 </div>

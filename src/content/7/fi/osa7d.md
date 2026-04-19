@@ -7,26 +7,34 @@ lang: fi
 
 <div class="content">
 
-React oli alkuaikoina jossain määrin kuuluisa siitä, että sovelluskehityksen edellyttämien työkalujen konfigurointi oli hyvin hankalaa. Tilannetta helpottamaan kehitettiin [Create React App](https://github.com/facebookincubator/create-react-app):in, joka poisti konfigurointiin liittyvät ongelmat. Kurssillakin käytettävä [Vite](https://vitejs.dev/) on viime aikoina korvannut Create React Appin uusissa sovelluksissa.
+React oli alkuaikoina tunnettu siitä, että sovelluskehityksen työkalujen konfigurointi oli hyvin hankalaa. Tilanteen helpottamiseksi kehitettiin [Create React App](https://github.com/facebookincubator/create-react-app), joka poisti konfigurointiin liittyvät ongelmat. Tällä kurssilla käytettävä [Vite](https://vitejs.dev/) on sittemmin syrjäyttänyt Create React Appin uusien React-sovellusten konfiguroinnin standardina.
 
-Sekä Vite että Create React App hyödyntävät varsinaisen työn tekemiseen <i>bundlereita</i>. Tutustumme nyt Create React Appin käyttämään [Webpack](https://webpack.js.org/)-nimiseen bundleriin. Webpack oli vuosia ylivoimaisesti suosituin bundler-ohjelmisto. Viime aikoina on kuitenkin syntynyt useita uuden sukupolven bundlereita kuten Viten käyttämä [esbuild](https://esbuild.github.io/), jotka ovat Webpackia huomattavasti nopeampia ja helppokäyttöisempiä. Esim. esbuildista kuitenkin puuttuu vielä eräitä hyödyllisiä ominaisuuksia (kuten selaimessa olevan koodin hotreload), joten tutustumme seuraavassa bundlereiden vanhaan hallitsijaan Webpackiin.
+Sekä Vite että Create React App käyttävät <i>bundlereita</i> varsinaiseen työhön. Tässä osiossa tarkastelemme lähemmin, mitä bundlerit oikeastaan tekevät, miten Vite toimii konepellin alla ja miten sitä voidaan konfiguroida eri tilanteisiin. Tutustumme lyhyesti myös [esbuildiin](https://esbuild.github.io/), matalan tason bundleriin, jota Vite itse käyttää sisäisest.
+
+> #### Entä Webpack?
+>
+> [Webpack](https://webpack.js.org/) oli hallitseva bundleri suurimman osan 2010-luvusta ja se on edelleen vanhemmissa projekteissa. Myös tämä kurssi käsitteli Webpackia kevääseen 2026 asti.
+>
+> Uuden projektin käynnistämistä Webpackilla vuonna 2026 ei kuitenkaan suositella. Sen konfigurointi on monimutkaista, ja modernit työkalut kuten Vite tarjoavat huomattavasti paremman kehittäjäkokemuksen. Webpack-konfiguraatiota ei käsitellä tällä kurssilla.
 
 ### Bundlaus
 
-Olemme toteuttaneet sovelluksia jakamalla koodin moduuleihin, joita on <i>importattu</i> niitä tarvitseviin paikkoihin. Vaikka ES6-moduulit ovatkin JavaScript-standardissa määriteltyjä, eivät vanhemmat selaimet vielä osaa käsitellä moduuleihin jaettua koodia.
+Olemme toteuttaneet sovelluksia jakamalla koodin moduuleihin, joita on importattu niitä tarvitseviin paikkoihin. Vaikka ES6-moduulit ovatkin JavaScript-standardissa määriteltyjä, eivät vanhemmat selaimet vielä osaa käsitellä moduuleihin jaettua koodia.
 
-Selainta varten moduuleissa oleva koodi <i>bundlataan</i>, eli siitä muodostetaan yksittäinen, kaiken koodin sisältävä tiedosto. Kun veimme Reactilla toteutetun frontendin tuotantoon osan 3 luvussa [Frontendin tuotantoversio](/osa3/sovellus_internetiin#frontendin-tuotantoversio), suoritimme bundlauksen komennolla _npm run build_. Konepellin alla kyseinen npm-skripti suorittaa bundlauksen, ja tuloksena on joukko hakemistoon <i>dist</i> sijoitettavia tiedostoja:
+Tästä syystä moduuleihin jaettu koodi <i>bundlataan</i> tuotantoa varten, eli lähdekooditiedostot muunnetaan ja yhdistetään optimoiduksi yksittäiseksi, kaiken koodin sisältäväksi tiedostoksi.
+
+Kun aiemmissa osissa suoritimme komennon <i>npm run build</i>, Vite suoritti tämän bundlauksen. Tulos löytyy <i>dist</i>-hakemistosta:
 
 ```
 ├── assets
-│   ├── index-d526a0c5.css
-│   ├── index-e92ae01e.js
-│   └── react-35ef61ed.svg
+│   ├── index-d526a0c5.css
+│   ├── index-e92ae01e.js
+│   └── react-35ef61ed.svg
 ├── index.html
 └── vite.svg
 ```
 
-Hakemiston dist juuressa oleva sovelluksen "päätiedosto" <i>index.html</i> lataa <i>script</i>-tagin avulla bundlatun JavaScript-tiedoston:
+Juuressa oleva <i>index.html</i> lataa bundlatun JavaScriptin <i>script</i>-tagilla:
 
 ```html
 <!doctype html>
@@ -36,185 +44,96 @@ Hakemiston dist juuressa oleva sovelluksen "päätiedosto" <i>index.html</i> lat
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
-    <script type="module" crossorigin src="/assets/index-e92ae01e.js"></script>
-    <link rel="stylesheet" href="/assets/index-d526a0c5.css">
+    <script type="module" crossorigin src="/assets/index-e92ae01e.js"></script> // highlight-line
+    <link rel="stylesheet" href="/assets/index-d526a0c5.css">  // highlight-line
   </head>
   <body>
     <div id="root"></div>
-    
   </body>
 </html>
 ```
 
 Kuten esimerkistä näemme, Vitellä tehdyssä sovelluksessa bundlataan JavaScriptin lisäksi sovelluksen CSS-määrittelyt tiedostoon <i>/assets/index-d526a0c5.csss</i>.
 
-Käytännössä bundlaus tapahtuu siten, että sovelluksen JavaScriptille määritellään alkupiste, usein tiedosto <i>index.js</i>, ja bundlauksen yhteydessä webpack ottaa mukaan kaiken koodin mitä alkupiste importtaa, importattujen koodien importtaamat koodit jne.
+Käytännössä bundlaus tapahtuu siten, että sovelluksen JavaScriptille määritellään alkupiste, joka on Vite-sovelluksissa tiedosto <i>main</i>.js, ja bundlauksen yhteydessä Vite ottaa mukaan kaiken koodin mitä alkupiste importtaa, importattujen koodien importtaamat koodit jne.
 
 Koska osa importeista on kirjastoja kuten React, Redux tai Axios, bundlattuun JavaScript-tiedostoon tulee myös kaikkien näiden sisältö.
 
-> Vanha tapa jakaa sovelluksen koodi moneen tiedostoon perustui siihen, että <i>index.html</i> latasi kaikki sovelluksen tarvitsemat erilliset JavaScript-tiedostot script-tagien avulla. Tämä on kuitenkin tehotonta, sillä jokaisen tiedoston lataaminen aiheuttaa pienen overheadin ja pääosin nykyään suositaankin koodin bundlaamista yksittäiseksi tiedostoksi.
+> Vanha tapa jakaa sovelluksen koodi moneen tiedostoon perustui siihen, että index.html latasi kaikki sovelluksen tarvitsemat erilliset JavaScript-tiedostot script-tagien avulla. Tämä on kuitenkin tehotonta, sillä jokaisen tiedoston lataaminen aiheuttaa pienen overheadin ja pääosin nykyään suositaankin koodin bundlaamista yksittäiseksi tiedostoksi.
 
-Tehdään nyt React-projektille sopiva webpack-konfiguraatio kokonaan käsin.
+### Miten Vite toimii
 
-Luodaan projektia varten hakemisto ja sen sisälle hakemistot (<i>build</i> ja <i>src</i>) sekä seuraavat tiedostot:
+Vitellä on kaksi selvästi erilaista toiminnallista moodia.
+
+**Kehitystila** (<i>npm run dev</i>) ei bundlaa koodiasi lainkaan. Sen sijaan Vite käynnistää kehitysserverin, joka tarjoaa lähdekooditiedostot natiiveina ES-moduuleina suoraan selaimelle, jotka moderni selain pystyy importata. Tästä syystä Vite käynnistyy erittäin nopeasti projektin koosta riippumatta.
+
+Poikkeuksen muodostavat sovelluksen riippuvuudet, jota bundlataan esbuildin avulla. Tämä ratkaisee kaksi ongelmaa: monet npm-paketit ovat edelleen CommonJS-muodossa (jota selaimet eivät voi käyttää natiivisti), ja jotkut kirjastot koostuvat sadoista pienistä sisäisistä tiedostoista, jotka muuten aiheuttaisivat satoja erillisiä pyyntöjä. esbuild muuntaa ja yhdistelee ne, tallentaa tuloksen levylle välimuistiin, ja seuraavat käynnistykset ovat lähes välittömiä.
+
+**Tuotantotila** (<i>npm run build</i>) käyttää [Rollup](https://rollupjs.org/)ia bundlaukseen esbuildin hoitaessa edelleen muita tehtäviä kuten transpilointia (JSX, TypeScript) ja minifiointia. Rollup on suunniteltu alusta alkaen ES-moduuleille, ja sisältää useita optimointeja, jotka voivat merkittävästi pienentää bundlen kokoa.
+
+Vastuunjako, esbuild nopeudesta, Rollup bundlen laadusta, on keskeinen osa Viten suunnittelua.
+
+> Saatat miettiä, miksi Vite ei käytä esbuildia myös tuotantobundlaukseen, ottaen huomioon kuinka nopea se on. Syy on se, että esbuildin bundlauksen tulos, vaikkakin oikea, tuottaa heikommin optimoituja tuloksia haastavimmissa konfiguraatioissa. Rollupin tulos on ennustettavampaa ja paremmin viritettyä todellisten sovellusten monimutkaisille riippuvuusgraafeille. Viten tekijät [ovat ilmoittaneet](https://vitejs.dev/guide/why.html#why-not-bundle-with-esbuild) aikovansa siirtyä esbuildiin tuotantobundlauksessa, kun esbuild on kehittynyt riittävästi.
+
+### esbuildiin tutustuminen
+
+Jotta saamme paremman käsityksen bundlaamisesta ja siihen liittyvästä, rakennetaan minimaalinen React-ympäristö käyttäen [esbuildia](https://esbuild.github.io/).
+
+
+Luodaan ensin yksinkertainen React-sovellus seuraavalla hakemistorakenteella:
 
 ```
-├── build
-├── package.json
+├── dist
+│   └── index.html
 ├── src
-│   └── index.js
-└── webpack.config.js
+│   ├── index.jsx
+│   └── App.jsx
+└── package.json
 ```
 
-Tiedoston <i>package.json</i> sisältö voi olla esim. seuraava:
-
-```json
-{
-  "name": "webpack-osa7",
-  "version": "0.0.1",
-  "description": "practising webpack",
-  "scripts": {},
-  "license": "MIT"
-}
-```
-
-Asennetaan webpack:
-
-```js
-npm install --save-dev webpack webpack-cli
-```
-
-Webpackin toiminta konfiguroidaan tiedostoon <i>webpack.config.js</i>. Laitetaan sen alustavaksi sisällöksi seuraava:
-
-```js
-const path = require('path')
-
-const config = () => {
-  return {
-    entry: './src/index.js',
-    output: {
-      path: path.resolve(__dirname, 'build'),
-      filename: 'main.js'
-    }
-  }
-}
-
-module.exports = config
-```
-
-**Huom:** määrittely olisi mahdollista tehdä funktion sijaan myös suoraan oliona:
-
-```js
-const path = require('path')
-
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js'
-  }
-}
-
-module.exports = config
-```
-
-Olio riittää monissa tilanteissa, mutta tulemme myöhemmin tarvitsemaan tiettyjä ominaisuuksia, jotka edellyttävät sen että määrittely on tehty funktiona.
-
-Määritellään sitten npm-skripti <i>build</i>, jonka avulla bundlaus suoritetaan:
-
-```js
-// ...
-"scripts": {
-  "build": "webpack --mode=development"
-},
-// ...
-```
-
-Lisätään hieman koodia tiedostoon <i>src/index.js</i>:
-
-```js
-const hello = name => {
-  console.log(`hello ${name}`)
-}
-```
-
-Kun nyt suoritamme komennon _npm run build_, webpack bundlaa koodin. Tuloksena on hakemistoon <i>build</i> sijoitettava tiedosto <i>main.js</i>:
-
-![](../../images/7/19x.png)
-
-Tiedostossa on paljon erikoisen näköistä tavaraa. Lopussa on mukana myös kirjoittamamme koodi:
-
-```js
-eval("const hello = name => {\n  console.log(`hello ${name}`)\n}\n\n//# sourceURL=webpack://webpack-osa7/./src/index.js?");
-```
-
-Lisätään hakemistoon <i>src</i> tiedosto <i>App.js</i> ja sille sisältö:
-
-```js
-const App = () => {
-  return null
-}
-
-export default App
-```
-
-Importataan moduuli <i>App</i> ja käytetään sitä tiedostossa <i>index.js</i>:
-
-```js
-import App from './App';
-
-const hello = name => {
-  console.log(`hello ${name}`)
-}
-
-App()
-```
-
-Kun nyt suoritamme bundlauksen komennolla _npm run build_, huomaamme webpackin havainneen molemmat tiedostot:
-
-![](../../images/7/20x.png)
-
-Kirjoittamamme koodi löytyy erittäin kryptisesti muotoiltuna bundlen lopusta:
-
-![](../../images/7/20z.png)
-
-### Konfiguraatiotiedosto
-
-Katsotaan nyt tarkemmin konfiguraation <i>webpack.config.js</i> tämänhetkistä sisältöä:
-
-```js
-const path = require('path')
-
-const config = () => {
-  return {
-    entry: './src/index.js',
-    output: {
-      path: path.resolve(__dirname, 'build'),
-      filename: 'main.js'
-    }
-  }
-}
-
-module.exports = config
-```
-
-Konfiguraatio on JavaScriptia ja tapahtuu eksporttaamalla määrittelyt palauttava funktio Noden moduulisyntaksilla.
-
-Tämänhetkinen minimaalinen määrittely on aika ilmeinen. Kenttä [entry](https://webpack.js.org/concepts/#entry) kertoo sen tiedoston, mistä bundlaus aloitetaan.
-
-Kenttä [output](https://webpack.js.org/concepts/#output) taas kertoo minne muodostettu bundle sijoitetaan. Kohdehakemisto täytyy määritellä <i>absoluuttisena polkuna</i>, mikä onnistuu helposti [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths)-metodilla. [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) on Noden globaali muuttuja, joka viittaa nykyiseen hakemistoon.
-
-### Reactin bundlaaminen
-
-Muutetaan sitten sovellus minimalistiseksi React-sovellukseksi. Asennetaan tarvittavat kirjastot:
+Asennetaan ensin React ja <i>react-dom</i>:
 
 ```bash
 npm install react react-dom
 ```
 
-Liitetään tavanomaiset loitsut tiedostoon <i>index.js</i>
+Asennetaan myös <i>esbuild</i>:
 
-```js
+```bash
+npm install --save-dev esbuild
+```
+
+Lisätään aluksi kaksi skriptiä <i>package.json</i>-tiedostoon:
+
+```json
+{
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --outfile=dist/main.js --jsx=automatic",
+    "serve": "npx serve dist"
+  },
+  // ...
+}
+```
+
+Sovellusta varten tarvitaan tiedoston <i>dist/index.html</i>, joka lataa JavaScript-bundlen:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>esbuild app</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./main.js"></script>
+  </body>
+</html>
+```
+
+Sovelluksen "sisääntulopiste", eli <i>src/main.jsx</i> on vanha tuttu:
+
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
@@ -222,15 +141,18 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-ja muutetaan <i>App.js</i> muotoon
+Yksinkertainen sovelluskomponentti <i>src/App.jsx</i> on seuraavanlainen:
 
-```js
-import React from 'react' // tarvitsemme importin nyt myös kompontentin määrittelyn yhteydessä
+```jsx
+import React, { useState } from 'react'
 
 const App = () => {
+  const [counter, setCounter] = useState(0)
+
   return (
     <div>
-      hello webpack
+      <p>count: {counter}</p>
+      <button onClick={() => setCounter(counter + 1)}>increment</ button>
     </div>
   )
 }
@@ -238,640 +160,263 @@ const App = () => {
 export default App
 ```
 
-Tarvitsemme sovellukselle myös "pääsivuna" toimivan tiedoston <i>build/index.html</i>, joka lataa <i>script</i>-tagin avulla bundlatun JavaScriptin:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>React App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/javascript" src="./main.js"></script>
-  </body>
-</html>
-```
-
-Kun bundlaamme sovelluksen, törmäämme kuitenkin ongelmaan:
-
-![](../../images/7/21x.png)
-
-### Loaderit
-
-Webpack mainitsee, että saatamme tarvita <i>loaderin</i> tiedoston <i>App.js</i> käsittelyyn. Webpack ymmärtää itse vain JavaScriptia, ja vaikka se saattaa meiltä matkan varrella olla unohtunutkin, käytämme Reactia ohjelmoidessamme [JSX](https://facebook.github.io/jsx/):ää näkymien renderöintiin, eli esim. seuraava
-
-```js
-const App = () => {
-  return (
-    <div>
-      hello webpack
-    </div>
-  )
-}
-```
-
-ei ole "normaalia" JavaScriptia, vaan JSX:n tarjoama syntaktinen oikotie määritellä <i>div</i>-tagia vastaava React-elementti.
-
-[Loaderien](https://webpack.js.org/concepts/loaders/) avulla on mahdollista kertoa webpackille miten tiedostot tulee käsitellä ennen niiden bundlausta.
-
-Määritellään projektiimme Reactin käyttämän JSX:n normaaliksi JavaScriptiksi muuntava loaderi:
-
-```js
-const path = require('path')
-
-const config = () => {
-  return {
-    entry: './src/index.js',
-    output: {
-      path: path.resolve(__dirname, 'build'),
-      filename: 'main.js'
-    },
-      // highlight-start
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-react'],
-          },
-        },
-      ],
-    },
-      // highlight-end
-  }
-}
-
-module.exports = config
-```
-
-Loaderit määritellään kentän <i>module</i> alle sijoitettavaan taulukkoon <i>rules</i>.
-
-Yksittäisen loaderin määrittely on kolmiosainen:
-
-```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  options: {
-    presets: ['@babel/preset-react']
-  }
-}
-```
-
-Kenttä <i>test</i> määrittelee, että käsitellään <i>.js</i>-päätteisiä tiedostoja. Kenttä <i>loader</i> kertoo, että käsittely tapahtuu [Babel Loader](https://github.com/babel/babel-loader):illa. Kenttä <i>options</i> taas antaa loaderille sen toimintaa ohjaavia parametreja.
-
-Asennetaan loader ja sen tarvitsemat kirjastot <i>kehitysaikaisiksi riippuvuuksiksi</i>:
-
-```js
-npm install @babel/core babel-loader @babel/preset-react --save-dev
-```
-
-Nyt bundlaus onnistuu.
-
-Jos katsomme bundlattua koodia ja editoimme hieman koodin ulkoasua, huomaamme, että komponentti <i>App</i> on muuttunut muotoon
-
-```js
-const App = () =>
-  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-    'div',
-    null,
-    'hello webpack'
-  )
-```
-
-Eli JSX-syntaksin sijaan komponentit luodaan pelkällä JavaScriptilla käyttäen Reactin funktiota [createElement](https://reactjs.org/docs/react-without-jsx.html).
-
-Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i> selaimen <i>open file</i> ‑toiminnolla:
-
-![](../../images/7/22.png)
-
-On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i>-toiminnallisuutta, selaimeen ei joillain selaimilla renderöidy mitään. [Konsoliin tulostuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Ongelma korjaantuu asentamalla kirjastot [core-js](https://www.npmjs.com/package/core-js) ja [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime)
+Nyt voimme bundlata sovelluksen:
 
 ```bash
-npm install core-js regenerator-runtime
+npm run build
 ```
 
-ja importtaamalla ne tiedostossa <i>index.js</i>:
+Tulostus on yksittäinen <i>dist/main.js</i>-tiedosto, joka sisältää sovelluksen lähdekoodin yhdessä React-kirjaston kanssa bundlattuna.
 
-```js
-import 'core-js/stable/index.js'
-import 'regenerator-runtime/runtime.js'
+Voimme suorittaa bundlatun sovelluksen komennolla <i>npm run serve</i>. Komento käyttää [serve](https://www.npmjs.com/package/serve)-pakettia käynnistääkseen paikallisen staattisten tiedostojen palvelimen <i>dist</i>-hakemistolle, jolloin sovellus on saatavilla osoitteessa <i>http://localhost:3000</i>:
+
+![](../../images/7/es1.png)
+
+esbuild tukee myös [minifiointia](https://en.wikipedia.org/wiki/Minification_(programming)) komentoriviparametrien avulla. Minifiointi poistaa koodista välilyönnit ja kommentit, lyhentää muuttujanimiä ja soveltaa muita kokooptimointeja. Bundle on huomattavan suuri, koska se sisältää koko React-kirjaston. Minifiointi pienentää sen kokoa merkittävästi.
+
+Otetaan nyt käyttöön minifiointi:
+
+```json
+{
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --minify --outfile=dist/main.js --jsx=automatic",  // highlight-line
+    "serve": "npx serve dist"
+  }
+}
 ```
 
-Tässä on jo melkein kaikki mitä tarvitsemme React-sovelluskehitykseen.
+Minifiointi pienentää bundlen koon noin 1,1 megatavusta noin 190 kilotavuun, pienennys on siis merkittävä!
+
+Minifioinnissa on kuitenkin haittapuoli. Jos sovellus aiheuttaa suoritusaikaisen virheen, selaimen kehittäjätyökalut viittaavat minifioituun koodiin, jota on lähes mahdoton lukea:
+
+![](../../images/7/es2.png)
+
+Ratkaisu on [source map](https://developer.mozilla.org/en-US/docs/Glossary/Source_map) eli oheistiedosto (<i>dist/main.js.map</i>), joka tallentaa, miten jokainen minifioidun bundlen rivi vastaa alkuperäistä lähdekoodia. Kun se on käytössä, virheilmotus viittaa minifioidun koodin lukukelvottoman koodin sijaan bundlaamattomaan lähdekoodiin.
+
+Voimme ottaa source mapit käyttöön lisäämällä <i>--sourcemap</i>-lipun:
+
+```json
+{
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --minify --sourcemap --outfile=dist/main.js --jsx=automatic",  // highlight-line
+    "serve": "npx serve dist"
+  }
+}
+```
+
+Nyt virhe on ymmärrettävä:
+
+![](../../images/7/es3.png)
+
+Huomaa, että source mapit ovat todella hyödyllisiä kehityksen ja debuggauksen aikana, mutta ne kannattaa yleensä jättää pois julkisesta tuotantobuildista. Koska source map sisältää alkuperäisen lähdekoodin, kuka tahansa, joka avaa selaimen kehittäjätyökalut, voi lukea minifioimattoman koodin. Jos tästä on haittaa, tulee <i>--sourcemap</i>-valinta jättää pois tuotantobuild-komennosta.
 
 ### Transpilaus
 
-Prosessista, joka muuttaa JavaScriptia muodosta toiseen käytetään englanninkielistä termiä [transpiling](https://en.wiktionary.org/wiki/transpile), joka taas on termi, joka viittaa koodin kääntämiseen (compile) sitä muuntamalla (transform). Suomenkielisen termin puuttuessa käytämme prosessista tällä kurssilla nimitystä <i>transpilaus</i>.
+Bundlauksen ohella esbuild suorittaa myös toisen keskeisen tehtävän: <i>transpilauksen</i>. Transpilaus tarkoittaa lähdekoodin muuntamista yhdestä JavaScript-muodosta toiseen, tyypillisesti modernista tai laajennetusta syntaksista tavalliseksi JavaScriptiksi, jonka selaimet voivat suorittaa.
 
-Edellisen luvun konfiguraation avulla siis <i>transpiloimme</i> JSX:ää sisältävän JavaScriptin normaaliksi JavaScriptiksi tämän hetken johtavan työkalun [Babelin](https://babeljs.io/) avulla.
+Selaimet ymmärtävät tavallista JavaScriptiä, mutta JSX ei ole kelvollista JavaScriptiä, yksikään selain ei voi suorittaa sitä suoraan. Jos koodissa on esimerkiksi
 
-Kuten osassa 1 jo mainittiin, läheskään kaikki selaimet eivät vielä osaa JavaScriptin uusimpien versioiden ES6:n ja ES7:n ominaisuuksia, ja tämän takia koodi yleensä transpiloidaan käyttämään vanhempaa JavaScript-syntaksi ES5:ttä.
+```jsx
+const element = <App />
+```
 
-Babelin suorittama transpilointiprosessi määritellään <i>pluginien</i> avulla. Käytännössä useimmiten käytetään valmiita [presetejä](https://babeljs.io/docs/plugins/) eli useamman sopivan pluginin joukkoja.
-
-Tällä hetkellä sovelluksemme transpiloinnissa käytetään presetiä [@babel/preset-react](https://babeljs.io/docs/plugins/preset-react/):
+tulee koodi transpiloida sellaiseen muotoon, jonka selain voi suorittaa:
 
 ```js
+const element = React.createElement(App, null)
+```
+
+Tästä syystä transpilaus on pakollinen vaihe kaikissa React-projekteissa, ei valinnainen optimointi. esbuild suorittaa sen automaattisesti bundlauksen yhteydessä. <i>--jsx=automatic</i>-valinnan ansiosta esbuild käsittelee JSX:n ilman ulkoisia työkaluja. Vanhassa Webpack-pohjaisessa työnkulussa piti asentaa ja konfiguroida [Babel](https://babeljs.io/) ja siihen liittyvät paketit JSX:n transpilointia varten. esbuildilla <i>.jsx</i>-päätteiset tiedostot transpiloidaan automaattisesti.
+
+### Kehitysympäristö
+
+Sovelluskehitys onnistuu jo, mutta development workflow on suorastaan hirveä. Muutosten jälkeen koodi on bundlattava komennolla <i>npm run build</i> ja selain uudelleenladattava jos haluamme testata koodia.
+
+esbuildin sisäänrakennettu [kehitysserveri](https://esbuild.github.io/api/#serve) ratkaisee ongelman. Lisätään <i>dev</i>-skripti <i>package.json</i>-tiedostoon:
+
+```json
 {
-  test: /\.js$/,
-  loader: 'babel-loader',
-  options: {
-    presets: ['@babel/preset-react'] // highlight-line
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --minify --sourcemap --outfile=dist/main.js --jsx=automatic",
+    "serve": "npx serve dist",
+    "dev": "esbuild src/main.jsx --bundle --outfile=dist/main.js --jsx=automatic --servedir=./dist --watch" // highlight-line
   }
 }
 ```
 
-Otetaan käyttöön preset [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/), joka sisältää kaiken hyödyllisen, minkä avulla uusimman standardin mukainen koodi saadaan transpiloitua ES5-standardin mukaiseksi koodiksi:
+Komennon <i>npm run dev</i> suorittaminen tekee saa aikaan kaksi asiaa. Ensinnäkin [--watch](https://esbuild.github.io/api/#watch) käskee esbuildia tarkkailemaan kaikkia importattuja lähdekooditiedostoja muutosten varalta ja rakentamaan bundlen automaattisesti uudelleen aina kun jokin niistä tallennetaan. Toiseksi [--servedir](https://esbuild.github.io/api/#serve) käynnistää HTTP-palvelimen, joka tarjoaa <i>dist</i>-hakemiston sisällön, eli <i>index.html</i>:n ja juuri rakennetun <i>main.js</i>:n – osoitteessa <i>http://localhost:8000</i>.
+
+<i>--servedir</i>-valinta on se, joka saa molemmat osat toimimaan yhdessä: ilman sitä esbuild vain rakentaisi uuden bundlen uudelleen watch-tilassa. Sen kanssa palvelin tarjoaa aina viimeisimmän bundlen, joten sovelluskehittäjän tarvitsee vain päivittää selain tiedoston tallentamisen jälkeen.
+
+Huomaa, että toisin kuin Viten kehitysserveri, esbuild ei tue hot module reloadia. Lähdekoodin muutokset vaativat manuaalisen selaimen päivityksen tullakseen voimaan.
+
+Nyt  meillä on selkeämpi käsitys siitä, mitä bundlaus ja transpilaus perimmiltään tarkoittavat, palataan Viten pariin ja katsotaan vielä, muutamia tapoja sen konfigurointiin.
+
+### Viten konfigurointi
+
+Suurimmassa osassa React-projekteja Vite toimii ilman minkäänlaista konfigurointia. Kun käyttäytymistä kuitenkin täytyy mukauttaa, se tapahtuu muokkaamalla tiedostoa <i>vite.config.js</i>.
+
+Minimaalinen Vite-konfiguraatio React-projektille näyttää tältä:
 
 ```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  options: {
-    presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
-  }
-}
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+})
 ```
 
-Preset asennetaan komennolla
+<i>@vitejs/plugin-react</i>-plugin  mahdollistaa JSX-syntaksin käsittelyn, nopean uudelleenlatauksen (hot module replacement, joka säilyttää komponenttien tilan päivitysten välillä) sekä muut React-kehitykseen tarvittavat ominaisuudet.
+
+#### Kehitysserverin konfigurointi
+
+Kehitysserverin portin ja muita asetuksia voidaan konfiguroida <i>server</i>-avaimen alla:
 
 ```js
-npm install @babel/preset-env --save-dev
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+    open: true,        // avaa selain automaattisesti
+  },
+})
 ```
 
-Kun nyt transpiloimme koodin, muuttuu se vanhan koulukunnan JavaScriptiksi. Komponentin <i>App</i> määrittely näyttää seuraavalta:
+#### API-pyyntöjen proxytys
+
+Paikallisessa kehityksessä React-sovellus pyörii tyypillisesti yhdessä portissa (esim. 3000) ja backend toisessa (esim. 3001). Selaimen same-origin-policy estäisi normaalisti pyyntöjen tekemisen niiden välillä. Viten proxy-asetus ratkaisee tämän ilman CORS-konfigurointia backendissä:
 
 ```js
-var App = function App() {
-  return _react2.default.createElement('div', null, 'hello webpack')
-};
-```
-
-Muuttujan määrittely tapahtuu avainsanan _var_ avulla, sillä ES5 ei tunne avainsanaa _const_. Myöskään nuolifunktiot eivät ole käytössä, joten funktiomäärittely käyttää avainsanaa _function_.
-
-### CSS
-
-Lisätään sovellukseemme hieman CSS:ää. Tehdään tiedosto <i>src/index.css</i>:
-
-```css
-.container {
-  margin: 10;
-  background-color: #dee8e4;
-}
-```
-
-Määritellään tyyli käytettäväksi komponentissa <i>App</i>
-
-```js
-const App = () => {
-  return (
-    <div className="container">
-      hello webpack
-    </div>
-  )
-}
-```
-
-ja importataan se tiedostossa <i>index.js</i>:
-
-```js
-import './index.css'
-```
-
-Transpilointi hajoaa:
-
-![](../../images/7/23x.png)
-
-CSS:ää varten onkin otettava käyttöön [css](https://webpack.js.org/loaders/css-loader/)- ja [style](https://webpack.js.org/loaders/style-loader/)-loaderit:
-
-```js
-{
-  rules: [
-    {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      options: {
-        presets: ['@babel/preset-react', '@babel/preset-env'],
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
       },
     },
-    // highlight-start
-    {
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader'],
-    },
-    // highlight-end
-  ];
+  },
+})
+```
+
+Tällä konfiguraatiolla Viten kehitysserveri välittää automaattisesti kaikki React-sovelluksen tekemät pyynnöt esim. osoitteeseen <i>/api/notes</i> osoitteeseen <i>http://localhost:3001/api/notes</i>. Frontend-koodin ei koskaan tarvitse sisällyttää <i>localhost:3001</i>-osoitetta URL-osoitteisiinsa kehityksen aikana.
+
+#### Ympäristömuuttujat
+
+Vitellä on sisäänrakennettu tuki ympäristömuuttujille <i>.env</i>-tiedostojen avulla.
+
+Luodaan <i>.env</i>-tiedosto projektin juureen:
+
+```
+VITE_BACKEND_URL=http://localhost:3001/api/notes
+```
+
+Ja <i>.env.production</i>-tiedosto tuotantoarvoille:
+
+```
+VITE_BACKEND_URL=https://myapp.fly.dev/api/notes
+```
+
+Kaikkien selaimelle näkyvien ympäristömuuttujien täytyy alkaa etuliitteellä <i>VITE_</i>. Muuttujat ilman tätä etuliitettä pysyvät vain palvelinpuolella, eikä niitä sisällytetä bundleen. Tämä on tietoinen turvallisuustoimenpide, joka estää salaisuuksien vahingollisen vuotamisen.
+
+Muuttujaan pääsee käsiksi sovelluskoodissa <i>import.meta.env</i>:n kautta:
+
+```js
+const App = () => {
+  const notes = useNotes(import.meta.env.VITE_BACKEND_URL)
+
+  return (
+    <div>
+      {notes.length} notes on server {import.meta.env.VITE_BACKEND_URL}
+    </div>
+  )
 }
 ```
 
-[css-loaderin](https://webpack.js.org/loaders/css-loader/) tehtävänä on ladata <i>CSS</i>-tiedostot, ja [style-loader](https://webpack.js.org/loaders/style-loader/) generoi koodiin CSS:t sisältävän <i>style</i>-elementin.
+Vite valitsee automaattisesti oikean <i>.env</i>-tiedoston moden perusteella:
 
-Näin konfiguroituna CSS-määrittelyt sisällytetään sovelluksen JavaScriptin sisältävään tiedostoon <i>main.js</i>. Sovelluksen päätiedostossa <i>index.html</i> ei siis ole tarvetta erikseen ladata CSS:ää.
+- <i>npm run dev</i> käyttää tiedostoja <i>.env</i> ja <i>.env.development</i>
+- <i>npm run build</i> käyttää tiedostoja <i>.env</i> ja <i>.env.production</i>
 
-CSS voidaan tarpeen vaatiessa myös generoida omaan tiedostoonsa esim. [mini-css-extract-pluginin](https://github.com/webpack-contrib/mini-css-extract-plugin) avulla.
+#### Transpilaus
 
-Kun loaderit asennetaan
+Vite hoitaa koodin transpilauksen automaattisesti. Kehityksen aikana esbuild transpiloi TypeScript- ja JSX-koodisi tarpeen mukaan. Se on tarpeeksi nopea tekemään tämän tiedostokohtaisesti ilman havaittavaa viivettä. Tuotantobuildien aikana Rollup hoitaa bundlauksen esbuildin hoitaessa transpilauksen.
 
-```js
-npm install style-loader css-loader --save-dev
+Viten oletustranspilointikohde on modernit selaimet, jotka tukevat natiiveja ES-moduuleita (Chrome 87+, Firefox 78+, Safari 14+, Edge 88+). Jos on tarvetta tukea vanhempia selaimia, on mahdollista konfiguroida kohde eksplisiittisesti ja lisätä <i>@vitejs/plugin-legacy</i>-pluginin:
+
+```bash
+npm install --save-dev @vitejs/plugin-legacy
 ```
 
-bundlaus toimii taas ja sovellus saa uudet tyylit.
-
-### Webpack-dev-server
-
-Sovelluskehitys onnistuu jo, mutta development workflow on suorastaan hirveä (alkaa jo muistuttaa Javalla tapahtuvaa sovelluskehitystä...). Muutosten jälkeen koodi on bundlattava ja selain uudelleenladattava jos haluamme testata koodia.
-
-Ratkaisun tarjoaa [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server). Asennetaan se komennolla
-
 ```js
-npm install --save-dev webpack-dev-server
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import legacy from '@vitejs/plugin-legacy'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    legacy({
+      targets: ['defaults', 'not IE 11'],
+    }),
+  ],
+})
 ```
 
-Määritellään dev-serverin käynnistävä npm-skripti:
+Legacy-plugin generoi automaattisesti erillisen bundlen vanhemmille selaimille Babelin avulla.
+
+#### CSS
+
+Vite käsittelee CSS:n ilman minkäänlaista konfigurointia, kun CSS-tiedosto importataan JavaScriptistä:
 
 ```js
-{
-  // ...
-  "scripts": {
-    "build": "webpack --mode=development",
-    "start": "webpack serve --mode=development" // highlight-line
-  },
-  // ...
-}
-```
-
-Lisätään tiedostoon <i>webpack.config.js</i> kenttä <i>devServer</i>:
-
-```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js',
-  },
-  // highlight-start
-  devServer: {
-    static: path.resolve(__dirname, 'build'),
-    compress: true,
-    port: 3000,
-  },
-  // highlight-end
-  // ...
-};
-```
-
-Komento _npm start_ käynnistää nyt dev-serverin porttiin, eli sovelluskehitys tapahtuu avaamalla tuttuun tapaan selain osoitteeseen <http://localhost:3000>. Kun teemme koodiin muutoksia, reloadaa selain automaattisesti itsensä.
-
-Päivitysprosessi on nopea, sillä dev-serveriä käytettäessä webpack ei bundlaa koodia normaaliin tapaan tiedostoksi <i>main.js</i>, vaan bundlauksen tuotos on olemassa ainoastaan keskusmuistissa.
-
-Laajennetaan koodia muuttamalla komponentin <i>App</i> määrittelyä seuraavasti:
-
-```js
-import React, { useState } from 'react'
 import './index.css'
-
-const App = () => {
-  const [counter, setCounter] = useState(0)
-
-  return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={() => setCounter(counter + 1)}>
-        press
-      </button>
-    </div>
-  )
-}
-
-export default App
 ```
 
-Sovellus toimii hyvin ja kehitys on melko sujuvaa.
+Vite käsittelee sen ja sisällyttää sen buildiin. Tuotannossa CSS extraktoidaan erilliseen tiedostoon. Kehityksen aikana se injektoidaan <i>&lt;style&gt;</i>-tagien kautta hot reload -tuella.
 
-### Sourcemappaus
+Vite tukee myös natiivisti [CSS Moduleita](https://github.com/css-modules/css-modules) sekä CSS-esiprosesoreja kuten [Sass](https://sass-lang.com/).
 
-Erotetaan napin klikkauksenkäsittelijä omaksi funktiokseen ja talletetaan tilaan <i>values</i> laskurin aiemmat arvot:
+#### Minifiointi
+
+Komennon <i>npm run build</i> suorituksen yhteydessä Vite minifioi muodostettavan bundlen. Minifiointi poistaa välilyönnit ja kommentit, lyhentää muuttujanimiä ja soveltaa muita kokooptimointeja. Tuloksena on paljon pienempi tiedosto, joka latautuu nopeammin selaimessa.
+
+Vite käyttää esbuildia JavaScript-minifiointiin ja sisäänrakennettua CSS-minifioijaa tyylitiedostoille.
+
+#### Source mapit
+
+Kehityksessä Vite generoi source mapit automaattisesti. Tuotantobuildeja varten ne voidaan ottaa käyttöön eksplisiittisesti:
 
 ```js
-const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState() // highlight-line
-
-  const handleClick = () => {
-    setCounter(counter + 1)
-    setValues(values.concat(counter)) // highlight-line
-  }
-
-  return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={handleClick}> // highlight-line
-        press
-      </button>
-    </div>
-  )
-}
-```
-
-Sovellus ei enää toimi, ja konsoli kertoo virheestä:
-
-![](../../images/7/25.png)
-
-Tiedämme tietenkin nyt, että virhe on metodissa onClick, mutta jos olisi kyse suuremmasta sovelluksesta, on virheilmoitus sikäli hyvin ikävä, että sen ilmoittama paikka
-
-```
-App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
-    at handleClick (App.js:27)
-```
-
-ei vastaa alkuperäisen koodin virheen sijaintia. Jos klikkaamme virheilmoitusta, huomaamme, että näytettävä koodi on jotain ihan muuta kuin kirjoittamamme koodi:
-
-![](../../images/7/26.png)
-
-Haluamme tietenkin, että virheilmoitusten yhteydessä näytetään kirjoittamamme koodi.
-
-Korjaus on onneksi hyvin helppo. Pyydetään webpackia generoimaan bundlelle ns. [source map](https://webpack.js.org/configuration/devtool/), jonka avulla bundlea suoritettaessa tapahtuva virhe on mahdollista <i>mäpätä</i> alkuperäisen koodin vastaavaan kohtaan.
-
-Source map saadaan generoitua lisäämällä konfiguraatioon kenttä <i>devtool</i> ja sen arvoksi 'source-map':
-
-```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    // ...
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    sourcemap: true,
   },
-  devServer: {
-    // ...
-  },
-  devtool: 'source-map', // highlight-line
-  // ..
-};
+})
 ```
 
-Konfiguraatioiden muuttuessa webpack tulee käynnistää uudelleen. On tosin mahdollista konfiguroida webpack tarkkailemaan konfiguraatioiden muutoksia, mutta emme tee sitä.
+#### Pluginit
 
-Nyt virheilmoitus on hyvä
+Viten toiminnallisuutta laajennetaan [plugineilla](https://vite.dev/plugins/). Plugin-ekosysteemi on kasvanut nopeasti ja kattaa useimmat yleiset tarpeet. Joitakin laajasti käytettyjä plugineja ovat:
 
-![](../../images/7/27.png)
+- <i>@vitejs/plugin-react</i> — React-tuki (JSX, fast refresh)
+- <i>@vitejs/plugin-legacy</i> — vanhojen selainten tuki
+- <i>vite-plugin-svgr</i> — SVG-tiedostojen importtaus React-komponentteina
+- <i>rollup-plugin-visualizer</i> — bundlen koon analyysi
 
-sillä se viittaa itse kirjoittamaamme koodiin:
+Pluginit määritellään <i>plugins</i>-taulukossa <i>vite.config.js</i>-tiedostossa. Ne noudattavat samaa rajapintaa kuin Rollup-pluginit, joten monet Rollup-pluginit toimivat myös Vitessä.
 
-![](../../images/7/27eb.png)
+#### Polyfillsit
 
-Source mapin käyttö mahdollistaa myös Chromen debuggerin luontevan käytön:
+<i>Polyfill</i> on koodi, joka toteuttaa ominaisuuden selaimille, jotka eivät sitä natiivisti tue. Transpilaus yksin ei riitä ominaisuuksille, jotka ovat syntaktisesti kelvollisia mutta toteuttamattomia. Esimerkiksi selain saattaa jäsentää <i>Promise</i>n oikein mutta sillä ei ole toteutusta sille.
 
-![](../../images/7/28.png)
+Vitessä polyfillit hoitaa <i>@vitejs/plugin-legacy</i>-plugin, joka sisällyttää automaattisesti tarvittavat polyfillit selainkohteidesi perusteella. 
 
-Korjataan bugi alustamalla tila <i>values</i> tyhjäksi taulukoksi:
-
-```js
-const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState([])
-  // ...
-}
-```
-
-### Koodin minifiointi
-
-Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon <i>main.js</i> webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston <i>main.js</i> koko 1009487 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 1009487 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
-
-Tiedoston sisältöä tarkastelemalla huomaa, että tiedostoa voisi optimoida huomattavasti koon suhteen esim. poistamalla kommentit. Tiedostoa ei kuitenkaan kannata lähteä optimoimaan käsin, sillä tarkoitusta varten on olemassa monia työkaluja.
-
-JavaScript-tiedostojen optimointiprosessista käytetään nimitystä <i>minifiointi</i>. Alan johtava työkalu tällä hetkellä lienee [UglifyJS](http://lisperator.net/uglifyjs/).
-
-Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen. Riittää, että muutetaan tiedoston <i>package.json</i> määrittelyä siten, että koodin bundlaus tapahtuu <i>production</i>-moodissa:
-
-```json
-{
-  "name": "webpack-osa7",
-  "version": "0.0.1",
-  "description": "practising webpack",
-  "scripts": {
-    "build": "webpack --mode=production", // highlight-line
-    "start": "webpack serve --mode=development"
-  },
-  "license": "MIT",
-  "dependencies": {
-    // ...
-  },
-  "devDependencies": {
-    // ...
-  }
-}
-```
-
-Kun sovellus bundlataan uudelleen, pienenee tuloksena oleva <i>main.js</i> mukavasti:
-
-```js
-$ ls -l build/main.js
--rw-r--r--  1 mluukkai  ATKK\hyad-all  146237 Feb  7 15:58 build/main.js
-```
-
-Minifioinnin lopputulos on kuin vanhan liiton C-koodia. Kommentit ja jopa turhat välilyönnit ja rivinvaihdot on poistettu ja muuttujanimet ovat yksikirjaimisia:
-
-```js
-function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s&&s[f].run();f=-1,t=c.length}s=null,d=!1,function(e){if(o===clearTimeout)return clearTimeout(e);if((o===l||!o)&&clearTimeout)return o=clearTimeout,clearTimeout(e);try{o(e)}catch(t){try{return o.call(null,e)}catch(t){return o.call(this,e)}}}(e)}}a.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)
-```
-
-### Sovelluskehitys- ja tuotantokonfiguraatio
-
-Lisätään sovellukselle backend. Käytetään jo tutuksi käynyttä muistiinpanoja tarjoavaa palvelua.
-
-Talletetaan seuraava sisältö tiedostoon <i>db.json</i>:
-
-```json
-{
-  "notes": [
-    {
-      "important": true,
-      "content": "HTML is easy",
-      "id": "5a3b8481bb01f9cb00ccb4a9"
-    },
-    {
-      "important": false,
-      "content": "Mongo can save js objects",
-      "id": "5a3b920a61e8c8d3f484bdd0"
-    }
-  ]
-}
-```
-
-Tarkoituksena on konfiguroida sovellus webpackin avulla siten, että paikallisesti sovellusta kehitettäessä käytetään backendina portissa 3001 toimivaa JSON Serveriä.
-
-Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <https://notes2023.fly.dev/api/notes> olevaa backendia.
-
-Asennetaan <i>Axios</i>, käynnistetään JSON Server ja tehdään tarvittavat lisäykset sovellukseen. Vaihtelun vuoksi muistiinpanojen hakeminen palvelimelta on toteutettu [custom hookin](/osa7/custom_hookit) _useNotes_ avulla:
-
-```js
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-
-// highlight-start
-const useNotes = (url) => {
-  const [notes, setNotes] = useState([])
-
-  useEffect(() => {
-    axios.get(url).then(response => {
-      setNotes(response.data)
-    })
-  }, [url])
-
-  return notes
-}
-// highlight-end
-
-const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState([])
-  const url = 'https://notes2023.fly.dev/api/notes'
-  const notes = useNotes(url) // highlight-line
-
-  const handleClick = () => {
-    setCounter(counter + 1)
-    setValues(values.concat(counter))
-  }
-
-  return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
-      <div>{notes.length} notes on server {url}</div> // highlight-line
-    </div>
-  )
-}
-
-export default App
-```
-
-Koodissa on nyt kovakoodattuna sovelluskehityksessä käytettävän palvelimen osoite. Miten saamme osoitteen hallitusti muutettua osoittamaan Internetissä olevaan backendiin bundlatessamme koodin?
-
-Webpackin konfiguraatiofunktiolla on kaksi parametria, <i>env</i> ja <i>argv</i>, joista jälkimmäisen avulla saamme selville npm-skriptissä määritellyn <i>moden</i>:
-
-```js
-const path = require('path')
-
-const config = (env, argv) => { // highlight-line
-  console.log('argv.mode:', argv.mode)
-  return {
-    // ...
-  }
-}
-
-module.exports = config
-```
-
-Nyt voimme siis halutessamme säätää Webpackin toimimaan eri tavalla riippuen siitä onko sovelluksen käyttöympäristö eli "mode" arvoltaan production vai development.
-
-Webpackin [DefinePlugin](https://webpack.js.org/plugins/define-plugin/):in avulla voimme määritellä globaaleja <i>vakioarvoja</i>, joita on mahdollista käyttää bundlattavassa koodissa. Määritellään nyt vakio <i>BACKEND\_URL</i>, joka saa eri arvon riippuen siitä ollaanko kehitysympäristössä vai tehdäänkö tuotantoon sopivaa bundlea:
-
-```js
-const path = require('path')
-const webpack = require('webpack') // highlight-line
-
-const config = (env, argv) => {
-  console.log('argv.mode:', argv.mode)
-
-  // highlight-start
-  const backend_url = argv.mode === 'production'
-    ? 'https://notes2023.fly.dev/api/notes'
-    : 'http://localhost:3001/notes'
-  // highlight-end
-
-  return {
-    entry: './src/index.js',
-    output: {
-      path: path.resolve(__dirname, 'build'),
-      filename: 'main.js'
-    },
-    devServer: {
-      static: path.resolve(__dirname, 'build'),
-      compress: true,
-      port: 3000,
-    },
-    devtool: 'source-map',
-    module: {
-      // ...
-    },
-    // highlight-start
-    plugins: [
-      new webpack.DefinePlugin({
-        BACKEND_URL: JSON.stringify(backend_url)
-      })
-    ]
-    // highlight-end
-  }
-}
-
-module.exports = config
-```
-
-Määriteltyä vakiota käytetään koodissa seuraavasti:
-
-```js
-const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState([])
-  const notes = useNotes(BACKEND_URL) // highlight-line
-
-  // ...
-  return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
-      <div>{notes.length} notes on server {BACKEND_URL}</div> // highlight-line
-    </div>
-  )
-}
-```
-
-Nyt siis jos sovellus on käynnistetty komennolla _npm start_ development-moodissa, hakee se muistiinpanot osoitteesta http://localhost:3001/notes. Komennolla _npm run build_ bundlattu versio taas käyttää osoitetta https://notes2023.fly.dev/api/notes muistiinpanojen hakemiseen.
-
-Jos kehitys- ja tuotantokonfiguraatio eriytyvät paljon, saattaa olla hyvä idea [eriyttää konfiguraatiot](https://webpack.js.org/guides/production/) omiin tiedostoihinsa.
-
-Tuotantoversiota eli bundlattua sovellusta on mahdollista kokeilla lokaalisti suorittamalla komento
-
-```js
-npx static-server
-```
-
-hakemistossa <i>build</i>, jolloin sovellus käynnistyy oletusarvoisesti osoitteeseen <http://localhost:9080>.
-
-### Polyfill
-
-Sovelluksemme on valmis ja toimii muiden selaimien kohtuullisen uusilla versiolla, mutta Internet Explorerilla sovellus ei toimi. Syynä tähän on se, että _Axiosin_ ansiosta koodissa käytetään [Promiseja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), mutta mikään IE:n versio ei kuitenkaan niitä tue:
-
-![](../../images/7/29.png)
-
-On paljon muitakin standardissa määriteltyjä asioita, joita IE ei tue. Esim. niinkin harmiton komento kuin taulukoiden [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) ylittää IE:n kyvyt:
-
-![](../../images/7/30.png)
-
-Tälläisessä tilanteessa normaali koodin transpilointi ei auta, sillä transpiloinnissa koodia käännetään uudemmasta JavaScript-syntaksista vanhempaan, selaimien paremmin tukemaan syntaksiin. Promiset ovat syntaktisesti täysin IE:n ymmärrettävissä, IE:ltä vain puuttuu toteutus Promisesta. Samoin on tilanne taulukoiden suhteen, IE:llä taulukoiden _find_ on arvoltaan <i>undefined</i>.
-
-Jos haluamme sovelluksen IE-yhteensopivaksi, tarvitsemme [polyfilliä](https://remysharp.com/2010/10/08/what-is-a-polyfill) eli koodia, joka lisää puuttuvan toiminnallisuuden vanhempiin selaimiin.
-
-Polyfillaus on mahdollista hoitaa [Webpackin ja Babelin avulla](https://babeljs.io/docs/usage/polyfill/) tai asentamalla yksi monista tarjolla olevista polyfill-kirjastoista.
-
-Esim. kirjaston [Promise Polyfill](https://www.npmjs.com/package/promise-polyfill) tarjoaman polyfillin käyttö on todella helppoa lisäämällä koodiin seuraava:
-
-```js
-import PromisePolyfill from 'promise-polyfill'
-
-if (!window.Promise) {
-  window.Promise = PromisePolyfill
-}
-```
-
-Jos globaalia _Promise_-olioa ei ole olemassa eli selain ei tue Promiseja, sijoitetaan polyfillattu Promise globaaliin muuttujaan. Jos polyfillattu Promise on hyvin toteutettu, muun koodin pitäisi toimia ilman ongelmia.
-
-Kattavahko lista olemassaolevista polyfilleistä löytyy [täältä](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
-
-Selaimien yhteensopivuus käytettävien API:en suhteen kannattaakin tarkistaa esim. [https://caniuse.com](https://caniuse.com)-sivustolta tai [Mozillan sivuilta](https://developer.mozilla.org/en-US/).
+Selaintuen olemassaolo tietyille API:ille on mahdollista tarkastaa osoitteesta [https://caniuse.com](https://caniuse.com) tai [Mozillan MDN-dokumentaatiosta](https://developer.mozilla.org/).
 
 </div>
+

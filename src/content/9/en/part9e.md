@@ -128,7 +128,7 @@ Types look like the following:
 interface Props {
   modalOpen: boolean;
   onClose: () => void;
-  onSubmit: (values: PatientFormValues) => Promise<void>;
+  onSubmit: (values: PatientFormValues) => void;
   error?: string;
 }
 
@@ -143,13 +143,13 @@ const AddPatientModal = ({ modalOpen, onClose, onSubmit, error }: Props) => {
 () => void
 ```
 
-The type of *onSubmit* is a bit more interesting, it has one parameter that has the type *PatientFormValues*. The return value of the function is _Promise&#60;void&#62;_. So again the function type is written with the arrow syntax:
+The type of *onSubmit* is a bit more interesting, it has one parameter that has the type *PatientFormValues*. The return value of the function is _&#60;void&#62;_. So again the function type is written with the arrow syntax:
 
 ```js
-(values: PatientFormValues) => Promise<void>
+(values: PatientFormValues) => <void>
 ```
 
-The return value of a *async* function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is just _Promise&#60;void&#62;_.
+The return value of a *async* function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is just _&#60;void&#62;_.
 
 </div>
 

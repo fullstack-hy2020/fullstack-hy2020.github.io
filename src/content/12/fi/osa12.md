@@ -6,6 +6,6 @@ lang: fi
 
 <div class="intro">
 
-Kurssin kahdestoista, kontteja käsittelevä osa löytyy [englanninkielisestä kurssimateriaalista](/en/part12).
+Osan materiaali siirtynyt osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers</a>
 
 </div>

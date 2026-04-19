@@ -9,7 +9,7 @@ lang: ptbr
 
 Os usuários devem estar aptos a logarem na aplicação, e quando um usuário é logado, suas informações devem ser adicionadas automaticamente a qualquer nova nota que você criar.
 
-Agora nós vamos implementar no backend uma [autenticação baseada em token](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works).
+Agora nós vamos implementar no backend uma [autenticação baseada em token](https://www.okta.com/identity-101/what-is-token-based-authentication/).
 
 Os princípios da autenticação baseada em token são apresentados no diagrama abaixo:
 

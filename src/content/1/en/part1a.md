@@ -130,7 +130,7 @@ The function is then assigned to a constant variable <i>App</i>:
 const App = ...
 ```
 
-There are a few ways to define functions in JavaScript. Here we will use [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), which are described in a newer version of JavaScript known as [ECMAScript 6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const), also called ES6.
+There are a few ways to define functions in JavaScript. Here we will use [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), which are described in a version of JavaScript known as [ECMAScript 6](https://262.ecma-international.org/6.0/index.html?_gl=1*xxe99l*_ga*MjA1MjAzOTEwMC4xNzc0MjU2OTkx*_ga_TDCK4DWEPP*czE3NzQyNTY5OTEkbzEkZzEkdDE3NzQyNTczNzUkajYwJGwwJGgw), also called ES6.
 
 Because the function consists of only a single expression we have used a shorthand, which represents this piece of code:
 

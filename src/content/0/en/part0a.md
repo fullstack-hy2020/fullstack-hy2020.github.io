@@ -90,13 +90,15 @@ Credits and grades are calculated as follows:
 
 | exercises    | credits        | grade    |
 | ------------ | :------------: | :------: |
-| 138          |       7        | 5        |
-| 127          |       6        | 5        |
+| 150          |       7        | 5        |
+| 135          |       6        | 5        |
 | 116          |       5        | 5        |
 | 105          |       5        | 4        |
 | 94           |       5        | 3        |
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
+
+The 6- and 7-credit thresholds have been adjusted to reflect the new exercises in Part 5.
 
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -111,7 +113,7 @@ You can only take the exam after submitting enough exercises for five credits. I
 By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
 - Submit at least 127 exercises for parts 0-7.
-- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-abc0a702-3d35-496f-87b9-5c7845a9367b).
+- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-759cfee1-370b-4200-8e11-dc86b1a8ed88).
 - [Request credits for part 6](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
@@ -119,7 +121,7 @@ By submitting at least 127 of the exercises for parts 0-7 while working on the c
 By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
 - Submit at least 138 exercises for parts 0-7.
-- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3149cc5e-8d83-4471-8eba-870093a2f01f).
+- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4142645d-5690-4527-9d57-79bd1fbc8770).
 - [Request credits for part 7](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
@@ -127,40 +129,28 @@ By submitting at least 138 of the exercises for parts 0-7 while working on the c
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5 because its contents are independent of parts 6 and 7.
 
 - Submit at least 22/26 exercises for part 8.
-- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4b912f04-d928-4a2d-aed7-8d8b2cefd397).
+- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f29bbf9e-3dfd-42d3-bdb8-c62be94932f8).
 - [Request credits for part 8](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
 
-By submitting at least 24/30 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
-
-- Submit at least 24/30 exercises for part 9.
-- [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-8d68ba22-4d46-479c-8990-32ddc83f5a5f).
-- [Request credits for part 9](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 9 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript</a>. 
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
 
 By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
 
 - Submit at least 25 exercises for part 10.
-- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e859336d-9d63-47ac-9906-a7da74cae32d).
+- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-af7b3535-d187-4999-985e-518c66a4a09b).
 - [Request credits for part 10](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
-By submitting all exercises for part 11 of the course on Continuous Integration / Continuous Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
-
-- Submit all exercises for part 11.
-- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-33f0ce21-ff95-42e1-9581-2c75ea3dd2a5).
-- [Request credits for part 11](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 11 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration</a>. All practicalities are explained there.
 
 #### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
 
-By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
-
-- Submit all exercises for part 12.
-- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-fd32902f-3941-4963-b73b-8408cff02ae2).
-- [Request credits for part 12](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 12 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers</a>. All practicalities are explained there.
 
 #### Part 13 - Full Stack Web Development: Relational databases (1 cr, CSM14114)
 
@@ -168,7 +158,7 @@ Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 
 ### Studying the course in a nutshell
 
-How to study the course – instructions in a nutshell: 5 cr core course CSM141081
+#### How to study the course – instructions in a nutshell: 5 cr core course CSM141081
 
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system.
@@ -180,13 +170,22 @@ How to study the course – instructions in a nutshell: 5 cr core course CSM1410
 
 Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
-How to study the course – instructions in a nutshell: other course parts
+#### How to study the course – instructions in a nutshell: parts 8 and 10
 
-- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8-12 have a separate instance in the submission system, part 13 has a different system of exercise submissions
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8 and 10 have a separate instance in the submission system
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
     - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately.
 - Mark the part completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
+
+#### How to study the course – instructions in a nutshell: parts 9 and 11-13
+
+All practicalities are explained in the new course pages
+
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">part 9</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">part 11</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">part 12</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">part 13</a>
 
 ### Submitting exercises
 
@@ -322,22 +321,18 @@ An electronic transcript of studies will be delivered to you by email. Present t
 
 ### No more yearly versions
 
-There are no more "yearly versions" of the course, the course is open all the time. Each part is updated once or twice per year. Updates are mostly minor: library versions are updated and text clarity is improved. However, there might also be some bigger changes.
+There are no "yearly versions" of the course, the course is open all the time. Each part is updated once or twice per year. Updates are mostly minor: library versions are updated and text clarity is improved. However, there might also be some bigger changes.
 
 Despite changes *all the submitted exercises remain valid*, and the course can be continued without being bothered about updates. Also, the policy for getting certificates, university credits etc. shall remain the same no matter what happens.
 
 Recent major changes
 
+- Part 7 (5th April): Webpack replaced with esbuild, error boundaries and keeping the frontend and backend in a single repository covered
+- Part 6 (5th April): Redux replaced with Zustand
+- Part 5 (31st March 2026): React Router and style libraries have been moved from Part 7 to this part
+- Parts 9, 11-13 (March 2026): content updated and material moved to new platform
 - Part 8: (3th January 2026) Apollo Server updated to v5. Apollo Client updated to v4. Refactoring backend code moved to part8c. Lot's of other small improvements.
-- Part 6 (12th October 2025): Jest replaced with Vitest. Axios replaced with Fetch API
-- Part 5 (21st August, 2025): React updated to version 19. PropTypes and forwardRef are no longer used. ESLint configurations updated
 - Part 4 (13th August, 2025): Express updated to version 5 and the express-async-errors library removed from part 4b
-- Part 9 (28th August, 2024): Zod library for validating request body type
-- Part 3 (20th June, 2024): ESLint configurations updated
-- Part 10 (21st March, 2024): Create React app replaced with Vite
-- Parts 3-5 (February-March 2024): Libraries used for testing changed
-- Part 10 (26th February, 2024): Library versions updated
-- Part 11 (16th January 2024): Example project dependencies updated
 
 ### Expanding on a previously completed course
 

@@ -9,7 +9,7 @@ lang: es
 
 Los usuarios deben poder iniciar sesión en nuestra aplicación, y cuando un usuario inicia sesión, su información de usuario debe adjuntarse automáticamente a cualquier nota nueva que cree.
 
-Ahora implementaremos soporte para [autenticación basada en token](https://www.digitalocean.com/community/tutorials/the-ins-and-outs-of-token-based-authentication#how-token-based-works) para el backend.
+Ahora implementaremos soporte para [autenticación basada en token](https://www.okta.com/identity-101/what-is-token-based-authentication/) para el backend.
 
 Los principios de la autenticación basada en tokens se describen en el siguiente diagrama de secuencia:
 

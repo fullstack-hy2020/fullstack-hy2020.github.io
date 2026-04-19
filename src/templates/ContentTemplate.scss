@@ -246,6 +246,15 @@ pre[class*='language-'] {
   text-shadow: none;
 }
 
+.warning {
+  color: #5a4000;
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  padding: 1em;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
 .arrow-go-up {
   width: 36px;
   height: 36px;

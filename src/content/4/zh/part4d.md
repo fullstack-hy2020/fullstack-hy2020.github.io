@@ -10,8 +10,8 @@ lang: zh
 <!-- Users must be able to log into our application, and when a user is logged in, their user information must automatically be attached to any new notes they create.-->
  用户必须能够登录我们的应用，当用户登录后，他们的用户信息必须自动附加到他们创建的任何新笔记上。
 
-<!-- We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend.-->
-我们现在将在后端实现对[基于令牌的认证](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works)的支持。
+<!-- We will now implement support for [token based authentication](https://www.okta.com/identity-101/what-is-token-based-authentication/) to the backend.-->
+我们现在将在后端实现对[基于令牌的认证](https://www.okta.com/identity-101/what-is-token-based-authentication/)的支持。
 
 <!-- The principles of token based authentication are depicted in the following sequence diagram:-->
  基于令牌的认证的原则在下面的顺序图中得到描述。

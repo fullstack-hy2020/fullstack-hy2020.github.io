@@ -66,7 +66,7 @@ const App = () => {
 export default App
 ```
 
-Los archivos <i>App.css</i> e <i>index.css</i>, y el directorio <i>assets</i> pueden eliminarse ya que nos son necesarios en nuestra aplicación por ahora.
+Los archivos <i>App.css</i> e <i>index.css</i>, y el directorio <i>assets</i> pueden eliminarse ya que no son necesarios en nuestra aplicación por ahora.
 
 ### create-react-app
 
@@ -142,7 +142,7 @@ La función luego se asigna a una variable constante <i>App</i>:
 const App = ...
 ```
 
-Hay algunas formas de definir funciones en JavaScript. Aquí utilizaremos [funciones de flecha](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/Arrow_functions), que se describen en una versión más reciente de JavaScript conocida como [ECMAScript 6](http://es6-features.org/#Constants), también llamada ES6.
+Hay algunas formas de definir funciones en JavaScript. Aquí utilizaremos [funciones de flecha](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/Arrow_functions), que se describen en una versión más reciente de JavaScript conocida como [ECMAScript 6](https://262.ecma-international.org/6.0/index.html?_gl=1*xxe99l*_ga*MjA1MjAzOTEwMC4xNzc0MjU2OTkx*_ga_TDCK4DWEPP*czE3NzQyNTY5OTEkbzEkZzEkdDE3NzQyNTczNzUkajYwJGwwJGgw), también llamada ES6.
 
 Debido a que la función consta de una sola expresión, hemos utilizado una abreviatura, que representa este fragmento de código:
 

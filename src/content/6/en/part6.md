@@ -6,13 +6,11 @@ lang: en
 
 <div class="intro">
 
-So far, we have placed the application's state and state logic directly inside React components. When applications grow larger, state management should be moved outside React components. In this part, we will introduce the Redux library, which is currently the most popular solution for managing the state of React applications.
+So far we have placed the application's state and the logic handling it directly in React components. As applications grow, it is advisable to move the state management outside of React components. In this part we will explore the Zustand library, which is currently the most popular state management solution for React applications.
 
-We'll learn about the lightweight version of Redux directly supported by React, namely the React context and useReducer hook, as well as the React Query library that simplifies the server state management.
+We will also look at the lighter state management approach directly supported by React — namely React's context and the useReducer hook — as well as the React Query library, which simplifies managing server state.
 
-<i>Part updated 12th October 2025</i>
-- <i>Node updated to version 22.18.0</i>
-- <i>Jest replaced with Vitest</i>
-- <i>Axios replaced with Fetch API</i>
+<i>Part updated 5th April 2026</i>
+- <i>Redux replaced with Zustand</i>
 
 </div>

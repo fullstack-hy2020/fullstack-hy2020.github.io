@@ -9,7 +9,7 @@ lang: fr
 
 Les utilisateurs doivent pouvoir se connecter à notre application, et lorsque l'utilisateur est connecté, ses informations doivent automatiquement être attachées à toutes les nouvelles notes qu'ils créent.
 
-Nous allons maintenant implémenter le support de [l'authentification basée sur des jetons](https://www.digitalocean.com/community/tutorials/the-ins-and-outs-of-token-based-authentication#how-token-based-works) dans le backend.
+Nous allons maintenant implémenter le support de [l'authentification basée sur des jetons](https://www.okta.com/identity-101/what-is-token-based-authentication/) dans le backend.
 
 Les principes de l'authentification basée sur des jetons sont représentés dans le diagramme de séquence suivant :
 

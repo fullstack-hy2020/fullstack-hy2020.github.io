@@ -12,8 +12,7 @@ So far we have tested the backend as a whole on an API level using integration t
 Next, we will look into one way to test the [system as a whole](https://en.wikipedia.org/wiki/System_testing) using <i>End to End</i> (E2E) tests.
 
 We can do E2E testing of a web application using a browser and a testing library. There are multiple libraries available. One example is [Selenium](http://www.seleniumhq.org/), which can be used with almost any browser.
-Another browser option is so-called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface.
-For example, Chrome can be used in headless mode.
+Another browser option is so-called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface. For example, Chrome can be used in headless mode.
 
 E2E tests are potentially the most useful category of tests because they test the system through the same interface as real users use.
 
@@ -22,23 +21,17 @@ They do have some drawbacks too. Configuring E2E tests is more challenging than 
 E2E tests can also be [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359).
 Some tests might pass one time and fail another, even if the code does not change at all.
 
-Perhaps the two easiest libraries for End to End testing at the moment are [Cypress](https://www.cypress.io/) and [Playwright](https://playwright.dev/).
+Perhaps the two easiest libraries for End to End testing at the moment are [Playwright](https://playwright.dev/) and [Cypress](https://www.cypress.io/).
 
 From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we can see that Playwright surpassed Cypress in download numbers during 2024, and its popularity continues to grow:
 
-![cypress vs playwright in npm trends](../../images/5/cvsp.png)
+![cypress vs playwright in npm trends](../../images/5/pwc.png)
 
-This course has been using Cypress for years. Now Playwright is a new addition. You can choose whether to complete the E2E testing part of the course with Cypress or Playwright. The operating principles of both libraries are very similar, so your choice is not very important. However, Playwright is now the preferred E2E library for the course.
+This course has been using Cypress for years. Now our choice is Playwright.
 
-If your choice is Playwright, please proceed. If you end up using Cypress, go [here](/en/part5/end_to_end_testing_cypress).
 
-### Playwright
+So [Playwright](https://playwright.dev/) is a newcomer to the End to End tests, which started to explode in popularity towards the end of 2023. Playwright is roughly on a par with Cypress in terms of ease of use. The libraries are slightly different in terms of how they work. Cypress is radically different from most libraries suitable for E2E testing, as Cypress tests are run entirely within the browser. Playwright's tests, on the other hand, are executed in the Node process, which is connected to the browser via programming interfaces.
 
-So [Playwright](https://playwright.dev/) is a newcomer to the End to End tests, which started to explode in popularity towards the end of 2023. Playwright is roughly on a par with Cypress in terms of ease of use. The libraries are slightly different in terms of how they work.  Cypress is radically different from most libraries suitable for E2E testing, as Cypress tests are run entirely within the browser. Playwright's tests, on the other hand, are executed in the Node process, which is connected to the browser via programming interfaces.
-
-Many blogs have been written about library comparisons, e.g. [this](https://www.lambdatest.com/blog/cypress-vs-playwright/) and [this](https://www.browserstack.com/guide/playwright-vs-cypress).
-
-It is difficult to say which library is better. One advantage of Playwright is its browser support; Playwright supports Chrome, Firefox and Webkit-based browsers like Safari. Currently, Cypress includes support for all these browsers, although Webkit support is experimental and does not support all of Cypress features. At the time of writing (1.3.2024), my personal preference leans slightly towards Playwright.
 
 Now let's explore Playwright.
 
@@ -1342,7 +1335,5 @@ Make a test that ensures that only the user who added the blog sees the blog's d
 Do a test that ensures that the blogs are arranged in the order according to the likes, the blog with the most likes first.
 
 <i>This task is significantly more challenging than the previous ones.</i>
-
-This was the last task of the section and it's time to push the code to GitHub and mark the completed tasks in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

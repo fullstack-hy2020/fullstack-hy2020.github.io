@@ -294,9 +294,9 @@ Internetistä alkaa löytyä yhä enenevissä määrin valmiita hookeja sekä mu
 
 <div class="tasks">
 
-### Tehtävät 7.4.-7.8.
+### Tehtävät 7.1.-7.5.
 
-#### 7.4: anekdoottisovellus ja hookit step1
+#### 7.1: anekdoottisovellus ja hookit step1
 
 Jatketaan React Router -[tehtävien](/osa7/react_router#tehtavat-7-1-7-3) sovelluksen parissa.
 
@@ -341,7 +341,7 @@ const App = () => {
 }
 ```
 
-#### 7.5: anekdoottisovellus ja hookit step2
+#### 7.2: anekdoottisovellus ja hookit step2
 
 Lisää lomakkeeseen nappi, joka mahdollistaa syötekenttien tyhjentämisen:
 
@@ -355,7 +355,7 @@ Lisäyksen jälkeen konsoliin saattaa ilmestyä ikävä varoitus:
 
 Ei välitetä virheestä vielä tässä tehtävässä.
 
-#### 7.6: anekdoottisovellus ja hookit step3
+#### 7.3: anekdoottisovellus ja hookit step3
 
 Jos ratkaisusi ei aiheuttanut warningia, ei sinun tarvitse tehdä tässä tehtävässä mitään.
 
@@ -392,7 +392,7 @@ Yksinkertainen korjaus olisi tietysti olla käyttämättä spread-syntaksia ja k
 
 Tällöin menettäisimme suurelta osin <i>useField</i>-hookin edut. Keksi tähän tehtävään edelleen spread-syntaksia käyttävä helppokäyttöinen ratkaisu ongelman kiertämiseen.
 
-#### 7.7: country hook
+#### 7.4: country hook
 
 Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14) tunnelmiin.
 
@@ -412,7 +412,7 @@ Maan tietojen hakeminen kannattaa hoitaa API:n endpointin [name](https://studies
 
 Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://react.dev/reference/react/useEffect#parameters) olevaa taulukkoa. Taulukolla kontrolloidaan, milloin efektifunktio kannattaa suorittaa. Kurssin [osassa 2](/osa2/tyylien_lisaaminen_react_sovellukseen#muutama-tarkea-huomio) on käyty läpi toisen parametrin käytön periaatteita.
 
-#### 7.8: ultimate hooks
+#### 7.5: ultimate hooks
 
 Aiempien osien materiaalissa kehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
 

@@ -7,493 +7,436 @@ lang: en
 
 <div class="content">
 
-### Hooks
+In the early days, React was somewhat famous for being very difficult to configure the tools required for application development. To make the situation easier, [Create React App](https://github.com/facebookincubator/create-react-app) was developed, which eliminated configuration-related problems. [Vite](https://vitejs.dev/), that is used throughout this course, has since replaced Create React App as the standard for new React applications.
 
-React offers 15 different [built-in hooks](https://react.dev/reference/react/hooks), of which the most popular ones are the [useState](https://react.dev/reference/react/useState) and [useEffect](https://react.dev/reference/react/useEffect) hooks that we have already been using extensively.
+Both Vite and Create React App use <i>bundlers</i> to do the actual work. In this section we will take a closer look at what bundlers actually do, how Vite works under the hood, and how to configure it for different scenarios. We will also briefly examine [esbuild](https://esbuild.github.io/), a low-level bundler that Vite itself uses internally, understanding esbuild helps clarify what bundling fundamentally means.
 
-In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) hook which allows components to provide their functions to other components. In [part 6](/en/part6/react_query_use_reducer_and_the_context) we used [useReducer](https://react.dev/reference/react/useReducer) and [useContext](https://react.dev/reference/react/useContext) to implement a Redux like state management.
+> #### What about Webpack?
+>
+>Webpack was the dominant bundler for most of the 2010s and is still encountered in older and enterprise codebases. This course also covered Webpack until spring 2026.
+>
+> If you work on a legacy project, knowing that Webpack exists and uses the same core concepts (entry points, loaders/plugins, output) is useful. However, setting up a new project with Webpack in 2026 is not recommended. Its configuration is complex, and modern tools like Vite provide a dramatically better developer experience. We will not cover Webpack configuration in this course.
 
-Within the last couple of years, many React libraries have begun to offer hook-based APIs. [In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components.
+### Bundling
 
-The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially hook-based. Its hooks can be used to access URL parameters and the <i>navigation</i> object, which allows for manipulating the browser URL programmatically.
+We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, not all execution environments handle module-based code automatically. Even modern browsers benefit from having dependencies pre-processed and optimized before delivery.
 
-As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using these we have to adhere to certain [rules or limitations](https://react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
+For this reason, code that is divided into modules is <i>bundled</i> for production, meaning that the source code files are transformed and combined into an optimized set of files that the browser can efficiently load. When we ran <i>npm run build</i> in earlier parts of this course, Vite performed this bundling. The output appears in the <i>dist</i> directory:
 
-**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.
+```
+├── assets
+│   ├── index-d526a0c5.css
+│   ├── index-e92ae01e.js
+│   └── react-35ef61ed.svg
+├── index.html
+└── vite.svg
+```
 
-**You can only call Hooks while React is rendering a function component:**
+The <i>index.html</i> at the root loads the bundled JavaScript with a <i>script</i> tag:
 
-- Call them at the top level in the body of a function component.
-- Call them at the top level in the body of a custom Hook.
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <script type="module" crossorigin src="/assets/index-e92ae01e.js"></script> // highlight-line
+    <link rel="stylesheet" href="/assets/index-d526a0c5.css">  // highlight-line
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
 
-There's an existing [ESlint plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) that can be used to verify that the application uses hooks correctly:
+The CSS is also bundled into a single file.
 
-![vscode error useState being called conditionally](../../images/7/60ea.png)
+In practice, bundling starts from an entry point, that is typically <i>main.jsx</i>. Vite includes not only the code from the entry point but also everything it imports, recursively, until the full dependency graph has been resolved.
 
-### Custom hooks
+Since part of the imported files are packages like React, Redux, and Axios, the bundled JavaScript file will also contain the contents of each of these libraries.
 
-React offers the option to create [custom](https://react.dev/learn/reusing-logic-with-custom-hooks) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components.
+> Before bundlers were available, the old approach was based on the fact that the index.html file loaded all of the separate JavaScript files of the application with the help of script tags. This resulted in decreased performance, since the loading of each separate file results in some overhead. For this reason, these days the preferred method is to bundle the code into a single file. Bundling also  enables optimizations like minification and tree-shaking (removing unused code).
 
-> <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
+### How Vite works
 
-Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_.
+Vite has two distinct operating modes that work quite differently.
 
-We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling) that can have its value incremented, decremented, or reset. The code of the application is as follows:
+**Development mode** (<i>npm run dev</i>) doesn't bundle your code at all. Instead, Vite starts a dev server that serves your source files as native ES modules, letting the browser resolve imports directly. This is why startup is nearly instant regardless of project size.
+One exception: third-party dependencies from node_modules are pre-bundled by esbuild before the server starts. This handles two problems: many npm packages are still in CommonJS format (which browsers can't consume natively), and some libraries consist of hundreds of tiny internal files that would otherwise trigger hundreds of separate requests. esbuild converts and consolidates them, caches the result on disk, and subsequent starts are near-instant.
 
-```js  
-import { useState } from 'react'
+**Production mode** (<i>npm run build</i>) uses [Rollup](https://rollupjs.org/) for bundling with esbuild still handling other tasks such as transpilation (JSX, TypeScript) and minification. Rollup was designed from the ground up for ES modules, which makes it exceptionally good at <i>tree-shaking</i> that is a technique that statically analyzes which exports from each module are actually used and removes the rest from the final bundle. For example, if you import only one utility function from a large library, tree-shaking ensures that the rest of that library's code is not included in the bundle. This can significantly reduce bundle size.
+
+The division of labor, esbuild for speed, Rollup for bundle quality, is central to Vite's design.
+
+> You might wonder why Vite doesn't just use esbuild for production bundling too, given how fast it is. The reason is that esbuild's bundling output, while correct, produces less optimized results for advanced scenarios: it has limited support for code splitting, does not produce the same level of chunk optimization, and its plugin ecosystem for bundle-level transformations is still maturing. Rollup's output is more predictable and better tuned for the complex dependency graphs that real applications produce. Vite's authors [have stated](https://vitejs.dev/guide/why.html#why-not-bundle-with-esbuild) that they intend to switch to esbuild for production bundling once its capabilities close this gap.
+
+### Understanding esbuild
+
+To understand what bundling fundamentally involves, it is useful to work with [esbuild](https://esbuild.github.io/) directly, without the abstraction layer that Vite adds on top. Let us build a minimal React environment from scratch.
+
+Let us now create a simple React app with the following directory structure:
+
+```
+├── dist
+│   └── index.html
+├── src
+│   ├── main.jsx
+│   └── App.jsx
+└── package.json
+```
+
+We start by installing React and react-dom:
+
+```bash
+npm install react react-dom
+```
+
+We also need to install esbuild:
+
+```bash
+npm install --save-dev esbuild
+```
+
+At the start we add two scripts to the <i>package.json</i>:
+
+```json
+{
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --outfile=dist/main.js --jsx=automatic",
+    "serve": "npx serve dist"
+  },
+  // ...
+}
+```
+
+For the app we need the file <i>dist/index.html</i> that loads the JavaScript bundle:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>esbuild app</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./main.js"></script>
+  </body>
+</html>
+```
+
+The entry point <i>src/main.jsx</i> is the typical one:
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
+The simple application component <i>src/App.jsx</i> is as follows:
+
+```jsx
+import React, { useState } from 'react'
+
 const App = () => {
   const [counter, setCounter] = useState(0)
 
   return (
     <div>
-      <div>{counter}</div>
-      <button onClick={() => setCounter(counter + 1)}>
-        plus
-      </button>
-      <button onClick={() => setCounter(counter - 1)}>
-        minus
-      </button>      
-      <button onClick={() => setCounter(0)}>
-        zero
-      </button>
+      <p>count: {counter}</p>
+      <button onClick={() => setCounter(counter + 1)}>increment</ button>
     </div>
   )
 }
+
+export default App
 ```
 
-Let's extract the counter logic into a custom hook. The code for the hook is as follows:
+Now we can bundle the app:
 
-```js
-const useCounter = () => {
-  const [value, setValue] = useState(0)
+```bash
+npm run build
+```
 
-  const increase = () => {
-    setValue(value + 1)
-  }
+The output is a single <i>dist/main.js</i> that contains your application code along with the React library bundled together.
 
-  const decrease = () => {
-    setValue(value - 1)
-  }
+We can now run the bundled app with <i>npm run serve</i>. This uses the [serve](https://www.npmjs.com/package/serve) package to start a local static file server for the <i>dist</i> directory, making the application available at <i>http://localhost:3000</i>:
 
-  const zero = () => {
-    setValue(0)
-  }
+![](../../images/7/es1.png)
 
-  return {
-    value, 
-    increase,
-    decrease,
-    zero
+esbuild also supports [minification](https://en.wikipedia.org/wiki/Minification_(programming)) through command-line flags. Minification removes whitespace and comments, shortens variable names, and applies other size optimizations. The bundle will be notably large because it includes the full React library. Minification reduces its size significantly.
+
+Let us now enable minification:
+
+```json
+{
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --minify --outfile=dist/main.js --jsx=automatic",  // highlight-line
+    "serve": "npx serve dist"
   }
 }
 ```
 
-Our custom hook uses the _useState_ hook internally to create its state. The hook returns an object, the properties of which include the value of the counter as well as functions for manipulating the value.
+Minification brings the bundle size down from around 1.1 MB to around 190 KB, a substantial reduction.
 
-React components can use the hook as shown below:
+Minification has a catch: if the application throws a runtime error, the browser's developer tools will point to a line in the minified <i>main.js</i>, which is all but impossible to read:
+
+![](../../images/7/es2.png)
+
+The solution is a [source map](https://developer.mozilla.org/en-US/docs/Glossary/Source_map): a companion file (<i>dist/main.js.map</i>) that records how every line of the minified bundle corresponds to the original source. With it enabled, a stack trace points to the exact line in <i>App.jsx</i> or <i>main.jsx</i> instead of somewhere inside an unreadable wall of minified code.
+
+We can enable source maps by adding the <i>--sourcemap</i> flag:
+
+```json
+{
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --minify --sourcemap --outfile=dist/main.js --jsx=automatic",  // highlight-line
+    "serve": "npx serve dist"
+  }
+}
+```
+
+Now the error makes sense:
+
+![](../../images/7/es3.png)
+
+Note that source maps are invaluable during development and debugging, but you may want to leave them out of a public production build. Because a source map contains your original source code, anyone who opens the browser's developer tools can read your unminified application logic. If that is a concern, simply omit the <i>--sourcemap</i> flag from the production build command.
+
+### Transpilation
+
+Alongside bundling, esbuild performs another essential task: <i>transpilation</i>. Transpilation means converting source code written in one form of JavaScript into another form, typically from modern or extended syntax into plain JavaScript that browsers can execute.
+
+Browsers understand standard JavaScript, but JSX is not valid JavaScript, no browser can parse it directly. When we write:
+
+```jsx
+const element = <App />
+```
+
+it must be transpiled it into something the browser can run:
+
+```js
+const element = React.createElement(App, null)
+```
+
+This is why transpilation is a required step for any React project, not an optional optimization. esbuild performs it automatically during bundling. With the <i>--jsx=automatic</i> flag, esbuild handles JSX without any external tool. In the old Webpack-based workflow you had to install and configure [Babel](https://babeljs.io/) and related packages to transpile the JSX for the browser. With esbuild, files ending in <i>.jsx</i> are transpiled out of the box.
+
+### Development environment
+
+So far, every change requires running <i>npm run build</i> and manually refreshing the browser, a slow loop that quickly becomes tedious. esbuild's built-in [development server](https://esbuild.github.io/api/#serve) solves this. Add a <i>dev</i> script to <i>package.json</i>:
+
+```json
+{
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --minify --sourcemap --outfile=dist/main.js --jsx=automatic",
+    "serve": "npx serve dist",
+    "dev": "esbuild src/main.jsx --bundle --outfile=dist/main.js --jsx=automatic --servedir=./dist --watch" // highlight-line
+  }
+}
+```
+
+Running <i>npm run dev</i> does two things at once. Firstly [--watch](https://esbuild.github.io/api/#watch) tells esbuild to watch all imported source files for changes and rebuild the bundle automatically whenever any of them is saved. Secondly [--servedir](https://esbuild.github.io/api/#serve) starts a lightweight HTTP server that serves the contents of the <i>dist</i> directory, your <i>index.html</i> and the freshly built <i>main.js</i> at <i>http://localhost:8000</i>.
+
+The <i>--servedir</i> flag is what makes both pieces work together: without it, esbuild would only rebuild in watch mode but not serve anything. With it, the server always delivers the latest bundle so you only need to refresh the browser after saving a file.
+
+Note that unlike Vite's dev server, esbuild does not support hot module replacement. Changes to your source code require a manual browser refresh to take effect.
+
+The clarity of esbuild's interface illustrates what a bundler fundamentally does: it takes an entry point, follows all imports, and produces an optimized output. Vite builds on top of this foundation and adds the developer experience layer, a dev server, hot module replacement, and sensible defaults for React projects.
+
+Now that we have a clearer picture of what bundling and transpilation fundamentally involve, let us return to Vite and look at how it can be configured.
+
+### Vite configuration
+
+For most React projects, Vite works without any configuration at all. However, when you do need to customize behavior, you edit <i>vite.config.js</i> (or <i>vite.config.ts</i>).
+
+A minimal Vite configuration for a React project looks like this:
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+})
+```
+
+The <i>@vitejs/plugin-react</i> plugin enables JSX transformation, fast refresh (hot module replacement that preserves component state), and other React-specific features.
+
+#### Development server configuration
+
+You can configure the development server's port and other settings under the <i>server</i> key:
+
+```js
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+    open: true,        // open browser automatically
+  },
+})
+```
+
+#### Proxying API requests
+
+When developing locally, your React app typically runs on one port (e.g., 3000) while your backend runs on another (e.g., 3001). The browser's same-origin policy would normally block requests between them. Vite's proxy setting solves this without requiring CORS configuration on the backend:
+
+```js
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    },
+  },
+})
+```
+
+With this configuration, any request your React app makes to <i>/api/notes</i> is automatically forwarded to <i>http://localhost:3001/api/notes</i> by Vite's dev server. Your frontend code never needs to include <i>localhost:3001</i> in its URLs during development.
+
+#### Environment variables
+
+Vite has built-in support for environment variables using <i>.env</i> files. This is the modern replacement for manually injecting constants into the bundle.
+
+Create a <i>.env</i> file in the project root:
+
+```
+VITE_BACKEND_URL=http://localhost:3001/api/notes
+```
+
+And a <i>.env.production</i> file for production values:
+
+```
+VITE_BACKEND_URL=https://myapp.fly.dev/api/notes
+```
+
+**Important:** all environment variables exposed to the browser must be prefixed with <i>VITE_</i>. Variables without this prefix remain server-side only and are not included in the bundle. This is a deliberate security measure to prevent accidentally leaking secrets.
+
+Access the variable in your application code via <i>import.meta.env</i>:
 
 ```js
 const App = () => {
-  const counter = useCounter()
+  const notes = useNotes(import.meta.env.VITE_BACKEND_URL)
 
   return (
     <div>
-      <div>{counter.value}</div>
-      <button onClick={counter.increase}>
-        plus
-      </button>
-      <button onClick={counter.decrease}>
-        minus
-      </button>      
-      <button onClick={counter.zero}>
-        zero
-      </button>
+      {notes.length} notes on server {import.meta.env.VITE_BACKEND_URL}
     </div>
   )
 }
 ```
 
-By doing this we can extract the state of the _App_ component and its manipulation entirely into the _useCounter_ hook. Managing the counter state and logic is now the responsibility of the custom hook.
+Vite automatically selects the correct <i>.env</i> file based on the mode:
 
-The same hook could be <i>reused</i> in the application that was keeping track of the number of clicks made to the left and right buttons:
+- <i>npm run dev</i> uses <i>.env</i> and <i>.env.development</i>
+- <i>npm run build</i> uses <i>.env</i> and <i>.env.production</i>
 
-```js
+Add <i>.env.production</i> to <i>.gitignore</i> if it contains sensitive values, and use <i>.env.example</i> to document what variables are required.
 
-const App = () => {
-  const left = useCounter()
-  const right = useCounter()
+#### Transpilation
 
-  return (
-    <div>
-      {left.value}
-      <button onClick={left.increase}>
-        left
-      </button>
-      <button onClick={right.increase}>
-        right
-      </button>
-      {right.value}
-    </div>
-  )
-}
+Vite handles code transpilation automatically. During development, esbuild transpiles your TypeScript and JSX on demand. It is fast enough to do this per-file without a noticeable delay. During production builds, Rollup handles the bundling while esbuild handles transpilation.
+
+The default transpilation target in Vite is modern browsers that support native ES modules (Chrome 87+, Firefox 78+, Safari 14+, Edge 88+). If you need to support older browsers, you can configure the target explicitly and add the <i>@vitejs/plugin-legacy</i> plugin:
+
+```bash
+npm install --save-dev @vitejs/plugin-legacy
 ```
 
-The application creates <i>two</i> completely separate counters. The first one is assigned to the variable _left_ and the other to the variable _right_.
-
-Dealing with forms in React is somewhat tricky. The following application presents the user with a form that requires him to input their name, birthday, and height:
-
 ```js
-const App = () => {
-  const [name, setName] = useState('')
-  const [born, setBorn] = useState('')
-  const [height, setHeight] = useState('')
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import legacy from '@vitejs/plugin-legacy'
 
-  return (
-    <div>
-      <form>
-        name: 
-        <input
-          type='text'
-          value={name}
-          onChange={(event) => setName(event.target.value)} 
-        /> 
-        <br/> 
-        birthdate:
-        <input
-          type='date'
-          value={born}
-          onChange={(event) => setBorn(event.target.value)}
-        />
-        <br /> 
-        height:
-        <input
-          type='number'
-          value={height}
-          onChange={(event) => setHeight(event.target.value)}
-        />
-      </form>
-      <div>
-        {name} {born} {height} 
-      </div>
-    </div>
-  )
-}
+export default defineConfig({
+  plugins: [
+    react(),
+    legacy({
+      targets: ['defaults', 'not IE 11'],
+    }),
+  ],
+})
 ```
 
-Every field of the form has its own state. To keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.
+The legacy plugin automatically generates a separate bundle for older browsers using Babel.
 
-Let's define our own custom _useField_ hook that simplifies the state management of the form:
+#### CSS
 
-```js
-const useField = (type) => {
-  const [value, setValue] = useState('')
-
-  const onChange = (event) => {
-    setValue(event.target.value)
-  }
-
-  return {
-    type,
-    value,
-    onChange
-  }
-}
-```
-
-The hook function receives the type of the input field as a parameter. It returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
-
-The hook can be used in the following way:
+Vite handles CSS without any configuration. Simply import a CSS file from your JavaScript:
 
 ```js
-const App = () => {
-  const name = useField('text')
-  // ...
-
-  return (
-    <div>
-      <form>
-        <input
-          type={name.type}
-          value={name.value}
-          onChange={name.onChange} 
-        /> 
-        // ...
-      </form>
-    </div>
-  )
-}
+import './index.css'
 ```
 
-### Spread attributes
+Vite will process it and include it in the build. In production, CSS is extracted into a separate file. During development, it is injected via <i>&lt;style&gt;</i> tags with hot reload support.
 
-We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) in the following way:
+Vite also natively supports [CSS Modules](https://github.com/css-modules/css-modules) for scoped styles. Any file ending in <i>.module.css</i> is treated as a CSS Module:
 
 ```js
-<input {...name} /> 
+import styles from './App.module.css'
+
+const App = () => (
+  <div className={styles.container}>
+    hello vite
+  </div>
+)
 ```
 
-As the [example](https://react.dev/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax) in the React documentation states, the following two ways of passing props to a component achieve the exact same result:
+CSS preprocessors like [Sass](https://sass-lang.com/) can be added by simply installing the preprocessor, no plugin or configuration needed:
+
+```bash
+npm install --save-dev sass
+```
+
+After that, <i>.scss</i> files work automatically.
+
+#### Minification
+
+When running <i>npm run build</i>, Vite minifies the output. Minification removes whitespace and comments, shortens variable names, and applies other size optimizations. The result is a much smaller file that loads faster in the browser.
+
+Vite uses esbuild for JavaScript minification and a built-in CSS minifier for stylesheets.
+
+#### Source maps
+
+Source maps allow browser developer tools to map errors and breakpoints back to your original source code rather than the minified bundle. Without them, a stack trace pointing to line 1 of <i>main.js</i> is nearly useless for debugging.
+
+In development, Vite generates source maps automatically. For production builds, you can enable them explicitly:
 
 ```js
-<Greeting firstName='Arto' lastName='Hellas' />
-
-const person = {
-  firstName: 'Arto',
-  lastName: 'Hellas'
-}
-
-<Greeting {...person} />
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    sourcemap: true,
+  },
+})
 ```
 
-The application gets simplified into the following format:
+Note that production source maps increase build time and expose your source code to anyone who looks at the network tab. In many cases it is better to upload source maps to an error monitoring service (such as Sentry) and keep them off the public server.
 
-```js
-const App = () => {
-  const name = useField('text')
-  const born = useField('date')
-  const height = useField('number')
+#### Plugins
 
-  return (
-    <div>
-      <form>
-        name: 
-        <input  {...name} /> 
-        <br/> 
-        birthdate:
-        <input {...born} />
-        <br /> 
-        height:
-        <input {...height} />
-      </form>
-      <div>
-        {name.value} {born.value} {height.value}
-      </div>
-    </div>
-  )
-}
-```
+Vite's functionality is extended through [plugins](https://vite.dev/plugins/). The plugin ecosystem has grown rapidly and covers most common needs. Some widely used plugins include:
 
-Dealing with forms is greatly simplified when the unpleasant nitty-gritty details related to synchronizing the state of the form are encapsulated inside our custom hook.
+- <i>@vitejs/plugin-react</i> — React support (JSX, fast refresh)
+- <i>@vitejs/plugin-legacy</i> — legacy browser support
+- <i>vite-plugin-svgr</i> — import SVG files as React components
+- <i>rollup-plugin-visualizer</i> — bundle size analysis
 
-Custom hooks are not only a tool for reusing code; they also provide a better way for dividing it into smaller modular parts.
+Plugins are specified in the <i>plugins</i> array in <i>vite.config.js</i>. They follow the same interface as Rollup plugins, so many Rollup plugins also work with Vite.
 
-### More about hooks
+#### Polyfills
 
-The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out:
+A <i>polyfill</i> is code that implements a feature for browsers that do not natively support it. Transpilation alone is not sufficient for features that are syntactically valid but unimplemented. For example, a browser might parse <i>Promise</i> correctly but have no implementation of it.
 
-- [Awesome React Hooks Resources](https://github.com/rehooks/awesome-react-hooks)
-- [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
-- [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
+With Vite, polyfills are handled by the plugin <i>@vitejs/plugin-legacy</i>, which automatically includes the necessary polyfills based on your browser targets. If you need a specific polyfill without the legacy plugin, you can install it directly and import it at the top of your entry file.
+
+You can check browser support for specific APIs at [https://caniuse.com](https://caniuse.com) or [Mozilla's MDN documentation](https://developer.mozilla.org/).
 
 </div>
 
-<div class="tasks">
-
-### Exercises 7.4.-7.8.
-
-We'll continue with the app from the [exercises](/en/part7/react_router#exercises-7-1-7-3) of the [react router](/en/part7/react_router) chapter.
-
-#### 7.4: Anecdotes and Hooks step 1
-
-Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier.
-
-One natural place to save the custom hooks of your application is in the <i>/src/hooks/index.js</i> file.
-
-If you use the [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) instead of the default export:
-
-```js
-import { useState } from 'react'
-
-export const useField = (type) => { // highlight-line
-  const [value, setValue] = useState('')
-
-  const onChange = (event) => {
-    setValue(event.target.value)
-  }
-
-  return {
-    type,
-    value,
-    onChange
-  }
-}
-
-// modules can have several named exports
-export const useAnotherHook = () => { // highlight-line
-  // ...
-}
-```
-
-Then [importing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) happens in the following way:
-
-```js
-import  { useField } from './hooks'
-
-const App = () => {
-  // ...
-  const username = useField('text')
-  // ...
-}
-```
-
-#### 7.5: Anecdotes and Hooks step 2
-
-Add a button to the form that you can use to clear all the input fields:
-
-![browser anecdotes with reset button](../../images/7/61ea.png)
-
-Expand the functionality of the <i>useField</i> hook so that it offers a new <i>reset</i> operation for clearing the field.
-
-Depending on your solution, you may see the following warning in your console:
-
-![devtools console warning invalid value for reset prop](../../images/7/62ea.png)
-
-We will return to this warning in the next exercise.
-
-#### 7.6: Anecdotes and Hooks step 3
-
-If your solution did not cause a warning to appear in the console, you have already finished this exercise.
-
-If you see the _Invalid value for prop \`reset\` on \<input\> tag_ warning in the console, make the necessary changes to get rid of it.
-
-The reason for this warning is that after making the changes to your application, the following expression:
-
-```js
-<input {...content}/>
-```
-
-Essentially, is the same as this:
-
-```js
-<input
-  value={content.value} 
-  type={content.type}
-  onChange={content.onChange}
-  reset={content.reset} // highlight-line
-/>
-```
-
-The <i>input</i> element should not be given a <i>reset</i> attribute.
-
-One simple fix would be to not use the spread syntax and write all of the forms like this:
-
-```js
-<input
-  value={username.value} 
-  type={username.type}
-  onChange={username.onChange}
-/>
-```
-
-If we were to do this, we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with the spread syntax.
-
-#### 7.7: Country hook
-
-Let's return to exercises [2.18-2.20](/en/part2/adding_styles_to_react_app#exercises-2-18-2-20).
-
-Use the code from <https://github.com/fullstack-hy2020/country-hook> as your starting point.
-
-The application can be used to search for a country's details from the service in <https://studies.cs.helsinki.fi/restcountries/>. If a country is found, its details are displayed:
-
-![browser displaying country details](../../images/7/69ea.png)
-
-If no country is found, a message is displayed to the user:
-
-![browser showing country not found](../../images/7/70ea.png)
-
-The application is otherwise complete, but in this exercise, you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
-
-Use the API endpoint [name](https://studies.cs.helsinki.fi/restcountries/) to fetch a country's details in a _useEffect_ hook within your custom hook.
-
-Note that in this exercise it is essential to use useEffect's [second parameter](https://react.dev/reference/react/useEffect#parameters) array to control when the effect function is executed. See the course [part 2](/en/part2/adding_styles_to_react_app#couple-of-important-remarks) for more info how the second parameter could be used.
-
-#### 7.8: Ultimate Hooks
-
-The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this:
-
-```js
-import axios from 'axios'
-const baseUrl = '/api/notes'
-
-let token = null
-
-const setToken = newToken => {
-  token = `bearer ${newToken}`
-}
-
-const getAll = async () => {
-  const response = await axios.get(baseUrl)
-  return response.data
-}
-
-const create = async newObject => {
-  const config = {
-    headers: { Authorization: token },
-  }
-
-  const response = await axios.post(baseUrl, newObject, config)
-  return response.data
-}
-
-const update = async (id, newObject) => {
-  const response = await axios.put(`${ baseUrl }/${id}`, newObject)
-  return response.data
-}
-
-export default { getAll, create, update, setToken }
-```
-
-We notice that the code is in no way specific to the fact that our application deals with notes. Excluding the value of the _baseUrl_ variable, the same code could be reused in the blog post application for dealing with the communication with the backend.
-
-Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
-
-You can do the exercise in the project found in the <https://github.com/fullstack-hy2020/ultimate-hooks> repository. The <i>App</i> component for the project is the following:
-
-```js
-const App = () => {
-  const content = useField('text')
-  const name = useField('text')
-  const number = useField('text')
-
-  const [notes, noteService] = useResource('http://localhost:3005/notes')
-  const [persons, personService] = useResource('http://localhost:3005/persons')
-
-  const handleNoteSubmit = (event) => {
-    event.preventDefault()
-    noteService.create({ content: content.value })
-  }
- 
-  const handlePersonSubmit = (event) => {
-    event.preventDefault()
-    personService.create({ name: name.value, number: number.value})
-  }
-
-  return (
-    <div>
-      <h2>notes</h2>
-      <form onSubmit={handleNoteSubmit}>
-        <input {...content} />
-        <button>create</button>
-      </form>
-      {notes.map(n => <p key={n.id}>{n.content}</p>)}
-
-      <h2>persons</h2>
-      <form onSubmit={handlePersonSubmit}>
-        name <input {...name} /> <br/>
-        number <input {...number} />
-        <button>create</button>
-      </form>
-      {persons.map(n => <p key={n.id}>{n.name} {n.number}</p>)}
-    </div>
-  )
-}
-```
-
-The _useResource_ custom hook returns an array of two items just like the state hooks. The first item of the array contains all of the individual resources and the second item of the array is an object that can be used for manipulating the resource collection, like creating new ones.
-
-If you implement the hook correctly, it can be used for both notes and persons (start the server with the _npm run server_ command at port 3005).
-
-![browser showing notes and persons](../../images/5/21e.png)
-
-</div>

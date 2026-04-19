@@ -290,8 +290,8 @@ const Note = ({ notes }) => {
 }
 ```
 
-<!-- The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/en/main/hooks/use-params) function of the React Router.-->
- _Note_组件接收所有的笔记作为prop<i>notes</i>，它可以通过React Router的[useParams](https://reactrouter.com/en/main/hooks/use-params)函数访问url参数（要显示的笔记的id）。
+<!-- The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/api/hooks/useParams) function of the React Router.-->
+ _Note_组件接收所有的笔记作为prop<i>notes</i>，它可以通过React Router的[useParams](https://reactrouter.com/api/hooks/useParams)函数访问url参数（要显示的笔记的id）。
 
 ### useNavigate
 
@@ -359,14 +359,14 @@ const Login = (props) => {
 }
 ```
 
-<!-- What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) function of the React Router. With this function the browser's url can be changed programmatically.-->
- 这个组件的有趣之处在于使用了React Router的[useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)函数。有了这个函数，浏览器的url可以以编程方式改变。
+<!-- What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/api/components/Navigate) function of the React Router. With this function the browser's url can be changed programmatically.-->
+ 这个组件的有趣之处在于使用了React Router的[useNavigate](https://reactrouter.com/api/components/Navigate)函数。有了这个函数，浏览器的url可以以编程方式改变。
 
 <!-- With user login, we call _navigate('/')_ that causes the browser's url to change to _/_ and the application renders the corresponding component <i>Home</i>.-->
 随着用户的登录，我们调用_navigate("/")_，使浏览器的url改变为_/_，应用渲染相应的组件<i>Home</i>。
 
-<!-- Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)  are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.-->
- [useParams](https://reactrouter.com/en/main/hooks/use-params)和[useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)都是钩子函数，就像我们现在已经多次使用的useState和useEffect。  正如你在第一章节所记得的，使用钩子函数有一些 [规则](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) 。Create-react-app已经被配置为在你违反这些规则时发出警告，例如，从条件语句中调用钩子函数。
+<!-- Both [useParams](https://reactrouter.com/api/hooks/useParams) and [useNavigate](https://reactrouter.com/api/components/Navigate)  are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.-->
+ [useParams](https://reactrouter.com/api/hooks/useParams)和[useNavigate](https://reactrouter.com/api/components/Navigate)都是钩子函数，就像我们现在已经多次使用的useState和useEffect。  正如你在第一章节所记得的，使用钩子函数有一些 [规则](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) 。Create-react-app已经被配置为在你违反这些规则时发出警告，例如，从条件语句中调用钩子函数。
 
 ### redirect
 
@@ -377,8 +377,8 @@ const Login = (props) => {
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-<!-- If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/en/main/components/navigate) to the login view:-->
- 如果一个用户没有登录，<i>Users</i>组件就不会被渲染。相反，用户会被使用组件[Navigate](https://reactrouter.com/en/main/components/navigate)重定向</i>到登录视图。
+<!-- If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/api/components/Navigate) to the login view:-->
+ 如果一个用户没有登录，<i>Users</i>组件就不会被渲染。相反，用户会被使用组件[Navigate](https://reactrouter.com/api/components/Navigate)重定向</i>到登录视图。
 
 ```js
 <Navigate replace to="/login" />

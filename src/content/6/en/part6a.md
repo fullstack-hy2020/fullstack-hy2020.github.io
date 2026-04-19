@@ -7,1300 +7,810 @@ lang: en
 
 <div class="content">
 
-So far, we have followed the state management conventions recommended by React. We have placed the state and the functions for handling it in the [higher level](https://react.dev/learn/sharing-state-between-components) of the component structure of the application. Quite often most of the app state and state altering functions reside directly in the root component. The state and its handler methods have then been passed to other components with props. This works up to a certain point, but when applications grow larger, state management becomes challenging.
+We have followed React's recommended practice for managing application state by defining the state needed by multiple components and the functions that handle it in the [top-level](https://reactjs.org/docs/lifting-state-up.html) components of the component hierarchy. Most of the state and the functions handling it have typically been defined directly in the root component and passed via props to the components that need them. This works up to a point, but as the application grows, state management becomes challenging.
 
-### Flux-architecture
+### Flux architecture
 
-Already years ago Facebook developed the [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview)-architecture to make state management of React apps easier. In Flux, the state is separated from the React components and into its own <i>stores</i>.
-State in the store is not changed directly, but with different <i>actions</i>.
+Facebook developed the [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview) architecture in the early days of React's history to ease state management problems. In Flux, the management of application state is separated entirely into external <i>stores</i> outside of React components. The state in the store is not changed directly but through specific <i>actions</i> that are created to that purpose.
 
-When an action changes the state of the store, the views are rerendered:
+When an action changes the store's state, the views are re-rendered:
 
-![diagram action->dispatcher->store->view](../../images/6/flux1.png)
+![Action -> Dispatcher -> Store -> View](../../images/6/flux1.png)
 
-If some action on the application, for example pushing a button, causes the need to change the state, the change is made with an action.
-This causes re-rendering the view again:
+If the use of the application (e.g., pressing a button) causes a need to change the state, the change is made through an action. This in turn causes the view to be re-rendered:
 
-![same diagram as above but with action looping back](../../images/6/flux2.png)
+![Action -> Dispatcher -> Store -> View -> Action -> Dispatcher -> View](../../images/6/flux2.png)
 
-Flux offers a standard way for how and where the application's state is kept and how it is modified.
+Flux thus provides a standard way for how and where the application state is kept and for making changes to it.
 
 ### Redux
 
-Facebook has an implementation for Flux, but we will be using the [Redux](https://redux.js.org) library. It works with the same principle but is a bit simpler. Facebook also uses Redux now instead of their original Flux.
+[Redux](https://redux.js.org), which follows the Flux architecture, was the dominant state management solution for React applications for nearly a decade. On this course, Redux was also used until spring 2026. Redux has always been plagued by complexity and a large amount of boilerplate code. The situation improved significantly with the introduction of [Redux Toolkit](https://redux-toolkit.js.org/), but despite this, the community continued to develop alternative state management solutions, such as [MobX](https://mobx.js.org/), [Recoil](https://recoiljs.org/) and [Jotai](https://www.npmjs.com/package/jotai). Their popularity has varied.
 
-We will get to know Redux by implementing a counter application yet again:
+The most interesting, and without a doubt the most popular of the new arrivals is [Zustand](https://zustand.docs.pmnd.rs/), and it is also our choice for a state management solution. Zustand appears to have already caught up with Redux in popularity:
 
-![browser counter application](../../images/6/1.png)
+![](../../images/6/redux-vs-rest.png)
 
-Create a new Vite application and install </i>redux</i> with the command
+### Zustand
+
+Let's get familiar with Zustand by once again implementing a counter application:
+
+![Rendered integer and three buttons: plus, minus and zero](../../images/6/1.png)
+
+
+Create a new Vite application and install <i>Zustand</i>:
 
 ```bash
-npm install redux
+npm install zustand
 ```
 
-As in Flux, in Redux the state is also stored in a [store](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#store).
+The first version, where only the counter increment works, is as follows:
 
-The whole state of the application is stored in <i>one</i> JavaScript object in the store. Because our application only needs the value of the counter, we will save it straight to the store. If the state was more complicated, different things in the state would be saved as separate fields of the object.
+```bash
+import { create } from 'zustand'
 
-The state of the store is changed with [actions](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#actions). Actions are objects, which have at least a field determining the <i>type</i> of the action.
-Our application needs for example the following action:
+const useCounterStore = create(set => ({
+  counter: 0,
+  increment: () => set(state => ({ counter: state.counter + 1 })),
+}))
 
-```js
-{
-  type: 'INCREMENT'
+const App = () => {
+  const counter = useCounterStore(state => state.counter)
+  const increment = useCounterStore(state => state.increment)
+
+  return (
+    <div>
+      <div>{counter}</div>
+      <div>
+        <button onClick={increment}>plus</button>
+        <button>minus</button>
+        <button>zero</button>
+      </div>
+      
+    </div>
+  )
 }
 ```
 
-If there is data involved with the action, other fields can be declared as needed.  However, our counting app is so simple that the actions are fine with just the type field.
+The application starts by creating the <i>store</i>, i.e., the global state, using Zustand's [create](https://zustand.docs.pmnd.rs/reference/apis/create) function:
 
-The impact of the action to the state of the application is defined using a [reducer](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#reducers). In practice, a reducer is a function that is given the current state and an action as parameters. It <i>returns</i> a new state.
+```bash
+import { create } from 'zustand'
 
-Let's now define a reducer for our application at <i>main.jsx</i>. The file initially looks like this:
-
-```js
-const counterReducer = (state, action) => {
-  if (action.type === 'INCREMENT') {
-    return state + 1
-  } else if (action.type === 'DECREMENT') {
-    return state - 1
-  } else if (action.type === 'ZERO') {
-    return 0
-  }
-
-  return state
-}
+const useCounterStore = create(set => ({
+  counter: 0,
+  increment: () => set(state => ({ counter: state.counter + 1 })),
+}))
 ```
 
-The first parameter is the <i>state</i> in the store. The reducer returns a <i>new state</i> based on the _action_ type. So, e.g. when the type of Action is <i>INCREMENT</i>, the state gets the old value plus one. If the type of Action is <i>ZERO</i> the new value of state is zero.
-
-Let's change the code a bit. We have used if-else statements to respond to an action and change the state. However, the [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement is the most common approach to writing a reducer.
-
-Let's also define a [default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) of 0 for the parameter <i>state</i>. Now the reducer works even if the store state has not been primed yet.
+The function receives as a parameter a <i>function</i> that returns the state to be defined for the application. The parameter is thus the following:
 
 ```js
-// highlight-start
-const counterReducer = (state = 0, action) => {
+set => ({
+  counter: 0,
+  increment: () => set(state => ({ counter: state.counter + 1 })),
+})
+```
+
+The state thus has <i>counter</i> defined with a value of zero, and <i>increment</i> which is a function.
+
+The application's components can access the values and functions defined in the state through the <i>useCounterStore</i> function defined using Zustand's <i>create</i>. The <i>App</i> component uses <i>selectors</i> to retrieve the <i>counter</i> value and the <i>increment</i> function from the state:
+
+```js
+const App = () => {
+  // highlight-start
+  // using selector to pick right part of the store state
+  const counter = useCounterStore(state => state.counter)
+  const increment = useCounterStore(state => state.increment)
   // highlight-end
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    case 'ZERO':
-      return 0
-    default: // if none of the above matches, code comes here
-      return state
+
+  return (
+    <div>
+      <div>{counter}</div> // highlight-line
+      <div>
+        <button onClick={increment}>plus</button>  // highlight-line
+        <button>minus</button>
+        <button>zero</button>
+      </div>
+      
+    </div>
+  )
+}
+```
+
+The code stores counter value of the store into a variable as follows:
+
+```js
+const counter = useCounterStore(state => state.counter)
+```
+
+A selector function <i>state => state.counter</i> is used, which determines what is returned from the store's contents. In the same way, the function stored in the store is retrieved into the variable <i>increment</i>.
+
+The state function <i>increment</i>, which was defined as follows, is given as the click handler for the "plus" button:
+
+```js
+const useCounterStore = create(set => ({
+  counter: 0,
+  increment: () => set(state => ({ counter: state.counter + 1 })), // highlight-line
+}))
+```
+
+Let's look at the function definition separately:
+
+```js
+() => set(state => ({ counter: state.counter + 1 }))
+```
+
+This is a function that calls the [set](https://zustand.docs.pmnd.rs/learn/guides/updating-state) function giving another function as a parameter. This function passed as a parameter defines how the state changes:
+
+```js
+state => ({ counter: state.counter + 1 })
+```
+
+which is shorthand for:
+
+```js
+state => {
+  return { counter: state.counter + 1 }
+}
+```
+
+The function returns a new state, which it computes based on the old state that it can access using the parameter <i>state</i>. So if the old state is, for example:
+
+```js
+{
+  counter: 1,
+  increment: // function definition
+}
+```
+
+the new state becomes:
+
+```js
+{
+  counter: 2,
+  increment: // function definition
+}
+```
+
+The state always also contains the state-changing function <i>increment</i>. 
+
+The state transition function
+
+```js
+state => ({ counter: state.counter + 1 })
+```
+
+only affects the <i>counter</i> value in the state.
+
+Nothing would prevent changing the function in the state within the state transition function; for example, if we defined it as follows:
+
+```js
+state => {
+  return {
+    counter: state.counter + 1 ,
+    increment: console.log('increment broken')
   }
 }
 ```
 
-The reducer is never supposed to be called directly from the application's code. It is only given as a parameter to the _createStore_ function which creates the store:
+the increment button would only work the first time; after that, pressing the button would only print to the console.
+
+When the new state is set as:
 
 ```js
-import { createStore } from 'redux' // highlight-line
+state => ({ counter: state.counter + 1 })
+```
 
-const counterReducer = (state = 0, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    case 'ZERO':
-      return 0
-    default:
-      return state
-  }
+only the value of the <i>counter</i> key in the state is updated; the new state is obtained by merging the old state with the value returned by the state-changing function. This is why the following state transition function:
+
+```js
+state => ({})
+```
+
+does not affect the state at all.
+
+Let's complete the application for the remaining buttons as well:
+
+```js
+const useCounterStore = create(set => ({
+  counter: 0,
+  increment: () => set(state => ({ counter: state.counter + 1 })),
+  decrement: () => set(state => ({ counter: state.counter - 1 })),
+  zero: () => set(() => ({ counter: 0 })),  
+}))
+
+const App = () => {
+  const counter = useCounterStore(state => state.counter)
+  const increment = useCounterStore(state => state.increment)
+  const decrement = useCounterStore(state => state.decrement)
+  const zero = useCounterStore(state => state.zero)
+
+  return (
+    <div>
+      <div>{counter}</div>
+      <div>
+        <button onClick={increment}>plus</button>
+        <button onClick={decrement}>minus</button>
+        <button onClick={zero}>zero</button>
+      </div>
+      
+    </div>
+  )
 }
-
-const store = createStore(counterReducer) // highlight-line
 ```
 
-The code editor may warn that _createStore_ is deprecated. Let's ignore this for now; there is a more detailed explanation about this further below.
+> #### Where do set and state come from?
+>
+> Where does <i>set</i> come from? It is a helper function provided by Zustand's <i>create</i> function, used to update the state. <i>create</i> calls the parameter function it receives and automatically passes <i>set</i> to it. You don't need to call or import it yourself; Zustand takes care of that.
+>
+> Where does <i>state</i> come from? When a function is given as a parameter to <i>set</i> (instead of a new state object directly), Zustand calls that function with the store's current state as its argument. This way, state-updating functions can access the old state to compute the new one.
 
-The store now uses the reducer to handle <i>actions</i>, which are <i>dispatched</i> or 'sent' to the store with its [dispatch](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#dispatch) method.
+### Using the state from different components
+
+Let's refactor the application so that the store definition is moved to its own file <i>store.js</i>, and the view is split into multiple components, each defined in their own files.
+
+The contents of <i>store.js</i> are straightforward:
 
 ```js
-store.dispatch({ type: 'INCREMENT' })
+export const useCounterStore = create(set => ({
+  counter: 0,
+  increment: () => set(state => ({ counter: state.counter + 1 })),
+  decrement: () => set(state => ({ counter: state.counter - 1 })),
+  zero: () => set(() => ({ counter: 0 })),  
+}))
 ```
 
-You can find out the state of the store using the method [getState](https://redux.js.org/api/store#getstate).
-
-For example the following code:
+The <i>App</i> component is simplified as follows:
 
 ```js
-// ...
-
-const store = createStore(counterReducer)
-
-// highlight-start
-console.log(store.getState())
-store.dispatch({type: 'INCREMENT'})
-store.dispatch({type: 'INCREMENT'})
-store.dispatch({type: 'INCREMENT'})
-console.log(store.getState())
-store.dispatch({type: 'ZERO'})
-store.dispatch({type: 'DECREMENT'})
-console.log(store.getState())
-// highlight-end
-```
-
-would print the following to the console
-
-```
-0
-3
--1
-```
-
-because at first, the state of the store is 0. After three <i>INCREMENT</i> actions the state is 3. In the end, after the <i>ZERO</i> and <i>DECREMENT</i> actions, the state is -1.
-
-The third important method that the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create callback functions that the store calls whenever an action is dispatched to the store.
-
-If, for example, we would add the following function to subscribe, <i>every change in the store</i> would be printed to the console.
-
-```js
-store.subscribe(() => {
-  const storeNow = store.getState()
-  console.log(storeNow)
-})
-```
-
-so the code
-
-```js
-// ...
-
-const store = createStore(counterReducer)
-
-// highlight-start
-store.subscribe(() => {
-  const storeNow = store.getState()
-  console.log(storeNow)
-})
-// highlight-end
-
-// highlight-start
-store.dispatch({ type: 'INCREMENT' })
-store.dispatch({ type: 'INCREMENT' })
-store.dispatch({ type: 'INCREMENT' })
-store.dispatch({ type: 'ZERO' })
-store.dispatch({ type: 'DECREMENT' })
-// highlight-end
-```
-
-would cause the following to be printed
-
-```
-1
-2
-3
-0
--1
-```
-
-The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is directly available for the React code. We will get to know better ways to structure React/Redux code later. The file <i>main.jsx</i> looks as follows:
-
-```js
-import ReactDOM from 'react-dom/client'
-import { createStore } from 'redux'
-
-const counterReducer = (state = 0, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    case 'ZERO':
-      return 0
-    default:
-      return state
-  }
-}
-
-const store = createStore(counterReducer)
+import Display from './Display'
+import Controls from './Controls'
 
 const App = () => {
   return (
     <div>
-      <div>{store.getState()}</div>
-      <button onClick={() => store.dispatch({ type: 'INCREMENT' })}>
-        plus
-      </button>
-      <button onClick={() => store.dispatch({ type: 'DECREMENT' })}>
-        minus
-      </button>
-      <button onClick={() => store.dispatch({ type: 'ZERO' })}>
-        zero
-      </button>
+      <Display />
+      <Controls />
     </div>
   )
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
-
-const renderApp = () => {
-  root.render(<App />)
-}
-
-renderApp()
-store.subscribe(renderApp)
+export default App
 ```
 
-There are a few notable things in the code.
-<i>App</i> renders the value of the counter by asking it from the store with the method _store.getState()_. The action handlers of the buttons <i>dispatch</i> the right actions to the store.
+What is noteworthy here is that the <i>App</i> component no longer passes state to its child components. In fact, the component does not touch the state in any way, the store definition has been fully separated outside the component.
 
-When the state in the store is changed, React is not able to automatically re-render the application. Thus we have registered a function _renderApp_, which renders the whole app, to listen for changes in the store with the _store.subscribe_ method. Note that we have to immediately call the _renderApp_ method. Without the call, the first rendering of the app would never happen.
-
-### A note about the use of createStore
-
-The most observant will notice that the name of the function createStore is overlined. If you move the mouse over the name, an explanation will appear
-
-![vscode error showing createStore deprecated, use configureStore instead](../../images/6/30new.png)
-
-The full explanation is as follows
-
-><i>We recommend using the configureStore method of the @reduxjs/toolkit package, which replaces createStore.</i>
->
-><i>Redux Toolkit is our recommended approach for writing Redux logic today, including store setup, reducers, data fetching, and more.</i>
->
-><i>For more details, please read this Redux docs page: <https://redux.js.org/introduction/why-rtk-is-redux-today></i>
->
-><i>configureStore from Redux Toolkit is an improved version of createStore that simplifies setup and helps avoid common bugs.</i>
->
-><i>You should not be using the redux core package by itself today, except for learning purposes. The createStore method from the core redux package will not be removed, but we encourage all users to migrate to using Redux Toolkit for all Redux code.</i>
-
-So, instead of the function <i>createStore</i>, it is recommended to use the slightly more "advanced" function <i>configureStore</i>, and we will also use it when we have achieved the basic functionality of Redux.
-
-Side note: <i>createStore</i> is defined as "deprecated", which usually means that the feature will be removed in some newer version of the library. The explanation above and this [discussion](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) reveal that <i>createStore</i> will not be removed, and it has been given the status <i>deprecated</i>, perhaps with slightly incorrect reasons. So the function is not obsolete, but today there is a more preferable, new way to do almost the same thing.
-
-### Redux-notes
-
-We aim to modify our note application to use Redux for state management. However, let's first cover a few key concepts through a simplified note application.
-
-The first version of our application, written in the file <i>main.jsx</i>, looks as follows:
+The component that renders the counter value is simple:
 
 ```js
-import ReactDOM from 'react-dom/client'
-import { createStore } from 'redux'
+import { useCounterStore } from './store'
 
-const noteReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'NEW_NOTE':
-      state.push(action.payload)
-      return state
-    default:
-      return state
-  }
+const Display = () => {
+  const counter = useCounterStore(state => state.counter)
+
+  return (
+    <div>{counter}</div>
+  )
 }
 
-const store = createStore(noteReducer)
+export default Display
+```
 
-store.dispatch({
-  type: 'NEW_NOTE',
-  payload: {
-    content: 'the app state is in redux store',
-    important: true,
-    id: 1
-  }
-})
+The component accesses the counter value via the <i>useCounterStore</i> function that defines the store. This is convenient in many ways, for example, there is no need to pass the state to the component through props.
 
-store.dispatch({
-  type: 'NEW_NOTE',
-  payload: {
-    content: 'state changes are made with actions',
-    important: false,
-    id: 2
-  }
-})
+The component that defines the buttons looks like this:
 
-const App = () => {
+```js
+import { useCounterStore } from './store'
+
+const Controls = () => {
+  const increment = useCounterStore(state => state.increment)
+  const decrement = useCounterStore(state => state.decrement)
+  const zero = useCounterStore(state => state.zero)
+
   return (
     <div>
-      <ul>
-        {store.getState().map(note => (
-          <li key={note.id}>
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
-          </li>
-        ))}
-      </ul>
+      <button onClick={increment}>plus</button>
+      <button onClick={decrement}>minus</button>
+      <button onClick={zero}>zero</button>
     </div>
   )
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
-
-const renderApp = () => {
-  root.render(<App />)
-}
-
-renderApp()
-store.subscribe(renderApp)
+export default Controls
 ```
 
-So far the application does not have the functionality for adding new notes, although it is possible to do so by dispatching <i>NEW\_NOTE</i> actions.
-
-Now the actions have a type and a field <i>payload</i>, which contains the note to be added:
+The <i>useCounterStore</i> function takes a selector function as its parameter, which determines which part of the state to use. For example:
 
 ```js
-{
-  type: 'NEW_NOTE',
-  payload: {
-    content: 'state changes are made with actions',
-    important: false,
-    id: 2
-  }
-}
+  const increment = useCounterStore(state => state.increment)
 ```
 
-The choice of the field name is not random. The general convention is that actions have exactly two fields, <i>type</i> telling the type and <i>payload</i> containing the data included with the Action.
+Here the selector function <i>state => state.increment</i> picks the value of the <i>increment</i> key from the state — the function that increments the counter — and stores it in the variable <i>increment</i>.
 
-### Pure functions, immutable
-
-The initial version of the reducer is very simple:
+We could also access the entire state as follows:
 
 ```js
-const noteReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'NEW_NOTE':
-      state.push(action.payload)
-      return state
-    default:
-      return state
-  }
-}
+  const state = useCounterStore()
+  // does the same as useCounterStore(state => state), i.e., selects the entire state
 ```
 
-The state is now an Array. <i>NEW\_NOTE</i>-type actions cause a new note to be added to the state with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method.
+We could then refer to the counter value and the functions using dot notation, i.e., <i>state.counter</i> and <i>state.increment</i>.
 
-The application seems to be working, but the reducer we have declared is bad. It breaks the [basic assumption](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#reducers) that reducers must be [pure functions](https://en.wikipedia.org/wiki/Pure_function).
-
-Pure functions are such, that they <i>do not cause any side effects</i> and they must always return the same response when called with the same parameters.
-
-We added a new note to the state with the method _state.push(action.payload)_ which <i>changes</i> the state of the state-object. This is not allowed. The problem is easily solved by using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which creates a <i>new array</i>, which contains all the elements of the old array and the new element:
+A natural question arises: would it be possible to use multiple parts of the state via destructuring:
 
 ```js
-const noteReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'NEW_NOTE':
-      return state.concat(action.payload) // highlight-line
-    default:
-      return state
-  }
+import { useCounterStore } from './store'
+
+const Controls = () => {
+  const { increment, decrement, zero } = useCounterStore() // highlight-line
+
+  return (
+    <div>
+      <button onClick={increment}>plus</button>
+      <button onClick={decrement}>minus</button>
+      <button onClick={zero}>zero</button>
+    </div>
+  )
 }
+
+export default Controls
 ```
 
-A reducer state must be composed of [immutable](https://en.wikipedia.org/wiki/Immutable_object) objects. If there is a change in the state, the old object is not changed, but it is <i>replaced with a new, changed, object</i>. This is exactly what we did with the new reducer: the old array is replaced with the new one.
+The solution works, but it has a significant drawback. Destructuring causes the <i>Controls</i> component to be re-rendered every time the counter value changes, even though the component only displays the buttons and not the value itself.
 
-Let's expand our reducer so that it can handle the change of a note's importance:
+The best practice in Zustand is therefore to select from the state exactly only those parts that are needed in the given component. A component re-renders only when the part of the state it has selected changes. When instead writing:
 
 ```js
-{
-  type: 'TOGGLE_IMPORTANCE',
-  payload: {
-    id: 2
-  }
-}
+  const { increment, decrement, zero } = useCounterStore() 
 ```
 
-Since we do not have any code which uses this functionality yet, we are expanding the reducer in the 'test-driven' way. 
+the component no longer reacts to changes in the counter value, because it has not selected it from the state.
 
-### Configuring the test environment
+### Reorganizing the state
 
-We have to first configure the [Vitest](https://vitest.dev/) testing library for the project. Let's install it as a development dependency for the application:
+However, we can achieve quite a neat solution by reorganizing the state as follows:
 
 ```js
-npm install --save-dev vitest
+export const useCounterStore = create(set => ({
+  counter: 0,
+  actions: {
+    increment: () => set(state => ({ counter: state.counter + 1 })),
+    decrement: () => set(state => ({ counter: state.counter - 1 })),
+    zero: () => set(() => ({ counter: 0 })),
+  }  
+}))
 ```
 
-Let us expand <i>package.json</i> with a script for running the tests:
+The state-changing functions are now grouped under their own key <i>actions</i>, and they can be selected as a whole and destructured:
 
-```json
-{
-  // ...
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "vitest" // highlight-line
-  },
-  // ...
+```js
+const Controls = () => {
+  
+  const { increment, decrement, zero } = useCounterStore(state => state.actions)
+
+  return (
+    <div>
+      <button onClick={increment}>plus</button>
+      <button onClick={decrement}>minus</button>
+      <button onClick={zero}>zero</button>
+    </div>
+  )
 }
 ```
 
-To make testing easier, let's move the reducer's code to its own module, to the file <i>src/reducers/noteReducer.js</i>:
+Now no re-rendering occurs, since only the functions have been selected from the state, and they remain the same for the entire lifetime of the store.
+
+According to some [best practices](https://tkdodo.eu/blog/working-with-zustand#only-export-custom-hooks), it is not advisable to export the function defining the entire state for use throughout the application. Instead, smaller views that expose only the necessary parts of the state should be created from it. Let's modify <i>store.js</i> as follows:
 
 ```js
-const noteReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'NEW_NOTE':
-      return state.concat(action.payload)
-    default:
-      return state
-  }
-}
+import { create } from 'zustand'
 
-export default noteReducer
+const useCounterStore = create(set => ({
+  counter: 0,
+  actions: {
+    increment: () => set(state => ({ counter: state.counter + 1 })),
+    decrement: () => set(state => ({ counter: state.counter - 1 })),
+    zero: () => set(() => ({ counter: 0 })),
+  }  
+}))
+
+// the hook functions that are used elsewhere in app
+export const useCounter = () => useCounterStore(state => state.counter)
+export const useCounterControls = () => useCounterStore(state => state.actions)
 ```
 
-The file <i>main.jsx</i> changes as follows:
+Now, outside the module defining the state, the functions <i>useCounter</i> — which returns the counter value when called — and <i>useCounterControls</i> — which returns the functions that modify the counter value — are available. The usage changes slightly:
 
 ```js
-import ReactDOM from 'react-dom/client'
-import { createStore } from 'redux'
-import noteReducer from './reducers/noteReducer' // highlight-line
+import { useCounter } from './store' // highlight-line
 
-const store = createStore(noteReducer)
+const Display = () => {
+  const counter = useCounter() // highlight-line
 
-// ...
-```
-
-We'll also add the library [deep-freeze](https://www.npmjs.com/package/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.
-Let's install the library as a development dependency:
-
-```js
-npm install --save-dev deep-freeze
-```
-
-We are now ready to write tests.
-
-### Tests for noteReducer
-
-Let's start by creating a test for handling the action <i>NEW\_NOTE</i>. The test, which we define in file <i>src/reducers/noteReducer.test.js</i>, has the following content:
-
-```js
-import deepFreeze from 'deep-freeze'
-import { describe, expect, test } from 'vitest'
-import noteReducer from './noteReducer'
-
-describe('noteReducer', () => {
-  test('returns new state with action NEW_NOTE', () => {
-    const state = []
-    const action = {
-      type: 'NEW_NOTE',
-      payload: {
-        content: 'the app state is in redux store',
-        important: true,
-        id: 1
-      }
-    }
-
-    deepFreeze(state)
-    const newState = noteReducer(state, action)
-
-    expect(newState).toHaveLength(1)
-    expect(newState).toContainEqual(action.payload)
-  })
-})
-```
-
-Run the test with <i>npm test</i>. The test ensures that the new state returned by the reducer is an array containing a single element, which is the same object as the one in the action’s <i>payload</i> field.
-
-The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer used the _push_ command to manipulate the state, the test would fail:
-
-![terminal showing test failure and error about not using array.push](../../images/6/2.png)
-
-Now we'll create a test for the <i>TOGGLE\_IMPORTANCE</i> action:
-
-```js
-test('returns new state with action TOGGLE_IMPORTANCE', () => {
-  const state = [
-    {
-      content: 'the app state is in redux store',
-      important: true,
-      id: 1
-    },
-    {
-      content: 'state changes are made with actions',
-      important: false,
-      id: 2
-    }
-  ]
-
-  const action = {
-    type: 'TOGGLE_IMPORTANCE',
-    payload: {
-      id: 2
-    }
-  }
-
-  deepFreeze(state)
-  const newState = noteReducer(state, action)
-
-  expect(newState).toHaveLength(2)
-
-  expect(newState).toContainEqual(state[0])
-
-  expect(newState).toContainEqual({
-    content: 'state changes are made with actions',
-    important: true,
-    id: 2
-  })
-})
-```
-
-So the following action
-
-```js
-{
-  type: 'TOGGLE_IMPORTANCE',
-  payload: {
-    id: 2
-  }
+  return (
+    <div>{counter}</div>
+  )
 }
 ```
 
-has to change the importance of the note with the id 2.
-
-The reducer is expanded as follows
-
 ```js
-const noteReducer = (state = [], action) => {
-  switch(action.type) {
-    case 'NEW_NOTE':
-      return state.concat(action.payload)
-    // highlight-start
-    case 'TOGGLE_IMPORTANCE': {
-      const id = action.payload.id
-      const noteToChange = state.find(n => n.id === id)
-      const changedNote = {
-        ...noteToChange,
-        important: !noteToChange.important
-      }
-      return state.map(note => (note.id !== id ? note : changedNote))
-    }
-    // highlight-end
-    default:
-      return state
-  }
+import { useCounterControls } from './store' // highlight-line
+
+const Controls = () => {
+  const { increment, decrement, zero } = useCounterControls() // highlight-line
+
+  return (
+    <div>
+      <button onClick={increment}>plus</button>
+      <button onClick={decrement}>minus</button>
+      <button onClick={zero}>zero</button>
+    </div>
+  )
 }
 ```
 
-We create a copy of the note whose importance has changed with the syntax [familiar from part 2](/en/part2/altering_data_in_server#changing-the-importance-of-notes), and replace the state with a new state containing all the notes which have not changed and the copy of the changed note <i>changedNote</i>.
+When using the state this way, there is no longer a need to use selector functions, as their use is hidden inside the definition of the new helper functions.
 
-Let's recap what goes on in the code. First, we search for a specific note object, the importance of which we want to change:
+The more observant have noticed that the Zustand-related functions are named starting with the word <i>use</i>. The reason for this is that the function returned by Zustand's <i>create</i> function — in our example <i>useCounterStore</i> — is a React [custom hook](https://react.dev/learn/reusing-logic-with-custom-hooks) function. Our own helper functions <i>useCounter</i> and <i>useCounterControls</i> are also essentially custom hooks, because they hide the use of the custom hook <i>useCounterStore</i> inside them.
 
-```js
-const noteToChange = state.find(n => n.id === id)
-```
-
-then we create a new object, which is a <i>copy</i> of the original note, only the value of the <i>important</i> field has been changed to the opposite of what it was:
-
-```js
-const changedNote = { 
-  ...noteToChange, 
-  important: !noteToChange.important 
-}
-```
-
-A new state is then returned. We create it by taking all of the notes from the old state except for the desired note, which we replace with its slightly altered copy:
-
-```js
-state.map(note => (note.id !== id ? note : changedNote))
-```
-
-### Array spread syntax
-
-Because we now have quite good tests for the reducer, we can refactor the code safely.
-
-Adding a new note creates the state returned from the Array's _concat_ function. Let's take a look at how we can achieve the same by using the JavaScript [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) syntax:
-
-```js
-const noteReducer = (state = [], action) => {
-  switch(action.type) {
-    case 'NEW_NOTE':
-      return [...state, action.payload] // highlight-line
-    case 'TOGGLE_IMPORTANCE': {
-      // ...
-    }
-    default:
-    return state
-  }
-}
-```
-
-The spread -syntax works as follows. If we declare
-
-```js
-const numbers = [1, 2, 3]
-```
-
-<code>...numbers</code> breaks the array up into individual elements, which can be placed in another array.
-
-```js
-[...numbers, 4, 5]
-```
-
-and the result is an array <i>[1, 2, 3, 4, 5]</i>.
-
-If we would have placed the array to another array without the spread
-
-```js
-[numbers, 4, 5]
-```
-
-the result would have been <i>[ [1, 2, 3], 4, 5]</i>.
-
-When we take elements from an array by [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment), a similar-looking syntax is used to <i>gather</i> the rest of the elements:
-
-```js
-const numbers = [1, 2, 3, 4, 5, 6]
-
-const [first, second, ...rest] = numbers
-
-console.log(first)     // prints 1
-console.log(second)   // prints 2
-console.log(rest)     // prints [3, 4, 5, 6]
-```
+Custom hooks come with a set of rules, for example, their names are expected to always start with <i>use</i>. The [rules of hooks](https://react.dev/warnings/invalid-hook-call-warning) covered in [Part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks) also apply to custom hooks!
 
 </div>
 
 <div class="tasks">
 
-### Exercises 6.1.-6.2.
+### Exercise 6.1.
 
-Let's make a simplified version of the unicafe exercise from part 1. Let's handle the state management with Redux.
+Let's make a new version of the Unicafe exercise from Part 1. We'll handle the application's state management using Zustand.
 
-You can take the code from this repository <https://github.com/fullstack-hy2020/unicafe-redux> for the base of your project.
+You can use the project at https://github.com/fullstack-hy2020/unicafe-zustand as the base for your application.
 
-<i>Start by removing the git configuration of the cloned repository, and by installing dependencies</i>
+<i>Start by removing the Git configuration of the cloned application and installing the dependencies:</i>
 
 ```bash
-cd unicafe-redux   // go to the directory of cloned repository
+cd unicafe-zustand   // go to the cloned repository directory
 rm -rf .git
 npm install
 ```
 
-#### 6.1: Unicafe Revisited, step 1
+#### 6.1: Unicafe revisited
 
-Before implementing the functionality of the UI, let's implement the functionality required by the store.
+Then implement the full original functionality of the application.
 
-We have to save the number of each kind of feedback to the store, so the form of the state in the store is:
+Your application's appearance and functionality should be the same as in Part 1:
 
-```js
-{
-  good: 5,
-  ok: 4,
-  bad: 2
-}
-```
-
-The project has the following base for a reducer:
-
-```js
-const initialState = {
-  good: 0,
-  ok: 0,
-  bad: 0
-}
-
-const counterReducer = (state = initialState, action) => {
-  console.log(action)
-  switch (action.type) {
-    case 'GOOD':
-      return state
-    case 'OK':
-      return state
-    case 'BAD':
-      return state
-    case 'RESET':
-      return state
-    default:
-      return state
-  }
-}
-
-export default counterReducer
-```
-
-and a base for its tests
-
-```js
-import deepFreeze from 'deep-freeze'
-import { describe, expect, test } from 'vitest'
-import counterReducer from './reducer'
-
-describe('unicafe reducer', () => {
-  const initialState = {
-    good: 0,
-    ok: 0,
-    bad: 0
-  }
-
-  test('should return a proper initial state when called with undefined state', () => {
-    const action = {
-      type: 'DO_NOTHING'
-    }
-
-    const newState = counterReducer(undefined, action)
-    expect(newState).toEqual(initialState)
-  })
-
-  test('good is incremented', () => {
-    const action = {
-      type: 'GOOD'
-    }
-    const state = initialState
-
-    deepFreeze(state)
-    const newState = counterReducer(state, action)
-    expect(newState).toEqual({
-      good: 1,
-      ok: 0,
-      bad: 0
-    })
-  })
-})
-```
-
-**Implement the reducer and its tests.**
-
-The provided first test should pass without any changes. Redux expects that the reducer returns the original state when it is called with a first parameter - which represents the previous <i>state</i> - with the value <i>undefined</i>.
-
-Start by expanding the reducer so that both tests pass. After that, add the remaining tests for the different actions of the reducer and implement the corresponding functionality in the reducer.
-
-In the tests, make sure that the reducer is an <i>immutable function</i> with the <i>deep-freeze</i> library. A good model for the reducer is the [redux-notes](/en/part6/flux_architecture_and_redux#pure-functions-immutable) example above.
-
-#### 6.2: Unicafe Revisited, step2
-
-Now implement the actual functionality of the application.
-
-Your application can have a modest appearance, nothing else is needed but buttons and the number of reviews for each type:
-
-![browser showing good bad ok buttons](../../images/6/50new.png)
+![](../../images/1/16e.png)
 
 </div>
 
 <div class="content">
 
-### Uncontrolled form
+### Zustand notes
 
-Let's add the functionality for adding new notes and changing their importance:
+Our goal is to make a Zustand-based version of the good old notes application.
+
+The first version of the application is the following. The <i>App</i> component:
 
 ```js
-// ...
-
-const generateId = () => Number((Math.random() * 1000000).toFixed(0)) // highlight-line
+import { useNotes } from './store'
 
 const App = () => {
-  // highlight-start
-  const addNote = event => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    store.dispatch({
-      type: 'NEW_NOTE',
-      payload: {
-        content,
-        important: false,
-        id: generateId()
-      }
-    })
-  }
-    // highlight-end
-
-  // highlight-start
-  const toggleImportance = id => {
-    store.dispatch({
-      type: 'TOGGLE_IMPORTANCE',
-      payload: { id }
-    })
-  }
-    // highlight-end
+  const notes = useNotes()
 
   return (
     <div>
-      // highlight-start
-      <form onSubmit={addNote}>
-        <input name="note" /> 
-        <button type="submit">add</button>
-      </form>
-        // highlight-end
       <ul>
-        {store.getState().map(note => (
-          <li key={note.id} onClick={() => toggleImportance(note.id)}> // highlight-line
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+        {notes.map(note => (
+          <li key={note.id}>
+            {note.important ? <strong>{note.content}</strong> : note.content}
           </li>
         ))}
       </ul>
     </div>
   )
 }
-
-// ...
+export default App
 ```
 
-The implementation of both functionalities is straightforward. It is noteworthy that we <i>have not</i> bound the state of the form fields to the state of the <i>App</i> component like we have previously done. React calls this kind of form [uncontrolled](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable).
-
->Uncontrolled forms have certain limitations (for example, dynamic error messages or disabling the submit button based on input are not possible). However they are suitable for our current needs.
-
-You can read more about uncontrolled forms [here](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/).
-
-The method for adding new notes is simple, it dispatches the action for adding notes:
+Store is initially defined as follows:
 
 ```js
-addNote = event => {
-  event.preventDefault()
-  const content = event.target.note.value
-  event.target.note.value = ''
-  store.dispatch({
-    type: 'NEW_NOTE',
-    payload: {
-      content,
-      important: false,
-      id: generateId()
-    }
-  })
-}
+import { create } from 'zustand'
+
+const useNoteStore = create(set => ({
+  notes: [
+    {
+      id: 1,
+      content: 'Zustand is less complex than Redux',
+      important: true,
+    },
+  ],
+}))
+
+export const useNotes = () => useNoteStore(state => state.notes)
 ```
 
-The content of the new note is obtained directly from the form’s input field, which can be accessed through the event object:
+For now, the application does not have the functionality to add new notes, and the strore does not yet support it. The state has been initialized with one note already added so that we can verify the application can successfully render the state.
+
+### Pure functions and immutable objects
+
+The first attempt at an action that adds a note is the following:
 
 ```js
-const content = event.target.note.value
+note => set(
+          state => {
+            state.notes.push(note)
+            return state
+          }
+        )
 ```
 
-Please note that the input field must have a name in order to access its value:  
+The function receives a note as a parameter and returns a state where a new note has been added to the old state <i>state</i>.
+
+Our attempt is, however, against the rules. Zustand's [documentation](https://zustand.docs.pmnd.rs/learn/guides/immutable-state-and-merging) states <i>Like with React's useState, we need to update state immutably</i>. As we know, <i>state.notes.push</i> mutates the state object, so the solution must be changed.
+
+The proper way is to use, for example, the [Array.concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) function, which does not modify the existing state but creates a new copy of it with the new note added:
 
 ```js
-<form onSubmit={addNote}>
-  <input name="note" /> // highlight-line
-  <button type="submit">add</button>
-</form>
+note => set(
+          state => {
+            return { notes: state.notes.concat(note) }
+          }
+        )
 ```
 
-A note's importance can be changed by clicking its name. The event handler is very simple:
+The store definition now looks as follows:
 
 ```js
-toggleImportance = id => {
-  store.dispatch({
-    type: 'TOGGLE_IMPORTANCE',
-    payload: { id }
-  })
-}
-```
+import { create } from 'zustand'
 
-### Action creators
-
-We begin to notice that, even in applications as simple as ours, using Redux can simplify the frontend code. However, we can do a lot better.
-
-React components don't need to know the Redux action types and forms.
-Let's separate creating actions into separate functions:
-
-```js
-const createNote = content => {
-  return {
-    type: 'NEW_NOTE',
-    payload: {
-      content,
-      important: false,
-      id: generateId()
-    }
+const useNoteStore = create(set => ({
+  notes: [],
+  actions: {
+    add: note => set(
+      state => ({ notes: state.notes.concat(note) })
+    )
   }
-}
+}))
 
-const toggleImportanceOf = id => {
-  return {
-    type: 'TOGGLE_IMPORTANCE',
-    payload: { id }
-  }
-}
+export const useNotes = () => useNoteStore(state => state.notes)
+export const useNoteActions = () => useNoteStore(state => state.actions)
 ```
 
-Functions that create actions are called [action creators](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#action-creators).
+> #### Array spread syntax
+>
+> Another commonly seen way to do the same thing is to use the array [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax:
+>
+> ```js
+> state => ({ notes: [...state.notes, note] })
+> ```
+>
+> Here, an array is formed by spreading each element of the <i>state.notes</i> array using spread syntax, and then appending the new note at the end. It is a matter of preference whether to use spread or the <i>concat</i> function.
 
-The <i>App</i> component does not have to know anything about the inner representation of the actions anymore, it just gets the right action by calling the creator function:
+Technically speaking, state created with Zustand is [immutable](https://developer.mozilla.org/en-US/docs/Glossary/Immutable), and the action functions that modify the state must be [pure functions](https://en.wikipedia.org/wiki/Pure_function).
+
+Pure functions are those that <i>produce no side effects</i> and always return the same result when called with the same parameters.
+
+### Uncontrolled form
+
+Let's add the ability to create new notes to the application:
 
 ```js
-const App = () => {
-  const addNote = event => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    store.dispatch(createNote(content)) // highlight-line
-    
-  }
-  
-  const toggleImportance = id => {
-    store.dispatch(toggleImportanceOf(id))// highlight-line
-  }
-
-  // ...
-}
-```
-
-### Forwarding Redux Store to various components
-
-Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its module.
-
-Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store.
-
-There are multiple ways to share the Redux store with the components. First, we will look into the newest, and possibly the easiest way, which is using the [hooks](https://react-redux.js.org/api/hooks) API of the [react-redux](https://react-redux.js.org/) library.
-
-First, we install react-redux
-
-```bash
-npm install react-redux
-```
-
-
-Let's organize the application code more sensibly into several different files. The file _main.jsx_ looks as follows after the changes:
-
-```js
-import ReactDOM from 'react-dom/client'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-
-import App from './App'
-import noteReducer from './reducers/noteReducer'
-
-const store = createStore(noteReducer)
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-)
-```
-
-Note, that the application is now defined as a child of a [Provider](https://react-redux.js.org/api/provider) component provided by the react-redux library. The application's store is given to the Provider as its attribute <i>store</i>:
-
-```js
-const store = createStore(noteReducer)
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}> // highlight-line
-    <App />
-  </Provider> // highlight-line
-)
-```
-
-This makes the store accessible to all components in the application, as we will soon see.
-
-Defining the action creators has been moved to the file <i>src/reducers/noteReducer.js</i> where the reducer is defined. That file looks like this:
-
-```js
-const noteReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'NEW_NOTE':
-      return [...state, action.payload]
-    case 'TOGGLE_IMPORTANCE': {
-      const id = action.payload.id
-      const noteToChange = state.find(n => n.id === id)
-      const changedNote = {
-        ...noteToChange,
-        important: !noteToChange.important
-      }
-      return state.map(note => (note.id !== id ? note : changedNote))
-    }
-    default:
-      return state
-  }
-}
-
-const generateId = () =>
-  Number((Math.random() * 1000000).toFixed(0))
-
-export const createNote = (content) => {
-  return {
-    type: 'NEW_NOTE',
-    payload: {
-      content,
-      important: false,
-      id: generateId()
-    }
-  }
-}
-
-export const toggleImportanceOf = (id) => {
-  return {
-    type: 'TOGGLE_IMPORTANCE',
-    payload: { id }
-  }
-}
-
-export default noteReducer
-```
-
-The module now has multiple [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) commands. The reducer function is still returned with the <i>export default</i> command, so the reducer can be imported the usual way:
-
-```js
-import noteReducer from './reducers/noteReducer'
-```
-
-A module can have only <i>one default export</i>, but multiple "normal" exports:
-
-```js
-export const createNote = (content) => {
-  // ...
-}
-
-export const toggleImportanceOf = (id) => { 
-  // ...
-}
-```
-
-Normally (not as defaults) exported functions can be imported with the curly brace syntax:
-
-```js
-import { createNote } from '../../reducers/noteReducer'
-```
-
-Next, we move the _App_ component into its own file _src/App.jsx_. The content of the file is as follows:
-
-```js
-import { createNote, toggleImportanceOf } from './reducers/noteReducer'
-import { useSelector, useDispatch } from 'react-redux' 
-
+import { useNotes, useNoteActions } from './store'
 
 const App = () => {
-  const dispatch = useDispatch()
-  const notes = useSelector(state => state)
+  const notes = useNotes()
+  const { add } = useNoteActions() // highlight-line
 
-  const addNote = (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    dispatch(createNote(content))
-  }
+  const generateId = () => Number((Math.random() * 1000000).toFixed(0))  // highlight-line
 
-  const toggleImportance = (id) => {
-    dispatch(toggleImportanceOf(id))
+ // highlight-start
+  const addNote = (e) => {
+    e.preventDefault()
+    const content = e.target.note.value
+    add({ id: generateId(), content, important: false })
+    e.target.reset()
   }
+   // highlight-end
 
   return (
     <div>
+     // highlight-start
       <form onSubmit={addNote}>
-        <input name="note" /> 
+        <input name="note" />
         <button type="submit">add</button>
       </form>
+       // highlight-end
       <ul>
-        {notes.map(note => 
-          <li
-            key={note.id} 
-            onClick={() => toggleImportance(note.id)}
-          >
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+        {notes.map(note => (
+          <li key={note.id}>
+            {note.important ? <strong>{note.content}</strong> : note.content}
           </li>
-        )}
+        ))}
       </ul>
     </div>
   )
 }
-
-export default App
 ```
 
-There are a few things to note in the code. Previously the code dispatched actions by calling the dispatch method of the Redux store:
+The implementation is fairly straightforward. What is noteworthy about adding a new note is that, unlike previous React-implemented forms, we have <i>not</i> bound the form field's value to the state of the <i>App</i> component. React calls such forms [uncontrolled](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
+
+> Uncontrolled forms have certain limitations. They do not allow, for example, providing validation messages on the fly, disabling the submit button based on content, and so on. However, they are suitable for our use case this time.
+You can read more about the topic [here](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/) if you wish.
+
+The form is very simple:
 
 ```js
-store.dispatch({
-  type: 'TOGGLE_IMPORTANCE',
-  payload: { id }
-})
+<form onSubmit={addNote}>
+  <input name="note" />
+  <button type="submit">add</button>
+</form>
 ```
 
-Now it does it with the <i>dispatch</i> function from the [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hook.
+What is noteworthy about the form is that the input field has a name. This allows the handler function to access the field's value.
+
+The addition handler is also straightforward:
 
 ```js
-import { useSelector, useDispatch } from 'react-redux'  // highlight-line
-
-const App = () => {
-  const dispatch = useDispatch()  // highlight-line
-  // ...
-
-  const toggleImportance = (id) => {
-    dispatch(toggleImportanceOf(id)) // highlight-line
+  const addNote = (e) => {
+    e.preventDefault()
+    const content = e.target.note.value
+    add({ id: generateId(), content, important: false })
+    e.target.reset()
   }
-
-  // ...
-}
 ```
 
-The <i>useDispatch</i> hook provides any React component access to the dispatch function of the Redux store defined in <i>main.jsx</i>. This allows all components to make changes to the state of the Redux store.
+The content is retrieved from the form's text field using <i>e.target.note.value</i> into a variable, which is used as a parameter in the call to the note-adding function <i>add</i>.
 
-The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector)-hook of the react-redux library.
+The last line, <i>e.target.reset()</i>, clears the form.
+
+The current code of the application is available in its entirety on [GitHub](https://github.com/fullstack-hy2020/zustand-notes/tree/part6-1), in the branch <i>part6-1</i>.
+
+### More components and functionality
+
+Let's split the application into more components. We'll separate the creation of a new note, the list of notes, and the display of a single note into their own components.
+
+The <i>App</i> component after the change is simple:
 
 ```js
-import { useSelector, useDispatch } from 'react-redux'  // highlight-line
-
-const App = () => {
-  // ...
-  const notes = useSelector(state => state)  // highlight-line
-  // ...
-}
+const App = () => (
+  <div>
+    <NoteForm />
+    <NoteList />
+  </div>
+)
 ```
 
-<i>useSelector</i> receives a function as a parameter. The function either searches for or selects data from the Redux store.
-Here we need all of the notes, so our selector function returns the whole state:
+Note creation, i.e., <i>NoteForm</i>, doesn't contain anything dramatic, so the code is not shown here.
+
+The component responsible for listing notes, <i>NoteList</i>, looks like the following:
 
 ```js
-state => state
-```
+import { useNotes } from './store'
+import Note from './Note'
 
-which is a shorthand for:
-
-```js
-(state) => {
-  return state
-}
-```
-
-Usually, selector functions are a bit more interesting and return only selected parts of the contents of the Redux store.
-We could for example return only notes marked as important:
-
-```js
-const importantNotes = useSelector(state => state.filter(note => note.important))  
-```
-
-The current version of the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-0), branch <i>part6-0</i>.
-
-### More components
-
-Let's separate the form responsible for creating a new note into its own component in the file <i>src/components/NoteForm.jsx</i>:
-
-```js
-import { useDispatch } from 'react-redux'
-import { createNote } from '../reducers/noteReducer'
-
-const NoteForm = () => {
-  const dispatch = useDispatch()
-
-  const addNote = (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    dispatch(createNote(content))
-  }
-
-  return (
-    <form onSubmit={addNote}>
-      <input name="note" />
-      <button type="submit">add</button>
-    </form>
-  )
-}
-
-export default NoteForm
-```
-
-Unlike in the React code we did without Redux, the event handler for changing the state of the app (which now lives in Redux) has been moved away from the <i>App</i> to a child component. The logic for changing the state in Redux is still neatly separated from the whole React part of the application.
-
-We'll also separate the list of notes and displaying a single note into their own components Let's place both in the file <i>src/components/Notes.jsx</i>:
-
-```js
-import { useDispatch, useSelector } from 'react-redux'
-import { toggleImportanceOf } from '../reducers/noteReducer'
-
-const Note = ({ note, handleClick }) => {
-  return (
-    <li onClick={handleClick}>
-      {note.content}
-      <strong> {note.important ? 'important' : ''}</strong>
-    </li>
-  )
-}
-
-const Notes = () => {
-  const dispatch = useDispatch()
-  const notes = useSelector(state => state)
+const NoteList = () => {
+  const notes = useNotes()
 
   return (
     <ul>
       {notes.map(note => (
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => dispatch(toggleImportanceOf(note.id))}
-        />
+        <Note key={note.id} note={note} />
       ))}
     </ul>
   )
 }
-
-export default Notes
 ```
 
-The logic for changing the importance of a note is now in the component managing the list of notes.
-
-Only a small amount of code remains in the file <i>App.jsx</i>:
+The component fetches the list of notes from the store and creates a corresponding <i>Note</i> component for each, passing the note's data as props:
 
 ```js
-import NoteForm from './components/NoteForm'
-import Notes from './components/Notes'
-
-const App = () => {
-  return (
-    <div>
-      <NoteForm />
-      <Notes />
-    </div>
-  )
-}
-
-export default App
+const Note = ({ note }) => (
+  <li>
+    {note.important ? <strong>{note.content}</strong> : note.content}
+  </li>
+)
 ```
 
-<i>Note</i>, responsible for rendering a single note, is very simple and is not aware that the event handler it gets as props dispatches an action. These kinds of components are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology.
+Let's also add the ability to toggle the importance of a note. The component after the change is the following:
 
-<i>Notes</i>, on the other hand, is a [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) component, as it contains some application logic: it defines what the event handlers of the <i>Note</i> components do and coordinates the configuration of <i>presentational</i> components, that is, the <i>Note</i>s.
+```js
+import { useNoteActions } from './store'
 
-The code of the Redux application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), on the branch <i>part6-1</i>.
+const Note = ({ note }) => {
+  const { toggleImportance } = useNoteActions() // highlight-line
+
+  return (
+    <li>
+      {note.important ? <strong>{note.content}</strong> : note.content}
+      // highlight-start
+      <button onClick={() => toggleImportance(note.id)}>
+        {note.important ? 'make not important' : 'make important'}
+      </button>
+      // highlight-end
+    </li>
+  )
+}
+```
+
+The component destructures the importance-toggling function from the return value of <i>useNoteActions</i>, and calls it when the toggle button is clicked.
+
+The implementation of the importance-toggling function looks like the following:
+
+```js
+import { create } from 'zustand'
+
+const useNoteStore = create(set => ({
+  notes: [],
+  actions: {
+    add: note => set(
+      state => ({ notes: state.notes.concat(note) })
+    ),
+    // highlight-start
+    toggleImportance: id => set(
+      state => ({
+        notes: state.notes.map(note =>
+          note.id === id ? { ...note, important: !note.important } : note
+        )
+      })
+    )
+     // highlight-end
+  }
+}))
+
+```
+
+The function receives the id of the note to be modified as a parameter. The new state is formed from the old state using the <i>map</i> function such that all old notes are included, except for the note to be modified, for which a version is created where its importance is toggled:
+
+```js
+{ ...note, important: !note.important } 
+```
+
+The current code of the application is available in its entirety on [GitHub](https://github.com/fullstack-hy2020/zustand-notes/tree/part6-2), in the branch <i>part6-2</i>.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 6.3.-6.8.
+### Exercises 6.2.-6.6.
 
-Let's make a new version of the anecdote voting application from part 1. Take the project from this repository <https://github.com/fullstack-hy2020/redux-anecdotes> as the base of your solution.
+Let's implement a new version of the anecdote voting application from Part 1. Use the project at https://github.com/fullstack-hy2020/zustand-anecdotes as the base for your solution.
 
-If you clone the project into an existing git repository, <i>remove the git configuration of the cloned application:</i>
+If you clone the project inside an existing Git repository, <i>remove the Git configuration of the cloned application:</i>
 
 ```bash
-cd redux-anecdotes  // go to the cloned repository
+cd zustand-anecdotes  // go to the cloned repository directory
 rm -rf .git
 ```
 
-The application can be started as usual, but you have to install the dependencies first:
+The application starts normally, but you need to install the dependencies first:
 
 ```bash
 npm install
 npm run dev
 ```
 
-After completing these exercises, your application should look like this:
+When completing the following exercises, the application should look like this:
 
-![browser showing anecdotes and vote buttons](../../images/6/3.png)
+![The application renders anecdotes. Each anecdote also shows the number of votes it has received and a vote button](../../images/6/u2.png)
 
-#### 6.3: Anecdotes, step 1
+#### 6.2: anecdotes, step1
 
-Implement the functionality for voting anecdotes. The number of votes must be saved to a Redux store.
+Implement the ability to vote for anecdotes. The number of votes must be stored in the Zustand store.
 
-#### 6.4: Anecdotes, step 2
+#### 6.3: anecdotes, step2
 
-Implement the functionality for adding new anecdotes.
+Add the ability to add new anecdotes to the application.
 
-You can keep the form uncontrolled like we did [earlier](/en/part6/flux_architecture_and_redux#uncontrolled-form).
+You can keep the addition form [uncontrolled](/en/part6/flux_architecture_and_zustand#uncontrolled-form) as in the earlier example.
 
-#### 6.5: Anecdotes, step 3
+#### 6.4: anecdotes, step3
 
-Make sure that the anecdotes are ordered by the number of votes.
+Separate the creation of a new anecdote into its own component called <i>AnecdoteForm</i> and separate the display of the anecdote list into its own component called <i>AnecdoteList</i>.
 
-#### 6.6: Anecdotes, step 4
-
-If you haven't done so already, separate the creation of action-objects to [action creator](https://read.reduxbook.com/markdown/part1/04-action-creators.html)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do what we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators).
-
-#### 6.7: Anecdotes, step 5
-
-Separate the creation of new anecdotes into a component called <i>AnecdoteForm</i>. Move all logic for creating a new anecdote into this new component.
-
-#### 6.8: Anecdotes, step 6
-
-Separate the rendering of the anecdote list into a component called <i>AnecdoteList</i>. Move all logic related to voting for an anecdote to this new component.
-
-Now the <i>App</i> component should look like this:
+After this exercise, the <i>App</i> component should look as follows:
 
 ```js
 import AnecdoteForm from './components/AnecdoteForm'
@@ -1318,5 +828,11 @@ const App = () => {
 
 export default App
 ```
+
+#### 6.5: anecdotes, step4
+
+Ensure that the anecdotes are kept in descending order by number of votes.
+
+**NOTE** In this exercise it is advisable to use the [Array.toSorted](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted) function, which does not sort the original array but creates a sorted copy of it. This is because the Zustand state must not be mutated!
 
 </div>

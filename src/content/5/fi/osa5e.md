@@ -7,1120 +7,1109 @@ lang: fi
 
 <div class="content">
 
-[Cypress](https://www.cypress.io/) on siis ollut edellisten vuosien ajan suosituin E2E-testauskirjasto, jonka rinnalle Playwright on kovaa vauhtia nousemassa. Tällä kurssilla on jo vuosia käytetty Cypressiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playwrightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. Playwright on kuitenkin nyt kurssin ensisijaisesti suosittelema E2E-kirjasto.
+Sovelluksemme ulkoasu on tällä hetkellä melko karu:
 
-Jos valintasi on Cypress, jatka eteenpäin. Jos päädyt käyttämään Playwrightia, mene [tänne](/osa5/end_to_end_testaus_playwright).
+![](../../images/5/u1.png)
 
-### Cypress
+Haluamme tilanteeseen muutoksen. Aloitetaan sovelluksen navigaatiorakenteesta.
 
-Toisin kuin React-frontendille tehdyt yksikkötestit tai backendin testit, nyt tehtävien End to End -testien ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_.
+On erittäin tyypillistä, että web-sovelluksissa on navigaatiopalkki, jonka avulla on mahdollista vaihtaa sovelluksen näkymää. Muistiinpanosovelluksemme voisi sisältää pääsivun:
 
-Asennetaan sitten Cypress suorittamalla uuden projektin kehitysaikaiseksi riippuvuudeksi
+![](../../images/5/u6.png)
 
-```js
-npm install --save-dev cypress
-```
+ja oma sivunsa muistiinpanojen näyttämiseen:
 
-ja määritellään npm-skripti käynnistämistä varten, ja tehdään myös pieni muutos sovelluksen käynnistävään skriptiin:
+![](../../images/5/u7.png)
 
-```js
-{
-  // ...
-  "scripts": {
-    "cypress:open": "cypress open"  // highlight-line
-  },
-  // ...
-}
-```
+sekä muistiinpanojen luomiseen:
 
-Cypress-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan, eli toisin kuin esim. backendin integraatiotestit, Cypress-testit <i>eivät käynnistä</i> testattavaa järjestelmää testauksen yhteydessä.
+![](../../images/5/u8.png)
 
-Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistettyä testausmoodissa, eli siten, että <i>NODE\_ENV</i> saa arvon <i>test</i>.
+[Vanhan koulukunnan web-sovelluksessa](/osa0#perinteinen-web-sovellus) sovelluksen näyttämän sivun vaihto tapahtui siten, että selain teki palvelimelle uuden HTTP GET ‑pyynnön ja renderöi sitten palvelimen palauttaman, uutta näkymää vastaavan HTML-koodin.
+
+Single page -sovelluksissa taas ollaan todellisuudessa koko ajan samalla sivulla, ja selaimessa suoritettava JavaScript-koodi luo illuusion eri "sivuista". Jos näkymää vaihdettaessa tehdään HTTP-kutsuja, niiden avulla haetaan ainoastaan JSON-muotoista dataa, jota uuden näkymän näyttäminen ehkä edellyttää.
+
+Navigaatiopalkki ja useita näkymiä sisältävä sovellus olisi helppo toteuttaa Reactilla, esim. siten että sovelluksen tila <i>page</i> muistaisi millä sivulla käyttäjä on, ja oikea näkymä renderöitäisiin tämän perusteella:
 
 ```js
-{
-  // ...
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development node --watch index.js",
-    "test": "cross-env NODE_ENV=test node --test",
-    "lint": "eslint .",
-    // ...
-    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
-  },
-  // ...
-}
-```
+const App = () => {
+  const [page, setPage] = useState('home')
 
-Kun backend ja frontend ovat käynnissä, voidaan käynnistää Cypress komennolla
+ const  toPage = (page) => (event) => {
+    event.preventDefault()
+    setPage(page)
+  }
 
-```js
-npm run cypress:open
-```
+  const content = () => {
+    if (page === 'home') {
+      return <Home />
+    } else if (page === 'notes') {
+      return <Notes />
+    } else if (page === 'users') {
+      return <Users />
+    }
+  }
 
-Cypress kysyy minkä tyyppisiä testejä haluamme tehdä. Valitaan "E2E Testing":
-
-![](../../images/5/51new.png)
-
-Valitaan sopiva selain (esim. Chrome) ja "Create new spec":
-
-![](../../images/5/52new.png)
-
-Annetaan testille nimeksi <i>note\_app.cy.js</i> ja sijoitetaan se ehdotettuun hakemistoon <i>cypress/e2e:</i>
-
-![](../../images/5/53new.png)
-
-Voisimme tehdä testejä Cypressin kautta, mutta käytetään kuitenkin VS Codea testien editointiin:
-
-![](../../images/5/54new.png)
-
-Suljetaan Cypressin testin editointinäkymä.
-
-Muutetaan testin sisältö seuraavanlaiseksi
-
-```js
-describe('Note app', function() {
-  it('front page can be opened', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
-  })
-})
-```
-
-Testin suoritus käynnistetään klikkaamalla testin nimeä Cypressin näkymästä:
-
-![](../../images/5/55new.png)
-
-Testin suoritus näyttää, miten sovellus käyttäytyy testin edetessä:
-
-![Selain renderöi näkymän, jossa vasemmalla testit ja niiden askeleet ja oikealla testin alla oleva sovellus.](../../images/5/56new.png)
-
-Testi näyttää rakenteeltaan melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Vitestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta.  
-
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen. [cy.visit](https://docs.cypress.io/api/commands/visit.html) avaa testin käyttämään selaimeen parametrina määritellyn osoitteen ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) etsii sivun sisältä parametrina annetun tekstin. 
-
-Olisimme voineet määritellä testin myös käyttäen nuolifunktioita
-
-```js
-describe('Note app', () => { // highlight-line
-  it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
-  })
-})
-```
-
-Mochan dokumentaatio kuitenkin [suosittelee](https://mochajs.org/#arrow-functions), että nuolifunktioita ei käytetä, sillä ne saattavat aiheuttaa ongelmia joissain tilanteissa.
-
-HUOM: tässä materiaalissa suoritetaan Cypress-testejä pääasiassa graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html) komennolla <em>cypress run</em>, joka kannattaa halutessa lisätä npm-skriptiksi.
-
-Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti
-
-```js
-describe('Note app', function() {
-  it('front page can be opened',  function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
-  })
-
-// highlight-start
-  it('front page contains random text', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('wtf is this app?')
-  })
-// highlight-end
-})
-```
-
-havaitsee Cypress ongelman
-
-![Vasemmalla oleva testin suoritusta kuvaava näkymä paljastaa, että "contains"-askel epäonnistuu ja aiheuttaa virheen AssertionError, timed out... Expected to find content 'wtf is this app?' but never did.](../../images/5/57new.png)
-
-Poistetaan virheeseen johtanut testi koodista.
-
-### Lomakkeelle kirjoittaminen
-
-Laajennetaan testejä siten, että testi yrittää kirjautua sovellukseen. Oletetaan että backendin tietokantaan on tallennettu käyttäjä, jonka käyttäjätunnus on <i>mluukkai</i> ja salasana <i>salainen</i>. 
-
-Aloitetaan kirjautumislomakkeen avaamisella.
-
-```js
-describe('Note app',  function() {
-  // ...
-
-  it('user can login', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('button', 'login').click()
-  })
-})
-```
-
-Testi etsii ensin _button_-tyyppisen elementin, jossa on haluttu teksti, ja klikkaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
-
-Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:5173</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
-
-```js
-describe('Note app', function() {
-  // highlight-start
-  beforeEach(function() {
-    cy.visit('http://localhost:5173')
-  })
-  // highlight-end
-
-  it('front page can be opened', function() {
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
-  })
-
-  it('user can login', function() {
-    cy.contains('button', 'login').click()
-  })
-})
-```
-
-Ilmoittautumislomake sisältää kaksi <i>input</i>-kenttää, joihin testin tulisi kirjoittaa.
-
-Komento [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) mahdollistaa elementtien etsimisen CSS-selektorien avulla.
-
-Voimme hakea lomakkeen ensimmäisen ja viimeisen input-kentän ja kirjoittaa niihin komennolla [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) seuraavasti:
-
-```js
-it('user can login', function () {
-  cy.contains('button', 'login').click()
-  cy.get('input:first').type('mluukkai')
-  cy.get('input:last').type('salainen')
-})  
-```
-
-Testi toimii, mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä, testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan sivulla ensimmäisenä ja viimeisenä.
-
-Käytetään nyt hyödyksi kirjautumislomakkeen olemassa olevia elementtejä. Kirjautumislomakkeen syötekentille on määritelty yksilölliset <i>labelit</i>: 
-
-```js
-// ...
-<form onSubmit={handleSubmit}>
-  <div>
-    <label> // highlight-line
-      username // highlight-line
-      <input
-        type="text"
-        value={username}
-        onChange={handleUsernameChange}
-      />
-    </label> // highlight-line
-  </div>
-  <div>
-    <label> // highlight-line
-      password // highlight-line
-      <input
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-    </label> // highlight-line
-  </div>
-  <button type="submit">login</button>
-</form>
-// ...
-```
-
-Syötekentät voi ja kannattaa etsiä testeissä <i>labelien</i> avulla::
-
-```js
-describe('Note app', function () {
-  // ...
-
-  it('user can login', function () {
-    cy.contains('button', 'login').click()
-    cy.contains('label', 'username').type('mluukkai') // highlight-line
-    cy.contains('label', 'password').type('salainen') // highlight-line
-  })
-})
-```
-
-Elementtien etsimisessä on järkevää pyrkiä hyödyntämään käyttöliittymän käyttäjälle näkyvää sisältöä, koska näin simuloidaan parhaiten sitä, miten käyttäjä oikeasti löytää halutun syötekentän navigoidessaan sovelluksessa.
-
-Kun käyttäjätunnus ja salasana on syötetty lomakkeelle, tulisi seuraavaksi painaa <i>login</i>-painiketta. Se aiheuttaa kuitenkin hieman päänvaivaa, sillä sivulla on nyt oikeastaan kaksi <i>login</i>-nimistä painiketta. Käyttämämme <i>Togglable</i>-komponentti nimittäin sisältää samannimisen painikkeen, joka on piilotettu antamalla sille näkyvyysmääre _style="display: none"_, kun kirjautumislomake on näkyvillä. 
-
-Jotta saamme testissä painettua varmasti oikeaa painiketta, määritellään kirjautumislomakkeen <i>login</i>-painikkeelle yksilöllinen <i>id</i>-attribuutti: 
-
-```js
-const LoginForm = ({ ... }) => {
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        // 
+      <div>
+        <a href="" onClick={toPage('home')} >
+          home
+        </a>
+        <a href="" onClick={toPage('notes')}>
+          notes
+        </a>
+        <a href="" onClick={toPage('users')} >
+          users
+        </a>
+      </div>
 
-        <button id="login-button" type="submit"> // highlight-line
-          login
+      {content()}
+    </div>
+  )
+}
+```
+
+Menetelmä ei kuitenkaan ole optimaalinen: sivuston osoite pysyy samana vaikka välillä ollaankin eri näkymässä. Jokaisella näkymällä tulisi kuitenkin olla oma osoitteensa, jotta esim. kirjanmerkkien tekeminen olisi mahdollista. Myöskään selaimen back-painike ei toimi  loogisesti jos sivuja ei vastaa oma osoite, eli back ei vie edelliseksi katsottuun sovelluksen näkymään vaan jonnekin ihan muualle.
+
+### React Router
+
+Kirjasto [React Router](https://reactrouter.com/), tarjoaa onneksi erinomaisen ratkaisun React-sovelluksen navigaation hallintaan.
+
+Asennetaan React Router:
+
+```bash
+npm install react-router-dom
+```
+
+Luodaan uusi komponentti, joka toimii sovelluksen pääsivuna
+
+```js
+const Home = () => {
+  return (
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+  )
+}
+
+export default Home
+```
+
+Eriytetään sovelluksen aiempi komponentissa <i>App</i> ollut päänäkymä omaksi komponentiksi, Siirretään kuitenkin muistiinpanojen tilan käsittely komponentin ulkopuolelle:
+
+
+```js
+// list of notes passed as parameter
+const NoteList = ({ notes }) => { // highlight-line
+  // content mostly same as was in component App 
+  // reference to NoteForm is removed
+}
+```
+
+Komponentti <i>App</i> muuttuu nyt seuraavasti
+
+```js
+import { useState, useEffect } from 'react'
+import noteService from './services/notes'
+
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from 'react-router-dom'
+import NoteList from './components/NoteList'
+import Home from './components/Home'
+import Footer from './components/Footer'
+import NoteForm from './components/NoteForm'
+
+const App = () => {
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+    noteService.getAll().then(initialNotes => {
+      setNotes(initialNotes)
+    })
+  }, [])
+
+  const addNote = noteObject => {
+    noteService.create(noteObject).then(returnedNote => {
+      setNotes(notes.concat(returnedNote))
+    })
+  }
+
+  const padding = {
+    padding: 5
+  }
+
+  return (
+    // highlight-start
+    <Router>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/create">new note</Link>
+      </div>
+        // highlight-end  
+
+    // highlight-start
+      <Routes>
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote}/>
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <Footer />
+    </Router>
+    // highlight-end
+  )
+}
+
+export default App
+```
+
+
+Reititys eli komponenttien ehdollinen, selaimen <i>URL:iin perustuva</i> renderöinti otetaan käyttöön sijoittamalla komponentteja [Router](https://reactrouter.com/api/declarative-routers/Router)-komponentin lapsiksi eli <i>Router</i>-tagien sisälle.
+
+Ensimmäisenä on määritelty sovelluksen navigaatiopalkki komponentin [Link](https://reactrouter.com/api/components/Link) avulla. Attribuutti <i>to</i> määrittelee miten selaimen osoitetta muutetaan linkkiä klikatessa:
+
+```js
+<div>
+  <Link style={padding} to="/">home</Link>
+  <Link style={padding} to="/notes">notes</Link>
+  <Link style={padding} to="/create">new note</Link>
+</div>
+```
+
+Seuraavana määritellään sovelluksen reititys komponentin [Routes](https://reactrouter.com/api/components/Routes) avulla. Komponentin sisälle määritellään [Route](https://reactrouter.com/api/components/Route):n avulla joukko sääntöjä ja niitä vastaavat renderöitävät komponentit:
+
+```js
+<Routes>
+  <Route path="/notes" element={
+    <NoteList notes={notes} />
+  } />
+  <Route path="/create" element={
+    <NoteForm createNote={addNote}/>
+  } />
+  <Route path="/" element={<Home />} />
+</Routes>
+```
+
+Jos ollaan sovelluksen juuriosoitteessa, renderöidään komponentti <i>Home</i>:
+
+![](../../images/5/u2.png)
+
+Klikatessa navigaatiopalkista "notes", vaihtuu selaimen osoiterivin osoitteeksi <i>notes</i>, ja renderöidään komponentti <i>NoteList</i>:
+
+![](../../images/5/u3.png)
+
+Vastaavasti, kun klikataan "new note" osoitteeksi tulee <i>create</i> renderöidään komponentti <i>NoteForm</i>.
+
+Normaalissa Web-sivussa selaimen osoiterivillä olevan osoitteen vaihtuminen aiheuttaa sivun uudelleenlataamisen. React Routeria käyttäen näin ei kuitenkaan tapahdtu vaan reititys tehdään täysin JavaScriptin avulla frontendissa.
+
+Käyttämämme Router-komponentti on [BrowserRouter](https://reactrouter.com/en/main/router-components/browser-router):
+
+```js
+import {
+  BrowserRouter as Router, // highlight-line
+  Routes, Route, Link
+} from 'react-router-dom'
+```
+
+[Dokumentaation](https://reactrouter.com/en/main/router-components/browser-router) mukaan
+
+> <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
+
+<i>BrowserRouter</i> mahdollistaa [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/):n avulla  sen, että selaimen osoiterivillä olevaa URL:ia voidaan käyttää React-sovelluksen sisäiseen "reitittämiseen", eli vaikka osoiterivillä oleva URL muuttuu, sivun sisältöä manipuloidaan ainoastaan JavaScriptillä, eikä selain lataa uutta sisältöä palvelimelta. Selaimen toiminta back- ja forward-toimintojen ja kirjanmerkkien tekemisen suhteen on kuitenkin intuitiivista eli toimii kuten perinteisillä verkkosivuilla.
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10), branchissa <i>part5-10</i>.
+
+### Parametrisoitu reitti
+
+Päätetään siirtää yksittäisen muistiinpanon tarkemmat tiedot omaan näkymään, johon päästään muistiinpanon nimeä klikkaamalla:
+
+![](../../images/5/u4.png)
+
+
+Nimen klikattavuus on toteutettu komponenttiin <i>NoteList</i> seuraavasti:
+
+```js
+import { Link } from 'react-router-dom' // highlight-line
+
+const NoteList = ({ notes }) => {
+  // ...
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <Notification message={errorMessage} />
+
+      {!user && loginForm()}
+
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all'}
         </button>
+      </div>
+      <ul>
+        {notesToShow.map(note => (
+          <li key={note.id}>
+            <Link to={`/notes/${note.id}`}>{note.content}</Link> // highlight-line
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+export default NoteList
+```
+
+Käytössä on siis jälleen  [Link](https://reactrouter.com/api/components/Link). Esimerkiksi muistiinpanon, jonka <i>id</i> on 12345 nimen klikkaaminen aiheuttaa selaimen osoitteen arvon päivittymisen muotoon <i>notes/12345</i>.
+
+Parametrisoitu URL määritellään komponentissa <i>App</i> olevaan reititykseen seuraavasti:
+
+```js
+<Router>
+  // ...
+
+  <Routes>
+    // highlight-start
+    <Route path="/notes/:id" element={
+      <Note notes={notes} toggleImportanceOf={toggleImportanceOf} />
+     } />
+    // highlight-end
+    <Route path="/notes" element={<Notes notes={notes} />} />   
+    <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+    <Route path="/login" element={<Login onLogin={login} />} />
+    <Route path="/" element={<Home />} />      
+  </Routes>
+</Router>
+```
+
+Yksittäisen muistiinpanon näkymän renderöivä route siis määritellään "Expressin tyyliin" merkitsemällä reitin parametrina oleva osa merkinnällä <i>:id</i> näin:
+
+```js
+<Route path="/notes/:id" element={<Note notes={notes} ... />} />
+```
+
+Kun selain siirtyy muistiinpanon yksilöivään osoitteeseen, esim. <i>/notes/12345</i>, renderöidään komponentti <i>Note</i>, jota olemme nyt hieman joutuneet muuttamaan:
+
+```js
+import { useParams } from 'react-router-dom' // highlight-line
+
+const Note = ({ notes, toggleImportance }) => {
+  // highlight-start
+  const id = useParams().id
+  const note = notes.find(n => n.id === id)
+  // highlight-end
+
+  const label = note.important ? 'make not important' : 'make important'
+
+  return (
+    <li className="note">
+      <span>{note.content}</span>
+      <button onClick={() => toggleImportance(id)}>{label}</button>
+    </li>
+  )
+}
+
+export default Note
+```
+
+Toisin kuin aiemmin, komponentti <i>Note</i> saa nyt parametrikseen <i>kaikki muistiinpanot</i> propsina <i>notes</i> ja se pääsee URL:n yksilöivään osaan eli näytettävän muistiinpanon <i>id</i>:hen käsiksi React Routerin funktion [useParams](https://reactrouter.com/api/hooks/useParams) avulla. 
+
+### useNavigate
+
+Backend tukee jo muistiinpanojen poistamista. Toteutetaan tätä varten nappi sovellukseen yksittäisten muistiinpanojen sivulle:
+
+![](../../images/5/u5.png)
+
+Lisätään komponenttiin <i>App</i> poiston suorittava käsittelijä, joka annetaan komponentille <i>Note</i>:
+
+```js
+const App = () => {
+
+  // highlight-start
+  const deleteNote = (id) => {
+    noteService.remove(id).then(() => {
+      setNotes(notes.filter(n => n.id !== id))
+    })
+  }
+  // highlight-end
+
+  return (
+      // ...
+
+      <Routes>
+        <Route path="/notes/:id" element={
+          <Note 
+            notes={notes}
+            toggleImportanceOf={toggleImportanceOf}
+            deleteNote={deleteNote} // highlight-line
+          />
+        } />
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote}/>
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <Footer />
+    </Router>
+  )
+}  
+```
+
+Komponentti <i>Note</i> muuttuu seuraavasti:
+
+```js
+import { useParams, useNavigate } from 'react-router-dom'
+
+const Note = ({ notes, toggleImportanceOf, deleteNote }) => { // highlight-line
+  const id = useParams().id
+  const navigate = useNavigate()  // highlight-line
+  const note = notes.find(n => n.id === id)
+
+  const label = note.important ? 'make not important' : 'make important'
+
+// highlight-start
+  const handleDelete = () => {
+    if (window.confirm(`Delete note "${note.content}"?`)) {
+      deleteNote(id)
+      navigate('/notes')
+    }
+  }
+  // highlight-end
+
+  return (
+    <li className="note">
+      <span>{note.content}</span>
+      <button onClick={() => toggleImportanceOf(id)}>{label}</button>
+      <button onClick={handleDelete}>delete</button>  // highlight-line
+    </li>
+  )
+}
+
+export default Note
+```
+
+Kun muistiinpano poistuu, navigoidaan takaisin kaikkien muistiinpanojen sivulle. Tämä tapahtuu kutsumalla React Routerin funktion [useNavigate](https://reactrouter.com/api/components/Navigate) palauttamaa funktiota halutulla osoitteella <i>navigate('/notes')</i> .
+
+Käyttämämme React Router ‑kirjaston funktiot [useParams](https://reactrouter.com/api/hooks/useParams) ja [useNavigate](https://reactrouter.com/api/components/Navigate) ovat molemmat hook-funktioita samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot).
+
+Muutetaan myös komponenttia <i>NoteForm</i> siten, että uuden muistiinpanon lisäämisen jälkeen navigoidaan käyttäjä kaikkien muistiinpanojen sivulle:
+
+```js
+import { useState } from 'react' 
+import { useNavigate } from 'react-router-dom' // highlight-line
+
+const NoteForm = ({ createNote }) => {
+  const [newNote, setNewNote] = useState('')
+  const navigate = useNavigate() // highlight-line
+
+  const addNote = event => {
+    event.preventDefault()
+    createNote({
+      content: newNote,
+      important: true
+    })
+
+    navigate('/notes') // highlight-line
+    setNewNote('')
+  }
+
+  return (
+    <div>
+      <h2>Create a new note</h2>
+
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={event => setNewNote(event.target.value)}
+          placeholder="write note content here"
+        />
+        <button type="submit">save</button>
       </form>
     </div>
   )
 }
 ```
 
-Testi muuttuu muotoon
+### Parametrisoitu reitti revisited
+
+Sovelluksessa on eräs hieman ikävä seikka. Komponentti _Note_ saa propseina <i>kaikki muistiinpanot</i>, vaikka se näyttää niistä ainoastaan sen, jonka <i>id</i> vastaa URL:n parametrisoitua osaa:
 
 ```js
-describe('Note app',  function() {
-  // ..
-  it('user can login', function () {
-    cy.contains('button', 'login').click()
-    cy.contains('label', 'username').type('mluukkai')
-    cy.contains('label', 'password').type('salainen')
-    cy.get('#login-button').click() // highlight-line
-
-    cy.contains('Matti Luukkainen logged in') // highlight-line
-  })
-})
-```
-
-Viimeinen rivi varmistaa, että kirjautuminen on onnistunut. 
-
-Huomaa, että CSS:n [id-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) on risuaita, eli jos koodista etsitään elementtiä, jolla on id <i>login-button</i> on sitä vastaava CSS-selektori <i>#login-button</i>.
-
-Huomaa, että testin läpimeno tässä vaiheessa edellyttää, että backendin ympäristön <i>test</i> tietokannassa on käyttäjä, jonka username on <i>mluukkai</i> ja salasana <i>salainen</i>. Luo käyttäjä tarvittaessa!
-
-### Muistiinpanojen luomisen testaus
-
-Luodaan seuraavaksi testi, joka lisää sovellukseen uuden muistiinpanon:
-
-```js
-describe('Note app', function() {
-  // ..
-  // highlight-start
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('button', 'login').click()
-      cy.contains('label', 'username').type('mluukkai')
-      cy.contains('label', 'password').type('salainen')
-      cy.get('#login-button').click()
-    })
-    // highlight-end
-
-    // highlight-start
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-
-      cy.contains('a note created by cypress')
-    })
-  })
-  // highlight-end
-})
-```
-
-Testi on määritelty omana <i>describe</i>-lohkonaan. Muistiinpanon luominen edellyttää että käyttäjä on kirjaantuneena, ja kirjautuminen hoidetaan <i>beforeEach</i>-lohkossa. 
-
-Testi luottaa siihen, että uutta muistiinpanoa luotaessa sivulla on ainoastaan yksi input-kenttä, eli se hakee kentän seuraavasti
-
-```js
-cy.get('input')
-```
-
-Jos kenttiä olisi useampia, testi hajoaisi
-
-![Aiheutuu virhe cy.type() cam only be called on a single element. Your subject contained 2 elements.](../../images/5/31x.png)
-
-Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella. Pitäydytään nyt kuitenkin yksinkertaisimmassa ratkaisussa.
-
-Testien rakenne näyttää seuraavalta:
-
-```js
-describe('Note app', function() {
+const Note = ({ notes, toggleImportance }) => { 
+  const id = useParams().id
+  const note = notes.find(n => n.id === Number(id))
   // ...
-
-  it('user can login', function() {
-    cy.contains('button', 'login').click()
-    cy.contains('label', 'username').type('mluukkai')
-    cy.contains('label', 'password').type('salainen')
-    cy.get('#login-button').click()
-
-    cy.contains('Matti Luukkainen logged in')
-  })
-
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('button', 'login').click()
-      cy.contains('label', 'username').type('mluukkai')
-      cy.contains('label', 'password').type('salainen')
-      cy.get('#login-button').click()
-    })
-
-    it('a new note can be created', function() {
-      // ...
-    })
-  })
-})
-```
-
-Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can login</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
-
-### Tietokannan tilan kontrollointi
-
-Jos testatessa on tarvetta muokata palvelimen tietokantaa, muuttuu tilanne heti haastavammaksi. Ideaalitilanteessa testauksen tulee aina lähteä liikkeelle palvelimen tietokannan suhteen samasta alkutilanteesta, jotta testeistä saadaan luotettavia ja helposti toistettavia.
-
-Kuten yksikkö- ja integraatiotesteissä, on myös E2E-testeissä paras ratkaisu nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen tuo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan.
-
-Ratkaistaan ongelma luomalla backendiin testejä varten API-endpoint, jonka avulla testit voivat tarvittaessa nollata kannan. Tehdään testejä varten oma <i>router</i>
-
-```js
-const router = require('express').Router()
-const Note = require('../models/note')
-const User = require('../models/user')
-
-router.post('/reset', async (request, response) => {
-  await Note.deleteMany({})
-  await User.deleteMany({})
-
-  response.status(204).end()
-})
-
-module.exports = router
-```
-
-ja lisätään se backendiin ainoastaan <i>jos sovellusta suoritetaan test-moodissa</i>:
-
-```js
-// ...
-
-app.use('/api/login', loginRouter)
-app.use('/api/users', usersRouter)
-app.use('/api/notes', notesRouter)
-
-// highlight-start
-if (process.env.NODE_ENV === 'test') {
-  const testingRouter = require('./controllers/testing')
-  app.use('/api/testing', testingRouter)
-}
-// highlight-end
-
-app.use(middleware.unknownEndpoint)
-app.use(middleware.errorHandler)
-
-module.exports = app
-```
-
-eli lisäyksen jälkeen HTTP POST ‑operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
-
-Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>.
-
-Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista.
-
-Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, joten testien alustuksessa luodaan testikäyttäjä suoraan backendiin.
-
-```js
-describe('Note app', function() {
-   beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen'
-    }
-    cy.request('POST', 'http://localhost:3001/api/users/', user) 
-    // highlight-end
-    cy.visit('http://localhost:5173')
-  })
-  
-  it('front page can be opened', function() {
-    // ...
-  })
-
-  it('user can login', function() {
-    // ...
-  })
-
-  describe('when logged in', function() {
-    // ...
-  })
-})
-```
-
-Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin komennolla [cy.request](https://docs.cypress.io/api/commands/request.html). 
-
-Toisin kuin aiemmin, nyt testaus alkaa nyt myös backendin suhteen aina hallitusti samasta tilanteesta, eli tietokannassa on yksi käyttäjä ja ei yhtään muistiinpanoa.
-
-Tehdään vielä testi, joka tarkastaa että muistiinpanojen tärkeyttä voi muuttaa. Muutimme sovellusta hieman aiemmin jo siten, että <i>important</i> saa aluksi arvon <i>true</i>:
-
-```js
-const NoteForm = ({ createNote }) => {
-  // ...
-
-  const addNote = (event) => {
-    event.preventDefault()
-    createNote({
-      content: newNote,
-      important: true // highlight-line
-    })
-
-    setNewNote('')
-  }
-  // ...
-} 
-```
-
-On useita eri tapoja testata asia. Seuraavassa etsitään ensin muistiinpano ja klikataan sen nappia <i>make not important</i>. Tämän jälkeen tarkistetaan että muistiinpano sisältää napin <i>make important</i>.
-
-```js
-describe('Note app', function() {
-  // ...
-
-  describe('when logged in', function() {
-    // ...
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
-      })
-
-      it('it can be made not important', function () {
-        cy.contains('another note cypress')
-          .contains('button', 'make not important')
-          .click()
-
-        cy.contains('another note cypress')
-          .contains('button', 'make important')
-      })
-    })
-  })
-})
-```
-
-Ensimmäinen komento tekee monta eri asiaa. Ensin etsitään elementti, missä on teksti <i>another note cypress</i>. Sitten löydetyn elementin sisältä etsitään painike <i>make not important</i> ja klikataan sitä. 
-
-Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make important</i>.
-
-### Epäonnistuneen kirjautumisen testi
-
-Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos salasana on väärä.
-
-Cypress suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>it</i> sijaan komennolla <i>it.only</i>, jolloin Cypress suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa.
-
-Testin ensimmäinen versio näyttää seuraavalta:
-
-```js
-describe('Note app', function() {
-  // ...
-
-  it.only('login fails with wrong password', function() {
-    cy.contains('button', 'login').click()
-    cy.contains('label', 'username').type('mluukkai')
-    cy.contains('label', 'password').type('wrong')
-    cy.get('#login-button').click()
-
-    cy.contains('wrong credentials')
-  })
-
-  // ...
-)}
-```
-
-Testi siis varmistaa komennon [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) avulla, että sovellus tulostaa virheilmoituksen.
-
-Sovellus renderöi virheilmoituksen CSS-luokan <i>error</i> sisältävään elementtiin:
-
-```js
-const Notification = ({ message }) => {
-  if (message === null) {
-    return null
-  }
-
-  return (
-    <div className="error"> // highlight-line
-      {message}
-    </div>
-  )
 }
 ```
 
-Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenomaan oikeaan paikkaan, eli CSS-luokan <i>error</i> sisältävään elementtiin:
-
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error').contains('wrong credentials') // highlight-line
-})
-```
-
-Eli ensin etsitään komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) CSS-luokan <i>error</i> sisältävä komponentti ja sen jälkeen varmistetaan että virheilmoitus löytyy sen sisältä. Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
-
-Voisimme tehdä saman myös käyttäen [should](https://docs.cypress.io/api/commands/should.html)-syntaksia:
+Olisiko sovellusta mahdollista muuttaa siten, että _Note_ saisi propsina ainoastaan näytettävän muistiinpanon:
 
 ```js
-it('login fails with wrong password', function() {
-  // ...
+import { useParams, useNavigate } from 'react-router-dom'
 
-  cy.get('.error').should('contain', 'wrong credentials') // highlight-line
-})
-```
+const Note = ({ note, id, toggleImportanceOf, deleteNote }) => {  // highlight-line
+  const id = useParams().id
+  const navigate = useNavigate()
 
-Shouldin käyttö on jonkin verran "hankalampaa" kuin komennon <i>contains</i>, mutta se mahdollistaa huomattavasti monipuolisemmat testit kuin pelkän tekstisisällön perusteella toimiva <i>contains</i>. 
-
-Lista yleisimmistä shouldin kanssa käytettävistä assertioista on [täällä](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
-
-Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error').should('contain', 'wrong credentials') 
-  cy.get('.error').should('have.css', 'color', 'rgb(255, 0, 0)')
-  cy.get('.error').should('have.css', 'border-style', 'solid')
-})
-```
-
-Värit on määriteltävä Cypressille [rgb](https://rgbcolorcode.com/color/red)-koodeina.
-
-Koska kaikki tarkastukset kohdistuvat samaan komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) haettuun elementtiin, ne voidaan ketjuttaa komennon [and](https://docs.cypress.io/api/commands/and.html) avulla:
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
-})
-```
-Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistunutta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
-
-```js
-it('login fails with wrong password', function() {
-  cy.contains('button', 'login').click()
-  cy.contains('label', 'username').type('mluukkai')
-  cy.contains('label', 'password').type('wrong')
-  cy.get('#login-button').click()
-
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
-
-  cy.get('html').should('not.contain', 'Matti Luukkainen logged in') // highlight-line
-})
-```
-
-Komentoa <i>should</i> käytetään useimmiten ketjutettuna komennon <i>get</i> (tai muun vastaavan ketjutettavissa olevan komennon) perään. Testissä käytetty <i>cy.get('html')</i> tarkoittaa käytännössä koko sovelluksen näkyvillä olevaa sisältöä.
-
-Saman asian olisi myös voinut tarkastaa ketjuttamalla komennon <i>contains</i> perään komento <i>should</i> hieman toisenlaisella parametrilla:
-
-```js
-cy.contains('Matti Luukkainen logged in').should('not.exist')
-```
-
-### Operaatioiden tekeminen käyttöliittymän "ohi"
-
-Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
-
-```js 
-describe('Note app', function() {
-  it('user can login', function() {
-    cy.contains('button', 'login').click()
-    cy.contains('label', 'username').type('mluukkai')
-    cy.contains('label', 'password').type('salainen')
-    cy.get('#login-button').click()
-
-    cy.contains('Matti Luukkainen logged in')
-  })
-
-  it('login fails with wrong password', function() {
     // ...
-  })
-
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('button', 'login').click()
-      cy.contains('label', 'username').type('mluukkai')
-      cy.contains('label', 'password').type('salainen')
-      cy.get('#login-button').click()
-    })
-
-    it('a new note can be created', function() {
-      // ... 
-    })
-   
-  })
-})
-```
-
-Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaantuneena, kirjaantuminen hoidetaan alustuksen tekevän <i>beforeEach</i>-lohkon sisällä. 
-
-Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
-
-Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
-
-Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa
-
-```js 
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/login', {
-      username: 'mluukkai', password: 'salainen'
-    }).then(response => {
-      localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:5173')
-    })
-    // highlight-end
-  })
-
-  it('a new note can be created', function() {
-    // ...
-  })
-
-  // ...
-})
-```
-
-Komennon [cy.request](https://docs.cypress.io/api/commands/request.html) tulokseen päästään käsiksi _then_-metodin avulla sillä sisäiseltä toteutukseltaan <i>cy.request</i> kuten muutkin Cypressin komennot ovat [eräänlaisia promiseja](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises). Käsittelijäfunktio tallettaa kirjautuneen käyttäjän tiedot localStorageen ja lataa sivun uudelleen. Tämän jälkeen käyttäjä on kirjautuneena sovellukseen samalla tavalla kuin jos kirjautuminen olisi tapahtunut kirjautumislomakkeen täyttämällä.
-
-Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää itse määritellyksi [komennoksi](https://docs.cypress.io/api/cypress-api/custom-commands.html).
-
-Komennot määritellään tiedostoon <i>cypress/support/commands.js</i>. Kirjautumisen tekevä komento näyttää seuraavalta:
-
-```js 
-Cypress.Commands.add('login', ({ username, password }) => {
-  cy.request('POST', 'http://localhost:3001/api/login', {
-    username, password
-  }).then(({ body }) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:5173')
-  })
-})
-```
-
-Komennon käyttö on helppoa, testi yksinkertaistuu ja selkeytyy:
-
-```js 
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.login({ username: 'mluukkai', password: 'salainen' })
-    // highlight-end
-  })
-
-  it('a new note can be created', function() {
-    // ...
-  })
-
-  // ...
-})
-```
-
-Sama koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Myös muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano lomakkeen avulla: 
-
-```js
-describe('Note app', function() {
-  // ...
-
-  describe('when logged in', function() {
-    beforeEach(function () {
-      cy.login({ username: 'mluukkai', password: 'salainen' })
-    })
-
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-
-      cy.contains('a note created by cypress')
-    })
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        // highlight-start
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
-        // highlight-end
-      })
-
-      it('it can be made important', function () {
-        // ...
-      })
-    })
-  })
-})
-```
-
-Eristetään myös muistiinpanon lisääminen omaksi komennoksi, joka tekee lisäämisen suoraan HTTP POST:lla:
-
-```js
-Cypress.Commands.add('createNote', ({ content, important }) => {
-  cy.request({
-    url: 'http://localhost:3001/api/notes',
-    method: 'POST',
-    body: { content, important },
-    headers: {
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
-    }
-  })
-
-  cy.visit('http://localhost:5173')
-})
-```
-
-Komennon suoritus edellyttää, että käyttäjä on kirjaantuneena sovelluksessa ja käyttäjän tiedot talletettuna sovelluksen localStorageen.
-
-Testin alustuslohko yksinkertaistuu seuraavasti:
-
-```js
-describe('Note app', function() {
-  // ...
-
-  describe('when logged in', function() {
-    // ...
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        // highlight-start
-        cy.createNote({
-          content: 'another note cypress',
-          important: true
-        })
-        // highlight-end
-      })
-
-      it('it can be made important', function () {
-        // ...
-      })
-    })
-  })
-})
-```
-
-Testeissämme on vielä eräs ikävä piirre. Sovelluksen frontendin osoite <i>http://localhost:5173</i> sekä backendin osoite <i>http://localhost:3001</i> on kovakoodattuna testeihin. Näistä oikeastaan backendin osoite on turha, sillä frontendin Vite-konfiguraatioon on määritelty proxy, joka forwardoi kaikki osoitteeseen <i>http://localhost:5173/api</i> menevät frontendin tekemät pyynnöt backendiin:
-
-```js
-export default defineConfig({
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-      },
-    }
-  },
-  // ...
-})
-```
-
-Voimme siis korvata testeissä kaikki osoitteet _http://localhost:3001/api/..._ osoitteella _http://localhost:5173/api/..._
-
-Määritellään sovellukselle <i>baseUrl</i> Cypressin valmiiksi generoimaan [konfiguraatiotiedostoon](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
-
-```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173' // highlight-line
-  },
-})
-```
-
-Kaikki testeissä ja <i>command.js</i>-tiedostossa olevat sovelluksen osoitetta käyttävät komennot
-
-```js
-cy.visit('http://localhost:5173')
-```
-
-voidaan nyt muuttaa muotoon
-
-```js
-cy.visit('')
-```
-
-### Muistiinpanon tärkeyden muutos
-
-Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiinpanon tärkeyttä on mahdollista muuttaa. Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kolme muistiinpanoa. Testit muuttuvat seuraavasti:
-
-```js
-describe('when logged in', function () {
-  beforeEach(function () {
-    cy.login({ username: 'mluukkai', password: 'salainen' })
-  })
-
-  it('a new note can be created', function () {
-    cy.contains('new note').click()
-    cy.get('input').type('a note created by cypress')
-    cy.contains('save').click()
-    cy.contains('a note created by cypress')
-  })
-  describe('and several notes exist', function () { // highlight-line
-    beforeEach(function () {
-      cy.createNote({ content: 'first note', important: true }) // highlight-line
-      cy.createNote({ content: 'second note', important: true }) // highlight-line
-      cy.createNote({ content: 'third note', important: true }) // highlight-line
-    })
-
-    it('one of those can be made non important', function () { // highlight-line
-      cy.contains('second note') // highlight-line
-        .contains('button', 'make not important')
-        .click()
-
-      cy.contains('second note') // highlight-line
-        .contains('button', 'make important')
-    })
-  })
-})
-```
-
-Miten komento [cy.contains](https://docs.cypress.io/api/commands/contains.html) tarkalleen ottaen toimii?
-
-Kun klikkaamme komentoa _-contains 'second note'_, Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.html) nähdään, että komento löytää elementin, jonka sisällä on teksti <i>second note</i>:
-
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, renderöityy oikealle sovelluksen sen hetkinen tila, missä löydetty elementti on merkattuna korostettuna.](../../images/5/34eb.png)
-
-Klikkaamalla seuraavaa riviä _-contains 'button, make not important'_, nähdään että löydetään nimenomaan 
-<i>second note</i>:a vastaava tärkeyden muutoksen tekevä nappi:
-
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, korostuu oikealle valintaa vastaava nappi](../../images/5/35a.png)
-
-Peräkkäin ketjutettuna toisena oleva <i>contains</i>-komento siis <i>jatkaa</i> hakua ensimmäisen komennon löytämän komponentin sisältä.
-
-Jos emme ketjuttaisi komentoja, eli olisimme kirjoittaneet 
-
-```js
-cy.contains('second note')
-cy.contains('button', 'make not important').click()
-```
-
-tulos olisi ollut aivan erilainen. Toinen rivi painaisi tässä tapauksessa väärän muistiinpanon nappia: 
-
-![Renderöityy virhe AssertionError: Timed out retrying after 4000ms: Expected to find content 'make not important'.](../../images/5/36.png)
-
-Testejä tehdessä kannattaa siis ehdottomasti varmistaa test runnerista, että testit etsivät niitä elementtejä, joita niiden on tarkoitus tutkia!
-
-Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään <i>span</i>-komponentin sisälle
-
-```js
-const Note = ({ note, toggleImportance }) => {
-  const label = note.important
-    ? 'make not important' : 'make important'
 
   return (
-    <li className='note'>
-      <span>{note.content}</span> // highlight-line
-      <button onClick={toggleImportance}>{label}</button>
+    <li className="note">
+      <span>{note.content}</span>
+      <button onClick={() => toggleImportanceOf(id)}>{label}</button>
+      <button onClick={handleDelete}>delete</button>
     </li>
   )
 }
+
+export default Note
+
 ```
 
-Testit hajoavat! Kuten test runner paljastaa, komento _cy.contains('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella:
+Eräs tapa on selvittää näytettävän muistiinpanon <i>id</i> komponentissa jo <i>App</i> React Routerin hook-funktion [useMatch](https://reactrouter.com/en/main/hooks/use-match) avulla.
 
-![Oikealle puolelle havainnollistuu, että fokus osuu napin sijaan pelkkään tekstiin](../../images/5/37.png)
-
-Eräs tapa korjata ongelma on seuraavassa:
+<i>useMatch</i>-hookin käyttö ei ole mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretään <i>Router</i> komponentin <i>App</i> ulkopuolelle:
 
 ```js
-it('one of those can be made non important', function () {
-  cy.contains('second note').parent().find('button').click()
-  cy.contains('second note')
-    .parent()
-    .find('button')
-    .should('contain', 'make important')
-})
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Router> // highlight-line
+    <App />
+  </Router> // highlight-line
+)
 ```
 
-Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/api/commands/parent.htm) avulla tekstin <i>second note</i> sisältävän elementin vanhemman alla oleva nappi ja painetaan sitä. Toinen rivi varmistaa, että napin teksti muuttuu.
-
-Huomaa, että napin etsimiseen käytetään komentoa [find](https://docs.cypress.io/api/commands/find.html#Syntax). Komento [cy.get](https://docs.cypress.io/api/commands/get.html) ei sovellu tähän tilanteeseen, sillä se etsii elementtejä aina <i>koko</i> sivulta ja palauttaisi nyt kaikki sovelluksen viisi nappia.
-
-Testissä on ikävästi copypastea, sillä rivien alku eli napin etsivä koodi on sama. 
-Tälläisissä tilanteissa on mahdollista hyödyntää komentoa [as](https://docs.cypress.io/api/commands/as.html): 
+Komponentti <i>App</i> muuttuu seuraavasti:
 
 ```js
-it('one of those can be made non important', function () {
-  cy.contains('second note').parent().find('button').as('theButton')
-  cy.get('@theButton').click()
-  cy.get('@theButton').should('contain', 'make important')
-})
+import {
+  // ...
+  useMatch  // highlight-line
+} from 'react-router-dom'
+
+const App = () => {
+  // ...
+
+ // highlight-start
+  const match = useMatch('/notes/:id')
+
+  const note = match
+    ? notes.find(note => note.id === match.params.id)
+    : null
+  // highlight-end
+
+  return (
+    <div>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        // ...
+      </div>
+
+      <Routes>
+        <Route path="/notes/:id" element={
+          <Note
+            note={note} // highlight-line
+            toggleImportanceOf={toggleImportanceOf}
+            deleteNote={deleteNote}
+          />
+        } />
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote}/>
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <div>
+        <em>Note app, Department of Computer Science 2026</em>
+      </div>
+    </div>
+  )
+}    
 ```
 
-Nyt ensimmäinen rivi etsii oikean napin, ja tallentaa sen komennon <i>as</i> avulla nimellä <i>theButton</i>. Seuraavat rivit pääsevät nimettyyn elementtiin käsiksi komennolla _cy.get('@theButton')_.
-
-### Testien suoritus ja debuggaaminen
-
-Vielä osan lopuksi muutamia huomioita Cypressin toimintaperiaatteesta sekä testien debuggaamisesta.
-
-Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia JavaScript-koodia, ja että voisimme esim. yrittää seuraavaa:
+Joka kerta, kun komponentti <i>App</i> renderöidään eli käytännössä aina kun sovelluksen osoiterivillä oleva URL vaihtuu, suoritetaan komento
 
 ```js
-const button = cy.contains('button', 'login')
-button.click()
-debugger
-cy.contains('logout').click()
+const match = useMatch('/notes/:id')
 ```
 
-Näin kirjoitettu koodi ei kuitenkaan toimi. Kun Cypress suorittaa testin, se lisää jokaisen _cy_-komennon suoritusjonoon. Kun testimetodin koodi on suoritettu loppuun, suorittaa Cypress yksi kerrallaan suoritusjonoon lisätyt _cy_-komennot.
-
-Cypressin komennot palauttavat aina _undefined_, eli yllä olevassa koodissa komento _button.click()_ aiheuttaisi virheen ja yritys käynnistää debuggeri ei pysäyttäisi koodia Cypress-komentojen suorituksen välissä, vaan jo ennen kuin yhtään Cypress-komentoa olisi suoritettu.
-
-Cypress-komennot ovat <i>promisen kaltaisia</i>, joten jos niiden palauttamia arvoja halutaan käsitellä, se tulee tehdä komennon [then](https://docs.cypress.io/api/commands/then.html) avulla. Esim. seuraava testi tulostaisi sovelluksen <i>kaikkien</i> nappien lukumäärän ja klikkaisi napeista ensimmäistä:
+Jos URL on muotoa _/notes/:id_, eli vastaa yksittäisen muistiinpanon URL:ia, muuttuja <i>match</i> saa arvokseen olion, jonka avulla polun parametroitu osa, eli muistiinpanon <i>id</i> voidaan selvittää. Näin saadaan haettua renderöitävä muistiinpano:
 
 ```js
-it('then example', function() {
-  cy.get('button').then( buttons => {
-    console.log('number of buttons', buttons.length)
-    cy.wrap(buttons[0]).click()
-  })
-})
+const note = match 
+  ? notes.find(note => note.id === match.params.id)
+  : null
 ```
 
-Myös testien suorituksen pysäyttäminen debuggeriin on [mahdollista](https://docs.cypress.io/api/commands/debug.html). Debuggeri käynnistyy vain jos Cypress test runnerin developer-konsoli on auki. 
 
-Developer-konsoli on monin tavoin hyödyllinen testejä debugatessa. Network-tabilla näkyvät testattavan sovelluksen tekemät HTTP-pyynnöt, ja console-välilehti kertoo testin komentoihin liittyviä tietoja:
+Sovelluksessamme on vielä pieni vika. Jos selain uudelleen ladataan yksittäisen muistiinpanon sivulla, seurauksena on virhe:
 
-![Console-välilehti havainnollistaa testien löytämiä elementtejä.](../../images/5/38.png)
+![](../../images/5/u5.png)
 
-Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä projektiin npm-skripti tätä tarkoitusta varten
+Ongelma johtuu siitä, että sivua yritetään renderöidä ennen kuin muistiinpanot on haettu backendista. Pääsemme ongelmasta eroon ehdollisella renderöinnillä:
 
 ```js
-  "scripts": {
-    "cypress:open": "cypress open",
-    "test:e2e": "cypress run" // highlight-line
-  },
+const Note = ({ note, toggleImportanceOf, deleteNote }) => {
+  const id = useParams().id
+  const navigate = useNavigate()
+
+// highlight-start
+  if(!note) {
+    return null
+  }
+  // highlight-end
+
+  return (
+    //...
+  )
+}
 ```
 
-Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run test:e2e</i>
+Sovelluksessa on vielä eräs ikävä piirre, kirjautumiseen liittyvä logiikka on edelleen kaikki muistiinpanot listaavalla sivulla. Jätämme kuitenkin toiminnallisuuden tähän hieman vajavaiseen tilaan.
 
-![Komennon suoritus tulostaa konsoliin tekstuaalisen raportin joka kertoo 5 läpimenneestä testistä.](../../images/5/39.png)
-
-Cypressissä on mahdollista tallentaa myös video testien suorituksesta. Videon tallentaminen voi olla erityisen hyödyllistä esimerkiksi debugatessa tai CI/CD-putkessa, sillä videosta voi jälkeenpäin tarkastaa helposti, mitä selaimessa tapahtui ennen virhettä. Ominaisuus on oletuksena pois päältä, ohjeet sen käyttöönottoon löytyvät Cypressin [dokumentaatiosta](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
-
-Testien koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
-
-Frontendin lopullinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), branchissa <i>part5-9</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), branchissa <i>part5-11</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtävät 5.17.-5.23.
+### Tehtävät 5.24-5.28.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella. Kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source ‑projektissa nähnyt.
+#### 5.24: routed blogs, step1
 
-Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
+Lisää blogisovellukseen React Router siten, että navigaatiopalkissa olevia linkkejä klikkailemalla saadaan säädeltyä näytettävää näkymää.
 
-> <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
+Sovelluksen juuressa eli polulla _/_ näytetään kaikkien blogien lista:
 
-#### 5.17: blogilistan end to end ‑testit, step1
+![](../../images/5/l1.png)
 
-Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
+Polulla _/login_ päästään kirjautumaan
 
-Testin rungon tulee olla seuraavanlainen
+![](../../images/5/l2.png)
 
-```js 
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    cy.visit('http://localhost:5173')
-  })
+Jos käyttäjä on kirjautunut, navigaatiopalkkiin tulee uloskirjautumisnappi:
 
-  it('Login form is shown', function() {
-    // ...
-  })
-})
+![](../../images/5/l3.png)
+
+Kirjautumisen ja uloskirjautumisen jälkeen käyttäjälle näytetään kaikkien blogien sivu.
+
+Tässä vaiheessa ei tarvitse vielä huolehtia blogien luomisesta.
+
+#### 5.25: routed blogs, step2
+
+Toteuta sovellukseen yksittäisen blogin tiedot näyttävä näkymä:
+
+![](../../images/5/l5.png)
+
+Yksittäisen blogin näkymään navigoidaan blogien listalta:
+
+![](../../images/5/l4.png)
+
+Varmista, että blogien tykkääminen toimii edelleen! Muuta myös toiminnallisuutta siten, että ainoastaan kirjautunut käyttäjä voi tykätä blogista.
+
+#### 5.26: routed blogs, step3
+
+Tee uuden blogin luomista varten uusi näkymä, jonne kirjautunut käyttäjä pääsee navigaation kautta:
+
+![](../../images/5/l6.png)
+
+Uuden blogin lisäyksen sekä olemassa olevan blogin poiston tulee viedä sovellus kaikkien blogien näkymään
+
+#### 5.27: routed blogs, step4
+
+Sovelluksen käytettävyys ja ulkoasu on nyt aiempaa parempi. Ikävä kyllä osa testeistä on päässyt hajoamaan. 
+
+Muuta nyt yksittäisen blogin näkymän Vitestillä tehtyjä yksikkötestejä seuraavasti
+- blogin tiedot sekä tykkäysten määrä näytetään kirjautumattomalle käyttäjälle, nappeja ei näytetä
+- kirjautuneelle käyttäjälle, joka ei ole blogin luoja näytetään ainoastaan tykkäysnappi
+- blogin luojalle näytetään myös blogin poistonappi
+
+#### 5.28: routed blogs, step5
+
+Seuraavana on vuorossa Playwrightillä tehtyjen end to end -testien korjaaminen. Aiemmin tekemämme testit ovat totaalisesti rikki, ja joudumme tekemään testeihin suuria muutoksia. 
+
+Tee testit seuraaviin tilanteisiin
+- kirjautuminen onnistuu oikealla salasana/käyttäjätunnus-yhdistelmällä
+- kirjautuminen epäonnistuu jos salasana/käyttäjätunnus väärin
+- kirjautunut käyttäjä pystyy luomaan blogin
+- kirjautunut käyttäjä voi tykätä blogeista
+- kirjautunut käyttäjä voi poistaa blogin
+
+Blogien järjestämistä tykkäysjärjestykseen ei siis nyt testata.
+
+</div>
+
+<div class="content"
+
+### Valmiit käyttöliittymätyylikirjastot
+
+Osassa 2 on jo katsottu kahta tapaa tyylien lisäämiseen, eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa ja [inline-tyylejä](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit). Katsotaan tässä osassa vielä muutamaa tapaa.
+
+Eräs lähestymistapa sovelluksen tyylien määrittelyyn on valmiin "UI-frameworkin" eli käyttöliittymätyylikirjaston käyttö.
+
+Ensimmäinen laajaa kuuluisuutta saanut UI-framework oli Twitterin kehittämä [Bootstrap](https://getbootstrap.com/). Viime vuosina UI-frameworkeja on noussut kuin sieniä sateella. Valikoima on niin iso, ettei tyhjentävää listaa kannata edes yrittää tehdä.
+
+Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määriteltyjä teemoja sekä "komponentteja", kuten painikkeita, menuja ja taulukkoja. Termi komponentti on edellä kirjoitettu hipsuissa sillä kyse ei ole samasta asiasta kuin React-komponentti. Useimmiten UI-frameworkeja käytetään sisällyttämällä sovellukseen frameworkin määrittelemät CSS-tyylitiedostot sekä JavaScript-koodi.
+
+Monista UI-frameworkeista on tehty React-ystävällinen versio, jossa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota, joista suosituin on [React-Bootstrap](https://react-bootstrap.github.io/).
+
+Bootstrapin sijaan katsotaan seuraavaksi tämän hetken kenties suosituinta UI-frameworkia eli Googlen kehittämän "muotokielen" [Material Designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://mui.com/). 
+
+Asennetaan kirjasto:
+
+```bash
+npm install @mui/material @emotion/react @emotion/styled
 ```
 
-Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [materiaalissa](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi) näytetyllä tavalla.
+MaterialUI:ta käytettäessa koko sovelluksen sisältö renderöidään useimmiten komponentin [Container](https://material-ui.com/components/container/) sisälle:
 
-#### 5.18: blogilistan end to end ‑testit, step2
+```js
+import { Container } from '@mui/material'
 
-Tee testit kirjautumiselle ja testaa sekä onnistunut että epäonnistunut kirjautuminen. Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
-
-Testien runko laajenee seuraavasti
-
-```js 
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    // create here a user to backend
-    cy.visit('http://localhost:5173')
-  })
-
-  it('Login form is shown', function() {
-    // ...
-  })
-
-  describe('Login',function() {
-    it('succeeds with correct credentials', function() {
+const App = () => {
+  // ...
+  return (
+    <Container>
       // ...
-    })
-
-    it('fails with wrong credentials', function() {
-      // ...
-    })
-  })
-})
+    </Container>
+  )
+}
 ```
 
-#### 5.19: blogilistan end to end ‑testit, step3
+#### Taulukko
 
-Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
+Aloitetaan komponentista <i>NoteList</i> ja renderöidään muistiinpanojen lista [taulukkona](https://mui.com/material-ui/react-table/#simple-table), joka näyttää myös muistiinpanon luoneen käyttäjän:
 
-```js 
-describe('Blog app', function() {
+```js
+import { useState, useEffect } from 'react'
+
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
+
+//...
+
+const NoteList = ({ notes }) => {
+
   // ...
 
-  describe('When logged in', function() {
-    beforeEach(function() {
-      // login user here
-    })
-
-    it('A blog can be created', function() {
+  return (
+    <div>
       // ...
-    })
-  })
+      <h2>Notes</h2>
 
-})
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>content</TableCell>
+              <TableCell>user</TableCell>
+              <TableCell>important</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {notes.map(note => (
+              <TableRow key={note.id}>
+                <TableCell>
+                  <Link to={`/notes/${note.id}`}>
+                    {note.content}
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  {note.user.name}
+                </TableCell>
+                <TableCell>
+                  {note.important ? 'yes': ''}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+    </div>
+  )
+}
+
+export default NoteList
+
 ```
 
-Testin tulee varmistaa, että luotu blogi tulee näkyville blogien listalle.
+Taulukko näyttää seuraavalta:
 
-#### 5.20: blogilistan end to end ‑testit, step4
+![](../../images/5/u10.png)
 
-Tee testi, joka varmistaa, että blogia voi likettää.
 
-#### 5.21: blogilistan end to end ‑testit, step5
+#### Lomake
 
-Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin.
+Parannellaan seuraavaksi uuden muistiinpanon luovaa näkymää <i>NoteForm</i> käyttäen komponentteja [TextField](https://mui.com/components/text-fields/) ja [Button](https://mui.com/api/button/):
 
-#### 5.22: blogilistan end to end ‑testit, step6
+```js 
+import { TextField, Button } from '@mui/material'
 
-Tee testi, joka varmistaa, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
+// ...
 
-#### 5.23: blogilistan end to end ‑testit, step6
+const NoteForm = ({ createNote }) => {
+  // ...
 
-Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
+  return (
+    <div>
+      <h2>Create a new note</h2>
 
-<i>Tämä tehtävä on edellisiä huomattavasti haastavampi.</i> Eräs ratkaisutapa on lisätä tietty luokka elementille, joka sisältää blogin sisällön ja käyttää [eq](https://docs.cypress.io/api/commands/eq#Syntax)-metodia tietyssä indeksissä olevan elementin hakemiseen:
-  
+      <form onSubmit={addNote}>
+        <TextField
+          label="note content"
+          value={newNote}
+          onChange={event => setNewNote(event.target.value)}
+        />
+        <div>
+          <Button type="submit" variant="contained" style={{ marginTop: 10 }}>
+            save
+          </Button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+export default NoteForm
+
+```
+
+Lopputulos on elegantti:
+
+![](../../images/5/u11.png)
+
+#### Notifikaatio
+
+
+Parannellaan sovelluksen notifikaatiot näyttävää komponenttia MaterialUI:n [Alert](https://mui.com/components/alert/) komponentin avulla:
+
 ```js
-cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
-cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
-``` 
-  
-Saatat törmätä tässä tehtävässä ongelmaan jos klikkaat monta kertaa peräkkäin <i>like</i>-nappia. Saattaa olla, että näin tehdessä liketykset tehdään samalle oliolle, eli Cypress ei "ehdi" välissä päivittää sovelluksen tilaa. Eräs tapa korjata ongelma on odottaa jokaisen klikkauksen jälkeen likejen lukumäärä päivittymistä ja tehdä uusi liketys vasta tämän jälkeen.
+import { Alert } from '@mui/material'
+
+const Notification = ({ notification }) => {
+  if (notification === null) {
+    return null
+  }
+
+  return (
+    <Alert style={{ marginTop: 10, marginBottom: 10 }} severity={notification.type}>
+      {notification.text}
+    </Alert>
+  )
+}
+
+export default Notification
+```
+
+Siirretään notifikaatiokomponentti ja sen tilan hallinta  komponenttiin <i>App</i>:
+
+```js
+const App = () => {
+  const [notes, setNotes] = useState([])
+  const [notification, setNotification] = useState(null) // highlight-line
+
+  // ...
+
+  const addNote = noteObject => {
+    noteService.create(noteObject).then(returnedNote => {
+      setNotes(notes.concat(returnedNote))
+      setNotification({ text: `Note '${returnedNote.content}' added!`, type: 'success' }) // highlight-line
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+    })
+  }
+
+  return (
+    <Container>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/create">new note</Link>
+      </div>
+
+      <Notification notification={notification} /> // highlight-line
+
+      <Routes>
+        <Route path="/notes/:id" element={
+          <Note
+            note={note}
+            toggleImportanceOf={toggleImportanceOf}
+            deleteNote={deleteNote}
+          />
+        } />
+        <Route path="/notes" element={
+          <NoteList notes={notes} setNotification={setNotification} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote} />
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <Footer />
+    </Container>
+  )
+}
+```
+
+Alert on ulkoasultaan tyylikäs:
+
+![](../../images/5/u12.png)
+
+#### Navigaatiovalikko
+
+Navigaatiovalikko toteutetaan komponentin [AppBar](https://mui.com/components/app-bar/) avulla.
+
+Jos sovelletaan suoraan dokumentaation esimerkkiä  
+
+```js
+<AppBar position="static">
+  <Toolbar>
+    <Button color="inherit"><Link to="/">home</Link></Button>
+    <Button color="inherit"><Link to="/notes">notes</Link></Button>
+    <Button color="inherit"><Link to="/create">new note</Link></Button>
+  </Toolbar>
+</AppBar>
+```
+
+saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen:
+
+![](../../images/5/u15.png)
+
+[Dokumentaatiota](https://mui.com/material-ui/guides/composition/#routing-libraries) lueskelemalla löytyy parempi tapa eli [component prop](https://mui.com/material-ui/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy.
+
+Määrittelemällä
+
+```js
+<Button color="inherit" component={Link} to="/">
+  home
+</Button>
+```
+
+renderöidään komponentti <i>Button</i> siten, että sen juurikomponenttina onkin react-router-dom-kirjaston komponentti <i>Link</i>, jolle siirtyy polun kertova prop <i>to</i>.  
+
+Navigaatiopalkin koodi kokonaisuudessaan on seuraava
+
+```js
+<AppBar position="static">
+  <Toolbar>
+    <Button color="inherit" component={Link} to="/">home</Button>
+    <Button color="inherit" component={Link} to="/notes">notes</Button>
+    <Button color="inherit" component={Link} to="/create">new note</Button>
+  </Toolbar>
+</AppBar>
+```
+
+ja lopputulos on haluamamme kaltainen:
+
+![](../../images/5/u16.png)
+
+Huomaamme kuitenkin, että kun hiiri viedään navigaatiopalkin päälle, on hover-indikaattori liian huomaamaton. Korjataan tilanne määrittelemällä tilanteisiin hieman parempi taustaväri: 
+
+
+```js
+const style = { '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' } }
+
+return (
+  <Container>
+    <AppBar position="static">
+      <Toolbar>
+        <Button color="inherit" component={Link} to="/" sx={style}>
+          home
+        </Button>
+        <Button color="inherit" component={Link} to="/notes" sx={style}>
+          notes
+        </Button>
+        <Button color="inherit" component={Link} to="/create" sx={style}>
+          new note
+        </Button>
+      </Toolbar>
+    </AppBar>
+
+    // ...
+)
+```
+
+Olemme vihdoin tyytyväisiä:
+
+![](../../images/5/u17.png)
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-12), branchissa <i>part5-12</i>.
+
+
+### Styled components
+
+Tapoja liittää tyylejä React-sovellukseen on jo näkemiemme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b).
+
+Mielenkiintoisen näkökulman tyylien määrittelyyn tarjoaa ES6:n [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) ‑syntaksia hyödyntävä [styled-components](https://www.styled-components.com/)-kirjasto.
+
+[Asennetaan](https://styled-components.com/docs/basics#installation) styled-components ja tehdään sen avulla muistiinpanosovellukseen (versioon ennen MaterialUI:n asentamista) muutama tyylillinen muutos. Tehdään ensin kaksi tyylimäärittelyä käytettävää komponenttia:
+
+```js
+import styled from 'styled-components'
+
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid Chocolate;
+  border-radius: 3px;
+`
+
+const Input = styled.input`
+  margin: 0.25em;
+  width: 300px;  
+`
+```
+
+Koodi luo HTML:n elementeistä <i>button</i> ja <i>input</i> tyyleillä rikastetut versiot ja sijoittaa ne muuttujiin <i>Button</i> ja <i>Input</i>.
+
+Tyylien määrittelyn syntaksi on varsin mielenkiintoinen, sillä CSS-määrittelyt asetetaan backtick-hipsujen sisään.
+
+Määritellyt komponentit toimivat kuten normaalit <i>button</i> ja <i>input</i>, ja sovelluksessa käytetään niitä tavanomaiseen tapaan:
+
+```js
+const NoteForm = ({ createNote }) => {
+  // ...
+
+  return (
+    <div>
+      <h2>Create a new note</h2>
+
+      <form onSubmit={addNote}>
+        <Input> // highlight-line
+          value={newNote}
+          onChange={event => setNewNote(event.target.value)}
+          placeholder="write note content here"
+        />
+        <Button type="submit">save</Button> // highlight-line
+      </form>
+    </div>
+  )
+}
+```
+
+Lomake näyttää nyt seuraavalta:
+
+![](../../images/5/u20.png)
+
+Määritellään vielä seuraavat tyylien lisäämiseen tarkoitetut komponentit, jotka ovat kaikki rikastettuja versioita <i>div</i>-elementistä:
+
+```js
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`
+```
+
+Otetaan uudet komponentit käyttöön sovelluksessa:
+
+```js
+const App = () => {
+  // ...
+
+
+  return (
+    <Page> // highlight-line
+      <Navigation> // highlight-line
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/create">new note</Link>
+      </Navigation> // highlight-line
+
+      <Routes>
+        <Route path="/notes/:id" element={
+          <Note
+            note={note}
+            toggleImportanceOf={toggleImportanceOf}
+            deleteNote={deleteNote}
+          />
+        } />
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote}/>
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+// highlight-start
+      <Footer>
+         Note app, Department of Computer Science, University of Helsinki 2026
+      </Footer>
+    </Page>
+    // highlight-end
+  )
+}
+```
+
+Lopputulos on seuraavassa:
+
+![](../../images/5/u21.png)
+
+styled-components on nostanut tasaisesti suosiotaan viime aikoina ja tällä hetkellä näyttääkin, että se on melko monien mielestä paras tapa React-sovellusten tyylien määrittelyyn.
+
+</div>
+
+<div class="tasks">
+
+### Tehtävät 5.29.-5.31.
+
+Parannellaan seuraavaksi blogisovelluksen tyylejä joko MaterialUI:n tai Styled Componentsin avulla.
+
+#### 5.29: styled blogs, step1
+
+Lisää tyylit sovelluksen lomakkeille.
+
+Ratkaisusi voi esim. näyttää seuraavalta. Kirjautumislomake:
+
+![](../../images/5/l10.png)
+
+Uuden blogin luominen:
+
+![](../../images/5/l11.png)
+
+
+#### 5.30: styled blogs, step2
+
+Tyylittele nyt sovelluksen navigaatiopalkki sekä notifikaatiot näyttävä komponentti. Ratkaisu voi näyttää esim. seuraavalta
+
+![](../../images/5/l12.png)
+
+#### 5.31: styled blogs, step3
+
+Paranna haluamallasi tavalla yksittäisen blogin näyttävän komponentin ulkonäköä. Seuraavassa eräs esimerkki:
+
+![](../../images/5/l14.png)
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
+

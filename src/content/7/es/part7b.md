@@ -13,9 +13,9 @@ React ofrece 15 [hooks incorporados](https://es.react.dev/reference/react/hooks)
 
 En la [parte 5](/es/part5/props_children_y_proptypes#referencias-a-componentes-con-ref) usamos el hook [useImperativeHandle](https://es.react.dev/reference/react/useImperativeHandle) que permite que los componentes proporcionen sus funciones a otros componentes. En la [parte 6](/es/part6/react_query_use_reducer_y_el_contexto) utilizamos [useReducer](https://es.react.dev/reference/react/useReducer) y [useContext](https://es.react.dev/reference/react/useContext) para implementar una gestión de estado similar a Redux.
 
-Durante el último año, muchas librerías de React han comenzado a ofrecer APIs basadas en hooks. En la [parte 6](/es/part6/flux_architecture_y_redux) usamos los hooks [useSelector](https://react-redux.js.org/api/hooks#useselector) y [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) de la librería react-redux para compartir nuestra redux-store y la función dispatch a nuestros componentes.
+En los últimos años, muchas librerías de React han comenzado a ofrecer APIs basadas en hooks. En la [parte 6](/es/part6/flux_architecture_y_redux) usamos los hooks [useSelector](https://react-redux.js.org/api/hooks#useselector) y [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) de la librería react-redux para compartir nuestra redux-store y la función dispatch con nuestros componentes.
 
-La API de [React-Router](https://reactrouter.com/en/main/start/tutorial) que presentamos en la [parte anterior](/es/part7/react_router) también se basa parcialmente en hooks. Sus hooks se pueden usar para acceder a los parámetros de la URL y al objeto <i>navigation</i>, lo que permite manipular la URL del navegador programáticamente.
+La API de [React Router](https://reactrouter.com/en/main/start/tutorial) que presentamos en la [parte anterior](/es/part7/react_router) también se basa parcialmente en hooks. Sus hooks se pueden usar para acceder a los parámetros de la URL y al objeto <i>navigation</i>, lo que permite manipular la URL del navegador programáticamente.
 
 Como se mencionó en la [parte 1](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks), los hooks no son funciones normales y cuando los usamos tenemos que cumplir con ciertas [reglas o limitaciones](https://es.react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks). Recapitulemos las reglas del uso de hooks, copiadas literalmente de la documentación oficial de React:
 
@@ -94,7 +94,7 @@ Nuestro hook personalizado utiliza el hook _useState_ internamente para crear su
 Los componentes de React pueden utilizar el hook como se muestra a continuación:
 
 ```js
-const App = (props) => {
+const App = () => {
   const counter = useCounter()
 
   return (
@@ -290,11 +290,11 @@ Internet está comenzando a llenarse con más y más material útil relacionado 
 
 <div class="tasks">
 
-### Ejercicios 7.4.-7.8.
+### Ejercicios 7.1.-7.5.
 
 Continuaremos con la aplicación de los [ejercicios](/es/part7/react_router#ejercicios-7-1-7-3) del capítulo de [react router](/es/part7/react_router).
 
-#### 7.4: Anécdotas y Hooks paso 1
+#### 7.1: Anécdotas y Hooks paso 1
 
 Simplifica el formulario de creación de anécdotas de tu aplicación con el hook personalizado _useField_ que definimos anteriormente.
 
@@ -319,7 +319,7 @@ export const useField = (type) => { // highlight-line
   }
 }
 
-// los módulos pueden tener muchas exportaciones nombradas
+// modules can have several named exports
 export const useAnotherHook = () => { // highlight-line
   // ...
 }
@@ -337,7 +337,7 @@ const App = () => {
 }
 ```
 
-#### 7.5: Anécdotas y Hooks paso 2
+#### 7.2: Anécdotas y Hooks paso 2
 
 Agrega un botón al formulario que puedas usar para borrar todos los campos de entrada:
 
@@ -351,7 +351,7 @@ Dependiendo de tu solución, es posible que veas la siguiente advertencia en tu 
 
 Volveremos a esta advertencia en el próximo ejercicio.
 
-#### 7.6: Anécdotas y Hooks paso 3
+#### 7.3: Anécdotas y Hooks paso 3
 
 Si tu solución no provocó que apareciera una advertencia en la consola, ya has terminado este ejercicio.
 
@@ -388,7 +388,7 @@ Una solución simple sería no usar la sintaxis de spread y escribir todos los f
 
 Si hiciéramos esto, perderíamos gran parte del beneficio proporcionado por el hook <i>useField</i>. En su lugar, busca una solución al problema, pero que aún sea fácil de usar con la sintaxis de spread.
 
-#### 7.7: Hook de País
+#### 7.4: Hook de País
 
 Volvamos a los ejercicios [2.18-20](/es/part2/agregar_estilos_a_la_aplicacion_react#ejercicios-2-18-2-20).
 
@@ -406,9 +406,9 @@ Por lo demás, la aplicación está completa, pero en este ejercicio debes imple
 
 Usa el endpoint [name](https://studies.cs.helsinki.fi/restcountries/) de la API para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
 
-Ten en cuenta que en este ejercicio es esencial utilizar el [segundo parámetro](https://react.dev/reference/react/useEffect#parameters) de useEffect para controlar cuándo se ejecuta la función de efecto.
+Ten en cuenta que en este ejercicio es esencial utilizar el array del [segundo parámetro](https://react.dev/reference/react/useEffect#parameters) de useEffect para controlar cuándo se ejecuta la función de efecto. Consulta la [parte 2](/es/part2/agregar_estilos_a_la_aplicacion_react#un-par-de-observaciones-importantes) del curso para más información sobre cómo puede usarse el segundo parámetro.
 
-#### 7.8: Hooks Definitivos
+#### 7.5: Hooks Definitivos
 
 El código de la aplicación responsable de comunicarse con el backend de la aplicación de notas de las partes anteriores se ve así:
 

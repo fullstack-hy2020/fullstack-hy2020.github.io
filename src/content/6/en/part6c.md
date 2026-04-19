@@ -7,565 +7,533 @@ lang: en
 
 <div class="content">
 
-### Setting up JSON Server
+At the end of this part, we will look at a few more different ways to manage the state of an application.
 
-Let's expand the application so that the notes are stored in the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
-
-The initial state of the database is stored in the file <i>db.json</i>, which is placed in the root of the project:
-
-```json
-{
-  "notes": [
-    {
-      "content": "the app state is in redux store",
-      "important": true,
-      "id": 1
-    },
-    {
-      "content": "state changes are made with actions",
-      "important": false,
-      "id": 2
-    }
-  ]
-}
-```
-
-We'll install json-server for the project:
+Let's continue with the note application. We will focus on communication with the server. Let's start the application from scratch. The first version is as follows:
 
 ```js
-npm install json-server --save-dev
-```
+const App = () => {
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.reset()
+    console.log(content)
+  }
 
-and add the following line to the <i>scripts</i> part of the file <i>package.json</i>
+  const toggleImportance = (note) => {
+    console.log('toggle importance of', note.id)
+  }
 
-```js
-"scripts": {
-  "server": "json-server -p 3001 db.json",
-  // ...
+  const notes = []
+
+  return (
+    <div>
+      <h2>Notes app</h2>
+      <form onSubmit={addNote}>
+        <input name="note" />
+        <button type="submit">add</button>
+      </form>
+      {notes.map((note) => (
+        <li key={note.id} onClick={() => toggleImportance(note)}>
+          {note.important ? <strong>{note.content}</strong> : note.content}
+          <button onClick={() => toggleImportance(note.id)}>
+            {note.important ? 'make not important' : 'make important'}
+          </button>  
+        </li>
+      ))}
+    </div>
+  )
 }
+
+export default App
 ```
 
-Now let's launch json-server with the command _npm run server_.
+The initial code is on GitHub in this [repository](https://github.com/fullstack-hy2020/query-notes/tree/part6-0), in the branch <i>part6-0</i>.
 
-### Fetch API
+### Managing data on the server with the TanStack Query library
 
-In software development, it is often necessary to consider whether a certain functionality should be implemented using an external library or whether it is better to utilize the native solutions provided by the environment. Both approaches have their own advantages and challenges.
+We shall now use the [TanStack Query](https://tanstack.com/query/latest) library to store and manage data retrieved from the server.
 
-In the earlier parts of this course, we used the [Axios](https://axios-http.com/docs/intro) library to make HTTP requests. Now, let's explore an alternative way to make HTTP requests using the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
-
-It is typical for an external library like <i>Axios</i> to be implemented using other external libraries. For example, if you install Axios in your project with the command _npm install axios_, the console output will be:
+Install the library with the command
 
 ```bash
-$ npm install axios
-
-added 23 packages, and audited 302 packages in 1s
-
-71 packages are looking for funding
-  run `npm fund` for details
-
-found 0 vulnerabilities
+npm install @tanstack/react-query
 ```
 
-So, in addition to the Axios library, the command would install over 20 other npm packages that Axios needs to function.
+A few additions to the file  <i>main.jsx</i> are needed to pass the library functions to the entire application:
 
-The <i>Fetch API</i> provides a similar way to make HTTP requests as Axios, but using the Fetch API does not require installing any external libraries. Maintaining the application becomes easier when there are fewer libraries to update, and security is also improved because the potential attack surface of the application is reduced. The security and maintainability of applications is discussed further in [part 7](https://fullstackopen.com/en/part7/class_components_miscellaneous#react-node-application-security) of the course.
+```js
+import { createRoot } from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query' // highlight-line
 
-In practice, requests are made using the _fetch()_ function. The syntax used differs somewhat from Axios. We will also soon notice that Axios has taken care of some things for us and made our lives easier. However, we will now use the Fetch API, as it is a widely used native solution that every Full Stack developer should be familiar with.
+import App from './App.jsx'
 
-### Getting data from the backend
+const queryClient = new QueryClient() // highlight-line
 
-Let's create a method for fetching data from the backend in the file <i>src/services/notes.js</i>:
+createRoot(document.getElementById('root')).render(
+  <QueryClientProvider client={queryClient}> // highlight-line
+    <App />
+  </QueryClientProvider> // highlight-line
+)
+```
+
+Let's use [JSON Server](https://github.com/typicode/json-server) as in the previous parts to simulate the backend. JSON Server is preconfigured in the example project, and the project root contains a file <i>db.json</i> that by default has two notes. You can start the server with:
+
+```js
+npm run server
+```
+
+We can now retrieve the notes in the <i>App</i> component. The code expands as follows:
+
+```js
+import { useQuery } from '@tanstack/react-query' // highlight-line
+
+const App = () => {
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.reset()
+    console.log(content)
+  }
+
+  const toggleImportance = (note) => {
+    console.log('toggle importance of', note.id)
+  }
+
+  // highlight-start
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:3001/notes')
+      if (!response.ok) {
+        throw new Error('Failed to fetch notes')
+      }
+      return await response.json()
+    }
+  })
+ 
+  console.log(JSON.parse(JSON.stringify(result)))
+ 
+  if (result.isPending) {
+    return <div>loading data...</div>
+  }
+ 
+  const notes = result.data
+  // highlight-end
+
+  return (
+    // ...
+  )
+}
+```
+
+Fetching data from the server is done, as in the previous chapter, using the Fetch API's <i>fetch</i> function. However, the function call is now wrapped into a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed by the [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) function. The call to <i>useQuery</i> takes as its parameter an object with the fields <i>queryKey</i> and <i>queryFn</i>. The value of the <i>queryKey</i> field is an array containing the string <i>notes</i>. It acts as the [key](https://tanstack.com/query/latest/docs/react/guides/query-keys) for the defined query, i.e. the list of notes.
+
+The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation:
+
+![browser devtools showing success status](../../images/6/t3.png)
+
+That is, the first time the component is rendered, the query is still in <i>pending</i> state, i.e. the associated HTTP request is pending. At this stage, only the following is rendered:
+
+```html
+<div>loading data...</div>
+```
+
+However, the HTTP request is completed so quickly that not even Max Verstappen would be able to see the text. When the request is completed, the component is rendered again. The query is in the state <i>success</i> on the second rendering, and the field <i>data</i> of the query object contains the data returned by the request, i.e. the list of notes that is rendered on the screen.
+
+So the application retrieves data from the server and renders it on the screen without using the React hooks <i>useState</i> and <i>useEffect</i> used in chapters 2-5 at all. The data on the server is now entirely under the administration of the TanStack Query library, and the application does not need the state defined with React's <i>useState</i> hook at all!
+
+Let's move the function making the actual HTTP request to its own file <i>src/requests.js</i>
 
 ```js
 const baseUrl = 'http://localhost:3001/notes'
 
-const getAll = async () => {
+export const getNotes = async () => {
   const response = await fetch(baseUrl)
-
   if (!response.ok) {
     throw new Error('Failed to fetch notes')
   }
-
-  const data = await response.json()
-  return data
-}
-
-export default { getAll }
-```
-
-Let's take a closer look at the implementation of the _getAll_ method. The notes are now fetched from the backend by calling the _fetch()_ function, which is given the backend's URL as an argument. The request type is not explicitly defined, so _fetch_ performs its default action, which is a GET request.
-
-Once the response has arrived, the success of the request is checked using the _response.ok_ property, and an error is thrown if necessary:
-
-```js
-if (!response.ok) {
-  throw new Error('Failed to fetch notes')
+  return await response.json()
 }
 ```
 
-The _response.ok_ attribute is set to _true_ if the request was successful, meaning the response status code is between 200 and 299. For all other status codes, such as 404 or 500, it is set to _false_.
-
-Note that _fetch_ does not automatically throw an error even if the response status code is, for example, 404. Error handling must be implemented manually, as we have done here.
-
-If the request is successful, the data contained in the response is converted to JSON format:
+The <i>App</i> component is now slightly simplified:
 
 ```js
-const data = await response.json()
+import { useQuery } from '@tanstack/react-query' 
+import { getNotes } from './requests' // highlight-line
+
+const App = () => {
+  // ...
+
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: getNotes // highlight-line
+  })
+
+  // ...
+}
 ```
 
-_fetch_ does not automatically convert any data included in the response to JSON format; the conversion must be done manually. It is also important to note that _response.json()_ is an asynchronous method, so the <i>await</i> keyword is required.
+The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-1) in the branch <i>part6-1</i>.
 
-Let's further simplify the code by directly returning the data returned by the _response.json()_ method:
+### Synchronizing data to the server using TanStack Query
+
+Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let's start by adding new notes.
+
+Let's make a function <i>createNote</i> to the file <i>requests.js</i> for saving new notes:
 
 ```js
-const getAll = async () => {
+const baseUrl = 'http://localhost:3001/notes'
+
+export const getNotes = async () => {
   const response = await fetch(baseUrl)
-
   if (!response.ok) {
     throw new Error('Failed to fetch notes')
+  }
+  return await response.json()
+}
+
+// highlight-start
+export const createNote = async (newNote) => {
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newNote)
+  }
+ 
+  const response = await fetch(baseUrl, options)
+ 
+  if (!response.ok) {
+    throw new Error('Failed to create note')
+  }
+ 
+  return await response.json()
+}
+// highlight-end
+```
+
+The <i>App</i> component will change as follows
+
+```js
+import { useQuery, useMutation } from '@tanstack/react-query' // highlight-line
+import { getNotes, createNote } from './requests' // highlight-line
+
+const App = () => {
+  //highlight-start
+  const newNoteMutation = useMutation({
+    mutationFn: createNote,
+  })
+  // highlight-end
+
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.reset()
+    newNoteMutation.mutate({ content, important: true }) // highlight-line
+  }
+
+  //
+
+}
+```
+
+To create a new note, a [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) is defined using the function [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutation):
+
+```js
+const newNoteMutation = useMutation({
+  mutationFn: createNote,
+})
+```
+
+The parameter is the function we added to the file <i>requests.js</i>, which uses Fetch API to send a new note to the server.
+
+The event handler <i>addNote</i> performs the mutation by calling the mutation object's function <i>mutate</i> and passing the new note as an argument:
+
+```js
+newNoteMutation.mutate({ content, important: true })
+```
+
+Our solution is good. Except it doesn't work. The new note is saved on the server, but it is not updated on the screen.
+
+In order to render a new note as well, we need to tell TanStack Query that the old result of the query whose key is the string <i>notes</i> should be [invalidated](https://tanstack.com/query/latest/docs/react/guides/invalidations-from-mutations).
+
+Fortunately, invalidation is easy, it can be done by defining the appropriate <i>onSuccess</i> callback function to the mutation:
+
+```js
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query' // highlight-line
+import { getNotes, createNote } from './requests'
+
+const App = () => {
+  const queryClient = useQueryClient() // highlight-line
+
+  const newNoteMutation = useMutation({
+    mutationFn: createNote,
+    onSuccess: () => {  // highlight-line
+      queryClient.invalidateQueries({ queryKey: ['notes'] }) // highlight-line
+    }, // highlight-line
+  })
+
+  // ...
+}
+```
+
+Now that the mutation has been successfully executed, a function call is made to
+
+```js
+queryClient.invalidateQueries({ queryKey: ['notes'] })
+```
+
+This in turn causes TanStack Query to automatically update a query with the key <i>notes</i>, i.e. fetch the notes from the server. As a result, the application renders the up-to-date state on the server, i.e. the added note is also rendered.
+
+Let us also implement the change in the importance of notes. A function for updating notes is added to the file <i>requests.js</i>:
+
+```js
+export const updateNote = async (updatedNote) => {
+  const options = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedNote)
+  }
+
+  const response = await fetch(`${baseUrl}/${updatedNote.id}`, options)
+
+  if (!response.ok) {
+    throw new Error('Failed to update note')
+  }
+
+  return await response.json()
+}
+```
+
+Updating the note is also done by mutation. The <i>App</i> component expands as follows:
+
+```js
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { getNotes, createNote, updateNote } from './requests' // highlight-line
+
+const App = () => {
+  const queryClient = useQueryClient()
+
+  const newNoteMutation = useMutation({
+    mutationFn: createNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notes'] })
+    }
+  })
+
+  // highlight-start
+  const updateNoteMutation = useMutation({
+    mutationFn: updateNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notes'] })
+    }
+  })
+  // highlight-end
+
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.reset()
+    newNoteMutation.mutate({ content, important: true })
+  }
+
+  const toggleImportance = (note) => {
+    updateNoteMutation.mutate({...note, important: !note.important }) // highlight-line
+  }
+
+  // ...
+}
+```
+
+So again, the mutation we created invalidates the notes query so that the updated note is rendered correctly. Using mutations is easy, the function <i>mutate</i> receives a note as a parameter, the importance of which has been changed to the negation of the old value.
+
+The current code for the application is on [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.
+
+### Optimizing the performance
+
+The application works well, and the code is relatively simple. The ease of making changes to the list of notes is particularly surprising. For example, when we change the importance of a note, invalidating the query <i>notes</i> is enough for the application data to be updated:
+
+```js
+const updateNoteMutation = useMutation({
+  mutationFn: updateNote,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['notes'] }) // highlight-line
+  }
+})
+```
+
+The consequence of this, of course, is that after the PUT request that causes the note change, the application makes a new GET request to retrieve the query data from the server:
+
+![devtools network tab with highlight over 3 and notes requests](../../images/6/t4.png)
+
+If the amount of data retrieved by the application is not large, it doesn't really matter. After all, from a browser-side functionality point of view, making an extra HTTP GET request doesn't really matter, but in some situations it might put a strain on the server.
+
+If necessary, it is also possible to optimize performance [by manually updating](https://tanstack.com/query/latest/docs/react/guides/updates-from-mutation-responses) the query state maintained by TanStack Query.
+
+The change for the mutation adding a new note is as follows:
+
+```js
+const App = () => {
+  const queryClient = useQueryClient()
+
+  const newNoteMutation = useMutation({
+    mutationFn: createNote,
+    // highlight-start
+    onSuccess: (newNote) => {
+      const notes = queryClient.getQueryData(['notes'])
+      queryClient.setQueryData(['notes'], notes.concat(newNote))
+    // highlight-end
+    }
+  })
+
+  // ...
+}
+```
+
+That is, in the <i>onSuccess</i> callback, the <i>queryClient</i> object first reads the existing <i>notes</i> state of the query and updates it by adding a new note, which is obtained as a parameter of the callback function. The value of the parameter is the value returned by the function <i>createNote</i>, defined in the file <i>requests.js</i> as follows:
+
+```js
+export const createNote = async (newNote) => {
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newNote)
+  }
+
+  const response = await fetch(baseUrl, options)
+
+  if (!response.ok) {
+    throw new Error('Failed to create note')
   }
 
   return await response.json() // highlight-line
 }
 ```
 
-### Initializing the store with data fetched from the server
+It would be relatively easy to make a similar change to a mutation that changes the importance of the note, but we leave it as an optional exercise.
 
-Let's now modify our application so that the application state is initialized with notes fetched from the server.
+Finally, note an interesting detail. TanStack Query refetches all notes when we switch to another browser tab and then return to the application's tab. This can be observed in the Network tab of the Developer Console:
 
-In the file <i>noteReducer.js</i>, change the initialization of the notes state so that by default there are no notes:
+![dev tools notes app with an arrow in a new tab and another arrow on console's network tab over notes request as 200](../../images/6/t5.png)
 
-```js
-const noteSlice = createSlice({
-  name: 'notes',
-  initialState: [], // highlight-line
-  // ...
-})
-```
-
-Let's add an action creator called <em>setNotes</em>, which allows us to directly replace the array of notes. We can create the desired action creator using the <em>createSlice</em> function as follows:
+What is going on? By reading the [documentation](https://tanstack.com/query/latest/docs/react/reference/useQuery), we notice that the default functionality of TanStack Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i> changes. If we want, we can turn off the functionality by creating a query as follows:
 
 ```js
-// ...
-
-const noteSlice = createSlice({
-  name: 'notes',
-  initialState: [],
-  reducers: {
-    createNote(state, action) {
-      const content = action.payload
-      state.push({
-        content,
-        important: false,
-        id: generateId()
-      })
-    },
-    toggleImportanceOf(state, action) {
-      const id = action.payload
-      const noteToChange = state.find(n => n.id === id)
-      const changedNote = {
-        ...noteToChange,
-        important: !noteToChange.important
-      }
-      return state.map(note => (note.id !== id ? note : changedNote))
-    },
-    // highlight-start
-    setNotes(state, action) {
-      return action.payload
-    }
-    // highlight-end
-  }
-})
-
-export const { createNote, toggleImportanceOf, setNotes } = noteSlice.actions // highlight-line
-export default noteSlice.reducer
-```
-
-Let's implement the initialization of notes in the <i>App</i> component. As is usually the case when fetching data from a server, we will use the <i>useEffect</i> hook:
-
-```js
-import { useEffect } from 'react' // highlight-line
-import { useDispatch } from 'react-redux' // highlight-line
-
-import NoteForm from './components/NoteForm'
-import Notes from './components/Notes'
-import VisibilityFilter from './components/VisibilityFilter'
-import { setNotes } from './reducers/noteReducer' // highlight-line
-import noteService from './services/notes' // highlight-line
-
 const App = () => {
-  const dispatch = useDispatch() // highlight-line
-
-  // highlight-start
-  useEffect(() => {
-    noteService.getAll().then(notes => dispatch(setNotes(notes)))
-  }, [dispatch])
-  // highlight-end
-
-  return (
-    <div>
-      <NoteForm />
-      <VisibilityFilter />
-      <Notes />
-    </div>
-  )
-}
-
-export default App
-```
-
-The notes are fetched from the server using the _getAll()_ method we defined, and then stored in the Redux store by dispatching the action returned by the _setNotes_ action creator. These operations are performed inside the <i>useEffect</i> hook, meaning they are executed when the App component is rendered for the first time.
-
-Let's take a closer look at a small detail. We have added the _dispatch_ variable to the dependency array of the <i>useEffect</i> hook. If we try to use an empty dependency array, ESLint gives the following warning: <i>React Hook useEffect has a missing dependency: 'dispatch'</i>. What does this mean?
-
-Logically, the code would work exactly the same even if we used an empty dependency array, because dispatch refers to the same function throughout the execution of the program. However, it is considered good programming practice to add all variables and functions used inside the _useEffect_ hook that are defined within the component to the dependency array. This helps to avoid unexpected bugs.
-
-### Sending data to the backend
-
-Next, let's implement the functionality for sending a new note to the server. This will also give us an opportunity to practice how to make a POST request using the _fetch()_ method.
-
-Let's extend the code in <i>src/services/notes.js</i> that handles communication with the server as follows:
-
-```js
-const baseUrl = 'http://localhost:3001/notes'
-
-const getAll = async () => {
-  const response = await fetch(baseUrl)
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch notes')
-  }
-
-  return await response.json()
-}
-
-// highlight-start
-const createNew = async (content) => {
-  const response = await fetch(baseUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ content, important: false }),
+  // ...
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: getNotes,
+    refetchOnWindowFocus: false // highlight-line
   })
-  
-  if (!response.ok) {
-    throw new Error('Failed to create note')
-  }
-  
-  return await response.json()
-}
-// highlight-end
 
-export default { getAll, createNew } // highlight-line
-```
-
-Let's take a closer look at the implementation of the _createNew_ method. The first parameter of the _fetch()_ function specifies the URL to which the request is made. The second parameter is an object that defines other details of the request, such as the request type, headers, and the data sent with the request. We can further clarify the code by storing the object that defines the request details in a separate <i>options</i> variable:
-
-```js
-const createNew = async (content) => {
-  // highlight-start
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ content, important: false }),
-  }
-  
-  const response = await fetch(baseUrl, options)
-  // highlight-end
-
-  if (!response.ok) {
-    throw new Error('Failed to create note')
-  }
-  
-  return await response.json()
-}
-```
-
-Let's take a closer look at the <i>options</i> object:
-
-- <i>method</i> defines the type of the request, which in this case is <i>POST</i>
-- <i>headers</i> defines the request headers. We add the header _'Content-Type': 'application/json'_ to let the server know that the data sent with the request is in JSON format, so it can handle the request correctly
-- <i>body</i> contains the data sent with the request. You cannot directly assign a JavaScript object to this field; it must first be converted to a JSON string by calling the _JSON.stringify()_ function
-
-As with a GET request, the response status code is checked for errors:
-
-```js
-if (!response.ok) {
-  throw new Error('Failed to create note')
-}
-```
-
-If the request is successful, <i>JSON Server</i> returns the newly created note, for which it has also generated a unique <i>id</i>. However, the data contained in the response still needs to be converted to JSON format using the _response.json()_ method:
-
-```js
-return await response.json()
-```
-
-Let's then modify our application's <i>NoteForm</i> component so that a new note is sent to the backend. The component's _addNote_ method will change slightly:
-
-```js
-import { useDispatch } from 'react-redux'
-import { createNote } from '../reducers/noteReducer'
-import noteService from '../services/notes' // highlight-line
-
-const NoteForm = (props) => {
-  const dispatch = useDispatch()
-  
-  const addNote = async (event) => { // highlight-line
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    const newNote = await noteService.createNew(content) // highlight-line
-    dispatch(createNote(newNote)) // highlight-line
-  }
-
-  return (
-    <form onSubmit={addNote}>
-      <input name="note" />
-      <button type="submit">add</button>
-    </form>
-  )
-}
-
-export default NoteForm
-```
-
-When a new note is created in the backend by calling the _createNew()_ method, the return value is an object representing the note, to which the backend has generated a unique <i>id</i>. Therefore, let's modify the action creator <i>createNote</i> defined in <i>notesReducer.js</i> as follows:
-
-```js
-const noteSlice = createSlice({
-  name: 'notes',
-  initialState: [],
-  reducers: {
-    createNote(state, action) {
-      state.push(action.payload) // highlight-line
-    },
-    // ..
-  },
-})
-```
-
-Changing the importance of notes could be implemented using the same principle, by making an asynchronous method call to the server and then dispatching an appropriate action.
-
-The current state of the code for the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) in the branch <i>part6-4</i>.
-
-</div>
-
-<div class="tasks">
-
-### Exercises 6.14.-6.15.
-
-#### 6.14 Anecdotes and the Backend, step 1
-
-When the application launches, fetch the anecdotes from the backend implemented using json-server. Use the Fetch API to make the HTTP request.
-
-As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
-
-#### 6.15 Anecdotes and the Backend, step 2
-
-Modify the creation of new anecdotes, so that the anecdotes are stored in the backend. Utilize the Fetch API in your implementation once again.
-
-</div>
-
-<div class="content">
-
-### Asynchronous actions and Redux Thunk
-
-Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components so that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:
-
-```js
-const App = () => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(initializeNotes())
-  }, [dispatch]) 
-  
   // ...
 }
 ```
 
-and <i>NoteForm</i> would create a new note as follows:
+If you put a console.log statement to the code, you can see from browser console how often TanStack Query causes the application to be re-rendered. The rule of thumb is that rerendering happens at least whenever there is a need for it, i.e. when the state of the query changes. You can read more about it e.g. [here](https://tkdodo.eu/blog/react-query-render-optimizations).
+
+
+### useNotes custom hook
+
+Our solution is fairly good, but somewhat bothersome is the fact that many TanStack Query implementation details have been placed directly inside the React component. Let's extract these into their own custom hook function:
 
 ```js
-const NoteForm = () => {
-  const dispatch = useDispatch()
-  
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { getNotes, createNote, updateNote } from '../requests'
+
+export const useNotes = () => {
+  const queryClient = useQueryClient()
+
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: getNotes,
+    refetchOnWindowFocus: false
+  })
+
+  const newNoteMutation = useMutation({
+    mutationFn: createNote,
+    onSuccess: (newNote) => {
+      const notes = queryClient.getQueryData(['notes'])
+      queryClient.setQueryData(['notes'], notes.concat(newNote))
+    }
+  })
+
+  const updateNoteMutation = useMutation({
+    mutationFn: updateNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notes'] })
+    }
+  })
+
+  return {
+    notes: result.data,
+    isPending: result.isPending,
+    addNote: (content) => newNoteMutation.mutate({ content, important: true }),
+    toggleImportance: (note) => updateNoteMutation.mutate({ 
+      ...note, important: !note.important 
+    }),
+  }
+}
+```
+
+The hook function encapsulates all TanStack Query related code: the query for fetching notes and both mutations for creating and updating notes. These implementation details are hidden from the hook's user, as the function returns a simple object containing
+
+- <i>notes</i>: the list of notes
+- <i>isPending</i>: whether the data is still loading
+- <i>addNote</i>: a function for adding a new note with just a content string
+- <i>toggleImportance</i>: a function for toggling the importance of a note
+
+The <i>App</i> component is simplified considerably:
+
+```js
+import { useNotes } from './hooks/useNotes'
+
+const App = () => {
+  const { notes, isPending, addNote: addNoteToServer, toggleImportance } = useNotes()
+
   const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value
-    event.target.note.value = ''
-    dispatch(createNote(content))
+    event.target.reset()
+    addNoteToServer(content)
   }
 
-  // ...
-}
-```
-
-In this implementation, both components would dispatch an action without the need to know about the communication with the server that happens behind the scenes. These kinds of <i>async actions</i> can be implemented using the [Redux Thunk](https://github.com/reduxjs/redux-thunk) library. The use of the library doesn't need any additional configuration or even installation when the Redux store is created using the Redux Toolkit's <em>configureStore</em> function.
-
-Thanks to Redux Thunk, it is possible to define <i>action creators</i> that return a function instead of an object. This makes it possible to implement asynchronous action creators that first wait for some asynchronous operation to complete and only then dispatch the actual action.
-
-If an action creator returns a function, Redux automatically passes the Redux store's <em>dispatch</em> and <em>getState</em> methods as arguments to the returned function. This allows us to define an action creator called <em>initializeNotes</em> in the <i>noteReducer.js</i> file, which fetches the initial notes from the server, as follows:
-
-```js
-import { createSlice } from '@reduxjs/toolkit'
-import noteService from '../services/notes' // highlight-line
-
-const noteSlice = createSlice({
-  name: 'notes',
-  initialState: [],
-  reducers: {
-    createNote(state, action) {
-      state.push(action.payload)
-    },
-    toggleImportanceOf(state, action) {
-      const id = action.payload
-      const noteToChange = state.find((n) => n.id === id)
-      const changedNote = {
-        ...noteToChange,
-        important: !noteToChange.important,
-      }
-      return state.map((note) => (note.id !== id ? note : changedNote))
-    },
-    setNotes(state, action) {
-      return action.payload
-    },
-  },
-})
-
-const { setNotes } = noteSlice.actions // highlight-line
-
-// highlight-start
-export const initializeNotes = () => {
-  return async (dispatch) => {
-    const notes = await noteService.getAll()
-    dispatch(setNotes(notes))
+  if (isPending) {
+    return <div>loading data...</div>
   }
-}
-// highlight-end
-
-export const { createNote, toggleImportanceOf } = noteSlice.actions // highlight-line
-
-export default noteSlice.reducer
-```
-
-In its inner function, that is, in the <i>asynchronous action</i>, the operation first fetches all notes from the server and then <i>dispatches</i> the action to add the notes to the store. It is noteworthy that Redux automatically passes a reference to the _dispatch_ method as an argument to the function, so the action creator _initializeNotes_ does not require any parameters.
-
-The action creator _setNotes_ is no longer exported outside the module, since the initial state of the notes will now be set using the asynchronous action creator _initializeNotes_ we created. However, we still use the _setNotes_ action creator within the module.
-
-The component <i>App</i> can now be defined as follows:
-
-```js
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-
-import NoteForm from './components/NoteForm'
-import Notes from './components/Notes'
-import VisibilityFilter from './components/VisibilityFilter'
-import { initializeNotes } from './reducers/noteReducer' // highlight-line
-
-const App = () => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(initializeNotes()) // highlight-line
-  }, [dispatch])
 
   return (
     <div>
-      <NoteForm />
-      <VisibilityFilter />
-      <Notes />
+      <h2>Notes app</h2>
+      <form onSubmit={addNote}>
+        <input name="note" />
+        <button type="submit">add</button>
+      </form>
+      {notes.map((note) => (
+        <li key={note.id}>
+          {note.important ? <strong>{note.content}</strong> : note.content}
+          <button onClick={() => toggleImportance(note)}>
+            {note.important ? 'make not important' : 'make important'}
+          </button>
+        </li>
+      ))}
     </div>
   )
 }
-
-export default App
 ```
 
-The solution is elegant. The initialization logic for the notes has been completely separated from the React component.
+The code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) in the branch <i>part6-3</i>.
 
-Next, let's create an asynchronous action creator called _appendNote_:
+TanStack Query is a versatile library that, based on what we have already seen, simplifies the application. Does TanStack Query make more complex state management solutions such as Zustand unnecessary? No. TanStack Query can partially replace the state of the application in some cases, but as the [documentation](https://tanstack.com/query/latest/docs/react/guides/does-this-replace-client-state) states
 
-```js
-import { createSlice } from '@reduxjs/toolkit'
-import noteService from '../services/notes'
+- TanStack Query is a <i>server-state library</i>, responsible for managing asynchronous operations between your server and client
+- Zustand, etc. are <i>client-state libraries</i> that can be used to store asynchronous data, albeit inefficiently when compared to a tool like TanStack Query
 
-const noteSlice = createSlice({
-  name: 'notes',
-  initialState: [],
-  reducers: {
-    createNote(state, action) {
-      state.push(action.payload)
-    },
-    toggleImportanceOf(state, action) {
-      const id = action.payload
-      const noteToChange = state.find((n) => n.id === id)
-      const changedNote = {
-        ...noteToChange,
-        important: !noteToChange.important,
-      }
-      return state.map((note) => (note.id !== id ? note : changedNote))
-    },
-    setNotes(state, action) {
-      return action.payload
-    },
-  },
-})
+So TanStack Query is a library that maintains the <i>server state</i> in the frontend, i.e. acts as a cache for what is stored on the server. TanStack Query simplifies the processing of data on the server, and can in some cases eliminate the need for data on the server to be saved in the frontend state.
 
-const { createNote, setNotes } = noteSlice.actions // highlight-line
-
-export const initializeNotes = () => {
-  return async (dispatch) => {
-    const notes = await noteService.getAll()
-    dispatch(setNotes(notes))
-  }
-}
-
-// highlight-start
-export const appendNote = (content) => {
-  return async (dispatch) => {
-    const newNote = await noteService.createNew(content)
-    dispatch(createNote(newNote))
-  }
-}
-// highlight-end
-
-export const { toggleImportanceOf } = noteSlice.actions // highlight-line
-
-export default noteSlice.reducer
-```
-
-The principle is the same once again. First, an asynchronous operation is performed, and once it is completed, an action that updates the store's state is <i>dispatched</i>. The _createNote_ action creator is no longer exported outside the file; it is used only internally in the implementation of the _appendNote_ function.
-
-The component <i>NoteForm</i> changes as follows:
-
-```js
-import { useDispatch } from 'react-redux'
-import { appendNote } from '../reducers/noteReducer' // highlight-line
-
-const NoteForm = () => {
-  const dispatch = useDispatch()
-
-  const addNote = async (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    dispatch(appendNote(content)) // highlight-line
-  }
-
-  return (
-    <form onSubmit={addNote}>
-      <input name="note" />
-      <button type="submit">add</button>
-    </form>
-  )
-}
-```
-
-The current state of the code for the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) in the branch <i>part6-5</i>.
-
-Redux Toolkit offers a multitude of tools to simplify asynchronous state management. Suitable tools for this use case are for example the [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) function and the [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) API.
+Most React applications need not only a way to temporarily store the served data, but also some solution for how the rest of the frontend state (e.g. the state of forms or notifications) is handled.
 
 </div>
 
@@ -573,37 +541,492 @@ Redux Toolkit offers a multitude of tools to simplify asynchronous state managem
 
 ### Exercises 6.16.-6.19.
 
-#### 6.16 Anecdotes and the Backend, step 3
+Now let's make a new version of the anecdote application that uses the TanStack Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified (Review the _server.js_ file for more details. Make sure you're connecting to the correct _PORT_). Start the server with <i>npm run server</i>.
 
-Modify the initialization of the Redux store to happen using asynchronous action creators, which are made possible by the Redux Thunk library.
+Use the Fetch API to make requests.
 
-#### 6.17 Anecdotes and the Backend, step 4
+#### Exercise 6.16
 
-Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the Redux Thunk library.
+Implement retrieving anecdotes from the server using TanStack Query.
 
-#### 6.18 Anecdotes and the Backend, step 5
+The application should work in such a way that if there are problems communicating with the server, only an error page will be displayed:
 
-Voting does not yet save changes to the backend. Fix the situation with the help of the Redux Thunk library and the Fetch API.
+![browser saying anecdote service not available due to problems in server on localhost](../../images/6/65new.png)
 
-#### 6.19 Anecdotes and the Backend, step 6
+You can find [here](https://tanstack.com/query/latest/docs/react/guides/queries) info how to detect the possible errors.
 
-The creation of notifications is still a bit tedious since one has to do two actions and use the _setTimeout_ function:
-
-```js
-dispatch(setNotification(`new anecdote '${content}'`))
-setTimeout(() => {
-  dispatch(clearNotification())
-}, 5000)
-```
-
-Make an action creator, which enables one to provide the notification as follows:
+You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isPending</i> for a while, because if a request fails, TanStack Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:
 
 ```js
-dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
+const result = useQuery(
+  {
+    queryKey: ['anecdotes'],
+    queryFn: getAnecdotes,
+    retry: false
+  }
+)
 ```
 
-The first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds.
+or that the request is retried e.g. only once:
 
-Implement the use of this improved notification in your application.
+```js
+const result = useQuery(
+  {
+    queryKey: ['anecdotes'],
+    queryFn: getAnecdotes,
+    retry: 1
+  }
+)
+```
+
+#### Exercise 6.17
+
+Implement adding new anecdotes to the server using TanStack Query. The application should render a new anecdote by default. Note that the content of the anecdote must be at least 5 characters long, otherwise the server will reject the POST request. You don't have to worry about error handling now.
+
+#### Exercise 6.18
+
+Implement voting for anecdotes using again the TanStack Query. The application should automatically render the increased number of votes for the voted anecdote.
+
+#### Exercise 6.19
+
+Extract the TanStack Query details into a custom hook function.
+
+</div>
+
+<div class="content">
+
+### Context API
+
+Let's return to the good old counter application. The application is defined as follows:
+
+```js
+import { useState } from 'react'
+import Display from './components/Display'
+import Controls from './components/Controls'
+
+const App = () => {
+  const [counter, setCounter] = useState(0)
+
+  return (
+    <div>
+      <Display counter={counter} />
+      <Controls counter={counter} setCounter={setCounter} />
+    </div>
+  )
+}
+```
+
+The <i>App</i> component defines the application state and passes it to the <i>Display</i> component, which renders the counter value:
+
+```js
+const Display = ({ counter }) => {
+
+  return (
+    <div>{counter}</div>
+  )
+}
+```
+
+and to the <i>Controls</i> component, which renders the buttons:
+
+```js
+const Controls = ({ counter, setCounter }) => {
+  const increment = () => setCounter(counter + 1)
+  const decrement = () => setCounter(counter - 1)
+  const zero = () => setCounter(0)
+
+  return (
+    <div>
+      <button onClick={increment}>plus</button>
+      <button onClick={decrement}>minus</button>
+      <button onClick={zero}>zero</button>
+    </div>
+  )
+}
+```
+
+The application grows:
+
+![](../../images/6/t6.png)
+
+The role of the <i>App</i> component changes: it still holds the application state, but it no longer renders the components using the counter state directly:
+
+```js
+const App = () => {
+  const [counter, setCounter] = useState(0)
+
+  return (
+    <div>
+      <Navbar />
+      <Panel counter={counter} setCounter={setCounter} />
+      <Footer />
+    </div>
+  )
+}
+```
+
+The new <i>Panel</i> component is responsible for rendering the components that display the counter and the buttons:
+
+```js
+import Display from './Display'
+import Controls from './Controls'
+
+const Panel = ({ counter, setCounter }) => {
+  return (
+    <div>
+      <Display counter={counter} />
+      <Controls counter={counter} setCounter={setCounter} />
+    </div>
+  )
+}
+```
+
+The component hierarchy of the application is as follows:
+
+```
+App (state)
+ ├── Panel 
+ │    ├── Display
+ │    └── Controls
+ └── Footer
+```
+
+The application state is still in the <i>App</i> component. To allow <i>Display</i> and <i>Controls</i> to access the counter state, the state and its update function must be passed as props through the <i>Panel</i> component, even though <i>Panel</i> itself doesn't need them. This kind of situation arises easily when using state created with the <i>useState</i> hook. This phenomenon is called [prop drilling](https://kentcdodds.com/blog/prop-drilling).
+
+React's built-in [Context API](https://react.dev/learn/passing-data-deeply-with-context) offers a solution to this problem. A React context is a kind of global state for the application, allowing any component to be given direct access to it.
+
+Let's now create a context in the application that stores the counter state management.
+
+A context is created using React's [createContext](https://react.dev/reference/react/createContext) hook. Let's create the context in a file <i>src/CounterContext.jsx</i>:
+
+```js
+import { createContext } from 'react'
+
+const CounterContext = createContext()
+
+export default CounterContext
+```
+
+The <i>App</i> component can now <i>provide</i> the context to its child components as follows:
+
+```js
+// ...
+import CounterContext from './components/CounterContext'
+
+const App = () => {
+  const [counter, setCounter] = useState(0)
+
+  return (
+    <CounterContext.Provider value={{counter, setCounter}}> // highlight-line
+      <Panel /> // highlight-line
+      <Footer />
+    </CounterContext.Provider> // highlight-line
+  )
+}
+```
+
+Providing the context is done by wrapping the child components inside the <i>CounterContext.Provider</i> component and setting an appropriate value for the context.
+
+The context value is now an object with the attributes <i>counter</i> and <i>setCounter</i>, i.e. the counter state and the function that updates it.
+
+Note that the <i>Panel</i> component no longer receives any counter-related props, so it simplifies to:
+
+```js
+const Panel = () => {
+  return (
+    <div>
+      <Display />
+      <Controls />
+    </div>
+  )
+}
+```
+
+Other components can now access the context using the [useContext](https://react.dev/reference/react/useContext) hook. The <i>Display</i> component changes as follows:
+
+```js
+import { useContext } from 'react' // highlight-line
+import CounterContext from './CounterContext' // highlight-line
+
+const Display = () => {  // highlight-line
+  const { counter } = useContext(CounterContext) // highlight-line
+
+  return <div>{counter}</div>
+}
+```
+
+The <i>Display</i> component no longer needs any props. It gets the counter value by calling the <i>useContext</i> hook with the <i>CounterContext</i> object as its parameter.
+
+Similarly, the <i>Controls</i> component changes to:
+
+```js
+import { useContext } from 'react' // highlight-line
+import CounterContext from './CounterContext' // highlight-line
+
+const Controls = () => {
+  const { counter, setCounter } = useContext(CounterContext) // highlight-line
+
+  const increment = () => setCounter(counter + 1)
+  const decrement = () => setCounter(counter - 1)
+  const zero = () => setCounter(0)
+
+  return (
+    <div>
+      <button onClick={increment}>plus</button>
+      <button onClick={decrement}>minus</button>
+      <button onClick={zero}>zero</button>
+    </div>
+  )
+}
+
+export default Controls
+```
+
+The components now have access to the content set by the context provider, the counter state and its update function.
+
+The components extract the attributes they need using JavaScript's destructuring syntax:
+
+```js
+const { counter } = useContext(CounterContext)
+```
+
+### Defining the counter context in its own file
+
+Our application still has the unpleasant feature that the counter state management functionality is defined inside the <i>App</i> component. Let's move all counter-related code to the file <i>CounterContext.jsx</i>:
+
+```js
+import { createContext, useState } from 'react'
+
+const CounterContext = createContext()
+
+export default CounterContext
+
+// highlight-start
+export const CounterContextProvider = (props) => {
+  const [counter, setCounter] = useState(0)
+
+  return (
+    <CounterContext.Provider value={{ counter, setCounter }}>
+      {props.children}
+    </CounterContext.Provider>
+  )
+}
+// highlight-end
+```
+
+The file now exports both the <i>CounterContext</i> object and the <i>CounterContextProvider</i> component, which is essentially a context provider whose value contains the counter and its update function.
+
+Let's use the context provider directly in the file <i>main.jsx</i>:
+
+```js
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+
+import App from './App'
+import { CounterContextProvider } from './CounterContext' // highlight-line
+
+createRoot(document.getElementById('root')).render(
+  <CounterContextProvider> // highlight-line
+    <App />
+  </CounterContextProvider> // highlight-line
+)
+```
+
+Now the context that defines the counter value and functionality is available to <i>all</i> components in the application.
+
+The <i>App</i> component simplifies to:
+
+```js
+import Panel from './components/Panel'
+import Footer from './components/Footer'
+
+const App = () => {
+
+  return (
+    <div>
+      <Navbar />
+      <Panel />
+      <Footer />
+  </div>
+  )
+}
+
+export default App
+```
+
+The context is still used in the same way, and no changes are needed to the other components. For example, <i>Controls</i> remains:
+
+```js
+const Controls = () => {
+  const { counter, setCounter } = useContext(CounterContext)
+  const increment = () => setCounter(counter + 1)
+  const decrement = () => setCounter(counter - 1)
+  const zero = () => setCounter(0)
+
+  return (
+    <div>
+      <button onClick={increment}>plus</button>
+      <button onClick={decrement}>minus</button>
+      <button onClick={zero}>zero</button>
+    </div>
+  )
+}
+```
+
+The solution is quite good. The entire application state, that is, the counter value, is now isolated in the <i>CounterContext</i> file. Components access exactly the part of the context they need using the <i>useContext</i> hook and JavaScript's destructuring syntax.
+
+Let's make one small improvement and also define the counter update functions <i>increment</i>, <i>decrement</i>, and <i>zero</i> in the context:
+
+```js
+import { createContext, useState } from 'react'
+
+const CounterContext = createContext()
+
+export default CounterContext
+
+export const CounterContextProvider = (props) => {
+  const [counter, setCounter] = useState(0)
+
+// highlight-start
+  const increment = () => setCounter(counter + 1)
+  const decrement = () => setCounter(counter - 1)
+  const zero = () => setCounter(0)
+// highlight-end
+
+  return (
+    <CounterContext.Provider value={{ counter, increment, decrement, zero }}> // highlight-line
+      {props.children}
+    </CounterContext.Provider>
+  )
+}
+```
+
+Now we can use the functions obtained from the context directly as button event handlers:
+
+```js
+import { useContext } from 'react'
+import CounterContext from '../CounterContext' 
+
+const Controls = () => {
+  const { increment, decrement, zero } = useContext(CounterContext) // highlight-line
+
+  return (
+    <div>
+      <button onClick={increment}>plus</button>
+      <button onClick={decrement}>minus</button>
+      <button onClick={zero}>zero</button>
+    </div>
+  )
+}
+```
+
+There is still room for one more improvement. If we look at how the counter context is used, we notice that the same boilerplate appears in both components that consume it:
+
+```js
+import { useContext } from 'react'
+import CounterContext from '../CounterContext' 
+
+const Display = () => {
+  const { counter } = useContext(CounterContext)
+  // ...
+}
+```
+
+```js
+import { useContext } from 'react'
+import CounterContext from '../CounterContext' 
+
+const Controls = () => {
+  const { increment, decrement, zero } = useContext(CounterContext) // highlight-line
+  // ...
+}
+```
+
+We can take the solution one step further by creating a custom hook that returns the context directly. Let's add it to the file <i>hooks/useCounter.js</i>:
+
+```js
+import { useContext } from 'react'
+import CounterContext from '../CounterContext'
+
+const useCounter = () => useContext(CounterContext)
+
+export default useCounter
+
+```
+
+Using the context is now one step simpler:
+
+```js
+import { useCounter } from '../hooks/useCounter'
+
+const Display = () => {
+  const { counter } = useCounter()
+  // ...
+}
+
+import { useCounter } from '../hooks/useCounter'
+
+const Controls = () => {
+  const { increment, decrement, zero } = useCounter()
+  // ...
+}
+```
+
+We are satisfied with the solution. It isolates all state management entirely within the context. The components that use the state have no knowledge of how the state is implemented — thanks to the custom hook, they are not even really aware that the solution is based on the Context API.
+
+The application code is in the GitHub repository [https://github.com/fullstack-hy2020/context-counter](https://github.com/fullstack-hy2020/context-counter).
+
+</div>
+
+<div class="tasks">
+
+### Exercises 6.20.-6.22.
+
+#### Exercise 6.20.
+
+The application has a <i>Notification</i> component for displaying notifications to the user.
+
+Implement the application's notification state management using the Context API. The notification should tell the user when a new anecdote is created or an anecdote is voted on:
+
+![browser showing notification for added anecdote](../../images/6/66new.png)
+
+The notification is displayed for five seconds.
+
+#### Exercise 6.21.
+
+As stated in exercise 6.17, the server requires that the content of the anecdote to be added is at least 5 characters long. Now implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request:
+
+![browser showing error notification for trying to add too short of an anecdoate](../../images/6/67new.png)
+
+The error condition should be handled in the callback function registered for it, see [here](https://tanstack.com/query/latest/docs/react/reference/useMutation) how to register a function.
+
+#### Exercise 6.22.
+
+If you haven't done so already, move the notification-related context into its own file <i>NotificationContext.jsx</i>, in the same way as the counter application's context was moved to <i>CounterContext.jsx</i> in the material. Also create a custom hook <i>useNotify</i> that encapsulates the notification logic. Simplify the components that use the notification so that they call the hook directly instead of calling <i>useContext</i> separately.
+
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+</div>
+
+<div class="content">
+
+### Which state management solution to choose?
+
+In chapters 1-5, all state management in the application was handled using React's <i>useState</i> hook. Asynchronous calls to the backend required the use of the <i>useEffect</i> hook in some situations. In principle, nothing else is needed.
+
+A subtle issue with solutions based on state created with the <i>useState</i> hook is that if some part of the application state is needed by multiple components, the state and the functions for manipulating it must be passed via props to all components that handle that state. Sometimes props need to be passed through multiple components, and the components along the way may not even be interested in the state in any way. This somewhat unpleasant phenomenon is called <i>prop drilling</i>.
+
+Over the years, several alternative solutions have been developed for state management in React applications, which can be used to ease problematic situations such as prop drilling. However, no solution has been "final" — all have their own pros and cons, and new solutions are being developed all the time.
+
+The situation may confuse a beginner and even an experienced web developer. Which solution should be used?
+
+For a simple application, <i>useState</i> is certainly a good starting point. If the application communicates with a server, the communication can be handled in the same way as in chapters 1-5, using the application's own state. Recently, however, it has become more common to move the communication and associated state management at least partially under the control of TanStack Query (or some other similar library). If you are concerned about useState and the prop drilling it entails, using context may be a good option. There are also situations where it may make sense to handle some of the state with useState and some with contexts.
+
+For a long time, the most popular and comprehensive state management solution has been Redux, which is a way to implement the so-called [Flux](https://facebookarchive.github.io/flux/) architecture. Redux is, however, known for its complexity and abundance of boilerplate code, which has been the motivation for newer state management solutions. In this course material, Redux has been replaced by the [Zustand](https://zustand.docs.pmnd.rs/) library, which provides equivalent functionality with a considerably simpler API. Zustand has become a popular choice especially when you need more than what useState offers, but the full Redux machinery feels excessive. Some of the criticism directed at Redux's rigidity has become outdated thanks to the [Redux Toolkit](https://redux-toolkit.js.org/), and Redux is still widely used, especially in larger projects.
+
+Neither Zustand nor Redux has to be used throughout the entire application. It may make sense, for example, to manage form state outside of them, especially in situations where the form state does not affect the rest of the application. Using Zustand or Redux together with TanStack Query in the same application is also perfectly possible.
+
+The question of which state management solution to use is not at all straightforward. It is impossible to give a single correct answer, and it is also likely that the chosen solution may turn out to be suboptimal as the application grows, requiring the approach to be changed even if the application has already been put into production.
+
 
 </div>

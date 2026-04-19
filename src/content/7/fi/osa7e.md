@@ -239,18 +239,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 
 Kun sovelluksen tila muuttuu, määrittyy komponenttien renderöinnin takia <i>uusi virtuaalinen DOM</i>. Reactilla on edellinen versio virtual DOM:ista muistissa ja sen sijaan että uusi virtuaalinen DOM renderöitäisiin suoraviivaisesti DOM API:n avulla, React laskee mikä on optimaalisin tapa tehdä DOM:iin muutoksia (eli poistaa, lisätä ja muokata DOM:issa olevia elementtejä) siten, että DOM saadaan vastaamaan uutta Virtual DOM:ia.
 
-### Reactin roolista sovelluksissa
-
-Materiaalissa ei ole tuotu ehkä riittävän selkeästi esille sitä, että React on ensisijaisesti tarkoitettu näkymien luomisesta huolehtivaksi kirjastoksi. Jos ajatellaan perinteistä [Model View Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) ‑jaottelua, on Reactin toimialaa juurikin <i>View</i>. React on siis sovellusalueeltaan suppeampi kuin esim. [Angular](https://angular.io/), joka on kaiken tarjoava Frontendin MVC-sovelluskehys. Reactia ei kutsutakaan sovelluskehykseksi (framework) vaan <i>kirjastoksi</i> (library).
-
-Pienissä sovelluksissa React-komponenttien tilaan talletetaan sovelluksen käsittelemää dataa, eli komponenttien tilan voi näissä tapauksissa ajatella vastaavan MVC:n <i>modeleita</i>.
-
-React-sovellusten yhteydessä ei kuitenkaan yleensä puhuta MVC-arkkitehtuurista ja jos käytössä on Redux niin silloin sovellukset noudattavat [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview//)-arkkitehtuuria ja Reactin rooliksi jää entistä enemmän pelkkä näkymien muodostaminen. Varsinainen sovelluslogiikka hallitaan Reduxin tilan ja action creatorien avulla. Jos käytössä on osasta 6 tuttu [redux thunk](/osa6/redux_sovelluksen_kommunikointi_palvelimen_kanssa#asynkroniset-actionit-ja-redux-thunk), on sovelluslogiikka mahdollista eristää lähes täysin React-koodista.
-
-Koska sekä React että [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview//) ovat Facebookilla syntyneinä, voi ajatella, että Reactin pitäminen ainoastaan käyttöliittymästä huolehtivana kirjastona on sen oikeaoppista käyttöä. Flux-arkkitehtuurin noudattaminen tuo sovelluksiin tietyn overheadin ja jos on kyse pienestä sovelluksesta tai prototyypistä, saattaa Reactin "väärinkäyttäminen" olla järkevää, sillä myöskään [overengineering](https://en.wikipedia.org/wiki/Overengineering) ei yleensä johda optimaaliseen tulokseen.
-
-Osan 6 [viimeinen luku](/osa6/react_query_use_reducer_ja_context) käsittelee Reactin tilanhallinnan uudempia virtauksia. Reactin suoraan tarjoamat hook-funktiot <i>useReducer</i> ja <i>useContext</i> tarjoavat eräänlaisen kevytversion Reduxille. <i>React Query</i> taas on kirjasto joka ratkaisee monia palvelimella olevan tilan käsittelyyn liittyviä pulmia, eliminoiden tarvetta sille, että React-sovelluksen tarvitsee tallettaa suoraan frontendin tilaan palvelimelta haettua dataa.
-
 ### React/node-sovellusten tietoturva
 
 Emme ole vielä maininneet kurssilla kuin muutaman sanan tietoturvaan liittyen. Kovin paljon ei nytkään ole aikaa, ja onneksi Helsingin Yliopistolla on MOOC-kurssi [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) tähän tärkeään aihepiiriin.

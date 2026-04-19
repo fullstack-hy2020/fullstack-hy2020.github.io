@@ -4,6 +4,17 @@ part: 9
 lang: fi
 ---
 
+
+
+<div class="intro warning">
+
+Huomaa, että osan 9 materiaali on siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">
+    https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript</a>
+
+Sisällössä on joitakin merkittäviä muutoksia. Jos olet jo aloittanut tämän osan ja edennyt ensimmäisten tehtävien ohi, voit jatkaa vanhan materiaalin mukaan — se säilyy täällä 1. toukokuuta 2026 asti.
+
+</div>
+
 <div class="intro">
 
 Kurssin yhdeksäs, TypeScriptiä käsittelevä osa löytyy [englanninkielisestä kurssimateriaalista](/en/part9).

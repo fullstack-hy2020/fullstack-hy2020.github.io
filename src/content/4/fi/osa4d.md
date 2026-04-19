@@ -9,7 +9,7 @@ lang: fi
 
 Käyttäjien tulee pystyä kirjautumaan sovellukseemme ja muistiinpanot pitää automaattisesti liittää kirjautuneen käyttäjän tekemiksi.
 
-Toteutamme nyt backendiin tuen [token-perustaiselle](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) autentikoinnille.
+Toteutamme nyt backendiin tuen [token-perustaiselle](https://www.okta.com/identity-101/what-is-token-based-authentication/) autentikoinnille.
 
 Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 

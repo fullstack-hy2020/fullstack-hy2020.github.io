@@ -119,7 +119,7 @@ Al enviar al menos 127 ejercicios de las partes 0 a 7 mientras trabajas en el cu
 Al enviar al menos 138 ejercicios para las partes 0-7 mientras trabajas en el curso base, puedes recibir un crédito adicional a través de esta extensión.
 
 - Envía al menos 138 ejercicios para las partes 0-7.
-- [Inscríbete en la parte 7 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-abc0a702-3d35-496f-87b9-5c7845a9367b).
+- [Inscríbete en la parte 7 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-759cfee1-370b-4200-8e11-dc86b1a8ed88).
 - [Solicita los créditos para la parte 7](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Parte 8 - Desarrollo Web Full Stack: GraphQL (1 crédito, CSM14113)
@@ -127,7 +127,7 @@ Al enviar al menos 138 ejercicios para las partes 0-7 mientras trabajas en el cu
 Al enviar al menos 22 de 26 ejercicios para la parte 8 del curso de GraphQL, puedes obtener un crédito adicional. La parte 8 puede realizarse en cualquier momento después de la parte 5, porque su contenido es independiente de las partes 6 y 7.
 
 - Envía al menos 22 de 26 ejercicios para la parte 8.
-- [Inscríbete en la parte 8 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4b912f04-d928-4a2d-aed7-8d8b2cefd397).
+- [Inscríbete en la parte 8 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f29bbf9e-3dfd-42d3-bdb8-c62be94932f8).
 - [Solicita los créditos para la parte 8](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Part 9 - Desarrollo Web Full Stack: TypeScript (1 crédito, CSM14110)
@@ -143,7 +143,7 @@ Al enviar al menos 24 de 30 ejercicios de la parte 9 del curso, TypeScript, pued
 Al enviar 25 ejercicios para la parte 10 del curso, React Native, puedes obtener dos créditos adicionales. Puedes encontrar más información sobre los requisitos previos de esta parte, el envío de ejercicios y los créditos en la [parte 10](/es/part10/introduccion_a_react_native).
 
 - Envía al menos 25 ejercicios para la parte 10.
-- [Inscríbete en la parte 10 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e859336d-9d63-47ac-9906-a7da74cae32d).
+- [Inscríbete en la parte 10 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-af7b3535-d187-4999-985e-518c66a4a09b).
 - [Solicita los créditos para la parte 10](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Parte 11 - Desarrollo Web Full Stack: Integración Continua / Entrega Continua (1 crédito, CSM14112)

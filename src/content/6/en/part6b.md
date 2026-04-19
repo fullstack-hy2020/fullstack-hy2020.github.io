@@ -4,330 +4,101 @@ part: 6
 letter: b
 lang: en
 ---
-
+ 
 <div class="content">
 
-Let's continue our work with the simplified [Redux version](/en/part6/flux_architecture_and_redux#redux-notes) of our notes application.
+Let's continue extending the Zustand version of the notes application.
 
-To ease our development, let's change our reducer so that the store gets initialized with a state that contains a couple of notes:
+To make development easier, let's change the initial state so that it already contains a few notes:
 
 ```js
 // highlight-start
-const initialState = [
-  {
-    content: 'reducer defines how redux store works',
-    important: true,
-    id: 1,
-  },
-  {
-    content: 'state of store can contain any data',
-    important: false,
-    id: 2,
-  },
-]
+const initialNotes = [
+    {
+      id: 1,
+      content: 'Zustand is less complex than Redux',
+      important: true,
+    }, {
+      id: 2,
+      content: 'React app benefits from custom hooks',
+      important: false,
+    }, {
+      id: 3,
+      content: 'Remember to sleep well',
+      important: true,
+    }
+  ]
+
+
 //highlight-end
 
-const noteReducer = (state = initialState, action) => { // highlight-line
-  // ...
-}
-
-// ...
-
-export default noteReducer
-```
-
-### Store with complex state
-
-Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
-
-![browser with important/not radio buttons and list](../../images/6/01f.png)
-
-Let's start with a very simple and straightforward implementation:
-
-```js
-import NoteForm from './components/NoteForm'
-import Notes from './components/Notes'
-
-const App = () => {
-//highlight-start
-  const filterSelected = (value) => {
-    console.log(value)
-  }
-//highlight-end
-
-  return (
-    <div>
-      <NoteForm />
-      //highlight-start
-      <div>
-        <input
-          type="radio"
-          name="filter"
-          onChange={() => filterSelected('ALL')}
-        />
-        all
-        <input
-          type="radio"
-          name="filter"
-          onChange={() => filterSelected('IMPORTANT')}
-        />
-        important
-        <input
-          type="radio"
-          name="filter"
-          onChange={() => filterSelected('NONIMPORTANT')}
-        />
-        nonimportant
-      </div>
-      //highlight-end
-      <Notes />
-    </div>
-  )
-}
-```
-
-Since the <i>name</i> attribute of all the radio buttons is the same, they form a <i>button group</i> where only one option can be selected.
-
-The buttons have a change handler that currently only prints the string associated with the clicked button to the console.
-
-In the following section, we will implement filtering by storing both the notes as well as <i>the value of the filter</i> in the redux store. When we are finished, we would like the state of the store to look like this:
-
-```js
-{
-  notes: [
-    { content: 'reducer defines how redux store works', important: true, id: 1},
-    { content: 'state of store can contain any data', important: false, id: 2}
-  ],
-  filter: 'IMPORTANT'
-}
-```
-
-Only the array of notes was stored in the state of the previous implementation of our application. In the new implementation, the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
-
-### Combined reducers
-
-We could modify our current reducer to deal with the new shape of the state. However, a better solution in this situation is to define a new separate reducer for the state of the filter. Let's also create a new _action creator_ function and place the code in the module <i>src/reducers/filterReducer.js</i>:
-
-```js
-const filterReducer = (state = 'ALL', action) => {
-  switch (action.type) {
-    case 'SET_FILTER':
-      return action.payload
-    default:
-      return state
-  }
-}
-
-export const filterChange = filter => {
-  return {
-    type: 'SET_FILTER',
-    payload: filter
-  }
-}
-
-export default filterReducer
-```
-
-The actions for changing the state of the filter look like this:
-
-```js
-{
-  type: 'SET_FILTER',
-  payload: 'IMPORTANT'
-}
-```
-
-We can create the actual reducer for our application by combining the two existing reducers with the [combineReducers](https://redux.js.org/api/combinereducers) function.
-
-Let's define the combined reducer in the <i>main.jsx</i> file. The updated content of the file is as follows:
-
-```js
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { createStore, combineReducers } from 'redux'
-
-import App from './App'
-import filterReducer from './reducers/filterReducer'
-import noteReducer from './reducers/noteReducer'
-
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer
-})
-
-const store = createStore(reducer)
-
-console.log(store.getState())
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <div />
-  </Provider>
-)
-```
-
-Since our application breaks completely at this point, we render an empty <i>div</i> element instead of the <i>App</i> component.
-
-Thanks to the console.log command, the state of the store is printed to the console:
-
-![devtools console showing notes array data](../../images/6/4e.png)
-
-As we can see from the output, the store has the exact shape we wanted it to!
-
-Let's take a closer look at how the combined reducer is created:
-
-```js
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
-})
-```
-
-The state of the store defined by the reducer above is an object with two properties: <i>notes</i> and <i>filter</i>. The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, which does not have to deal with the other properties of the state. Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
-
-Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer. Let's temporarily add the following lines to the file <i>main.jsx</i>:
-
-```js
-// ...
-
-const store = createStore(reducer)
-
-console.log(store.getState())
-
-// highlight-start
-import { createNote } from './reducers/noteReducer'
-import { filterChange } from './reducers/filterReducer'
-// highlight-end
-
-// highlight-start
-store.subscribe(() => console.log(store.getState()))
-store.dispatch(filterChange('IMPORTANT'))
-store.dispatch(createNote('combineReducers forms one reducer from many simple reducers'))
-// highlight-end
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <div />
-  </Provider>
-)
-```
-
-By simulating the creation of a note and changing the state of the filter in this fashion, the state of the store gets logged to the console after every change that is made to the store:
-
-![devtools console output showing notes filter and new note](../../images/6/5e.png)
-
-At this point, it is good to become aware of a tiny but important detail. If we add a console log statement <i>to the beginning of both reducers</i>:
-
-```js
-const filterReducer = (state = 'ALL', action) => {
-  console.log('ACTION: ', action) // highlight-line
+const useNoteStore = create((set) => ({
+  notes: initialNotes,
   // ...
 }
 ```
 
-Based on the console output one might get the impression that every action gets duplicated:
+### More complex state
 
-![devtools console output showing duplicated actions in note and filter reducers](../../images/6/6.png)
+Let's implement filtering of the notes displayed in the application, allowing the visible notes to be restricted. The filter is implemented using [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
 
-Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer, or in other words, every reducer "listens" to all of the dispatched actions and does something with them if it has been instructed to do so. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
+![At the top of the page a form for adding a note (input field and an add button). Below that radio button selection for which notes to show, options: all, important and nonimportant. Below these all notes are rendered, with the text important next to notes marked as important.](../../images/6/u1.png)
 
-### Finishing the filters
-
-Let's finish the application so that it uses the combined reducer. Let's remove the extra test code from the file <i>main.jsx</i> and restore _App_ as the rendered component. The updated content of the file is as follows:
+The question arises of how best to handle the filter's state management. There are essentially two options: create a separate Zustand store for the filter, or add it to the existing store. Both solutions are justifiable. The [best practices](https://tkdodo.eu/blog/working-with-zustand#keep-the-scope-of-your-store-small) found online recommend keeping completely unrelated things in separate stores. However, the list of notes and filtering are closely enough related that we will place both in the same store:
 
 ```js
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { createStore, combineReducers } from 'redux'
+const useNoteStore = create((set) => ({
+  notes: initialNotes,
+  filter: 'all', // highlight-line
+  actions: {
+    add: note => set(
+      state => ({ notes: state.notes.concat(note) })
+    ),
+    toggleImportance: id => set(
+      state => ({
+        notes: state.notes.map(note =>
+          note.id === id ? { ...note, important: !note.important } : note
+        )
+      })
+    ),
+    setFilter: value => set(() => ({ filter: value })) // highlight-line
+  }
+}))
 
-import App from './App'
-import filterReducer from './reducers/filterReducer'
-import noteReducer from './reducers/noteReducer'
-
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer
-})
-
-const store = createStore(reducer)
-
-console.log(store.getState())
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-)
+export const useNotes = () => useNoteStore((state) => state.notes)
+export const useFilter = () => useNoteStore((state) => state.filter) // highlight-line
+export const useNoteActions = () => useNoteStore((state) => state.actions)
 ```
 
-Next, let's fix a bug that is caused by the code expecting the application store to be an array of notes:
-
-![browser TypeError: notes.map is not a function](../../images/6/7v.png)
-
-It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
+The component that sets the filter value:
 
 ```js
-const Notes = () => {
-  const dispatch = useDispatch()
-  const notes = useSelector(state => state.notes) // highlight-line
-
-  return(
-    <ul>
-      {notes.map(note =>
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => 
-            dispatch(toggleImportanceOf(note.id))
-          }
-        />
-      )}
-    </ul>
-  )
-}
-```
-
-Previously the selector function returned the whole state of the store:
-
-```js
-const notes = useSelector(state => state)
-```
-
-And now it returns only its field <i>notes</i>
-
-```js
-const notes = useSelector(state => state.notes)
-```
-
-Let's extract the visibility filter into its own <i>src/components/VisibilityFilter.jsx</i> component:
-
-```js
-import { useDispatch } from 'react-redux'
-import { filterChange } from '../reducers/filterReducer'
+import { useNoteActions } from './store'
 
 const VisibilityFilter = () => {
-  const dispatch = useDispatch()
+  const { setFilter } = useNoteActions()
 
   return (
     <div>
       <input
         type="radio"
         name="filter"
-        onChange={() => dispatch(filterChange('ALL'))}
+        onChange={() => setFilter('all')}
+        defaultChecked
       />
       all
       <input
         type="radio"
         name="filter"
-        onChange={() => dispatch(filterChange('IMPORTANT'))}
+        onChange={() => setFilter('important')}
       />
       important
       <input
         type="radio"
         name="filter"
-        onChange={() => dispatch(filterChange('NONIMPORTANT'))}
+        onChange={() => setFilter('nonimportant')}
       />
-      nonimportant
+      not important
     </div>
   )
 }
@@ -335,101 +106,144 @@ const VisibilityFilter = () => {
 export default VisibilityFilter
 ```
 
-With the new component, <i>App</i> can be simplified as follows:
+The <i>App</i> component renders the filter:
 
 ```js
-import NoteForm from './components/NoteForm'
-import Notes from './components/Notes'
-import VisibilityFilter from './components/VisibilityFilter'
-
-const App = () => {
-  return (
-    <div>
-      <NoteForm />
-      <VisibilityFilter />
-      <Notes />
-    </div>
-  )
-}
-
-export default App
+const App = () => (
+  <div>
+    <NoteForm />
+    <VisibilityFilter /> // highlight-line
+    <NoteList />
+  </div>
+)
 ```
 
-The implementation is rather straightforward. Clicking the different radio buttons changes the state of the store's <i>filter</i> property.
-
-Let's change the <i>Notes</i> component to incorporate the filter:
+The filtering of the displayed notes could be handled in the <i>NoteList</i> component, for example as follows:
 
 ```js
-const Notes = () => {
-  const dispatch = useDispatch()
+import { useNotes, useFilter } from './store'
+import Note from './Note'
+
+const NoteList = () => {
+  const notes = useNotes()
+  const filter = useFilter() // highlight-line
+
   // highlight-start
-  const notes = useSelector(state => {
-    if (state.filter === 'ALL') {
-      return state.notes
-    }
-    return state.filter === 'IMPORTANT'
-      ? state.notes.filter(note => note.important)
-      : state.notes.filter(note => !note.important)
+  const notesToShow = notes.filter(note => {
+    if (filter === 'important') return note.important
+    if (filter === 'nonimportant') return !note.important
+    return true
   })
   // highlight-end
 
   return (
     <ul>
-      {notes.map(note => (
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => dispatch(toggleImportanceOf(note.id))}
-        />
+      {notesToShow.map(note => ( // highlight-line
+        <Note key={note.id} note={note} />
       ))}
     </ul>
   )
 }
 ```
 
-We only make changes to the selector function, which used to be
+A better solution is reached by including the filtering logic directly in the store's <i>useNotes</i> function:
 
 ```js
-useSelector(state => state.notes)
+import { create } from 'zustand'
+
+const useNoteStore = create((set) => ({
+  // ...
+}))
+
+// highlight-start
+export const useNotes = () => {
+  const notes = useNoteStore((state) => state.notes)
+  const filter = useNoteStore((state) => state.filter)
+
+  if (filter === 'important') return notes.filter(n => n.important)
+  if (filter === 'nonimportant') return notes.filter(n => !n.important)
+
+  return notes
+}
+// highlight-end
 ```
 
-Let's simplify the selector by destructuring the fields from the state it receives as a parameter:
+The function <i>useNotes</i> thus always returns a list of notes filtered in the desired way. The consumer of the function, the <i>NoteList</i> component, doesn't even need to be aware of the filter's existence:
 
 ```js
-const notes = useSelector(({ filter, notes }) => {
-  if ( filter === 'ALL' ) {
-    return notes
-  }
-  return filter  === 'IMPORTANT' 
-    ? notes.filter(note => note.important)
-    : notes.filter(note => !note.important)
-})
+import { useNotes } from './store'
+import Note from './Note'
+
+const NoteList = () => {
+  // component gets always the properly filtered set of notes
+  const notes = useNotes()
+
+  return (
+    <ul>
+      {notes.map(note => (
+        <Note key={note.id} note={note} />
+      ))}
+    </ul>
+  )
+}
 ```
 
-There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally, this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later.
+The solution is elegant!
 
-The current version of the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2), branch <i>part6-2</i>.
+> #### A possible alternative solution
+>
+> An alternative would be to implement filtering directly inside a selector function, so that both the notes and the filter are read in a single <i>useNoteStore</i> call:
+>
+>```js
+>export const useNotes = () => useNoteStore(({ notes, filter }) => {
+>  if (filter === 'important') return notes.filter(n => n.important)
+>  if (filter === 'nonimportant') return notes.filter(n => !n.important)
+>  return notes
+>})
+>```
+>
+> This approach does not work, however, as it leads to an infinite re-rendering loop when the filter is changed.
+>
+> The reason is as follows: Zustand compares the selector's return value using the <i>===</i> operator. Since <i>notes.filter(...)</i> creates a new array on every render, React always interprets it as a new state and triggers another render, which again creates a new array, and so on.
+>
+> The fix is to add [useShallow](https://zustand.docs.pmnd.rs/reference/hooks/use-shallow), which replaces the <i>===</i> comparison with a shallow comparison: it compares the array elements one by one. If the content has not changed, it returns the old array reference instead of a new one, so React sees the state as stable and does not re-render.
+>
+>```js
+>import { useShallow } from 'zustand/react/shallow'
+>
+>//...
+>
+>export const useNotes = () => useNoteStore(useShallow(({ notes, filter }) => {
+>  if (filter === 'important') return notes.filter(n => n.important)
+>  if (filter === 'nonimportant') return notes.filter(n => !n.important)
+>  return notes
+>}))
+>```
+>
+> The solution works, but it is slightly harder to understand. In the course material we use the earlier-presented version with two separate <i>useNoteStore</i> calls.
+
+The current code of the application is available in its entirety on [GitHub](https://github.com/fullstack-hy2020/zustand-notes/tree/part6-3), in the branch <i>part6-3</i>.
 
 </div>
 
 <div class="tasks">
 
-### Exercise 6.9
+### Exercise 6.6
 
-#### 6.9 Anecdotes, step 7
+Let's continue with the anecdote application.
 
-Implement filtering for the anecdotes that are displayed to the user.
+#### 6.6 anecdotes, step5
 
-![browser showing filtering of anecdotes](../../images/6/9ea.png)
+Implement filtering of the anecdotes displayed in the application:
 
-Store the state of the filter in the redux store. It is recommended to create a new reducer, action creators, and a combined reducer for the store using the <i>combineReducers</i> function.
+![A text field is added at the top; by typing in it the displayed anecdotes can be limited to those containing the string typed into the filter field](../../images/6/u3.png)
 
-Create a new <i>Filter</i> component for displaying the filter. You can use the following code as a template for the component:
+Create a <i>Filter</i> component for displaying the filter on screen. You can use the following as its starting point:
 
 ```js
 const Filter = () => {
   const handleChange = (event) => {
-    // input-field value is in variable event.target.value
+    // the value of the input field is in event.target.value
   }
   const style = {
     marginBottom: 10
@@ -449,344 +263,470 @@ export default Filter
 
 <div class="content">
 
-### Redux Toolkit and Refactoring the Store Configuration
+### Data to the server
 
-As we have seen so far, Redux's configuration and state management implementation requires quite a lot of effort. This is manifested for example in the reducer and action creator-related code which has somewhat repetitive boilerplate code. [Redux Toolkit](https://redux-toolkit.js.org/) is a library that solves these common Redux-related problems. The library for example greatly simplifies the configuration of the Redux store and offers a large variety of tools to ease state management.
+Let's extend the application so that notes are stored in a backend. We'll use the [JSON Server](/en/part2/getting_data_from_server) familiar from Part 2.
 
-Let's start using Redux Toolkit in our application by refactoring the existing code. First, we will need to install the library:
+Save the initial state of the database to the file <i>db.json</i> at the root of the project:
 
-```bash
-npm install @reduxjs/toolkit
-```
-
-Next, open the <i>main.jsx</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:
-
-```js
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit' // highlight-line
-
-import App from './App'
-import filterReducer from './reducers/filterReducer'
-import noteReducer from './reducers/noteReducer'
-
- // highlight-start
-const store = configureStore({
-  reducer: {
-    notes: noteReducer,
-    filter: filterReducer
-  }
-})
-// highlight-end
-
-console.log(store.getState())
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-)
-```
-
-We already got rid of a few lines of code, now we don't need the <em>combineReducers</em> function to create the store's reducer. We will soon see that the <em>configureStore</em> function has many additional benefits such as the effortless integration of development tools and many commonly used libraries without the need for additional configuration.
-
-Let's further clean up the <i>main.jsx</i> file by moving the code related to the creation of the Redux store into a separate file. Let's create a new file <i>src/store.js</i>:
-```js
-import { configureStore } from '@reduxjs/toolkit'
-
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
-
-const store = configureStore({
-  reducer: {
-    notes: noteReducer,
-    filter: filterReducer
-  }
-})
-
-export default store
-```
-
-After the changes, the content of the <i>main.jsx</i> is the following:
-
-```js
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-
-import App from './App'
-import store from './store'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-)
-```
-
-### Redux Toolkit and Refactoring Reducers
-
-Let's move on to refactoring the reducers, which brings forth the benefits of the Redux Toolkit. With Redux Toolkit, we can easily create reducer and related action creators using the [createSlice](https://redux-toolkit.js.org/api/createSlice) function. We can use the <em>createSlice</em> function to refactor the reducer and action creators in the <i>reducers/noteReducer.js</i> file in the following manner:
-
-```js
-import { createSlice } from '@reduxjs/toolkit' // highlight-line
-
-const initialState = [
-  {
-    content: 'reducer defines how redux store works',
-    important: true,
-    id: 1,
-  },
-  {
-    content: 'state of store can contain any data',
-    important: false,
-    id: 2,
-  },
-]
-
-const generateId = () =>
-  Number((Math.random() * 1000000).toFixed(0))
-
-// highlight-start
-const noteSlice = createSlice({
-  name: 'notes',
-  initialState,
-  reducers: {
-    createNote(state, action) {
-      const content = action.payload
-
-      state.push({
-        content,
-        important: false,
-        id: generateId(),
-      })
+```json
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "Zustand is less complex than Redux",
+      "important": true
     },
-    toggleImportanceOf(state, action) {
-      const id = action.payload
-
-      const noteToChange = state.find(n => n.id === id)
-
-      const changedNote = { 
-        ...noteToChange, 
-        important: !noteToChange.important 
-      }
-
-      return state.map(note =>
-        note.id !== id ? note : changedNote 
-      )     
+    {
+      "id": 2,
+      "content": "React app benefits from custom hooks",
+      "important": false
+    },
+    {
+      "id": 3,
+      "content": "Remember to sleep well",
+      "important": true
     }
-  },
-})
-// highlight-end
-
-// highlight-start
-export const { createNote, toggleImportanceOf } = noteSlice.actions
-export default noteSlice.reducer
-// highlight-end
-```
-
-The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values.
-The <em>initialState</em> parameter defines the reducer's initial state.
-The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:
-
-```js
-dispatch(createNote('Redux Toolkit is awesome!'))
-```
-
-This dispatch call is equivalent to dispatching the following object:
-
-```js
-dispatch({ type: 'notes/createNote', payload: 'Redux Toolkit is awesome!' })
-```
-
-If you followed closely, you might have noticed that inside the <em>createNote</em> action, there seems to happen something that violates the reducers' immutability principle mentioned earlier:
-
-```js
-createNote(state, action) {
-  const content = action.payload
-
-  state.push({
-    content,
-    important: false,
-    id: generateId(),
-  })
+  ]
 }
 ```
 
-We are mutating <em>state</em> argument's array by calling the <em>push</em> method instead of returning a new instance of the array. What's this all about?
+Install JSON Server:
 
-Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer. Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable. Note that <em>state</em> can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action. In this case, the function directly <i>returns</i> the new state. Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.
+```bash
+npm install json-server --save-dev
+```
 
-The <em>createSlice</em> function returns an object containing the reducer as well as the action creators defined by the <em>reducers</em> parameter. The reducer can be accessed by the <em>noteSlice.reducer</em> property, whereas the action creators by the <em>noteSlice.actions</em> property. We can produce the file's exports in the following way:
+and add the following line to the <i>scripts</i> section of <i>package.json</i>:
 
 ```js
-const noteSlice = createSlice({
+"scripts": {
+  "server": "json-server -p 3001 db.json",
   // ...
-})
-
-// highlight-start
-export const { createNote, toggleImportanceOf } = noteSlice.actions
-export default noteSlice.reducer
-// highlight-end
+}
 ```
 
-The imports in other files will work just as they did before:
+Start JSON Server with the command _npm run server_.
+
+### Fetch API
+
+In software development, one often has to consider whether to implement a certain feature using an external library or to take advantage of the native solutions provided by the environment. Both approaches have their own advantages and challenges.
+
+In earlier parts of this course we have used the [Axios](https://axios-http.com/docs/intro) library for making HTTP requests. Let's now get familiar with an alternative way to make HTTP requests using the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+
+It is typical that an external library like <i>Axios</i> is implemented using other external libraries. For example, if you install Axios in a project with the command <i>npm install axios</i>, the console output is:
+
+```bash
+$ npm install axios
+
+added 23 packages, and audited 302 packages in 1s
+
+71 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
+So the command would install not only the Axios library but over 20 other npm packages that Axios requires to work.
+
+The <i>Fetch API</i> offers a similar way to make HTTP requests as Axios, but using the Fetch API does not require installing external libraries. Application maintenance becomes easier when there are fewer libraries to update, and security also improves since the potential attack surface of the application is reduced. Application security and maintenance are touched upon in [Part 7](https://fullstackopen.com/en/part7/class_components_miscellaneous#security-in-react-and-node-applications) of the course.
+
+Making requests is done in practice by using the <i>fetch()</i> function. The syntax used has some differences compared to Axios. We'll also soon notice that Axios took care of some things for us and made our lives easier. We'll use the Fetch API now, however, because it is a widely-used native solution that every Full Stack developer should be familiar with.
+
+### Fetching data from the server
+
+Let's create a function that fetches data from the backend in the file <i>src/services/notes.js</i>:
 
 ```js
-import noteReducer, { createNote, toggleImportanceOf } from './reducers/noteReducer'
-```
+const baseUrl = 'http://localhost:3001/notes'
 
-We need to alter the action type names in the tests due to the conventions of ReduxToolkit:
+const getAll = async () => {
+  const response = await fetch(baseUrl)
 
-```js 
-import deepFreeze from 'deep-freeze'
-import { describe, expect, test } from 'vitest'
-import noteReducer from './noteReducer'
-
-describe('noteReducer', () => {
-  test('returns new state with action notes/createNote', () => { // highlight-line
-    const state = []
-    const action = {
-      type: 'notes/createNote', // highlight-line
-      payload: 'the app state is in redux store' // highlight-line
-    }
-
-    deepFreeze(state)
-    const newState = noteReducer(state, action)
-
-    expect(newState).toHaveLength(1)
-    expect(newState.map(note => note.content)).toContainEqual(action.payload) // highlight-line
-  })
-})
-
-test('returns new state with action notes/toggleImportanceOf', () => { // highlight-line
-  const state = [
-    {
-      content: 'the app state is in redux store',
-      important: true,
-      id: 1
-    },
-    {
-      content: 'state changes are made with actions',
-      important: false,
-      id: 2
-    }
-  ]
-
-  const action = {
-    type: 'notes/toggleImportanceOf', // highlight-line
-    payload: 2 // highlight-line
+  if (!response.ok) {
+    throw new Error('Failed to fetch notes')
   }
 
-  deepFreeze(state)
-  const newState = noteReducer(state, action)
+  const data = await response.json()
+  return data
+}
 
-  expect(newState).toHaveLength(2)
-
-  expect(newState).toContainEqual(state[0])
-
-  expect(newState).toContainEqual({
-    content: 'state changes are made with actions',
-    important: true,
-    id: 2
-  })
-})
+export default { getAll }
 ```
 
-You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
+Let's look more closely at the implementation of the <i>getAll</i> function. The notes are now fetched from the backend by calling the <i>fetch()</i> function, which has been given the backend URL as an argument. The request type is not separately specified, so <i>fetch</i> performs the default action, which is a GET request.
 
-### Redux Toolkit and console.log
-
-As we have learned, console.log is an extremely powerful tool; it often saves us from trouble.
-
-Let's try to print the state of the Redux Store to the console in the middle of the reducer created with the function createSlice:
+When the response has arrived, we check whether the request succeeded by looking at the <i>response.ok</i> field and throw an error if necessary:
 
 ```js
-const noteSlice = createSlice({
-  name: 'notes',
-  initialState,
-  reducers: {
+if (!response.ok) {
+  throw new Error('Failed to fetch notes')
+}
+```
+
+The attribute <i>response.ok</i> gets the value <i>true</i> if the request succeeded, i.e., if the response status code is in the range 200-299. For all other status codes, such as 404 or 500, it gets the value <i>false</i>.
+
+Note that <i>fetch</i> does not automatically throw an error even if the response status code is, for example, 404. Error handling must be implemented manually, as we have done now.
+
+If the request succeeded, the data contained in the response is converted to JSON format:
+
+```js
+const data = await response.json()
+```
+
+<i>fetch</i> does not automatically convert the data that may accompany the response to JSON format; the conversion must be done manually. It is also worth noting that <i>response.json()</i> is an asynchronous function, so the <i>await</i> keyword must be used with it.
+
+Let's simplify the code a bit by returning the data returned by the <i>response.json()</i> function directly:
+
+```js
+const getAll = async () => {
+  const response = await fetch(baseUrl)
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch notes')
+  }
+
+  return await response.json() // highlight-line
+}
+```
+
+Let's add a function to the store that can be used to initialize the state with notes fetched from the server:
+
+```js
+const useNoteStore = create((set) => ({
+  notes: [], // highlight-line
+  filter: '',
+  actions: {
     // ...
-    toggleImportanceOf(state, action) {
-      const id = action.payload
+    setFilter: value => set(() => ({ filter: value })),
+    initialize: notes => set(() => ({ notes })) // highlight-line
+  }
+}))
+```
 
-      const noteToChange = state.find(n => n.id === id)
+Let's implement the initialization of notes in the <i>App</i> component — as usual when fetching data from a server, we use the <i>useEffect</i> hook:
 
-      const changedNote = { 
-        ...noteToChange, 
-        important: !noteToChange.important 
-      }
+```js
+const App = () => {
+  const { initialize } = useNoteActions()
 
-      console.log(state) // highlight-line
+ // highlight-start
+  useEffect(() => {
+    noteService.getAll().then(notes => initialize(notes))
+  }, [initialize])
+ // highlight-end
 
-      return state.map(note =>
-        note.id !== id ? note : changedNote 
-      )     
+  return (
+    <div>
+      <NoteForm />
+      <VisibilityFilter />
+      <NoteList />
+    </div>
+  )
+}
+```
+
+The notes are thus fetched from the server using the  <i>getAll()</i> function we defined and then stored using the store's <i>initialize</i> function. These actions are done in the <i>useEffect</i> hook, meaning they are executed during the first render of the App component.
+
+Let's look more closely at one small detail. We have added the <i>initialize</i> function to the dependency array of the <i>useEffect</i> hook. If we try to use an empty dependency array, ESLint gives the following warning: <i>React Hook useEffect has a missing dependency: 'initialize'</i>. What is going on?
+
+The code would work logically exactly the same even if we used an empty dependency array, because <i>initialize</i> refers to the same function throughout the program's execution. However, it is good programming practice to add all variables and functions used by the _useEffect_ hook that are defined inside the component to the dependencies. This helps avoid unexpected bugs.
+
+### Sending data to the server
+
+Let's next implement the functionality for sending a new note to the server. At the same time we can practice how to make a POST request using the <i>fetch()</i> function.
+
+Let's extend the server communication code in <i>src/services/notes.js</i> as follows:
+
+```js
+const baseUrl = 'http://localhost:3001/notes'
+
+const getAll = async () => {
+  const response = await fetch(baseUrl)
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch notes')
+  }
+
+  return await response.json()
+}
+
+// highlight-start
+const createNew = async (content) => {
+  const response = await fetch(baseUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content, important: false }),
+  })
+  
+  if (!response.ok) {
+    throw new Error('Failed to create note')
+  }
+  
+  return await response.json()
+}
+// highlight-end
+
+export default { getAll, createNew } // highlight-line
+```
+
+Let's look more closely at the implementation of the <i>createNew</i> function. The first parameter of the <i>fetch()</i> function specifies the URL to which the request is made. The second parameter is an object that defines the other details of the request, such as the request type, headers and the data sent with the request. We can further clarify the code by storing the object defining the request details in a separate <i>options</i> helper variable:
+
+```js
+const createNew = async (content) => {
+  // highlight-start
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content, important: false }),
+  }
+  
+  const response = await fetch(baseUrl, options)
+  // highlight-end
+
+  if (!response.ok) {
+    throw new Error('Failed to create note')
+  }
+  
+  return await response.json()
+}
+```
+
+Let's look more closely at the <i>options</i> object:
+
+- <i>method</i> defines the request type, which in this case is <i>POST</i>
+- <i>headers</i> defines the request headers. We attach the header <i>'Content-Type': 'application/json'</i> to the request so that the server knows that the data included with the request is in JSON format, and can handle the request correctly
+- <i>body</i> contains the data to be sent with the request. The field cannot directly contain a JavaScript object, it must first be converted to a JSON string by calling <i>JSON.stringify()</i>
+
+As with the GET request, we also check the response status code here for errors:
+
+```js
+if (!response.ok) {
+  throw new Error('Failed to create note')
+}
+```
+
+If the request succeeds, <i>JSON Server</i> returns the just-created note, for which it has also generated a unique <i>id</i>. The data contained in the response must still be converted to JSON format using the <i>response.json()</i> function: 
+
+```js
+return await response.json()
+```
+
+Let's then change our application's <i>NoteForm</i> component so that a new note is sent to the backend. The component's <i>addNote</i> function changes slightly:
+
+```js
+import { useNoteActions } from './store'
+import noteService from './services/notes'
+
+const NoteForm = () => {
+  const { add } = useNoteActions()
+
+  const addNote = async (e) => {
+    e.preventDefault()
+    const content = e.target.note.value
+    const newNote = await noteService.createNew(content) // highlight-line
+    add(newNote)
+    e.target.reset()
+  }
+
+  return (
+    <form onSubmit={addNote}>
+      <input name="note" />
+      <button type="submit">add</button>
+    </form>
+  )
+}
+
+export default NoteForm
+```
+
+When a new note is created in the backend by calling the function <i>createNew()</i>, we get back an object describing the note, for which the backend has generated an <i>id</i>.
+
+The current code of the application is available in its entirety on [GitHub](https://github.com/fullstack-hy2020/zustand-notes/tree/part6-4), in the branch <i>part6-4</i>.
+
+### Async actions
+
+Our approach is fairly good, but in one sense unfortunate, in that the communication with the server happens inside the code of the functions that define the components. It would be better if the communication could be abstracted away from the components, so that they only need to call an appropriate function that the store provides.
+
+We want <i>App</i> to initialize the application state as follows:
+
+```js
+const App = () => {
+  const { initialize } = useNoteActions()  // highlight-line
+
+  useEffect(() => {
+    initialize()  // highlight-line
+  }, [initialize])
+
+  return (
+    <div>
+      <NoteForm />
+      <VisibilityFilter />
+      <NoteList />
+    </div>
+  )
+}
+```
+
+
+<i>NoteForm</i> in turn creates a new note like this:
+
+```js
+const NoteForm = () => {
+  const { add } = useNoteActions()  // highlight-line
+
+  const addNote = async (e) => {
+    e.preventDefault()
+    const content = e.target.note.value
+    await add(content)  // highlight-line
+    e.target.reset()
+  }
+
+  return (
+    <form onSubmit={addNote}>
+      <input name="note" />
+      <button type="submit">add</button>
+    </form>
+  )
+}
+```
+
+The change to <i>store.js</i> is as follows:
+
+```js
+import { create } from 'zustand'
+import noteService from './services/notes' // highlight-line
+
+const useNoteStore = create((set) => ({
+  notes: [],
+  filter: '',
+  actions: {
+    add: async (content) => {  // highlight-line
+      const newNote = await noteService.createNew(content)  // highlight-line
+      set(state => ({ notes: state.notes.concat(newNote) })) 
+    },
+    initialize: async () => {  // highlight-line
+      const notes = await noteService.getAll()  // highlight-line
+      set(() => ({ notes }))
+    },
+    // ...
+  }
+}))
+```
+
+The functions <i>add</i> and <i>initialize</i> have thus been changed into asynchronous functions, which first call the appropriate noteService function, and then update the state.
+
+The solution is elegant; state management and communication with the server are entirely separated outside of React components.
+
+Let's finalize the application by synchronizing the importance toggle change to the server.
+
+<i>noteService.js</i> is extended as follows:
+
+```js
+const update = async (id, note) => {
+  const response = await fetch(`${baseUrl}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(note),
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to update note')
+  }
+
+  return await response.json()
+}
+
+export default { getAll, createNew, update } 
+```
+
+The change to the store's <i>toggleImportance</i> function is as follows:
+
+```js
+const useNoteStore = create((set) => ({
+  notes: [],
+  filter: '',
+  actions: {
+    add: async (content) => {
+      const newNote = await noteService.createNew(content)
+      set(state => ({ notes: state.notes.concat(newNote) }))
+    },
+    // highlight-start
+    toggleImportance: async (id) => {
+      const note = useNoteStore.getState().notes.find(n => n.id === id)
+      const updated = await noteService.update(
+        id, { ...note, important: !note.important }
+      )
+      set(state => ({
+        notes: state.notes.map(n => n.id === id ? updated : n)
+      }))
+    },
+    // highlight-end
+    setFilter: value => set(() => ({ filter: value })),
+    initialize: async () => {
+      const notes = await noteService.getAll()
+      set(() => ({ notes }))
     }
-  },
-})
+  }
+}))
 ```
 
-When we now change the importance of a note by clicking its name, the following is printed to the console
-
-![devtools console showing Handler,Target as null but IsRevoked as true](../../images/6/40new.png)
-
-The output is interesting but not very useful. This is about the previously mentioned Immer library used by the Redux Toolkit internally to save the state of the Store.
-
-The state can be converted to a human-readable format by using the [current](https://redux-toolkit.js.org/api/other-exports#current) function from the immer library. The function can be imported with the following command:
+There is one noteworthy detail in the new function. The function receives the note's id as a parameter. However, the modified note must be sent to the backend. It can be found by calling the store's <i>getState</i> function:
 
 ```js
-import { current } from '@reduxjs/toolkit'
+const note = useNoteStore.getState().notes.find(n => n.id === id)
 ```
 
-and after this, the state can be printed to the console with the following command:
+Zustand stores also have a number of other [helper functions](https://zustand.docs.pmnd.rs/reference/apis/create#returns), which may be useful in some situations.
+
+Let's however also change the store definition so that we also pass the parameter <i>get</i> to the function given to <i>create</i>, through which we can then access the state values when needed:
 
 ```js
-console.log(current(state))
+const useNoteStore = create((set, get) => ({ // highlight-line
+  notes: [],
+  filter: '',
+  actions: {
+    toggleImportance: async (id) => {
+      const note = get().notes.find(n => n.id === id) // highlight-line
+      const updated = await noteService.update(
+        id, { ...note, important: !note.important }
+      )
+      set(state => ({
+        notes: state.notes.map(n => n.id === id ? updated : n)
+      }))
+    },
+    // ...
+  }
+}))
 ```
 
-Console output is now human readable
+The function <i>get</i> returns the current state of the store. For example, the call <i>get().notes</i> gives the store's current notes. The function <i>get</i> is functionally equivalent to calling <i>useNoteStore.getState()</i>, but is the most idiomatic way to refer to the store's state from within the store's own functions.
 
-![dev tools showing array of 2 notes](../../images/6/41new.png)
-
-### Redux DevTools
-
-[Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome addon that offers useful development tools for Redux. It can be used for example to inspect the Redux store's state and dispatch actions through the browser's console. When the store is created using Redux Toolkit's <em>configureStore</em> function, no additional configuration is needed for Redux DevTools to work.
-
-Once the addon is installed, clicking the <i>Redux</i> tab in the browser's developer tools, the Redux DevTools should open:
-
-![browser with redux addon in devtools](../../images/6/42new.png)
-
-You can inspect how dispatching a certain action changes the state by clicking the action:
-
-![devtools inspecting state tree in redux](../../images/6/43new.png)
-
-It is also possible to dispatch actions to the store using the development tools:
-
-![devtools redux dispatching createNote with payload](../../images/6/44new.png)
+The code of the application is on [GitHub](https://github.com/fullstack-hy2020/zustand-notes/tree/part6-5) in the branch <i>part6-5</i>.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 6.10.-6.13.
+### Exercises 6.7.-6.11.
 
-Let's continue working on the anecdote application using Redux that we started in exercise 6.3.
+#### 6.7 anecdotes, step6
 
-#### 6.10 Anecdotes, step 8
+Fetch the anecdotes from the JSON Server backend when the application starts. Use the Fetch API to make the HTTP request.
 
-Install Redux Toolkit for the project. Move the Redux store creation into the file <i>store.js</i> and use Redux Toolkit's <em>configureStore</em> to create the store.
+You can find the initial content for the backend e.g. [here](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
-Change the definition of the <i>filter reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.
+#### 6.8 anecdotes, step7
 
-Also, start using Redux DevTools to debug the application's state easier.
+Change the creation of new anecdotes so that anecdotes are stored in the backend. Use the Fetch API in your implementation.
 
-#### 6.11 Anecdotes, step 9
+#### 6.9 anecdotes, step8
 
-Change also the definition of the <i>anecdote reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.
+Voting does not yet save changes to the backend. Fix the situation.
 
-#### 6.12 Anecdotes, step 10
+#### 6.10 anecdotes, step9
 
-The application has a ready-made body for the <i>Notification</i> component:
+The application has a ready-made skeleton for the <i>Notification</i> component:
 
 ```js
 const Notification = () => {
@@ -807,16 +747,553 @@ const Notification = () => {
 export default Notification
 ```
 
-Extend the component so that it renders the message stored in the Redux store. Create a separate reducer for the new functionality by using the Redux Toolkit's <em>createSlice</em> function.
+Extend the application so that it shows a notification using the <i>Notification</i> component for five seconds when anecdotes are voted on or new anecdotes are created:
 
-The application does not have to use the <i>Notification</i> component intelligently at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
+![A notification is shown when voting: you voted 'if it hurts, do it more often'](../../images/6/8eb.png)
 
-#### 6.13 Anecdotes, step 11
+Use Zustand for notification state management. It may be a good idea to create a separate Zustand store for notifications, since notification usage may expand to other areas of the application as it grows, such as user login.
 
-Extend the application so that it uses the <i>Notification</i> component to display a message for five seconds when the user votes for an anecdote or creates a new anecdote:
+#### 6.11 anecdotes, step10
 
-![browser showing message of having voted](../../images/6/8eb.png)
+We notice that some of the anecdotes added by users are not very good. Implement a feature that allows deleting anecdotes that have zero votes.
 
-It's recommended to create separate [action creators](https://redux-toolkit.js.org/api/createSlice#reducers) for setting and removing notifications.
+</div>
+
+<div class="content">
+
+### Middlewares
+
+When developing an application, one often encounters situations where it is hard to understand why the application behaves unexpectedly. The state changes as a result of some action function call, but it is unclear which call changed what and in which order. Traditional console logging of individual functions only helps to a limited extent.
+
+Zustand supports so-called middlewares, which can be used to add functionality to stores transparently, without touching the store's own logic. The idea of middleware is simple: it "wraps" around the store and can, for example, automatically log every state change.
+
+The form of middleware functions is somewhat cryptic. Below is a <i>logger</i> that always prints the store's old and new state whenever the state changes:
+
+```js
+const logger = (config) => (set, get) => config(
+  (...args) => {
+    console.log('prev state', get());
+    set(...args);
+    console.log('next state', get());
+  },
+  get
+);
+```
+
+The middleware is activated by "wrapping" the function given to Zustand's <i>create</i> as its parameter:
+
+```js
+const useNoteStore = create(logger((set, get) => ({ // highlight-line
+  notes: [],
+  filter: '',
+  actions: {
+    // ...
+  }
+}))) // highlight-line
+```
+
+Now whenever the store's state changes, we can always see in the console how the state changes:
+
+![](../../images/6/u4.png)
+
+In practice our defined middleware works by replacing the original function <i>set</i> with the function
+
+```js
+  (...args) => {
+    console.log('prev state', get());
+    set(...args);
+    console.log('next state', get());
+  }
+```
+
+which in addition to calling <i>set</i>, also prints the old and new state (accessible via the <i>get</i> function) to the console. The second parameter is the old <i>get</i> unchanged.
+
+Zustand also has a ready-made <i>devtools</i> middleware that integrates the store with the browser's [Redux DevTools](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) extension. Devtools is an extremely useful development tool, as it allows you to visually track state changes.
+
+The setup is straightforward:
+
+```js
+import { create } from 'zustand'
+import { devtools } from 'zustand/middleware' // highlight-line
+
+const useNoteStore = create(devtools((set, get) => ({ // highlight-line
+  notes: [],
+  filter: '',
+  actions: {
+    // ...
+  }
+}))) // highlight-line
+```
+
+When the Redux DevTools extension is installed in the browser, the state of the store and its changes can be inspected in the browser's developer tools:
+
+![Redux DevTools view in browser: on the left a list of state changes, on the right the state contents in tree form](../../images/6/u6.png)
+
+### Testing Zustand stores
+
+Finally, let's look at testing Zustand stores with Vitest.
+
+For simplicity, let's start with the counter store:
+
+```js
+import { create } from 'zustand'
+
+const useCounterStore = create(set => ({
+  counter: 0,
+  actions: {
+    increment: () => set(state => ({ counter: state.counter + 1 })),
+    decrement: () => set(state => ({ counter: state.counter - 1 })),
+    zero: () => set(() => ({ counter: 0 })),
+  }  
+}))
+
+export const useCounter = () => useCounterStore(state => state.counter)
+export const useCounterControls = () => useCounterStore(state => state.actions)
+
+export default useCounterStore // highlight-line
+```
+
+We added an export to the definition for the tests, through which the test can access the store.
+
+Let's install Vitest:
+
+```
+npm install --save-dev vitest
+```
+
+Let's implement the test in the file <i>store.test.js</i>:
+
+```js
+import { beforeEach, describe, expect, it } from 'vitest'
+import useCounterStore from './store'
+
+beforeEach(() => {
+  useCounterStore.setState({ counter: 0 })
+})
+
+describe('counter store', () => {
+  it('initial state is 0', () => {
+    expect(useCounterStore.getState().counter).toBe(0)
+  })
+
+  it('increment increases counter by 1', () => {
+    useCounterStore.getState().actions.increment()
+    expect(useCounterStore.getState().counter).toBe(1)
+  })
+
+  it('decrement decreases counter by 1', () => {
+    useCounterStore.getState().actions.decrement()
+    expect(useCounterStore.getState().counter).toBe(-1)
+  })
+
+  it('zero resets counter to 0', () => {
+    useCounterStore.getState().actions.increment()
+    useCounterStore.getState().actions.increment()
+    useCounterStore.getState().actions.zero()
+    expect(useCounterStore.getState().counter).toBe(0)
+  })
+})
+```
+
+The tests are quite straightforward, utilizing the store's [getState](https://zustand.docs.pmnd.rs/reference/apis/create#returns) function, which allows them to read the store's state and execute the store's functions.
+
+Before each test, the store is reset to its initial state in the <i>beforeEach</i> block using the store's [setState](https://zustand.docs.pmnd.rs/reference/apis/create#returns) function.
+
+Resetting the store to its initial state is simple in our case. This is not always necessarily so. Zustand's [documentation](https://zustand.docs.pmnd.rs/learn/guides/testing#vitest) describes a way to create a version of stores for testing that is automatically reset to its initial state before each test. The method is, however, complex enough and unnecessary for us that we will skip it for now.
+
+The tests thus use the store directly. If more complex logic has been implemented through custom hooks for using the store, it may be necessary to write tests that also utilize the hooks. In the counter, store usage happens through the hooks <i>useCounter</i> and <i>useCounterControls</i>:
+
+
+```js
+const useCounterStore = create(set => ({
+  // ...
+}))
+
+// hightlight-start
+export const useCounter = () => useCounterStore(state => state.counter)
+export const useCounterControls = () => useCounterStore(state => state.actions)
+// hightlight-end
+```
+
+In this case the hooks do not contain any logic, they just separately expose the value stored in the store and the store's functions. The testing approach we used above is therefore perfectly fine.
+
+Let's however make another version of the tests for example purposes, where the store is used in exactly the same way as the application uses it.
+
+<i>useCounter</i> and <i>useCounterControls</i> are React hooks, so testing them requires [React Testing Library](https://github.com/testing-library/react-testing-library) and the [jsdom](https://github.com/jsdom/jsdom) library:
+
+```
+npm install --save-dev @testing-library/react jsdom
+```
+
+Let's add the testing environment configuration to <i>vite.config.js</i>:
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  // highlight-start
+  test: {
+    environment: 'jsdom',
+  },
+   // highlight-end
+})
+```
+
+The tests are as follows:
+
+```js
+import { beforeEach, describe, expect, it } from 'vitest'
+import { renderHook, act } from '@testing-library/react'
+import useCounterStore, { useCounter, useCounterControls } from './store'
+
+beforeEach(() => {
+  useCounterStore.setState({ counter: 0 })
+})
+
+describe('counter hooks', () => {
+  it('useCounter returns initial value of 0', () => {
+    const { result } = renderHook(() => useCounter())
+    expect(result.current).toBe(0)
+  })
+
+  it('increment updates counter', () => {
+    const { result: counter } = renderHook(() => useCounter())
+    const { result: controls } = renderHook(() => useCounterControls())
+
+    act(() => controls.current.increment())
+
+    expect(counter.current).toBe(1)
+  })
+
+  it('decrement updates counter', () => {
+    const { result: counter } = renderHook(() => useCounter())
+    const { result: controls } = renderHook(() => useCounterControls())
+
+    act(() => controls.current.decrement())
+
+    expect(counter.current).toBe(-1)
+  })
+
+  it('zero resets counter', () => {
+    const { result: counter } = renderHook(() => useCounter())
+    const { result: controls } = renderHook(() => useCounterControls())
+
+    act(() => {
+      controls.current.increment()
+      controls.current.increment()
+      controls.current.zero()
+    })
+
+    expect(counter.current).toBe(0)
+  })
+})
+```
+
+There are a few interesting things in the test. At the start of the tests, the hooks are rendered using the [renderHook](https://testing-library.com/docs/react-testing-library/api/#renderhook) function:
+
+```js
+const { result: counter } = renderHook(() => useCounter())
+const { result: controls } = renderHook(() => useCounterControls())
+```
+
+This way the test gets access to the values returned by the hooks, which are stored in the variables <i>counter</i> and <i>controls</i>.
+
+The hooks are called by wrapping the call inside the [act](https://testing-library.com/docs/react-testing-library/api/#act) function:
+
+```js
+act(() => {
+  controls.current.increment()
+  controls.current.increment()
+  controls.current.zero()
+})
+```
+
+Lopuksi tapahtuu testin ekspektaatio:
+
+```js
+expect(counter.current).toBe(0)
+```
+
+As we can see, to access the hook itself we still need to take the <i>current</i> field from the object returned by <i>renderHook</i>, which corresponds to the hook's current value.
+
+> #### What is act?
+>
+> <i>act</i> is a helper function that ensures all state updates and their side effects have been processed before the test code continues.
+>
+> When a state change occurs in a React component or hook, React does not update the state immediately but queues the updates. act forces these queued updates to be executed.
+>
+> Without act, a test might check the state before React has had time to update it, causing the test to fail or give incorrect results.
+>
+> React Testing Library wraps many of its functions (such as fireEvent, userEvent) in act automatically, but when testing hooks directly it is usually needed.
+
+Testing via hooks uses React Testing Library and renders the hooks in a real React context using jsdom. This approach is considerably slower than tests that use the store directly, so if the hooks do not contain complex logic, it may be sufficient to run the tests using the store directly.
+
+The code containing the Zustand counter tests is available on [GitHub](https://github.com/fullstack-hy2020/zustand-counter).
+
+### Testing the notes store
+
+Testing the store of the note application is a somewhat more challenging case, since the store contains asynchronous functions that call the server:
+
+```js
+import { create } from 'zustand'
+import noteService from './services/notes'
+
+const useNoteStore = create(set => ({
+  notes: [],
+  filter: '',
+  actions: {
+    add: async (content) => {
+      const newNote = await noteService.createNew(content) // highlight-line
+      set(state => ({ notes: state.notes.concat(newNote) }))
+    },
+    toggleImportance: async (id) => {
+      const note = useNoteStore.getState().notes.find(n => n.id === id)
+      // highlight-start
+      const updated = await noteService.update(
+        id, { ...note, important: !note.important }
+      )
+       // highlight-end
+      set(state => ({
+        notes: state.notes.map(n => n.id === id ? updated : n)
+      }))
+    },
+    setFilter: value => set(() => ({ filter: value })),
+    initialize: async () => {
+      const notes = await noteService.getAll() // highlight-line
+      set(() => ({ notes }))
+    }
+  }
+}))
+
+export const useNotes = () => { 
+  const notes = useNoteStore((state) => state.notes)
+  const filter = useNoteStore((state) => state.filter)
+
+  if (filter === 'important') return notes.filter(n => n.important)
+  if (filter === 'nonimportant') return notes.filter(n => !n.important)
+  return notes
+}
+
+export const useFilter = () => useNoteStore((state) => state.filter)
+export const useNoteActions = () => useNoteStore((state) => state.actions)
+```
+
+This time <i>useNotes</i> also contains a significant amount of logic, so testing should probably be done via hooks with React Testing Library.
+
+Let's install the required libraries:
+
+```
+npm install --save-dev vitest @testing-library/react jsdom
+```
+
+Let's add the testing environment configuration to <i>vite.config.js</i>:
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  // highlight-start
+  test: {
+    environment: 'jsdom',
+  },
+   // highlight-end
+})
+```
+
+The first part of the tests is as follows:
+
+```js
+import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { renderHook, act } from '@testing-library/react'
+
+vi.mock('./services/notes', () => ({
+  default: {
+    getAll: vi.fn(),
+    createNew: vi.fn(),
+    update: vi.fn(),
+  }
+}))
+
+import noteService from './services/notes'
+import useNoteStore, { useNotes, useFilter, useNoteActions } from './store'
+
+beforeEach(() => {
+  useNoteStore.setState({ notes: [], filter: '' })
+  vi.clearAllMocks()
+})
+
+describe('useNoteActions', () => {
+  it('initialize loads notes from service', async () => {
+    const mockNotes = [{ id: 1, content: 'Test', important: false }]
+    noteService.getAll.mockResolvedValue(mockNotes)
+
+    const { result } = renderHook(() => useNoteActions())
+
+    await act(async () => {
+      await result.current.initialize()
+    })
+
+    const { result: notesResult } = renderHook(() => useNotes())
+    expect(notesResult.current).toEqual(mockNotes)
+  })
+
+  it('add appends a new note', async () => {
+    const newNote = { id: 2, content: 'New note', important: false }
+    noteService.createNew.mockResolvedValue(newNote)
+
+    const { result } = renderHook(() => useNoteActions())
+
+    await act(async () => {
+      await result.current.add('New note')
+    })
+
+    const { result: notesResult } = renderHook(() => useNotes())
+    expect(notesResult.current).toContainEqual(newNote)
+  })
+
+  it('toggleImportance flips important flag', async () => {
+    const note = { id: 1, content: 'Test', important: false }
+    useNoteStore.setState({ notes: [note] })
+    noteService.update.mockResolvedValue({ ...note, important: true })
+
+    const { result } = renderHook(() => useNoteActions())
+
+    await act(async () => {
+      await result.current.toggleImportance(1)
+    })
+
+    const { result: notesResult } = renderHook(() => useNotes())
+    expect(notesResult.current[0].important).toBe(true)
+  })
+})
+```
+
+There is a lot to digest in the tests. The tests create, using Vitest, a [mock](https://vitest.dev/guide/mocking) version of the <i>noteService</i> responsible for communicating with the server:
+ 
+```js
+import { describe, it, expect, beforeEach, vi } from 'vitest'
+
+vi.mock('./services/notes', () => ({
+  default: {
+    getAll: vi.fn(),
+    createNew: vi.fn(),
+    update: vi.fn(),
+  }
+}))
+```
+
+[vi.mock](https://vitest.dev/api/vi.html#vi-mock) replaces the <i>noteService</i> in the <i>./services/notes</i> module with its own version, where all functions are replaced with mock functions returned by [vi.fn](https://vitest.dev/api/vi.html#vi-fn).
+
+Before each test, the store is reset to its initial state and the mock functions are cleared:
+
+```js
+beforeEach(() => {
+  useNoteStore.setState({ notes: [], filter: '' })
+  vi.clearAllMocks()
+})
+```
+
+At the start of each test, the mocked <i>noteService</i> is told via the [mockResolvedValue](https://vitest.dev/api/mock.html#mockresolvedvalue) function how it should behave in the context of the test:
+
+```js
+it('initialize loads notes from service', async () => {
+  // highlight-start
+  const mockNotes = [{ id: 1, content: 'Test', important: false }]
+  noteService.getAll.mockResolvedValue(mockNotes)
+  // highlight-end
+
+  const { result } = renderHook(() => useNoteActions())
+
+  await act(async () => {
+    await result.current.initialize()
+  })
+
+  const { result: notesResult } = renderHook(() => useNotes())
+  expect(notesResult.current).toEqual(mockNotes)
+})
+```
+
+First, the test defines that when the <i>noteService.getAll</i> function is called, the notes in the <i>mockNotes</i> array are returned to the store.
+
+The thing being tested is the call to the <i>initialize</i> function:
+
+```js
+await act(async () => {
+  await result.current.initialize()
+})
+```
+
+Since this is an asynchronous function, the completion of the call must be awaited with the <i>await</i> keyword.
+
+Finally, the test verifies that the store's state contains the same list of notes that the mocked <i>noteService.getAll</i> returned:
+
+```js
+const { result: notesResult } = renderHook(() => useNotes())
+expect(notesResult.current).toEqual(mockNotes)
+```
+
+The other tests follow the same pattern: first, what the store's called <i>noteService</i> function returns is defined, and then the actual test is run.
+
+The second part of the tests verifies that filtering works correctly:
+
+```js
+describe('useNotes filtering', () => {
+  const notes = [
+    { id: 1, content: 'A', important: true },
+    { id: 2, content: 'B', important: false },
+  ]
+
+  beforeEach(() => {
+    useNoteStore.setState({ notes })
+  })
+
+  it('returns all notes with no filter', () => {
+    const { result } = renderHook(() => useNotes())
+    expect(result.current).toHaveLength(2)
+  })
+
+  it('filters important notes', () => {
+    useNoteStore.setState({ notes, filter: 'important' })
+    const { result } = renderHook(() => useNotes())
+    expect(result.current).toEqual([notes[0]])
+  })
+
+  it('filters nonimportant notes', () => {
+    useNoteStore.setState({ notes, filter: 'nonimportant' })
+    const { result } = renderHook(() => useNotes())
+    expect(result.current).toEqual([notes[1]])
+  })
+})
+```
+
+The state is initialized with two notes, one of which is important and the other is not. The three test cases verify that <i>useNotes</i> returns the correct notes for all filter values.
+
+The application's final code is on [GitHub](https://github.com/fullstack-hy2020/zustand-notes/tree/part6-6) in the branch <i>part6-6</i>.
+
+</div>
+
+<div class="tasks">
+
+### Exercises 6.12.-6.15.
+
+#### 6.12 Anecdotes, step11
+
+Write a test that verifies the state is initialized with the anecdotes returned by the backend.
+
+#### 6.13 Anecdotes, step12
+
+Write a test that verifies the component displaying anecdotes receives the anecdotes from the store sorted by votes.
+
+#### 6.14 Anecdotes, step13
+
+Write a test that verifies the correct React component receives a properly filtered list of anecdotes.
+
+#### 6.15 Anecdotes, step14
+
+Write a test that verifies that voting increases the number of votes for an anecdote.
 
 </div>
