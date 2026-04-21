@@ -110,17 +110,17 @@ You can only take the exam after submitting enough exercises for five credits. I
 
 #### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
 
-By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
+By submitting at least 135 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
-- Submit at least 127 exercises for parts 0-7.
+- Submit at least 135 exercises for parts 0-7.
 - [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-759cfee1-370b-4200-8e11-dc86b1a8ed88).
 - [Request credits for part 6](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
 
-By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
+By submitting at least 150 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
-- Submit at least 138 exercises for parts 0-7.
+- Submit at least 150 exercises for parts 0-7.
 - [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4142645d-5690-4527-9d57-79bd1fbc8770).
 - [Request credits for part 7](/en/part0/general_info/#how-to-get-your-credits).
 
