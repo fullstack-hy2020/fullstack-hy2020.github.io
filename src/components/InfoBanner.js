@@ -49,14 +49,11 @@ const InfoBanner = ({ visible, onHide }) => {
       <div style={textStyle}>
         <div style={{ marginBottom: 20 }}>
           <div style={{ marginBottom: 10 }}>
-            Material of Part 9 has been moved to <a style={linkStyle} 
-                href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript"
+            Material of Part 10 has been moved to <a style={linkStyle} 
+                href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native"
               >
-                https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript
+                https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native
               </a>
-          </div>
-          <div style={{ marginBottom: 10 }}>
-            There are some notable changes in the content. If you have already started this part, and advanced beyond the first exercises, you may continue following the old material, it shall remain here until 1st May 2026.
           </div>
         </div>
       </div>

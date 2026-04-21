@@ -119,12 +119,7 @@ module.exports = {
       d: 'React with types',
       e: 'Grande finale: Patientor',
     },
-    10: {
-      a: 'Introduction to React Native',
-      b: 'React Native basics',
-      c: 'Communicating with server',
-      d: 'Testing and extending our application',
-    },
+    10: {},
     11: {},
     12: {},
     13: {},

@@ -12,7 +12,7 @@ import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
 
-const BANNER_TO_KEY = 'part_09_changes';
+const BANNER_TO_KEY = 'part_10_changes';
 const BANNER3_TO_KEY = 'part_7_changes';
 const BANNER2_TO_KEY = 'part_6_changes';
 
@@ -29,7 +29,7 @@ const Layout = (props) => {
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY);
     if (!key) {
-      const relevant = window.location.href.includes('en/part9') || window.location.href.includes('osa9');
+      const relevant = window.location.href.includes('en/part10') || window.location.href.includes('osa10');
       setVisible(relevant);
     }
   }, []);

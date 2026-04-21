@@ -6,10 +6,8 @@ lang: en
 
 <div class="intro">
 
-In this part, we will learn how to build native Android and iOS mobile applications with JavaScript and React using the React Native framework. We will dive into the React Native ecosystem by developing an entire mobile application from scratch. Along the way, we will learn concepts such as how to render native user interface components with React Native, how to create beautiful user interfaces, how to communicate with a server, and how to test a React Native application.
+Material of this part has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native</a>
 
-<i>Part updated 26th Feb 2024</i>
-- <i>New Node 20 version of rate-repository-api</i>
-- <i>Material updated</i>
+You can still access the old content [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/0ab0b72f8dddd35ca43c812abd15675a92a1abaa/src/content/10/en).
 
 </div>

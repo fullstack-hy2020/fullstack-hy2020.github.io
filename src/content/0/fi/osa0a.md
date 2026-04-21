@@ -93,11 +93,7 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 
 #### Osa 10 - Full Stack ‑websovelluskehitys: React Native (2 op, CSM14111, englanniksi)
 
-Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteellä. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
-
--	Tee vähintään 25 tehtävää osasta 10. 
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-af7b3535-d187-4999-985e-518c66a4a09b)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native</a>. 
 
 #### Osa 11 - Full Stack ‑websovelluskehitys: jatkuva integraatio (1 op, CSM14112, englanniksi)
 
@@ -121,21 +117,23 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 - Tee kurssikoe palautusjärjestelmässä, lue lisää [täältä](/osa0/yleista#kurssikoe).
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6–8 ja 10) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6-8) 
 
-- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8 ja 10 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. 
+- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osa 8 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. 
 
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 9 ja 11-13) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 9-13) 
 
 Käytännöt selviävät osien materiaalista:
 
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">osa 9</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">osa 110</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">osa 11</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">osa 12</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">osa 13</a>
+
 
 ### Tehtävien palauttaminen
 
@@ -272,6 +270,7 @@ Kurssilla ei ole vuosittaisia versiota. Kurssi on siis käynnissä koko ajan. Jo
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
+- Osa 10 (21.4.2026): Expo-versio ja kirjastot päivitetty
 - Osa 7 (6.4.2026): Webpack korvattu esbuildilla
 - Osa 6 (5.4.2026): Redux korvattu Zustandilla
 - Osa 5 (31.3.2026): Cypressiä käsittelevä osuus poistettu. React Router ja tyylikirjastot siirretty osasta 7 tähän osaan

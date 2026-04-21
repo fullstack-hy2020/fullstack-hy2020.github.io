@@ -138,11 +138,7 @@ Material of part 9 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
 
-By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
-
-- Submit at least 25 exercises for part 10.
-- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-af7b3535-d187-4999-985e-518c66a4a09b).
-- [Request credits for part 10](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 10 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native</a>
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
@@ -170,19 +166,20 @@ Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 
 Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
-#### How to study the course – instructions in a nutshell: parts 8 and 10
+#### How to study the course – instructions in a nutshell: part 8
 
-- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8 and 10 have a separate instance in the submission system
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that part 8 has a separate instance in the submission system
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
     - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately.
 - Mark the part completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
 
-#### How to study the course – instructions in a nutshell: parts 9 and 11-13
+#### How to study the course – instructions in a nutshell: parts 9-13
 
 All practicalities are explained in the new course pages
 
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">part 9</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">part 10</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">part 11</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">part 12</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">part 13</a>
@@ -327,6 +324,7 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
+- Part 10 (21st April): Expo version and libraries updated
 - Part 7 (5th April): Webpack replaced with esbuild, error boundaries and keeping the frontend and backend in a single repository covered
 - Part 6 (5th April): Redux replaced with Zustand
 - Part 5 (31st March 2026): React Router and style libraries have been moved from Part 7 to this part

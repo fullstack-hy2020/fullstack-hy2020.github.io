@@ -6,6 +6,7 @@ lang: fi
 
 <div class="intro">
 
-Kurssin kymmenes, React Nativea käsittelevä osa löytyy [englanninkielisestä kurssimateriaalista](/en/part10).
+Osan 9 materiaali on siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">
+    https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native</a>
 
 </div>
