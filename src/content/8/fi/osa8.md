@@ -6,14 +6,8 @@ lang: fi
 
 <div class="intro">
 
-Kurssin uudessa osassa käsitellään GraphQL:ää, eli Facebookin kehittämää, RESTille vaihtoehtoista tapaa selaimen ja palvelimen väliseen kommunikointiin.
+Huomaa, että osan 8 materiaali on siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql</a>
 
-Katso <a target="_BLANK" href='https://www.youtube.com/watch?v=R7bXa7g6YuQ&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm&index=4&t=0s'>täältä</a> Houston Inc:n Niko Salmisen GraphQL:ää käsittelevä vierailuluento.
-
-<i>Osa päivitetty 3.1.2026</i>
-- <i>Apollo Server päivitetty versiosta v4 versioon v5</i>
-- <i>Apollo Client päivitetty versiosta v3 versioon v4</i>
-- <i>Node päivitetty versioon 22.18.0</i>
-- <i>Lisätty ohjeet GraphQL-palvelimen skeeman syntaksikorostuksen käyttöönottoon VS Codessa</i>
+Vanha materiaali on edelleen nähtävillä [täällä](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/0ab0b72f8dddd35ca43c812abd15675a92a1abaa/src/content/8/fi).
 
 </div>

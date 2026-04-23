@@ -126,11 +126,7 @@ By submitting at least 150 of the exercises for parts 0-7 while working on the c
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
 
-By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5 because its contents are independent of parts 6 and 7.
-
-- Submit at least 22/26 exercises for part 8.
-- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f29bbf9e-3dfd-42d3-bdb8-c62be94932f8).
-- [Request credits for part 8](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 8 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql</a>. 
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
 
@@ -166,18 +162,11 @@ Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 
 Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
-#### How to study the course – instructions in a nutshell: part 8
-
-- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that part 8 has a separate instance in the submission system
-    - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
-- If you want to get University of Helsinki credits
-    - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately.
-- Mark the part completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
-
-#### How to study the course – instructions in a nutshell: parts 9-13
+#### How to study the course – instructions in a nutshell: parts 8-13
 
 All practicalities are explained in the new course pages
 
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">part 8</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">part 9</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">part 10</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">part 11</a>

@@ -23,5 +23,4 @@ In this part, we will be using the tools previously introduced to build end-to-e
 
 This part is created by [Tuomo Torppa](https://www.linkedin.com/in/tuomotorppa), [Tuukka Peuraniemi](https://www.linkedin.com/in/tuukkapeuraniemi/) and [Jani Rapo](https://www.linkedin.com/in/jani-rapo-5520817b/), the awesome developers of [Terveystalo](https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/), the largest private healthcare service provider in Finland. Terveystalo’s nationwide network covers 300 locations across Finland. The clinic network is supplemented by 24/7 digital services.
 
-
 </div>

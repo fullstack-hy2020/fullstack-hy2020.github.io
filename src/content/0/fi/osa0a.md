@@ -82,10 +82,7 @@ Suorittamalla vähintään 150 tehtävää kurssin osista 0–7 ydinkurssin suor
 
 #### Osa 8 - Full Stack ‑websovelluskehitys: GraphQL (1 op, CSM14113)
 
-Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen, sillä sen sisältö ei riipu osista 6 ja 7.
--	Tee vähintään 22/26 tehtävää osasta 8. 
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f29bbf9e-3dfd-42d3-bdb8-c62be94932f8)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql</a>
 
 #### Osa 9 - Full Stack ‑websovelluskehitys: TypeScript (1 op, CSM14110, englanniksi)
 
@@ -117,17 +114,18 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 - Tee kurssikoe palautusjärjestelmässä, lue lisää [täältä](/osa0/yleista#kurssikoe).
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6-8) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6 ja 7) 
 
 - Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osa 8 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. 
 
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 9-13) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 8-13) 
 
 Käytännöt selviävät osien materiaalista:
 
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">osa 8</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">osa 9</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">osa 110</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">osa 11</a>
