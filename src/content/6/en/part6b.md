@@ -1010,7 +1010,7 @@ act(() => {
 })
 ```
 
-Lopuksi tapahtuu testin ekspektaatio:
+Finally, the test expectation occurs:
 
 ```js
 expect(counter.current).toBe(0)
