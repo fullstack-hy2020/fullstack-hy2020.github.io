@@ -9,6 +9,7 @@ import InfoBanner from './InfoBanner';
 import InfoBanner2 from './InfoBanner2';
 import InfoBanner3 from './InfoBanner3';
 import InfoBanner4 from './InfoBanner4';
+import InfoBannerNextJs from './InfoBannerNextJs';
 import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
@@ -17,6 +18,7 @@ const BANNER_TO_KEY = 'part_10_changes';
 const BANNER3_TO_KEY = 'part_7_changes';
 const BANNER2_TO_KEY = 'part_6_changes';
 const BANNER4_TO_KEY = 'part_8_changes';
+const BANNER_NEXT_JS_KEY = 'part_14_changes';
 
 const Layout = (props) => {
   const { i18n } = useTranslation();
@@ -28,6 +30,7 @@ const Layout = (props) => {
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
   const [visible4, setVisible4] = useState(false);
+  const [nextJsVisible, setNextJsVisible] = useState(false);
 
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY);
@@ -61,6 +64,13 @@ const Layout = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    const key = localStorage.getItem(BANNER_NEXT_JS_KEY);
+    if (!key) {
+      setNextJsVisible(true);
+    }
+  }, []);
+
   const hideNote = () => {
     console.log('hideNote');
     localStorage.setItem(BANNER_TO_KEY, 'yes');
@@ -85,6 +95,12 @@ const Layout = (props) => {
     setVisible4(false);
   };
 
+  const hideNextJsNote = () => {
+    console.log('hideNote');
+    localStorage.setItem(BANNER_NEXT_JS_KEY, 'yes');
+    setNextJsVisible(false);
+  };
+
   return (
     <div className="main-wrapper">
       <SkipToContent isCoursePage={isCoursePage} />
@@ -98,6 +114,12 @@ const Layout = (props) => {
       <InfoBanner3 onHide={() => hideNote3()} visible={visible3} />
 
       <InfoBanner4 onHide={() => hideNote4()} visible={visible4} />
+
+      <InfoBannerNextJs
+        language={siteLanguage}
+        onHide={() => hideNextJsNote()}
+        visible={nextJsVisible}
+      />
 
       <main id="main-content">{children}</main>
 
