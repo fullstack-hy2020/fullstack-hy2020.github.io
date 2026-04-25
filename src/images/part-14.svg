@@ -1,0 +1,40 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1024">
+  <defs>
+    <style>.cls-1{fill:#e1e1e1;}.cls-2{fill:#fff;}</style>
+  </defs>
+  <!-- Row 1 boxes -->
+  <rect class="cls-2" x="290" y="162" width="150" height="150"/>
+  <path d="M440,315H290a3,3,0,0,1-3-3V162a3,3,0,0,1,3-3H440a3,3,0,0,1,3,3V312A3,3,0,0,1,440,315Zm-147-6H437V165H293Z"/>
+  <rect class="cls-2" x="565" y="162" width="150" height="150"/>
+  <path d="M715,315H565a3,3,0,0,1-3-3V162a3,3,0,0,1,3-3H715a3,3,0,0,1,3,3V312A3,3,0,0,1,715,315Zm-147-6H712V165H568Z"/>
+  <rect class="cls-2" x="840" y="162" width="150" height="150"/>
+  <path d="M990,315H840a3,3,0,0,1-3-3V162a3,3,0,0,1,3-3H990a3,3,0,0,1,3,3V312A3,3,0,0,1,990,315Zm-147-6H987V165H843Z"/>
+  <!-- Row 2 boxes -->
+  <rect class="cls-2" x="290" y="437" width="150" height="150"/>
+  <path d="M440,590H290a3,3,0,0,1-3-3V437a3,3,0,0,1,3-3H440a3,3,0,0,1,3,3V587A3,3,0,0,1,440,590Zm-147-6H437V440H293Z"/>
+  <rect class="cls-2" x="565" y="437" width="150" height="150"/>
+  <path d="M715,590H565a3,3,0,0,1-3-3V437a3,3,0,0,1,3-3H715a3,3,0,0,1,3,3V587A3,3,0,0,1,715,590Zm-147-6H712V440H568Z"/>
+  <rect class="cls-2" x="840" y="437" width="150" height="150"/>
+  <path d="M990,590H840a3,3,0,0,1-3-3V437a3,3,0,0,1,3-3H990a3,3,0,0,1,3,3V587A3,3,0,0,1,990,590Zm-147-6H987V440H843Z"/>
+  <!-- Row 3 boxes -->
+  <rect class="cls-2" x="290" y="712" width="150" height="150"/>
+  <path d="M440,865H290a3,3,0,0,1-3-3V712a3,3,0,0,1,3-3H440a3,3,0,0,1,3,3V862A3,3,0,0,1,440,865Zm-147-6H437V715H293Z"/>
+  <rect class="cls-1" x="565" y="712" width="150" height="150"/>
+  <path d="M715,865H565a3,3,0,0,1-3-3V712a3,3,0,0,1,3-3H715a3,3,0,0,1,3,3V862A3,3,0,0,1,715,865Zm-147-6H712V715H568Z"/>
+  <!-- N letter in center box -->
+  <path d="M593,462v76h10v-55l56,55h10V462h-10v54l-56-54Z"/>
+  <!-- Horizontal connectors row 1 -->
+  <path d="M443,234h119a3,3,0,0,1,0,6H443a3,3,0,0,1,0-6Z"/>
+  <path d="M718,234h119a3,3,0,0,1,0,6H718a3,3,0,0,1,0-6Z"/>
+  <!-- Horizontal connectors row 2 -->
+  <path d="M443,509h119a3,3,0,0,1,0,6H443a3,3,0,0,1,0-6Z"/>
+  <path d="M718,509h119a3,3,0,0,1,0,6H718a3,3,0,0,1,0-6Z"/>
+  <!-- Vertical connectors col 1 -->
+  <path d="M368,315v119a3,3,0,0,1-6,0V315a3,3,0,0,1,6,0Z"/>
+  <path d="M368,590v119a3,3,0,0,1-6,0V590a3,3,0,0,1,6,0Z"/>
+  <!-- Vertical connectors col 2 -->
+  <path d="M643,315v119a3,3,0,0,1-6,0V315a3,3,0,0,1,6,0Z"/>
+  <path d="M643,590v119a3,3,0,0,1-6,0V590a3,3,0,0,1,6,0Z"/>
+  <!-- Vertical connectors col 3 -->
+  <path d="M918,315v119a3,3,0,0,1-6,0V315a3,3,0,0,1,6,0Z"/>
+</svg>

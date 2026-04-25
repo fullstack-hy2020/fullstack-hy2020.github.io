@@ -104,6 +104,12 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 
 Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases</a>.
 
+#### Osa 14 - Full Stack Web Development: Next.js
+
+Materiaali osoitteessa <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs</a>
+
+Opintopisteitä tästä osasta on mahdollista saada 1.8.2026 alkaen.
+
 ### Suoritusohjeet pähkinänkuoressa
 
 #### Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081) 
@@ -121,7 +127,7 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 8-13) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 8-14) 
 
 Käytännöt selviävät osien materiaalista:
 
@@ -131,7 +137,7 @@ Käytännöt selviävät osien materiaalista:
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">osa 11</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">osa 12</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">osa 13</a>
-
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">osa 14</a>
 
 ### Tehtävien palauttaminen
 
@@ -268,6 +274,7 @@ Kurssilla ei ole vuosittaisia versiota. Kurssi on siis käynnissä koko ajan. Jo
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
+- Osa 14 (25.4.2026): uusi osa lisätty
 - Osa 10 (21.4.2026): Expo-versio ja kirjastot päivitetty
 - Osa 7 (6.4.2026): Webpack korvattu esbuildilla
 - Osa 6 (5.4.2026): Redux korvattu Zustandilla

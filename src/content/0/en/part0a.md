@@ -148,6 +148,12 @@ Material of part 12 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 
 Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases</a>. All practicalities are explained there.
 
+#### Part 14 - Full Stack Web Development: Next.js
+
+Material in address <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs</a>
+
+Note that university credits of this part are available starting 1st August 2026
+
 ### Studying the course in a nutshell
 
 #### How to study the course – instructions in a nutshell: 5 cr core course CSM141081
@@ -162,7 +168,7 @@ Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 
 Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
-#### How to study the course – instructions in a nutshell: parts 8-13
+#### How to study the course – instructions in a nutshell: parts 8-14
 
 All practicalities are explained in the new course pages
 
@@ -172,6 +178,8 @@ All practicalities are explained in the new course pages
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">part 11</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">part 12</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">part 13</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">part 14</a>
+
 
 ### Submitting exercises
 
@@ -313,9 +321,10 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
-- Part 10 (21st April): Expo version and libraries updated
-- Part 7 (5th April): Webpack replaced with esbuild, error boundaries and keeping the frontend and backend in a single repository covered
-- Part 6 (5th April): Redux replaced with Zustand
+- Part 14 (25th April 2026): new part added
+- Part 10 (21st April 2026): Expo version and libraries updated
+- Part 7 (5th April 2026): Webpack replaced with esbuild, error boundaries and keeping the frontend and backend in a single repository covered
+- Part 6 (5th April 2026): Redux replaced with Zustand
 - Part 5 (31st March 2026): React Router and style libraries have been moved from Part 7 to this part
 - Parts 9, 11-13 (March 2026): content updated and material moved to new platform
 - Part 8: (3th January 2026) Apollo Server updated to v5. Apollo Client updated to v4. Refactoring backend code moved to part8c. Lot's of other small improvements.
