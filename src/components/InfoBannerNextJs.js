@@ -46,7 +46,7 @@ const InfoBannerNextJs = ({ visible, onHide, language }) => {
     outline: 'none',
     backgroundColor: 'transparent',
     border: 'none',
-    color: 'var(--color-text)',
+    color: '#5a4000',
     cursor: 'pointer',
     fontSize: 18,
     lineHeight: 1,
