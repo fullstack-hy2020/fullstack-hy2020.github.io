@@ -1158,8 +1158,6 @@ Copilotin chat mahdollistaa myös suurempien kokonaisuuksien luomisen
 
 Copilotin ja muiden kielimallien antamien vihjeiden hyödyllisyyden aste vaihtelee. Kielimallien ehkä suurin ongelma on [hallusinointi](https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)), ne generoivat välillä täysin vakuuttavan näköisiä vastauksia mitkä kuitenkin ovat täysin päättömiä. Ohjelmoidessa toki hallusinoitu koodi jää usein nopeasti kiinni jos koodi ei toimi. Ongelmallisempia tilanteita ovat ne, missä kielimallin generoima koodi näyttää toimivan, mutta se sisältää vaikeammin havaittavia bugeja tai esim. tietoturvahaavoittuvuuksia.
 
-Toinen ongelma kielimallien soveltamisessa ohjelmistokehitykseen on se, että kielimallien on vaikea "hahmottaa" isompia projekteja, ja esim. generoida toiminnallisuutta, joka edellyttäisi muutoksia useisiin tiedostoihin. Kielimallit eivät myöskään nykyisellään osaa yleistää koodia, eli jos koodissa on esim. olemassaolevia funktioita tai komponentteja, joita kielimalli pystyisi pienin muutoksin hyödyntämään siltä pyydettyyn toiminnallisuuteen, ei kielimalli tähän taivu. Tästä voi olla seurauksena se, että koodikanta rapistuu sillä kielimallit generoivat koodiin paljon toisteisuutta, ks. lisää esim. [täältä](https://visualstudiomagazine.com/articles/2024/01/25/copilot-research.aspx).
-
 Kielimalleja käytettäessä vastuu siis jää aina ohjelmoijalle. 
 
 Kielimallien nopea kehitys asettaa ohjelmointia opiskelevan haastavaan asemaan: kannattaako ja tarvitseeko enää ylipäätään opetella ohjelmointia vanhan liiton tyyliin, kun lähes kaiken saa kielimalleilta valmiina? 
