@@ -363,7 +363,9 @@ The solution works, but it has a significant drawback. Destructuring causes the 
 The best practice in Zustand is therefore to select from the state exactly only those parts that are needed in the given component. A component re-renders only when the part of the state it has selected changes. When instead writing:
 
 ```js
-  const { increment, decrement, zero } = useCounterStore() 
+const increment = useCounterStore(state => state.increment)
+const decrement = useCounterStore(state => state.decrement)
+const zero = useCounterStore(state => state.zero)Ï
 ```
 
 the component no longer reacts to changes in the counter value, because it has not selected it from the state.
