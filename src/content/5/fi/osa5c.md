@@ -569,7 +569,7 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä funktiota _createNote_ uuden muistiinpanon tiedot parametrina.
+Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä createNote-funktiota ja antaa sille uuden muistiinpanon tiedot parametrina.
 
 Testi on seuraavassa:
 
