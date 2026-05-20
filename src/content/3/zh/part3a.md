@@ -371,11 +371,11 @@ app.get('/', (request, response) => {
 })
 ```
 
-<!-- The event handler function accepts two parameters. The first [request](http://expressjs.com/en/4x/api.html#req) parameter contains all of the information of the HTTP request, and the second [response](http://expressjs.com/en/4x/api.html#res) parameter is used to define how the request is responded to.-->
-该事件处理函数接受两个参数。第一个 [request](http://expressjs.com/en/4x/api.html#req) 参数包含 HTTP 请求的所有信息，第二个 [response](http://expressjs.com/en/4x/api.html#res) 参数用于定义如何对请求进行响应。
+<!-- The event handler function accepts two parameters. The first [request](https://expressjs.com/en/5x/api/request/) parameter contains all of the information of the HTTP request, and the second [response](https://expressjs.com/en/5x/api/response/) parameter is used to define how the request is responded to.-->
+该事件处理函数接受两个参数。第一个 [request](https://expressjs.com/en/5x/api/request/) 参数包含 HTTP 请求的所有信息，第二个 [response](https://expressjs.com/en/5x/api/response/) 参数用于定义如何对请求进行响应。
 
-<!-- In our code, the request is answered by using the [send](http://expressjs.com/en/4x/api.html#res.send) method of the _response_ object. Calling the method makes the server respond to the HTTP request by sending a response containing the string <code>\<h1>Hello World!\</h1></code> that was passed to the _send_ method. Since the parameter is a string, Express automatically sets the value of the <i>Content-Type</i> header to be <i>text/html</i>. The status code of the response defaults to 200. -->
-在我们的代码中，请求是通过使用 _response_ 对象的 [send](http://expressjs.com/en/4x/api.html#res.send) 方法响应的。调用该方法会使服务端响应 HTTP 请求，发送一个响应，内容包含传递给 _send_ 方法的 <code>\<h1>Hello World!\</h1></code> 字符串。由于参数是一个字符串，Express 自动将 <i>Content-Type</i> 标头的值设为 <i>text/html</i>。响应的状态码默认为 200。
+<!-- In our code, the request is answered by using the [send](https://expressjs.com/en/5x/api/response/#ressendbody) method of the _response_ object. Calling the method makes the server respond to the HTTP request by sending a response containing the string <code>\<h1>Hello World!\</h1></code> that was passed to the _send_ method. Since the parameter is a string, Express automatically sets the value of the <i>Content-Type</i> header to be <i>text/html</i>. The status code of the response defaults to 200. -->
+在我们的代码中，请求是通过使用 _response_ 对象的 [send](https://expressjs.com/en/5x/api/response/#ressendbody) 方法响应的。调用该方法会使服务端响应 HTTP 请求，发送一个响应，内容包含传递给 _send_ 方法的 <code>\<h1>Hello World!\</h1></code> 字符串。由于参数是一个字符串，Express 自动将 <i>Content-Type</i> 标头的值设为 <i>text/html</i>。响应的状态码默认为 200。
 
 <!-- We can verify this from the <i>Network</i> tab in developer tools:-->
 我们可以在开发者工具中的<i>网络</i>标签页中验证：
@@ -391,8 +391,8 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-<!-- The request is responded to with the [json](http://expressjs.com/en/4x/api.html#res.json) method of the _response_ object. Calling the method will send the __notes__ array that was passed to it as a JSON formatted string. Express automatically sets the <i>Content-Type</i> header with the appropriate value of <i>application/json</i>.-->
-请求是用 _response_ 对象的 [json](http://expressjs.com/en/4x/api.html#res.json) 方法响应的。调用该方法将以 JSON 格式的字符串发送传给它的 __notes__ 数组。Express 自动将 <i>Content-Type</i> 标头设为合适值 <i>application/json</i>。
+<!-- The request is responded to with the [json](https://expressjs.com/en/5x/api/response/#resjsonbody) method of the _response_ object. Calling the method will send the __notes__ array that was passed to it as a JSON formatted string. Express automatically sets the <i>Content-Type</i> header with the appropriate value of <i>application/json</i>.-->
+请求是用 _response_ 对象的 [json](https://expressjs.com/en/5x/api/response/#resjsonbody) 方法响应的。调用该方法将以 JSON 格式的字符串发送传给它的 __notes__ 数组。Express 自动将 <i>Content-Type</i> 标头设为合适值 <i>application/json</i>。
 
 ![](../../images/3/6new.png)
 
@@ -522,14 +522,14 @@ npm run dev
 <!-- ### Fetching a single resource -->
 ### 获取单个资源
 
-<!-- Let's expand our application so that it offers a REST interface for operating on individual notes. First let's create a [route](http://expressjs.com/en/guide/routing.html) for fetching a single resource.-->
-让我们扩展我们的应用，使其提供一个 REST 接口来操作单个笔记。首先，让我们创建一个用来获取单个资源的[路由](http://expressjs.com/en/guide/routing.html)。
+<!-- Let's expand our application so that it offers a REST interface for operating on individual notes. First let's create a [route](https://expressjs.com/en/5x/guide/routing/) for fetching a single resource.-->
+让我们扩展我们的应用，使其提供一个 REST 接口来操作单个笔记。首先，让我们创建一个用来获取单个资源的[路由](https://expressjs.com/en/5x/guide/routing/)。
 
 <!-- The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.-->
 我们将为单个笔记使用的唯一地址的形式是 <i>notes/10</i>，其中末尾的数字指笔记的唯一 id。
 
-<!-- We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax:-->
-在 Express 中，可以用冒号语法来为路由定义[参数](http://expressjs.com/en/guide/routing.html#route-parameters)：
+<!-- We can define [parameters](https://expressjs.com/en/5x/guide/routing/#route-parameters) for routes in express by using the colon syntax:-->
+在 Express 中，可以用冒号语法来为路由定义[参数](https://expressjs.com/en/5x/guide/routing/#route-parameters)：
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -542,8 +542,8 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Now <code>app.get('/api/notes/:id', ...)</code> will handle all HTTP GET requests that are of the form <i>/api/notes/SOMETHING</i>, where <i>SOMETHING</i> is an arbitrary string.-->
 现在 <code>app.get('/api/notes/:id', ...)</code> 将处理所有形式为 <i>/api/notes/SOMETHING</i> 的 HTTP GET 请求，其中 <i>SOMETHING</i> 是一个任意的字符串。
 
-<!-- The <i>id</i> parameter in the route of a request can be accessed through the [request](http://expressjs.com/en/api.html#req) object: -->
-请求的路由中的 <i>id</i> 参数可以通过 [request](http://expressjs.com/en/api.html#req) 对象访问：
+<!-- The <i>id</i> parameter in the route of a request can be accessed through the [request](https://expressjs.com/en/5x/api/request/) object: -->
+请求的路由中的 <i>id</i> 参数可以通过 [request](https://expressjs.com/en/5x/api/request/) 对象访问：
 
 ```js
 const id = request.params.id
@@ -591,8 +591,8 @@ app.get('/api/notes/:id', (request, response) => {
 ```
 
 
-<!-- Since no data is attached to the response, we use the [status](http://expressjs.com/en/4x/api.html#res.status) method for setting the status, and the [end](http://expressjs.com/en/4x/api.html#res.end) method for responding to the request without sending any data.-->
-由于响应中没有数据，我们使用 [status](http://expressjs.com/en/4x/api.html#res.status) 方法来设置状态，并使用 [end](http://expressjs.com/en/4x/api.html#res.end) 方法来响应请求，而不发送任何数据。
+<!-- Since no data is attached to the response, we use the [status](https://expressjs.com/en/5x/api/response/#resstatuscode) method for setting the status, and the [end](https://expressjs.com/en/5x/api/response/#resenddata-encoding-callback) method for responding to the request without sending any data.-->
+由于响应中没有数据，我们使用 [status](https://expressjs.com/en/5x/api/response/#resstatuscode) 方法来设置状态，并使用 [end](https://expressjs.com/en/5x/api/response/#resenddata-encoding-callback) 方法来响应请求，而不发送任何数据。
 
 <!-- The if-condition leverages the fact that all JavaScript objects are [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), meaning that they evaluate to true in a comparison operation. However, _undefined_ is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) meaning that it will evaluate to false.-->
 if 条件利用了这样一个事实——所有 JavaScript 对象都是[真值](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)，也就是在比较操作中会被计算为 true。然而，_undefined_ 是[假值](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)，也就是会被计算为 false。
@@ -682,8 +682,8 @@ app.delete('/api/notes/:id', (request, response) => {
 <!-- Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.rfc-editor.org/rfc/rfc9112#name-message-body) in JSON format. -->
 接下来，让我们实现向服务端添加新笔记的功能。添加笔记是通过向地址 <http://localhost:3001/api/notes> 发送 HTTP POST 请求，并在请求[体](https://www.rfc-editor.org/rfc/rfc9112#name-message-body)中以 JSON 格式发送新笔记的所有信息来完成的。 
 
-<!-- To access the data easily, we need the help of the Express [json-parser](https://expressjs.com/en/api.html) that we can use with the command _app.use(express.json())_. -->
-为了方便地访问数据，我们需要借助 Express [json-parser](https://expressjs.com/en/api.html)，可以通过命令 _app.use(express.json())_ 来使用它。
+<!-- To access the data easily, we need the help of the Express [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) that we can use with the command _app.use(express.json())_. -->
+为了方便地访问数据，我们需要借助 Express [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions)，可以通过命令 _app.use(express.json())_ 来使用它。
 
 <!-- Let's activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:-->
 让我们启用 json-parser 并实现处理 HTTP POST 请求的处理函数的初始版本。
@@ -781,8 +781,8 @@ Postman 也允许用户保存请求，但情况可能变得相当混乱，特别
 
 > <!-- **Important sidenote**-->
 > **重要的附注**
-> <!-- Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.-->
-> 有时当你在调试时，你可能想找出 HTTP 请求中设了哪些标头。一种方法是通过 _request_ 对象的 [get](http://expressjs.com/en/4x/api.html#req.get) 方法获取单个标头的值。_request_ 对象还有 <i>headers</i> 属性，包含某个请求的所有标头。
+> <!-- Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](https://expressjs.com/en/5x/api/request/#reqgetfield) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.-->
+> 有时当你在调试时，你可能想找出 HTTP 请求中设了哪些标头。一种方法是通过 _request_ 对象的 [get](https://expressjs.com/en/5x/api/request/#reqgetfield) 方法获取单个标头的值。_request_ 对象还有 <i>headers</i> 属性，包含某个请求的所有标头。
 > <!-- Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which leads to the backend server not knowing that the data it has received is in the JSON format.-->
 > 在 VS REST Client 中，如果你不小心在第一行和指定 HTTP 标头的行之间添加了一个空行，就会出现问题。在这种情况下，REST Client 会将其解释为所有的标头都是空的，这会导致后端服务端不知道收到的数据是 JSON 格式的。
 > <!-- You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.-->
@@ -1069,8 +1069,8 @@ POST 是唯一的既不<i>安全</i>也不<i>幂等</i>的 HTTP 请求类型。�
 <!-- ### Middleware -->
 ### 中间件
 
-<!-- The Express [json-parser](https://expressjs.com/en/api.html) used earlier is a [middleware](http://expressjs.com/en/guide/using-middleware.html). -->
-之前使用的 Express [json-parser](https://expressjs.com/en/api.html) 是一个[中间件](http://expressjs.com/en/guide/using-middleware.html)。
+<!-- The Express [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) used earlier is a [middleware](https://expressjs.com/en/resources/middleware/body-parser/). -->
+之前使用的 Express [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) 是一个[中间件](https://expressjs.com/en/resources/middleware/body-parser/)。
 
 <!-- Middleware are functions that can be used for handling _request_ and _response_ objects.-->
 中间件是可以用来处理 _request_ 和 _response_ 对象的函数。
