@@ -9,9 +9,7 @@ lang: en
 
 Next, let's connect the frontend we made in [part 2](/en/part2) to the Express backend we built in part 3a.
 
-In part 2, the frontend fetched notes from json-server at http://localhost:3001/notes. The Express backend we built in this part has a slightly different URL structure — notes are now at http://localhost:3001/api/notes.
-
-Our backend has a slightly different URL structure now, as the notes can be found at <http://localhost:3001/api/notes>. Let's change the attribute __baseUrl__ in the frontend notes app at <i>src/services/notes.js</i> like so:
+In part 2, the frontend fetched notes from json-server at http://localhost:3001/notes. The Express backend we built in this part has a slightly different URL structure — notes are now at http://localhost:3001/api/notes. Let's change the attribute __baseUrl__ in the frontend notes app at <i>src/services/notes.js</i> like so:
 
 ```js
 import axios from 'axios'
