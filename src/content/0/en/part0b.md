@@ -582,7 +582,7 @@ The rise of the single-page app brought several more "modern" ways of web develo
 However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and that Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not received too warm of a welcome.
 
 Currently, the most popular tool for implementing the browser-side logic of web applications is Facebook's [React](https://react.dev/) library.
-During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux) library, which are frequently used together.
+During this course, we will get familiar with React and the [Zustand](https://github.com/pmndrs/zustand) library, which are frequently used together.
 
 The status of React seems strong, but the world of JavaScript is ever-changing. For example, recently a newcomer - [VueJS](https://vuejs.org/) - has been capturing some interest.
 
