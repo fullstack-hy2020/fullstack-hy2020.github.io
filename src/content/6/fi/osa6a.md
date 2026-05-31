@@ -402,7 +402,7 @@ const Controls = () => {
 
 Nyt uudelleenrenderöitymistä ei tapahdu, sillä tilasta on valittu ainoastaan funktiot, jotka pysyvät koko tilan elinajan samana.
 
-Joidenkin [parhaiden käytänteiden](https://tkdodo.eu/blog/working-with-zustand#only-export-custom-hooks) mukaan, koko tilan määrittelevää funktiota ei kannata exportata koko ohjelman käyttöön. Sen sijaan kannattaa luoda siitä pienempiä näkymiä, jotka paljastavat vain tarvittavat osat tilasta. Muokataan tilaa <i>state.js</i> seuraavasti:
+Joidenkin [parhaiden käytänteiden](https://tkdodo.eu/blog/working-with-zustand#only-export-custom-hooks) mukaan, koko tilan määrittelevää funktiota ei kannata exportata koko ohjelman käyttöön. Sen sijaan kannattaa luoda siitä pienempiä näkymiä, jotka paljastavat vain tarvittavat osat tilasta. Muokataan tiedostoa <i>store.js</i> seuraavasti:
 
 ```js
 import { create } from 'zustand'
