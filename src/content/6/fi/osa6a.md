@@ -776,7 +776,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 <div class="tasks">
 
-### Tehtävät 6.2.-6.6.
+### Tehtävät 6.2.-6.5.
 
 Toteutetaan uusi versio ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2020/zustand-anecdotes oleva projekti.
 
