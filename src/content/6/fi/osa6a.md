@@ -588,7 +588,7 @@ export const useNoteActions = () => useNoteStore(state => state.actions)
 > state => ({ notes: [...state.notes, note] })
 > ```
 >
-> Tässä siis muodostetaan taulukko, johon otetaan spread-syntaksilla jokainen taulukon <i>state.notes</i> alkioista sekä lisätään vielä loppuun uusi muistiinpano <i>notes</i>. On makuasia, käyttääkö spreadia vai funktiota <i>concat</i>.
+> Tässä siis muodostetaan taulukko, johon otetaan spread-syntaksilla jokainen taulukon <i>state.notes</i> alkioista sekä lisätään vielä loppuun uusi muistiinpano <i>note</i>. On makuasia, käyttääkö spreadia vai funktiota <i>concat</i>.
 
 Teknisesti ilmaisten Zustandilla muodostettu tila on [muuttumaton (engl. immutable)](https://developer.mozilla.org/en-US/docs/Glossary/Immutable), ja tilaa muuttavien action-funktioiden tulee olla [puhtaita funktioita](https://en.wikipedia.org/wiki/Pure_function).
 
@@ -810,7 +810,7 @@ Voit pitää lisäyslomakkeen aiemman esimerkin tapaan [ei-kontrolloituna](/osa6
 
 #### 6.4: anekdootit, step3
 
-Eriytä uuden anekdootin luominen omaksi komponentikseen nimeltään <i>AnecdoteForm</i> ja Eriytä anekdoottilistan näyttäminen omaksi komponentikseen nimeltään <i>AnecdoteList</i>.
+Eriytä uuden anekdootin luominen omaksi komponentikseen nimeltään <i>AnecdoteForm</i> ja eriytä anekdoottilistan näyttäminen omaksi komponentikseen nimeltään <i>AnecdoteList</i>.
 
 Tämän tehtävän jälkeen komponentin <i>App</i> pitäisi näyttää seuraavalta:
 
