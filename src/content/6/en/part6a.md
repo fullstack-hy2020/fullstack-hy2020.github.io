@@ -774,7 +774,7 @@ The current code of the application is available in its entirety on [GitHub](htt
 
 <div class="tasks">
 
-### Exercises 6.2.-6.6.
+### Exercises 6.2.-6.5.
 
 Let's implement a new version of the anecdote voting application from Part 1. Use the project at https://github.com/fullstack-hy2020/zustand-anecdotes as the base for your solution.
 
