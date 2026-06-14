@@ -420,7 +420,7 @@ const Note = ({ note }) => {
 }
 ```
 
-Une façon de faire cela serait d'utiliser le hook [useMatch](https://reactrouter.com/en/v6.3.0/api#usematch) de React Router pour déterminer l'identifiant de la note à afficher dans le composant _App_.
+Une façon de faire cela serait d'utiliser le hook [useMatch](https://reactrouter.com/api/hooks/useMatch) de React Router pour déterminer l'identifiant de la note à afficher dans le composant _App_.
 
 Il n'est pas possible d'utiliser le hook <i>useMatch</i> dans le composant qui définit la partie routée de l'application. Déplaçons l'utilisation des composants Router depuis App:
 
