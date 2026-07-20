@@ -7,1182 +7,1104 @@ lang: es
 
 <div class="content">
 
-[Cypress](https://www.cypress.io/) ha sido la librería de pruebas E2E más popular durante los últimos años, pero Playwright está ganando terreno rápidamente. Este curso ha estado usando Cypress durante años. Ahora, Playwright es una nueva adición. Puedes elegir si completar la parte de pruebas E2E del curso con Cypress o Playwright. Los principios operativos de ambas librerías son muy similares, así que tu elección no es muy importante. Sin embargo, ahora Playwright es la librería E2E preferida para el curso.
+La interfaz de usuario de nuestra aplicación es actualmente bastante básica:
 
-Si tu elección es Cypress, por favor continúa. Si terminas usando Playwright, ve [aquí](/es/part5/pruebas_de_extremo_a_extremo_playwright).
+![](../../images/5/u1.png)
 
-### Cypress
+Queremos cambiar eso. Comencemos con la estructura de navegación de la aplicación.
 
-La librería E2E [Cypress](https://www.cypress.io/) se ha vuelto popular durante los últimos años. Cypress es excepcionalmente fácil de usar y, en comparación con Selenium, por ejemplo, requiere mucha menos molestia y dolor de cabeza. Su principio operativo es radicalmente diferente al de la mayoría de las librerías de prueba E2E, porque las pruebas Cypress se ejecutan completamente dentro del navegador. Otras librerías ejecutan las pruebas en un proceso de Node, que está conectado al navegador a través de una API.
+Es muy común que las aplicaciones web tengan una barra de navegación que permite a los usuarios cambiar entre diferentes vistas dentro de la aplicación. Nuestra aplicación para tomar notas podría incluir una página de inicio:
 
-Hagamos algunas pruebas de extremo a extremo para nuestra aplicación de notas.
+![](../../images/5/u6.png)
 
-A diferencia de las pruebas de backend o las pruebas unitarias realizadas en el front-end de React, las pruebas de extremo a extremo no necesitan estar ubicadas en el mismo proyecto npm donde está el código. Hagamos un proyecto completamente separado para las pruebas E2E con el comando _npm init_. Luego instala Cypress en <i>el nuevo proyecto</i> como una dependencia de desarrollo.
+y una página separada para ver notas:
 
-```js
-npm install --save-dev cypress
-```
+![](../../images/5/u7.png)
 
-y agregando un script npm para ejecutarlo:
+así como una página para crear notas:
 
-```js
-{
-  // ...
-  "scripts": {
-    "cypress:open": "cypress open"  // highlight-line
-  },
-  // ...
-}
-```
+![](../../images/5/u8.png)
 
-También le hacemos un pequeño cambio al script que inicia la aplicación, sin este cambio Cypress no puede acceder a ella.
+[En una aplicación web tradicional](/es/part0/fundamentos_de_las_aplicaciones_web#aplicaciones-web-tradicionales), cambiar entre las páginas mostradas por la aplicación implicaba que el navegador enviara una nueva solicitud HTTP GET al servidor y luego renderizara el código HTML devuelto por el servidor, que correspondía a la nueva vista.
 
-A diferencia de las pruebas unitarias del frontend, las pruebas de Cypress pueden estar en el repositorio frontend o backend, o incluso en su propio repositorio separado.
+Sin embargo, en las aplicaciones de una sola página, en realidad estás en la misma página todo el tiempo y el código JavaScript ejecutado en el navegador crea la ilusión de diferentes "páginas". Si se realizan solicitudes HTTP al cambiar de vista, se utilizan únicamente para recuperar datos con formato JSON que pueden ser necesarios para mostrar la nueva vista.
 
-Las pruebas requieren que el sistema bajo prueba esté funcionando. A diferencia de nuestras pruebas de integración de backend, las pruebas de Cypress <i>no inician</i> el sistema cuando se ejecutan.
+Una aplicación con una barra de navegación y múltiples vistas sería fácil de implementar con React, por ejemplo, haciendo que el estado de la aplicación <i>page</i> recuerde en qué página se encuentra el usuario y muestre la vista correcta en función de esto:
 
-Agreguemos un script npm al <i>backend </i> que lo inicia en modo de prueba, o para que <i>NODE\\_ENV </i> sea <i>test</i>.
 
 ```js
-{
-  // ...
-  "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
-    "lint": "eslint .",
-    "test": "jest --verbose --runInBand",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
-  },
-  // ...
-}
-```
+const App = () => {
+  const [page, setPage] = useState('home')
 
-**NB** Para conseguir que Cypress funcione con WSL2 se debe realizar una configuración preliminar. Estos dos [enlaces](https://docs.cypress.io/guides/references/advanced-installation#Windows-Subsystem-for-Linux) son buenos lugares para [iniciar](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
-
-Cuando tanto el backend como el frontend están ejecutándose, podemos iniciar Cypress con el comando
-
-```js
-npm run cypress:open
-```
-
-Cypress nos pregunta qué tipo de prueba realizaremos. Debemos elegir "E2E Testing":
-
-![flecha apuntando a opción e2e en menú de cypress](../../images/5/51new.png)
-
-A continuación debemos elegir un navegador (por ejemplo Chrome) y luego debemos hacer click en "Create new spec":
-
-![flecha apuntando a crear nuevo spec en menú de cypress](../../images/5/52new.png)
-
-Creemos el archivo de prueba <i>cypress/e2e/note\_app.cy.js</i>:
-
-![ubicación de archivo de prueba de cypress en cypress/e2e/note_app.cy.js](../../images/5/53new.png)
-
-Podemos editar la prueba en Cypress, pero usemos en cambio VS Code:
-
-![vscode mostrando cambios en la prueba y cypress mostrando que la prueba fue agregada](../../images/5/54new.png)
-
-Ahora podemos cerrar la vista de edición de Cypress.
-
-Cambiemos el contenido de la prueba como se muestra a continuación:
-
-```js
-describe('Note app', function() {
-  it('front page can be opened', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
-})
-```
-
-La prueba se ejecuta haciendo clic en ella en Cypress:
-
-Ejecutar la prueba muestra cómo se comporta la aplicación mientras esta se ejecuta:
-
-![cypress mostrando la automatización de la prueba de notas](../../images/5/56new.png)
-
-La estructura de la prueba debería resultar familiar. Utilizan bloques <i>describe</i> para agrupar diferentes casos de prueba, al igual que Jest. Los casos de prueba se han definido con el método <i>it</i>. Cypress tomó estas partes de la librería de pruebas [Mocha](https://mochajs.org/) a la que utiliza bajo el capó.
-
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) y [cy.contains](https://docs.cypress.io/api/commands/contains.html) son comandos de Cypress, y su propósito es bastante obvio.
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) abre la dirección web dada como parámetro en el navegador utilizado por la prueba. [cy.contains](https://docs.cypress.io/api/commands/contains.html) busca la cadena que recibió como parámetro en la página.
-
-Podríamos haber declarado la prueba usando una función de flecha
-
-```js
-describe('Note app', () => { // highlight-line
-  it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
-})
-```
-
-Sin embargo, Mocha [recomienda](https://mochajs.org/#arrow-functions) que no se utilicen funciones de flecha, porque podrían causar algunos problemas en ciertas situaciones.
-
-Si <i>cy.contains</i> no encuentra el texto que está buscando, la prueba no pasa. Por lo tanto, si extendemos nuestra prueba de la siguiente manera
-
-```js
-describe('Note app', function() {
-  it('front page can be opened',  function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
-
-// highlight-start
-  it('front page contains random text', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('wtf is this app?')
-  })
-// highlight-end
-})
-```
-
-la prueba falla
-
-![cypress mostrando falla al esperar encontrar wtf pero no](../../images/5/57new.png)
-
-Eliminemos el código que falla de la prueba.
-
-La variable _cy_ que utilizan nuestras pruebas nos da un error Eslint molesto
-
-![captura de pantalla de vscode mostrando que cy no está definido](../../images/5/58new.png)
-
-Podemos deshacernos de él instalando [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) como una dependencia de desarrollo
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-y cambiando la configuración en <i>.eslintrc.cjs</i> de la siguiente manera:
-
-```js
-module.exports = {
-  "env": {
-    browser: true,
-    es2020: true,
-    "jest/globals": true,
-    "cypress/globals": true // highlight-line
-  },
-  "extends": [ 
-    // ...
-  ],
-  "parserOptions": {
-    // ...
-  },
-  "plugins": [
-      "react", "jest", "cypress" // highlight-line
-  ],
-  "rules": {
-    // ...
+ const  toPage = (page) => (event) => {
+    event.preventDefault()
+    setPage(page)
   }
-}
-```
 
-### Escribiendo en un formulario
+  const content = () => {
+    if (page === 'home') {
+      return <Home />
+    } else if (page === 'notes') {
+      return <Notes />
+    } else if (page === 'users') {
+      return <Users />
+    }
+  }
 
-Extendamos nuestras pruebas para que nuestra nueva prueba intente iniciar sesión en nuestra aplicación.
-Suponemos que nuestro backend contiene un usuario con el nombre de usuario <i>mluukkai</i> y la contraseña <i>salainen</i>.
-
-La prueba comienza abriendo el formulario de inicio de sesión.
-
-```js
-describe('Note app',  function() {
-  // ...
-
-  it('login form can be opened', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('log in').click()
-  })
-})
-```
-
-La prueba primero busca el botón de inicio de sesión por su texto y hace clic en el botón con el comando [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
-
-Nuestras dos pruebas comienzan de la misma manera, abriendo la página <i>http://localhost:5173</i>, por lo que deberíamos extraer el código compartido en un bloque <i>beforeEach</i> que se ejecuta antes de cada prueba:
-
-```js
-describe('Note app', function() {
-  // highlight-start
-  beforeEach(function() {
-    cy.visit('http://localhost:5173')
-  })
-  // highlight-end
-
-  it('front page can be opened', function() {
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
-
-  it('login form can be opened', function() {
-    cy.contains('log in').click()
-  })
-})
-```
-
-El campo de inicio de sesión contiene dos campos de <i>input</i>, en los que la prueba debe escribir.
-
-El comando [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) permite buscar elementos mediante selectores CSS.
-
-Podemos acceda al primer y último campo de input de la página, y escribir en ellos con el comando [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) así:
-
-```js
-it('user can login', function () {
-  cy.contains('log in').click()
-  cy.get('input:first').type('mluukkai')
-  cy.get('input:last').type('salainen')
-})  
-```
-
-La prueba funciona. El problema es que si luego agregamos más campos de input, la prueba se interrumpirá porque espera que los campos que necesita sean el primero y el último en la página.
-
-Sería mejor dar a nuestros inputs <i>IDs</i> únicos y usarlos para encontrarlos.
-Cambiamos nuestro formulario de inicio de sesión de la siguiente manera:
-
-```js
-const LoginForm = ({ ... }) => {
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            id='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            id='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button id="login-button" type="submit"> // highlight-line
-          login
+      <div>
+        <a href="" onClick={toPage('home')} >
+          home
+        </a>
+        <a href="" onClick={toPage('notes')}>
+          notes
+        </a>
+        <a href="" onClick={toPage('users')} >
+          users
+        </a>
+      </div>
+
+      {content()}
+    </div>
+  )
+}
+```
+
+Sin embargo, este método no es óptimo: la URL del sitio web sigue siendo la misma incluso cuando estás en una vista diferente. Sin embargo, cada vista debe tener su propia URL para que los usuarios puedan, por ejemplo, marcar páginas como favoritas. Además, el botón Atrás del navegador no funciona lógicamente si las páginas no tienen direcciones propias; es decir, hacer clic en el botón Atrás no lo llevará a la vista de la aplicación vista anteriormente, sino a otro lugar completamente diferente.
+
+### React Router
+
+Afortunadamente, la librería [React Router](https://reactrouter.com/) ofrece una excelente solución para gestionar la navegación en una aplicación React.
+
+Instalemos React Router:
+
+```bash
+npm install react-router-dom
+```
+
+Creemos un nuevo componente que sirva como página principal de la aplicación.
+
+```js
+const Home = () => {
+  return (
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+  )
+}
+
+export default Home
+```
+
+Extraeremos la vista principal anterior de la aplicación (que estaba en el componente <i>App</i>) a su propio componente, pero moveremos el manejo del estado de las notas fuera del componente:
+
+```js
+// list of notes passed as a parameter
+const NoteList = ({ notes }) => { // highlight-line
+  // content mostly the same as in the App component
+  // reference to NoteForm is removed
+}
+```
+
+El componente <i>App</i> ahora cambia de la siguiente manera
+
+
+```js
+import { useState, useEffect } from 'react'
+import noteService from './services/notes'
+
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from 'react-router-dom'
+import NoteList from './components/NoteList'
+import Home from './components/Home'
+import Footer from './components/Footer'
+import NoteForm from './components/NoteForm'
+
+const App = () => {
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+    noteService.getAll().then(initialNotes => {
+      setNotes(initialNotes)
+    })
+  }, [])
+
+  const addNote = noteObject => {
+    noteService.create(noteObject).then(returnedNote => {
+      setNotes(notes.concat(returnedNote))
+    })
+  }
+
+  const padding = {
+    padding: 5
+  }
+
+  return (
+    // highlight-start
+    <Router>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/create">new note</Link>
+      </div>
+        // highlight-end  
+
+    // highlight-start
+      <Routes>
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote}/>
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <Footer />
+    </Router>
+    // highlight-end
+  )
+}
+
+export default App
+```
+
+El enrutamiento —es decir, el renderizado condicional de componentes según la <i>URL</i> del navegador— se habilita colocando los componentes como hijos de [Router](https://reactrouter.com/api/declarative-routers/Router), dentro de sus etiquetas.
+
+Primero, la barra de navegación de la aplicación se define utilizando el componente [Link](https://reactrouter.com/api/components/Link). El atributo <i>to</i> especifica cómo se cambia la URL del navegador cuando se hace clic en el enlace:
+
+```js
+<div>
+  <Link style={padding} to="/">home</Link>
+  <Link style={padding} to="/notes">notes</Link>
+  <Link style={padding} to="/create">new note</Link>
+</div>
+```
+
+A continuación, el enrutamiento de la aplicación se define utilizando el componente [Routes](https://reactrouter.com/api/components/Routes). Dentro del componente usamos [Route](https://reactrouter.com/api/components/Route) para definir un conjunto de reglas y los componentes que se renderizarán para cada una:
+
+```js
+<Routes>
+  <Route path="/notes" element={
+    <NoteList notes={notes} />
+  } />
+  <Route path="/create" element={
+    <NoteForm createNote={addNote}/>
+  } />
+  <Route path="/" element={<Home />} />
+</Routes>
+```
+
+En la URL raíz de la aplicación se renderiza el componente <i>Home</i>:
+
+![](../../images/5/u2.png)
+
+Al hacer clic en "notas" en la barra de navegación, la dirección del navegador cambia a <i>notes</i> y se renderiza el componente <i>NoteList</i>:
+
+![](../../images/5/u3.png)
+
+De manera similar, al hacer clic en "nueva nota", la URL pasa a ser <i>create</i> y se renderiza el componente <i>NoteForm</i>.
+
+En una página web normal, cambiar la dirección en la barra de direcciones del navegador hace que la página se vuelva a cargar. Sin embargo, cuando se usa React Router, esto no sucede; en cambio, el enrutamiento se maneja completamente a través de JavaScript en la interfaz.
+
+El componente del enrutador que utilizamos es [BrowserRouter](https://reactrouter.com/en/main/router-components/browser-router):
+
+```js
+import {
+  BrowserRouter as Router, // highlight-line
+  Routes, Route, Link
+} from 'react-router-dom'
+```
+
+Según la [documentación](https://reactrouter.com/en/main/router-components/browser-router)
+
+> <i>BrowserRouter</i> es un <i>Router</i> que utiliza la API de historial HTML5 (pushState, replaceState y el evento popstate) para mantener su interfaz de usuario sincronizada con la URL.
+
+<i>BrowserRouter</i> utiliza la [API de historial HTML5](https://css-tricks.com/using-the-html5-history-api/) para permitir que la URL en la barra de direcciones del navegador se use para el "enrutamiento" interno dentro de una aplicación React, lo que significa que incluso si la URL en la barra de direcciones cambia, el contenido de la página se manipula únicamente a través de JavaScript y el navegador no carga contenido nuevo desde el servidor. Sin embargo, el comportamiento del navegador con respecto a las funciones de avance y retroceso y los marcadores es intuitivo: funciona igual que en los sitios web tradicionales.
+
+El código actual de la aplicación está disponible en su totalidad en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10), en la rama <i>part5-10</i>.
+
+### Ruta parametrizada
+
+Movamos los detalles de una sola nota a su propia vista, a la que se puede acceder haciendo clic en el nombre de la nota:
+
+![](../../images/5/u4.png)
+
+
+La capacidad de hacer clic en el nombre se ha implementado en el componente <i>NoteList</i> de la siguiente manera:
+
+```js
+import { Link } from 'react-router-dom' // highlight-line
+
+const NoteList = ({ notes }) => {
+  // ...
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <Notification message={errorMessage} />
+
+      {!user && loginForm()}
+
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all'}
         </button>
+      </div>
+      <ul>
+        {notesToShow.map(note => (
+          <li key={note.id}>
+            <Link to={`/notes/${note.id}`}>{note.content}</Link> // highlight-line
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+export default NoteList
+```
+
+Así volvemos a utilizar [Link](https://reactrouter.com/api/components/Link). Por ejemplo, al hacer clic en el nombre de una nota cuyo <i>id</i> es 12345, la URL del navegador se actualiza a <i>notes/12345</i>.
+
+La URL parametrizada se define en el enrutamiento dentro del componente <i>App</i> de la siguiente manera:
+
+```js
+<Router>
+  // ...
+
+  <Routes>
+    // highlight-start
+    <Route path="/notes/:id" element={
+      <Note notes={notes} toggleImportanceOf={toggleImportanceOf} />
+     } />
+    // highlight-end
+    <Route path="/notes" element={<Notes notes={notes} />} />   
+    <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+    <Route path="/login" element={<Login onLogin={login} />} />
+    <Route path="/" element={<Home />} />      
+  </Routes>
+</Router>
+```
+
+La ruta que representa la vista para una sola nota se define en el "estilo Express" marcando el parámetro de ruta con la notación <i>:id</i> de la siguiente manera:
+
+```js
+<Route path="/notes/:id" element={<Note notes={notes} ... />} />
+```
+
+Cuando el navegador navega a la URL única de una nota, por ejemplo, <i>/notes/12345</i>, se representa el componente <i>Note</i>, que ahora hemos tenido que modificar ligeramente:
+
+```js
+import { useParams } from 'react-router-dom' // highlight-line
+
+const Note = ({ notes, toggleImportance }) => {
+  // highlight-start
+  const id = useParams().id
+  const note = notes.find(n => n.id === id)
+  // highlight-end
+
+  const label = note.important ? 'make not important' : 'make important'
+
+  return (
+    <li className="note">
+      <span>{note.content}</span>
+      <button onClick={() => toggleImportance(id)}>{label}</button>
+    </li>
+  )
+}
+
+export default Note
+```
+
+A diferencia de antes, el componente <i>Note</i> ahora recibe todas las notas mediante la prop <i>notes</i> y puede acceder a la parte variable de la URL —en concreto, el <i>id</i> de la nota que se mostrará— mediante el hook [useParams](https://reactrouter.com/api/hooks/useParams) de React Router.
+
+### useNavigate
+
+El backend ya admite la eliminación de notas. Para implementar esto, agreguemos un botón a la página de notas individuales en la aplicación:
+
+![](../../images/5/u5.png)
+
+Agreguemos un controlador al componente <i>App</i> que realiza la eliminación y pasémoslo al componente <i>Note</i>:
+
+```js
+const App = () => {
+
+  // highlight-start
+  const deleteNote = (id) => {
+    noteService.remove(id).then(() => {
+      setNotes(notes.filter(n => n.id !== id))
+    })
+  }
+  // highlight-end
+
+  return (
+      // ...
+
+      <Routes>
+        <Route path="/notes/:id" element={
+          <Note 
+            notes={notes}
+            toggleImportanceOf={toggleImportanceOf}
+            deleteNote={deleteNote} // highlight-line
+          />
+        } />
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote}/>
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <Footer />
+    </Router>
+  )
+}  
+```
+
+El componente <i>Note</i> cambia de la siguiente manera:
+
+```js
+import { useParams, useNavigate } from 'react-router-dom'
+
+const Note = ({ notes, toggleImportanceOf, deleteNote }) => { // highlight-line
+  const id = useParams().id
+  const navigate = useNavigate()  // highlight-line
+  const note = notes.find(n => n.id === id)
+
+  const label = note.important ? 'make not important' : 'make important'
+
+// highlight-start
+  const handleDelete = () => {
+    if (window.confirm(`Delete note "${note.content}"?`)) {
+      deleteNote(id)
+      navigate('/notes')
+    }
+  }
+  // highlight-end
+
+  return (
+    <li className="note">
+      <span>{note.content}</span>
+      <button onClick={() => toggleImportanceOf(id)}>{label}</button>
+      <button onClick={handleDelete}>delete</button>  // highlight-line
+    </li>
+  )
+}
+
+export default Note
+```
+
+Cuando se elimina una nota, el usuario regresa a la página que enumera todas las notas. Esto se hace llamando a la función devuelta por [useNavigate](https://reactrouter.com/api/components/Navigate) de React Router con la URL deseada: <i>navigate('/notes')</i>.
+
+Las funciones [useParams](https://reactrouter.com/api/hooks/useParams) y [useNavigate](https://reactrouter.com/api/components/Navigate) de React Router son hooks, al igual que useState y useEffect, que ya hemos utilizado muchas veces. Como vimos en la parte 1, existen ciertas [reglas](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks) asociadas al uso de hooks.
+
+Modifiquemos también el componente <i>NoteForm</i> para que después de agregar una nueva nota, el usuario acceda a la página que contiene todas las notas:
+
+```js
+import { useState } from 'react' 
+import { useNavigate } from 'react-router-dom' // highlight-line
+
+const NoteForm = ({ createNote }) => {
+  const [newNote, setNewNote] = useState('')
+  const navigate = useNavigate() // highlight-line
+
+  const addNote = event => {
+    event.preventDefault()
+    createNote({
+      content: newNote,
+      important: true
+    })
+
+    navigate('/notes') // highlight-line
+    setNewNote('')
+  }
+
+  return (
+    <div>
+      <h2>Create a new note</h2>
+
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={event => setNewNote(event.target.value)}
+          placeholder="write note content here"
+        />
+        <button type="submit">save</button>
       </form>
     </div>
   )
 }
 ```
 
-También agregamos una ID a nuestro botón submit para que podamos acceder a él en nuestras pruebas.
+### Ruta parametrizada revisada
 
-La prueba se convierte en:
-
-```js
-describe('Note app',  function() {
-  // ..
-  it('user can log in', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')  // highlight-line    
-    cy.get('#password').type('salainen')  // highlight-line
-    cy.get('#login-button').click()  // highlight-line
-
-    cy.contains('Matti Luukkainen logged in') // highlight-line
-  })
-})
-```
-
-La última línea asegura que el inicio de sesión fue exitoso.
-
-Ten en cuenta que el [selector de ID](https://developer.mozilla.org/es/docs/Web/CSS/ID_selectors) de CSS es #, así que si queremos buscar un elemento con el ID <i>username</i> el selector de CSS es <i>#username</i>.
-
-Por favor, ten en cuenta que para que la prueba pase en esta etapa, es necesario que haya un usuario en la base de datos de pruebas del entorno de test del backend, cuyo nombre de usuario sea <i>mluukkai</i> y la contraseña sea <i>salainen</i>. ¡Crea un usuario si es necesario!
-
-### Probando el formulario para agregar notas
-
-A continuación, agreguemos pruebas para probar la funcionalidad "new note":
+Hay un problema ligeramente molesto con la aplicación. El componente _Note_ recibe <i>all notes</i> como props, aunque solo muestra aquella cuyo <i>id</i> coincide con la parte parametrizada de la URL:
 
 ```js
-describe('Note app', function() {
-  // ..
-  // highlight-start
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
-      cy.get('#login-button').click()
-    })
-    // highlight-end
-
-    // highlight-start
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-
-      cy.contains('a note created by cypress')
-    })
-  })
-  // highlight-end
-})
-```
-
-La prueba se ha definido en su propio bloque <i>describe</i>.
-Solo los usuarios registrados pueden crear nuevas notas, por lo que agregamos el inicio de sesión en la aplicación en un bloque <i>beforeEach</i>.
-
-La prueba confía en que al crear una nueva nota, la página contiene solo una entrada, por lo que la busca así:
-
-```js
-cy.get('input')
-```
-
-Si la página tuviera más inputs, la prueba se rompería
-
-![error de cypress: cy.type solo puede ser llamado en un elemento individual](../../images/5/31x.png)
-
-Debido a esto, nuevamente sería mejor darle al input un <i>ID</i> y buscar el elemento por su ID.
-
-La estructura de las pruebas se ve así:
-
-```js
-describe('Note app', function() {
+const Note = ({ notes, toggleImportance }) => { 
+  const id = useParams().id
+  const note = notes.find(n => n.id === Number(id))
   // ...
-
-  it('user can log in', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
-
-    cy.contains('Matti Luukkainen logged in')
-  })
-
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
-      cy.get('#login-button').click()
-    })
-
-    it('a new note can be created', function() {
-      // ...
-    })
-  })
-})
-```
-
-Cypress ejecuta las pruebas en el orden en que están en el código. Entonces, primero ejecuta <i>user can log in</i>, donde el usuario inicia sesión. Entonces cypress ejecutará <i>a new note can be created</i> para la cual el bloque <i>beforeEach</i> también inicia sesión.
-¿Por qué hacer esto? ¿No inició sesión el usuario después de la primera prueba?
-No, porque <i>cada</i> prueba comienza desde cero en lo que respecta al navegador.
-Todos los cambios en el estado del navegador se invierten después de cada prueba.
-
-### Controlando el estado de la base de datos
-
-Si las pruebas necesitan poder modificar la base de datos del servidor, la situación inmediatamente se vuelve más complicada. Idealmente, la base de datos del servidor debería ser la misma cada vez que ejecutamos las pruebas, para que nuestras pruebas se puedan repetir de forma fiable y sencilla.
-
-Al igual que con las pruebas unitarias y de integración, con las pruebas E2E es mejor vaciar la base de datos y posiblemente formatearla antes de ejecutar las pruebas. El desafío con las pruebas E2E es que no tienen acceso a la base de datos.
-
-La solución es crear endpoints de API en el backend para la prueba.
-Podemos vaciar la base de datos usando estos endpoints.
-Creemos un nuevo enrutador para las pruebas dentro de la carpeta <i>controllers</i>, en el archivo <i>testing.js</i>
-
-```js
-const testingRouter = require('express').Router()
-const Note = require('../models/note')
-const User = require('../models/user')
-
-testingRouter.post('/reset', async (request, response) => {
-  await Note.deleteMany({})
-  await User.deleteMany({})
-
-  response.status(204).end()
-})
-
-module.exports = testingRouter
-```
-
-y agrégalo al backend solo <i>si la aplicación se ejecuta en modo de prueba</i>:
-
-```js
-// ...
-
-app.use('/api/login', loginRouter)
-app.use('/api/users', usersRouter)
-app.use('/api/notes', notesRouter)
-
-// highlight-start
-if (process.env.NODE_ENV === 'test') {
-  const testingRouter = require('./controllers/testing')
-  app.use('/api/testing', testingRouter)
-}
-// highlight-end
-
-app.use(middleware.unknownEndpoint)
-app.use(middleware.errorHandler)
-
-module.exports = app
-```
-
-Después de los cambios, una solicitud POST HTTP al endpoint <i>/api/testing/reset</i> vacía la base de datos. Asegúrate de que tu backend esté ejecutándose en modo de prueba iniciándolo con este comando (previamente configurado en el archivo package.json):
-
-```js
-  npm run start:test
-```
-
-El código de backend modificado se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), rama <i>part5-1</i>.
-
-A continuación, cambiaremos el bloque <i>beforeEach</i> para que vacíe la base de datos del servidor antes de ejecutar las pruebas.
-
-Actualmente no es posible agregar nuevos usuarios a través de la interfaz de usuario del frontend, por lo que agregamos un nuevo usuario al backend desde el bloque beforeEach.
-
-```js
-describe('Note app', function() {
-   beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen'
-    }
-    cy.request('POST', 'http://localhost:3001/api/users/', user) 
-    // highlight-end
-    cy.visit('http://localhost:5173')
-  })
-  
-  it('front page can be opened', function() {
-    // ...
-  })
-
-  it('user can login', function() {
-    // ...
-  })
-
-  describe('when logged in', function() {
-    // ...
-  })
-})
-```
-
-Durante el formateo, la prueba realiza solicitudes HTTP al backend con [cy.request](https://docs.cypress.io/api/commands/request.html).
-
-A diferencia de antes, ahora la prueba comienza con el backend en el mismo estado cada vez. El backend contendrá un usuario y ninguna nota.
-
-Agreguemos una prueba más para verificar que podemos cambiar la importancia de notas.
-
-Anteriormente cambiamos el frontend para que una nueva nota se importante por defecto, por lo que el campo <i>important</i> es <i>true</i>:
-
-```js
-const NoteForm = ({ createNote }) => {
-  // ...
-
-  const addNote = (event) => {
-    event.preventDefault()
-    createNote({
-      content: newNote,
-      important: true // highlight-line
-    })
-
-    setNewNote('')
-  }
-  // ...
-} 
-```
-
-Hay varias formas de probar esto. En el siguiente ejemplo, primero buscamos una nota y hacemos clic en su botón <i>make not important</i>. Luego verificamos que la nota ahora contenga un botón <i>make important</i>.
-
-```js
-describe('Note app', function() {
-  // ...
-
-  describe('when logged in', function() {
-    // ...
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
-      })
-
-      it('it can be made not important', function () {
-        cy.contains('another note cypress')
-          .contains('make not important')
-          .click()
-
-        cy.contains('another note cypress')
-          .contains('make important')
-      })
-    })
-  })
-})
-```
-
-El primer comando busca un componente que contenga el texto <i>another note cypress</i>, y luego busca un botón <i>make not important</i> dentro de él. Luego hace clic en el botón.
-
-El segundo comando comprueba que el texto del botón haya cambiado a <i>make important</i>.
-
-### Prueba de inicio de sesión fallida
-
-Hagamos una prueba para asegurarnos de que un intento de inicio de sesión falla si la contraseña es incorrecta.
-
-Cypress ejecutará todas las pruebas cada vez de forma predeterminada y, a medida que aumenta el número de pruebas, comienza a consumir bastante tiempo.
-Al desarrollar una nueva prueba o al depurar una prueba rota, podemos definir la prueba con <i>it.only</i> en lugar de <i>it</i>, de modo que Cypress solo ejecutará la prueba requerida.
-Cuando la prueba esté funcionando, podemos eliminar <i>.only</i>.
-
-La primera versión de nuestras pruebas es la siguiente:
-
-```js
-describe('Note app', function() {
-  // ...
-
-  it.only('login fails with wrong password', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('wrong')
-    cy.get('#login-button').click()
-
-    cy.contains('wrong credentials')
-  })
-
-  // ...
-)}
-```
-
-La prueba utiliza [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) para garantizar que la aplicación imprima un mensaje de error.
-
-La aplicación muestra el mensaje de error en un componente con la clase CSS <i>error</i>:
-
-```js
-const Notification = ({ message }) => {
-  if (message === null) {
-    return null
-  }
-
-  return (
-    <div className="error"> // highlight-line
-      {message}
-    </div>
-  )
 }
 ```
 
-Podríamos hacer que la prueba asegure que el mensaje de error se renderiza al componente correcto, es decir, al componente con la clase CSS <i>error</i>:
+¿Sería posible modificar la aplicación para que _Note_ reciba solo la nota que se mostrará como prop?
 
 ```js
-it('login fails with wrong password', function() {
-  // ...
+import { useParams, useNavigate } from 'react-router-dom'
 
-  cy.get('.error').contains('wrong credentials') // highlight-line
-})
-```
-
-Primero usamos [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) para buscar un componente con la clase CSS <i>error</i>. Luego verificamos que el mensaje de error se pueda encontrar en este componente.
-Ten en cuenta que los [selectores de clase CSS](https://developer.mozilla.org/es/docs/Web/CSS/Class_selectors) comienzan con un punto final, por lo que el selector para la clase <i>error</i> es <i>.error</i>.
-
-Podríamos hacer lo mismo usando la sintaxis [should](https://docs.cypress.io/api/commands/should.html):
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error').should('contain', 'wrong credentials') // highlight-line
-})
-```
-
-Usar should es un poco más complicado que usar <i>contains</i>, pero permite pruebas más diversas que <i>contains</i>, que funciona solo con contenido de texto.
-
-La lista de las aserciones más comunes con las que se puede usar _should_ se puede encontrar [aquí](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
-
-Podemos, por ejemplo, asegurarnos de que el mensaje de error sea rojo y tenga un borde:
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error').should('contain', 'wrong credentials') 
-  cy.get('.error').should('have.css', 'color', 'rgb(255, 0, 0)')
-  cy.get('.error').should('have.css', 'border-style', 'solid')
-})
-```
-
-Cypress requiere que los colores se den como [rgb](https://rgbcolorcode.com/color/red).
-
-Debido a que todas las pruebas son para el mismo componente al que accedimos usando [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax), podemos encadenarlos usando [and](https://docs.cypress.io/api/commands/and.html).
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
-})
-```
-
-Terminemos la prueba para que también verifique que la aplicación no muestre el mensaje de éxito <i>'Matti Luukkainen logged in'</i>:
-
-```js
-it('login fails with wrong password', function() {
-  cy.contains('log in').click()
-  cy.get('#username').type('mluukkai')
-  cy.get('#password').type('wrong')
-  cy.get('#login-button').click()
-
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
-
-  cy.get('html').should('not.contain', 'Matti Luukkainen logged in') // highlight-line
-})
-```
-
-El comando <i>should</i> se usa más frecuentemente encadenándolo después del comando <i>get</i> (o otro comando similar que pueda ser encadenado). El <i>cy.get('html')</i> usado en la prueba prácticamente significa el contenido visible de toda la aplicación.
-
-También podríamos verificar lo mismo encadenando el comando <i>contains</i> con el comando <i>should</i> con un parámetro ligeramente diferente:
-
-```js
-cy.contains('Matti Luukkainen logged in').should('not.exist')
-```
-
-**NOTA:** Algunas propiedades CSS se comportan de manera diferente en Firefox. Si ejecutas las pruebas con Firefox:
-
-  ![running](https://user-images.githubusercontent.com/4255997/119015927-0bdff800-b9a2-11eb-9234-bb46d72c0368.png)
-  
-  entonces las pruebas que involucran, por ejemplo, `border-style`, `border-radius` y `padding`, pasarán en Chrome o Electron, pero fallarán en Firefox:
-
-  ![borderstyle](https://user-images.githubusercontent.com/4255997/119016340-7b55e780-b9a2-11eb-82e0-bab0418244c0.png)
-
-### Omitiendo la interfaz de usuario
-
-Actualmente tenemos las siguientes pruebas:
-
-```js
-describe('Note app', function() {
-  it('user can login', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
-
-    cy.contains('Matti Luukkainen logged in')
-  })
-
-  it('login fails with wrong password', function() {
-    // ...
-  })
-
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
-      cy.get('#login-button').click()
-    })
-
-    it('a new note can be created', function() {
-      // ... 
-    })
-   
-  })
-})
-```
-
-Primero probamos el inicio de sesión. Luego, en su propio bloque de descripción, tenemos un montón de pruebas que esperan que el usuario inicie sesión. El usuario ha iniciado sesión en el bloque <i>beforeEach</i>.
-
-Como dijimos anteriormente, ¡cada prueba comienza desde cero! Las pruebas no comienzan en el estado donde terminaron las pruebas anteriores.
-
-La documentación de Cypress nos da el siguiente consejo: [Prueba completamente el flujo de inicio de sesión, ¡pero solo una vez!](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow----but-only-once).
-Por lo tanto, en lugar de iniciar sesión como usuario mediante el formulario en el bloque <i>beforeEach</i>, vamos a omitir la interfaz de usuario y realizaremos una solicitud HTTP al backend para iniciar sesión. La razón de esto es que iniciar sesión con una solicitud HTTP es mucho más rápido que completar un formulario.
-
-Nuestra situación es un poco más complicada que en el ejemplo de la documentación de Cypress, porque cuando un usuario inicia sesión, nuestra aplicación guarda sus detalles en localStorage.
-Sin embargo, Cypress también puede manejar esto.
-El código es el siguiente:
-
-```js
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/login', {
-      username: 'mluukkai', password: 'salainen'
-    }).then(response => {
-      localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:5173')
-    })
-    // highlight-end
-  })
-
-  it('a new note can be created', function() {
-    // ...
-  })
+const Note = ({ note, id, toggleImportanceOf, deleteNote }) => {  // highlight-line
+  const id = useParams().id
+  const navigate = useNavigate()
 
   // ...
-})
-```
-
-Podemos acceder a la respuesta de un [cy.request](https://docs.cypress.io/api/commands/request.html) con el método [_then_](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#The-Cypress-Command-Queue). Debajo del capó, <i>cy.request</i>, al igual que todos los comandos de Cypress, son [asíncronos](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous).
-La función de callback guarda los detalles de un usuario conectado en localStorage y recarga la página.
-Ahora no hay diferencia con un usuario que inicia sesión a través del formulario de inicio de sesión.
-
-Si cuando escribimos nuevas pruebas en nuestra aplicación, tenemos que usar el código de inicio de sesión en varios lugares, deberíamos convertirlo en un [comando personalizado](https://docs.cypress.io/api/cypress-api/custom-commands.html).
-
-Los comandos personalizados se declaran en <i>cypress/support/commands.js</i>.
-El código para iniciar sesión es el siguiente:
-
-```js
-Cypress.Commands.add('login', ({ username, password }) => {
-  cy.request('POST', 'http://localhost:3001/api/login', {
-    username, password
-  }).then(({ body }) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:5173')
-  })
-})
-```
-
-Usar nuestro comando personalizado es fácil y nuestra prueba se vuelve más limpia:
-
-```js
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.login({ username: 'mluukkai', password: 'salainen' })
-    // highlight-end
-  })
-
-  it('a new note can be created', function() {
-    // ...
-  })
-
-  // ...
-})
-```
-
-Lo mismo se aplica a la creación de una nueva nota ahora que pensamos sobre ello. Tenemos una prueba que hace una nueva nota usando el formulario. También hacemos una nueva nota en el bloque <i>beforeEach</i> de la prueba que cambia la importancia de una nota:
-
-```js
-describe('Note app', function() {
-  // ...
-
-  describe('when logged in', function() {
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-
-      cy.contains('a note created by cypress')
-    })
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
-      })
-
-      it('it can be made important', function () {
-        // ...
-      })
-    })
-  })
-})
-```
-
-Creemos un nuevo comando personalizado para crear una nueva nota. El comando creará una nueva nota con una solicitud HTTP POST:
-
-```js
-Cypress.Commands.add('createNote', ({ content, important }) => {
-  cy.request({
-    url: 'http://localhost:3001/api/notes',
-    method: 'POST',
-    body: { content, important },
-    headers: {
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
-    }
-  })
-
-  cy.visit('http://localhost:5173')
-})
-```
-
-El comando espera que el usuario haya iniciado sesión y que los detalles del usuario estén guardados en localStorage.
-
-Ahora el bloque beforeEach de la nota se convierte en:
-
-```js
-describe('Note app', function() {
-  // ...
-
-  describe('when logged in', function() {
-    it('a new note can be created', function() {
-      // ...
-    })
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        // highlight-start
-        cy.createNote({
-          content: 'another note cypress',
-          important: true
-        })
-        // highlight-end
-      })
-
-      it('it can be made important', function () {
-        // ...
-      })
-    })
-  })
-})
-```
-
-Hay otra cosa en nuestras pruebas que es molesta. La URL de nuestra aplicación <i> http://localhost:5173 </i> esta codificada literalmente en varios lugares.
-
-Definamos la URL de nuestra aplicación <i>baseUrl</i> en el [archivo de configuración](https://docs.cypress.io/guides/references/configuration) pre-generado de Cypress <i>cypress.config.js</i>:
-
-```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173' // highlight-line
-  },
-})
-```
-
-Todos los comandos en las pruebas que usan la dirección de la aplicación
-
-```js
-cy.visit('http://localhost:5173')
-```
-
-se pueden cambiar a
-
-```js
-cy.visit('')
-```
-
-La dirección codificada del backend, <i>http://localhost:3001</i>, todavía está en las pruebas. La [documentación](https://docs.cypress.io/guides/guides/environment-variables) de Cypress recomienda definir otras direcciones utilizadas por las pruebas como variables de entorno.
-
-Expandamos el archivo de configuración <i>cypress.config.js</i> de la siguiente manera:
-
-```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173',
-    env: {
-      BACKEND: 'http://localhost:3001/api' // highlight-line
-    }
-  },
-})
-```
-
-Reemplacemos todas las direcciones del backend en las pruebas de la siguiente manera:
-
-```js
-describe('Note ', function() {
-  beforeEach(function() {
-
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'secret'
-    }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
-    cy.visit('')
-  })
-  // ...
-})
-```
-
-### Cambiando la importancia de una nota
-
-Por último, echemos un vistazo a la prueba que hicimos para cambiar la importancia de una nota.
-Primero cambiaremos el bloque beforeEach para que cree tres notas en lugar de una:
-
-```js
-describe('when logged in', function() {
-  describe('and several notes exist', function () {
-    beforeEach(function () {
-      // highlight-start
-      cy.login({ username: 'mluukkai', password: 'salainen' })
-      cy.createNote({ content: 'first note', important: false })
-      cy.createNote({ content: 'second note', important: false })
-      cy.createNote({ content: 'third note', important: false })
-      // highlight-end
-    })
-
-    it('one of those can be made important', function () {
-      cy.contains('second note')
-        .contains('make important')
-        .click()
-
-      cy.contains('second note')
-        .contains('make not important')
-    })
-  })
-})
-```
-
-¿Cómo funciona realmente el comando [cy.contains](https://docs.cypress.io/api/commands/contains.html)?
-
-Cuando hacemos clic en el comando _cy.contains('second note')_ en Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/cypress-app#Test-Runner), vemos que ese comando busca el elemento que contiene el texto <i>second note</i>:
-
-![cypress test runner haciendo clic en la segunda nota](../../images/5/34new.png)
-
-Al hacer clic en la línea siguiente _.contains('make important')_ vemos que la prueba utiliza el botón 'make important' correspondiente a la <i>segunda nota</i>:
-
-![cypress test runner haciendo clic en make important](../../images/5/35new.png)
-
-Cuando está encadenado, el segundo comando <i>contains</i> <i>continúa</i> la búsqueda desde dentro del componente encontrado por el primer comando.
-
-Si no hubiéramos encadenado los comandos, y en su lugar hubiéramos escrito
-
-```js
-cy.contains('second note')
-cy.contains('make important').click()
-```
-
-el resultado habría sido totalmente diferente. La segunda línea de la prueba haría clic en el botón de una nota incorrecta:
-
-![cypress mostrando error e intentando hacer clic incorrectamente en el primer botón](../../images/5/36new.png)
-
-Al escribir pruebas, ¡debes verificar en el ejecutor de pruebas que las pruebas utilicen los componentes correctos!
-
-Cambiemos el componente _Note_ para que el texto de la nota se renderice en un <i>span </i>.
-
-```js
-const Note = ({ note, toggleImportance }) => {
-  const label = note.important
-    ? 'make not important' : 'make important'
 
   return (
-    <li className='note'>
-      <span>{note.content}</span> // highlight-line
-      <button onClick={toggleImportance}>{label}</button>
+    <li className="note">
+      <span>{note.content}</span>
+      <button onClick={() => toggleImportanceOf(id)}>{label}</button>
+      <button onClick={handleDelete}>delete</button>
     </li>
   )
 }
+
+export default Note
 ```
 
-¡Nuestras pruebas se rompen! Como revela el test runner, _cy.contains('second note')_ ahora devuelve el componente que contiene el texto y el botón no está en él.
+Una posibilidad es determinar dentro del componente el <i>id</i> de la nota que se mostrará mediante el hook [useMatch](https://reactrouter.com/en/main/hooks/use-match) de React Router.
 
-![cypress mostrando que la prueba está rota intentando hacer clic en "make important"](../../images/5/37new.png)
-
-Una forma de solucionarlo es la siguiente:
+No es posible utilizar el hook <i>useMatch</i> en el mismo componente que define la parte enrutable de la aplicación. Movamos el componente <i>Router</i> fuera de <i>App</i>:
 
 ```js
-it('one of those can be made important', function () {
-  cy.contains('second note').parent().find('button').click()
-  cy.contains('second note').parent().find('button')
-    .should('contain', 'make not important')
-})
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Router> // highlight-line
+    <App />
+  </Router> // highlight-line
+)
 ```
 
-En la primera línea, usamos el comando [parent](https://docs.cypress.io/api/commands/parent.html) para acceder al elemento padre del elemento que contiene <i>second note</i> y buscamos el botón dentro de él.
-Luego hacemos clic en el botón y verificamos que el texto cambie.
-
-Ten en cuenta que usamos el comando [find](https://docs.cypress.io/api/commands/find.html#Syntax) para buscar el botón. No podemos usar [cy.get](https://docs.cypress.io/api/commands/get.html) aquí, porque siempre busca desde la página <i>completa</i> y devolvería los 5 botones en la pagina.
-
-Desafortunadamente, ahora tenemos algo de copia-pega en las pruebas, porque el código para buscar el botón correcto es siempre el mismo.
-
-En este tipo de situaciones, es posible usar el comando [as](https://docs.cypress.io/api/commands/as.html):
+El componente <i>App</i> se convierte en:
 
 ```js
-it('one of those can be made important', function () {
-  cy.contains('second note').parent().find('button').as('theButton')
-  cy.get('@theButton').click()
-  cy.get('@theButton').should('contain', 'make not important')
-})
+import {
+  // ...
+  useMatch  // highlight-line
+} from 'react-router-dom'
+
+const App = () => {
+  // ...
+
+ // highlight-start
+  const match = useMatch('/notes/:id')
+
+  const note = match
+    ? notes.find(note => note.id === match.params.id)
+    : null
+  // highlight-end
+
+  return (
+    <div>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        // ...
+      </div>
+
+      <Routes>
+        <Route path="/notes/:id" element={
+          <Note
+            note={note} // highlight-line
+            toggleImportanceOf={toggleImportanceOf}
+            deleteNote={deleteNote}
+          />
+        } />
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote}/>
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <div>
+        <em>Note app, Department of Computer Science 2026</em>
+      </div>
+    </div>
+  )
+}    
 ```
 
-Ahora la primera línea encuentra el botón correcto y usa <i>as</i> para guardarlo como <i>theButton</i>. Las siguientes líneas pueden usar el elemento nombrado con <i>cy.get('@theButton')</i>.
-
-### Ejecutando y depurando tus pruebas
-
-Finalmente, algunas notas sobre cómo funciona Cypress y la depuración de tus pruebas.
-
-Debido a la forma de las pruebas de Cypress, da la impresión de que son código JavaScript normal y, por ejemplo, podríamos intentar esto:
+Cada vez que se renderiza el componente <i>App</i> (lo que, en la práctica, ocurre cada vez que cambia la URL en la barra de direcciones del navegador) se ejecuta el siguiente comando
 
 ```js
-const button = cy.contains('log in')
-button.click()
-debugger
-cy.contains('logout').click()
+const match = useMatch('/notes/:id')
 ```
 
-Sin embargo, esto no funcionará. Cuando Cypress ejecuta una prueba, agrega cada comando _cy_ a una cola de ejecución.
-Cuando se haya ejecutado el código del método de prueba, Cypress ejecutará cada comando en la cola uno por uno.
-
-Los comandos de Cypress siempre devuelven _undefined_, por lo que _button.click()_ en el código anterior causaría un error. Un intento de iniciar el depurador no detendría el código entre la ejecución de los comandos, sino antes de que se haya ejecutado algún comando.
-
-Los comandos de Cypress son <i>como promesas</i>, así que si queremos acceder a sus valores de retorno, tenemos que hacerlo usando el comando [then](https://docs.cypress.io/api/commands/then.html).
-Por ejemplo, la siguiente prueba imprime el número de botones en la aplicación y hace clic en el primer botón:
+Si la URL tiene el formato _/notes/:id_, es decir, corresponde a la URL de una sola nota, a la variable <i>match</i> se le asigna un objeto que puede usarse para determinar la parte parametrizada de la ruta, es decir, el <i>id</i> de la nota. Esto nos permite recuperar la nota a renderizar:
 
 ```js
-it('then example', function() {
-  cy.get('button').then( buttons => {
-    console.log('number of buttons', buttons.length)
-    cy.wrap(buttons[0]).click()
-  })
-})
+const note = match 
+  ? notes.find(note => note.id === match.params.id)
+  : null
 ```
 
-Detener la ejecución de la prueba con el depurador es [posible](https://docs.cypress.io/api/commands/debug.html). El depurador se inicia solo si la consola para desarrolladores del test runner de Cypress está abierta.
 
-La Consola para desarrolladores es muy útil para depurar tus pruebas.
-Puedes ver las solicitudes HTTP realizadas por las pruebas en la pestaña Network, y la pestaña Console te mostrará información sobre tus pruebas:
+Todavía hay un pequeño error en nuestra aplicación. Si el navegador se recarga en una sola página de notas, se produce un error:
 
-![consola para desarrolladores mientras se ejecuta Cypress](../../images/5/38new.png)
+![](../../images/5/u5.png)
 
-Hasta ahora hemos ejecutado nuestras pruebas Cypress usando el test runner gráfico. También es posible ejecutarlas [desde la línea de comandos](https://docs.cypress.io/guides/guides/command-line.html). Solo tenemos que agregarle un script npm:
+El problema surge porque se intenta representar la página antes de que se hayan obtenido las notas del backend. Podemos resolver este problema con renderizado condicional:
 
 ```js
-  "scripts": {
-    "cypress:open": "cypress open",
-    "test:e2e": "cypress run" // highlight-line
-  },
+const Note = ({ note, toggleImportanceOf, deleteNote }) => {
+  const id = useParams().id
+  const navigate = useNavigate()
+
+// highlight-start
+  if(!note) {
+    return null
+  }
+  // highlight-end
+
+  return (
+    //...
+  )
+}
 ```
 
-Ahora podemos ejecutar nuestras pruebas desde la línea de comandos con el comando <i>npm run test:e2e</i>
+La aplicación tiene una característica más molesta: la lógica de inicio de sesión todavía está en la página que enumera las notas. Sin embargo, dejaremos la funcionalidad en este estado algo incompleto por ahora.
 
-![Salida de terminal al ejecutar las pruebas npm e2e mostrando aprobadas](../../images/5/39new.png)
-
-Ten en cuenta que los videos de la ejecución de las pruebas se guardarán en <i>cypress/videos/</i>, por lo que probablemente deberías ignorar este directorio en git. También es posible [desactivar](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) la creación de videos.
-
-Las pruebas se encuentran en [GitHub](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
-
-La versión final del código frontend se puede encontrar en la rama [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9) *part5-9*.
+El código actual de la aplicación está disponible en su totalidad en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), en la rama <i>part5-11</i>.
 
 </div>
 
 <div class="tasks">
 
-### Ejercicios 5.17.-5.23.
+### Ejercicios 5.24–5.28.
 
-En los últimos ejercicios de esta parte haremos algunas pruebas E2E para nuestra aplicación de blog.
-El material de esta parte debería ser suficiente para completar los ejercicios.
-También deberías consultar la [documentación](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) de Cypress. Probablemente sea la mejor documentación que he visto para un proyecto de código abierto.
+#### 5.24: blogs enrutados, paso 1
 
-Recomiendo especialmente leer [Introducción a Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), que afirma que
+Añade React Router a la aplicación de blogs para que los enlaces de la barra de navegación controlen qué vista se muestra.
 
-> <i>Esta es la guía más importante para comprender cómo realizar pruebas con Cypress. Léela. Entiéndela.</i>
+En la raíz de la aplicación, es decir, la ruta _/_, se muestra una lista de todos los blogs:
 
-#### 5.17: Pruebas de End To End de la Lista de Blogs, paso 1
+![](../../images/5/l1.png)
 
-Configura Cypress para tu proyecto. Realiza una prueba para comprobar que la aplicación muestra el formulario de inicio de sesión de forma predeterminada.
+La ruta _/login_ permite a los usuarios iniciar sesión
 
-La estructura de la prueba debe ser la siguiente
+![](../../images/5/l2.png)
 
-```js
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.visit('http://localhost:5173')
-  })
+Si el usuario ha iniciado sesión, aparece un botón de cierre de sesión en la barra de navegación:
 
-  it('Login form is shown', function() {
-    // ...
-  })
-})
+![](../../images/5/l3.png)
+
+Después de iniciar y cerrar sesión, el usuario debe ser dirigido a la página que enumera todos los blogs.
+
+En esta etapa, todavía no necesita preocuparse por crear blogs.
+
+#### 5.25: blogs enrutados, paso 2
+
+Implementa una vista que muestre la información de una única publicación del blog:
+
+![](../../images/5/l5.png)
+
+Los usuarios navegan a la vista de publicación de blog única desde la lista de blogs:
+
+![](../../images/5/l4.png)
+
+¡Asegúrate de que la función "Me gusta" para blogs todavía funcione! También modifique la funcionalidad para que sólo los usuarios que hayan iniciado sesión puedan darle "Me gusta" a un blog.
+
+#### 5.26: blogs enrutados, paso 3
+
+Crea una nueva vista para añadir blogs a la que puedan acceder desde la navegación los usuarios que hayan iniciado sesión:
+
+![](../../images/5/l6.png)
+
+Agregar un blog nuevo y eliminar un blog existente debería redirigir al usuario a la vista de todos los blogs.
+
+#### 5.27: blogs enrutados, paso 4
+
+La usabilidad y apariencia de la aplicación ahora son mejores que antes. Desafortunadamente, algunas de las pruebas han fallado.
+
+Ahora modifique las pruebas para la vista de blog única creada en Vitest de la siguiente manera
+- La información del blog y la cantidad de Me gusta se muestran a los usuarios no autenticados, los botones no se muestran
+- A los usuarios autenticados que no son los creadores del blog se les muestra solo el botón Me gusta.
+- Al creador del blog también se le muestra el botón de eliminar.
+
+#### 5.28: blogs enrutados, paso 5
+
+El siguiente paso es arreglar las pruebas de un extremo a otro creadas con Playwright. Las pruebas que escribimos anteriormente no funcionan por completo y tendremos que realizarles cambios importantes.
+
+Crea pruebas para los siguientes escenarios:
+- El inicio de sesión se realizó correctamente con la combinación correcta de nombre de usuario y contraseña.
+- El inicio de sesión falla si el nombre de usuario/contraseña es incorrecto
+- Un usuario que haya iniciado sesión puede crear un blog.
+- A un usuario que haya iniciado sesión le pueden gustar los blogs.
+- Un usuario que haya iniciado sesión puede eliminar un blog.
+
+Por lo tanto, la clasificación de blogs por Me gusta no se está probando en este momento.
+
+</div>
+
+<div class="content">
+
+### Librerías de UI
+
+En la parte 2 ya vimos dos formas de añadir estilos: mediante un [único archivo CSS](/es/part2/agregar_estilos_a_la_aplicacion_react) tradicional y mediante [estilos en línea](/es/part2/agregar_estilos_a_la_aplicacion_react#estilos-en-linea). En esta sección veremos algunas formas más.
+
+Una forma de definir los estilos de una aplicación es utilizar un framework de UI, es decir, una librería de estilos para interfaces de usuario.
+
+El primer framework de UI que alcanzó una gran popularidad fue [Bootstrap](https://getbootstrap.com/), desarrollado por Twitter. Durante los últimos años, los frameworks de UI han proliferado. La selección es tan amplia que ni siquiera merece la pena intentar enumerarlos todos aquí.
+
+Muchos marcos de UI incluyen temas predefinidos para aplicaciones web, así como "componentes", como botones, menús y tablas. El término "componente" está escrito entre comillas arriba porque no se refiere a lo mismo que un componente de React. La mayoría de las veces, los marcos de UI se utilizan incluyendo las hojas de estilo CSS del marco y el código JavaScript en la aplicación.
+
+Muchos marcos de UI se han adaptado a versiones compatibles con React, donde los "componentes" definidos por el marco de UI se han convertido en componentes de React. Por ejemplo, hay un par de versiones React de Bootstrap, la más popular de las cuales es [React-Bootstrap](https://react-bootstrap.github.io/).
+
+En lugar de Bootstrap, veamos el que quizá sea actualmente el framework de UI más popular: la librería para React [Material UI](https://mui.com/), que implementa el lenguaje de diseño [Material Design](https://material.io/) de Google.
+
+Instalemos la librería:
+
+```bash
+npm install @mui/material @emotion/react @emotion/styled
 ```
 
-#### 5.18: Pruebas de End To End de la Lista de Blogs, paso 2
-
-Realiza pruebas para iniciar sesión. Prueba tanto los intentos de inicio de sesión exitosos y los no exitosos.
-Crea un nuevo usuario en el bloque <i>beforeEach</i> para las pruebas.
-
-El cuerpo de las pruebas se extiende de la siguiente manera
+Cuando se utiliza Material UI, todo el contenido de la aplicación suele renderizarse dentro del componente [Container](https://mui.com/material-ui/react-container/):
 
 ```js
-describe('Blog app', function() {
-  beforeEach(function() {
-    // vacía la base de datos aquí
-    // crea un usuario para el backend aquí
-    cy.visit('http://localhost:5173')
-  })
+import { Container } from '@mui/material'
 
-  it('Login form is shown', function() {
-    // ...
-  })
-
-  describe('Login',function() {
-    it('succeeds with correct credentials', function() {
+const App = () => {
+  // ...
+  return (
+    <Container>
       // ...
-    })
-
-    it('fails with wrong credentials', function() {
-      // ...
-    })
-  })
-})
+    </Container>
+  )
+}
 ```
 
-El bloque <i>beforeEach</i> debe vaciar la base de datos utilizando, por ejemplo, el método de formateo que usamos en el [material](/es/part5/pruebas_de_extremo_a_extremo_cypress#controlando-el-estado-de-la-base-de-datos).
+#### Tabla
 
-<i>Ejercicio adicional opcional</i>: comprueba que la notificación que se muestra con el inicio de sesión fallido se muestra en rojo.
-
-#### 5.19: Pruebas de End To End de la Lista de Blogs, paso 3
-
-Realiza una prueba que compruebe que un usuario que ha iniciado sesión puede crear un nuevo blog.
-La estructura de la prueba podría ser la siguiente
+Comencemos con el componente <i>NoteList</i> y rendericemos la lista de notas como una [tabla](https://mui.com/material-ui/react-table/#simple-table), que también muestra el usuario que creó cada nota:
 
 ```js
-describe('Blog app', function() {
+import { useState, useEffect } from 'react'
+
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
+
+//...
+
+const NoteList = ({ notes }) => {
+
   // ...
 
-  describe('When logged in', function() {
-    beforeEach(function() {
+  return (
+    <div>
       // ...
-    })
+      <h2>Notes</h2>
 
-    it('A blog can be created', function() {
-      // ...
-    })
-  })
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>content</TableCell>
+              <TableCell>user</TableCell>
+              <TableCell>important</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {notes.map(note => (
+              <TableRow key={note.id}>
+                <TableCell>
+                  <Link to={`/notes/${note.id}`}>
+                    {note.content}
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  {note.user.name}
+                </TableCell>
+                <TableCell>
+                  {note.important ? 'yes': ''}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-})
+    </div>
+  )
+}
+
+export default NoteList
 ```
 
-La prueba debe garantizar que se agregue un nuevo blog a la lista de todos los blogs.
+La tabla se ve así:
 
-#### 5.20: Pruebas de End To End de la Lista de Blogs, paso 4
+![](../../images/5/u10.png)
 
-Haz una prueba que compruebe que al usuario le puede gustar ("like") un blog.
 
-#### 5.21: Pruebas de End To End de la Lista de Blogs, paso 5
+#### Formulario
 
-Realiza una prueba para asegurarte de que el usuario que creó un blog pueda eliminarlo.
+A continuación, mejoremos la vista para crear una nueva nota <i>NoteForm</i> usando los componentes [TextField](https://mui.com/components/text-fields/) y [Button](https://mui.com/api/button/):
 
-#### 5.22: Pruebas de End To End de la Lista de Blogs, paso 6
+```js 
+import { TextField, Button } from '@mui/material'
 
-Realiza una prueba para asegurarte de que solo el creador puede ver el botón delete de un blog, nadie más.
+// ...
 
-#### 5.23: Pruebas de End To End de la Lista de Blogs, paso 7
+const NoteForm = ({ createNote }) => {
+  // ...
 
-Realiza una prueba que verifique que los blogs estén ordenados de acuerdo con los likes, con el blog con más likes en primer lugar.
+  return (
+    <div>
+      <h2>Create a new note</h2>
 
-<i>Este ejercicio puede ser un poco más complicado que los anteriores</i>. Una posible solución es agregar cierta clase para el elemento que cubre el contenido del blog y luego usar el método [eq](https://docs.cypress.io/api/commands/eq#Syntax) para obtener el elemento en un índice específico:
+      <form onSubmit={addNote}>
+        <TextField
+          label="note content"
+          value={newNote}
+          onChange={event => setNewNote(event.target.value)}
+        />
+        <div>
+          <Button type="submit" variant="contained" style={{ marginTop: 10 }}>
+            save
+          </Button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+export default NoteForm
+
+```
+
+El resultado es elegante:
+
+![](../../images/5/u11.png)
+
+#### Notificaciones
+
+
+Mejoremos el componente de notificación mediante el componente [Alert](https://mui.com/material-ui/react-alert/) de Material UI:
 
 ```js
-cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
-cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
+import { Alert } from '@mui/material'
+
+const Notification = ({ notification }) => {
+  if (notification === null) {
+    return null
+  }
+
+  return (
+    <Alert style={{ marginTop: 10, marginBottom: 10 }} severity={notification.type}>
+      {notification.text}
+    </Alert>
+  )
+}
+
+export default Notification
 ```
 
-Ten en cuenta que podrías terminar teniendo problemas si haces clic en el botón "Like" muchas veces seguidas. Puede ser que Cypress haga clic tan rápido que no tenga tiempo de actualizar el estado de la aplicación entre los clics. Una solución para esto es esperar a que se actualice la cantidad de Likes entre todos los clics.
+Mueva el componente de notificación y su gestión de estado al componente <i>App</i>:
 
-Este fue el último ejercicio de esta parte, y es hora de enviar tu código a GitHub y marcar los ejercicios que has completado en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+```js
+const App = () => {
+  const [notes, setNotes] = useState([])
+  const [notification, setNotification] = useState(null) // highlight-line
+
+  // ...
+
+  const addNote = noteObject => {
+    noteService.create(noteObject).then(returnedNote => {
+      setNotes(notes.concat(returnedNote))
+      setNotification({ text: `Note '${returnedNote.content}' added!`, type: 'success' }) // highlight-line
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+    })
+  }
+
+  return (
+    <Container>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/create">new note</Link>
+      </div>
+
+      <Notification notification={notification} /> // highlight-line
+
+      <Routes>
+        <Route path="/notes/:id" element={
+          <Note
+            note={note}
+            toggleImportanceOf={toggleImportanceOf}
+            deleteNote={deleteNote}
+          />
+        } />
+        <Route path="/notes" element={
+          <NoteList notes={notes} setNotification={setNotification} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote} />
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <Footer />
+    </Container>
+  )
+}
+```
+
+Alert tiene un diseño elegante:
+
+![](../../images/5/u12.png)
+
+#### Menú de navegación
+
+El menú de navegación se implementa utilizando el componente [AppBar](https://mui.com/components/app-bar/).
+
+Si aplicamos el ejemplo de la documentación directamente
+
+```js
+<AppBar position="static">
+  <Toolbar>
+    <Button color="inherit"><Link to="/">home</Link></Button>
+    <Button color="inherit"><Link to="/notes">notes</Link></Button>
+    <Button color="inherit"><Link to="/create">new note</Link></Button>
+  </Toolbar>
+</AppBar>
+```
+
+Esto proporciona una solución funcional, pero su apariencia no es la mejor posible:
+
+![](../../images/5/u15.png)
+
+En la [documentación](https://mui.com/material-ui/guides/composition/#routing-libraries) encontramos una alternativa mejor: la [prop component](https://mui.com/material-ui/guides/composition/#component-prop), que permite cambiar cómo se renderiza el elemento raíz de un componente de Material UI.
+
+Al definir
+
+```js
+<Button color="inherit" component={Link} to="/">
+  home
+</Button>
+```
+
+El componente <i>Button</i> se renderiza usando como raíz el componente <i>Link</i> de <i>react-router-dom</i>, al que se pasa la prop <i>to</i> que especifica la ruta.
+
+El código completo para la barra de navegación es el siguiente
+
+```js
+<AppBar position="static">
+  <Toolbar>
+    <Button color="inherit" component={Link} to="/">home</Button>
+    <Button color="inherit" component={Link} to="/notes">notes</Button>
+    <Button color="inherit" component={Link} to="/create">new note</Button>
+  </Toolbar>
+</AppBar>
+```
+
+y el resultado se ve tal como queremos:
+
+![](../../images/5/u16.png)
+
+Sin embargo, notamos que cuando se mueve el mouse sobre la barra de navegación, el indicador de desplazamiento es demasiado sutil. Arreglemos esto definiendo un color de fondo ligeramente mejor para estas situaciones:
+
+```js
+const style = { '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' } }
+
+return (
+  <Container>
+    <AppBar position="static">
+      <Toolbar>
+        <Button color="inherit" component={Link} to="/" sx={style}>
+          home
+        </Button>
+        <Button color="inherit" component={Link} to="/notes" sx={style}>
+          notes
+        </Button>
+        <Button color="inherit" component={Link} to="/create" sx={style}>
+          new note
+        </Button>
+      </Toolbar>
+    </AppBar>
+
+    // ...
+)
+```
+
+Finalmente estamos satisfechos:
+
+![](../../images/5/u17.png)
+
+El código actual de la aplicación está disponible en su totalidad en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-12), en la rama <i>part5-12</i>.
+
+
+### Styled Components
+
+Además de lo que ya hemos visto, existen [otras formas](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) de aplicar estilos a una aplicación React.
+
+La librería [styled-components](https://www.styled-components.com/), que utiliza la sintaxis [literal de plantilla etiquetada](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) de ES6, ofrece un enfoque interesante para definir estilos.
+
+[Instalemos](https://styled-components.com/docs/basics#installation) Styled Components y utilicémoslo para realizar algunos cambios de estilo en la aplicación de notas (la versión anterior a la instalación de Material UI). Primero, creemos dos definiciones de estilo para los componentes que usaremos:
+
+```js
+import styled from 'styled-components'
+
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid Chocolate;
+  border-radius: 3px;
+`
+
+const Input = styled.input`
+  margin: 0.25em;
+  width: 300px;  
+`
+```
+
+El código crea versiones de los elementos HTML <i>button</i> y <i>input</i> con estilo y los asigna a las variables <i>Button</i> y <i>Input</i>.
+
+La sintaxis para definir estilos es bastante interesante, ya que las definiciones CSS se colocan entre comillas invertidas. Esta es la sintaxis de los [literales de plantilla etiquetados](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) de ES6.
+
+Los componentes definidos funcionan como elementos normales <i>button</i> y <i>input</i>, y se utilizan en la aplicación de la forma habitual:
+
+
+```js
+const NoteForm = ({ createNote }) => {
+  // ...
+
+  return (
+    <div>
+      <h2>Create a new note</h2>
+
+      <form onSubmit={addNote}>
+        <Input> // highlight-line
+          value={newNote}
+          onChange={event => setNewNote(event.target.value)}
+          placeholder="write note content here"
+        />
+        <Button type="submit">save</Button> // highlight-line
+      </form>
+    </div>
+  )
+}
+```
+
+El formulario ahora se ve así:
+
+![](../../images/5/u20.png)
+
+Definamos los siguientes componentes para agregar estilos, todos los cuales son versiones mejoradas de los elementos <i>div</i>:
+
+```js
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`
+```
+
+Los nuevos componentes ahora se pueden utilizar en la aplicación:
+
+```js
+const App = () => {
+  // ...
+
+  return (
+    <Page> // highlight-line
+      <Navigation> // highlight-line
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/create">new note</Link>
+      </Navigation> // highlight-line
+
+      <Routes>
+        <Route path="/notes/:id" element={
+          <Note
+            note={note}
+            toggleImportanceOf={toggleImportanceOf}
+            deleteNote={deleteNote}
+          />
+        } />
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote}/>
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+// highlight-start
+      <Footer>
+         Note app, Department of Computer Science, University of Helsinki 2026
+      </Footer>
+    </Page>
+    // highlight-end
+  )
+}
+```
+
+El resultado final es el siguiente:
+
+![](../../images/5/u21.png)
+
+Styled-Components ha ido ganando popularidad últimamente y actualmente parece que mucha gente lo considera la mejor manera de definir estilos para aplicaciones React.
+
+</div>
+
+<div class="tasks">
+
+### Ejercicios 5.29–5.31
+
+A continuación, mejora los estilos de la aplicación de blogs utilizando Material UI o Styled Components.
+
+#### 5.29: blogs con estilo, paso 1
+
+Añade estilos a los formularios de la aplicación.
+
+Su solución podría verse así. Formulario de inicio de sesión:
+
+![](../../images/5/l10.png)
+
+Creando un nuevo blog:
+
+![](../../images/5/l11.png)
+
+#### 5.30: blogs con estilo, paso 2
+
+Ahora diseña la barra de navegación de la aplicación y el componente que muestra las notificaciones. El resultado podría verse así:
+
+![](../../images/5/l12.png)
+
+#### 5.31: blogs con estilo, paso 3
+
+Personaliza como prefieras la apariencia del componente que muestra un único blog. Este es un ejemplo:
+
+![](../../images/5/l14.png)
+
+Este fue el último ejercicio de la sección; es hora de enviar el código a GitHub y marcar los ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

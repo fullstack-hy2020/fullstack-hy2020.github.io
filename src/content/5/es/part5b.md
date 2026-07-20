@@ -7,6 +7,24 @@ lang: es
 
 <div class="content">
 
+Esta sección se ha escrito utilizando React 19 y algunas de las funcionalidades de React presentadas en este capítulo no funcionan con versiones anteriores. Las primeras partes del curso se escribieron con React 18, así que asegúrate de que tu proyecto tenga ahora instalada la versión 19 de React.
+
+Puedes comprobar el archivo <i>package.json</i> para verificar que se utiliza la versión 19 de las librerías <i>react</i> y <i>react-dom</i>:
+
+```json
+{
+  // ...
+  "dependencies": {
+    "axios": "^1.9.0",
+    "react": "^19.1.0", // highlight-line
+    "react-dom": "^19.1.0" // highlight-line
+  },
+  // ...
+}
+```
+
+Ejecuta también el comando <i>npm install</i>, que instala las dependencias según el archivo <i>package.json</i>. Esto es necesario si, por ejemplo, clonaste el repositorio de ejemplo en una fase anterior del curso, cuando todavía se utilizaba una versión más antigua de React.
+
 ### Mostrando el formulario de inicio de sesión solo cuando sea apropiado
 
 Modifiquemos la aplicación para que el formulario de inicio de sesión no se muestre por defecto:
@@ -383,14 +401,14 @@ const App = () => {
 }
 ```
 
-El hook [useRef](https://es.react.dev/reference/react/useRef) se utiliza para crear una referencia <i>noteFormRef</i>, que se asigna al componente <i>Togglable</i> que contiene el formulario para crear la nota. La variable <i>noteFormRef</i> actúa como referencia al componente. Este hook asegura que se mantenga la misma referencia (ref) en todas las re-renderizaciones del componente.
+El hook [useRef](https://es.react.dev/reference/react/useRef) se utiliza para crear una referencia <i>noteFormRef</i>, que se asigna al componente <i>Togglable</i> que contiene el formulario para crear la nota. La variable <i>noteFormRef</i> actúa como referencia al componente. Este hook garantiza que se mantenga la misma referencia (ref) durante todos los nuevos renderizados del componente.
 
 También realizamos los siguientes cambios en el componente <i>Togglable</i>:
 
 ```js
-import { useState, forwardRef, useImperativeHandle } from 'react' // highlight-line
+import { useState, useImperativeHandle } from 'react' // highlight-line
 
-const Togglable = forwardRef((props, refs) => { // highlight-line
+const Togglable = (props) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -401,10 +419,8 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
   }
 
 // highlight-start
-  useImperativeHandle(refs, () => {
-    return {
-      toggleVisibility
-    }
+  useImperativeHandle(props.ref, () => {
+    return { toggleVisibility }
   })
 // highlight-end
 
@@ -419,12 +435,10 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
       </div>
     </div>
   )
-})  // highlight-line
+}
 
 export default Togglable
 ```
-
-La función que crea el componente está envuelta dentro de una llamada a la función [forwardRef](https://es.react.dev/reference/react/forwardRef). De esta manera el componente puede acceder a la referencia que le fue asignada.
 
 El componente usa el hook [useImperativeHandle](https://es.react.dev/reference/react/useImperativeHandle) para que su función <i>toggleVisibility</i> esté disponible fuera del componente.
 
@@ -515,7 +529,7 @@ El desarrollo full stack es <i>extremadamente difícil</i>, por eso utilizaré t
 
 #### 5.5 Frontend de la Lista de Blogs, paso 5
 
-Cambia el formulario para crear publicaciones de blog para que solo se muestre cuando sea apropiado. Utiliza una funcionalidad similar a la que se mostró [anteriormente en esta parte del material del curso](/es/part5/props_children_y_proptypes#mostrando-el-formulario-de-inicio-de-sesion-solo-cuando-sea-apropiado). Si lo deseas, puedes utilizar el componente <i>Togglable</i> definido en la parte 5.
+Cambia el formulario para crear publicaciones de blog para que solo se muestre cuando sea apropiado. Utiliza una funcionalidad similar a la que se mostró [anteriormente en esta parte del material del curso](/es/part5/props_children_y_la_ref_del_componente#mostrando-el-formulario-de-inicio-de-sesion-solo-cuando-sea-apropiado). Si lo deseas, puedes utilizar el componente <i>Togglable</i> definido en la parte 5.
 
 Por defecto, el formulario no es visible
 
@@ -531,7 +545,7 @@ El formulario se esconde otra vez luego de que un nuevo blog es creado.
 
 Separa el formulario para crear un nuevo blog en su propio componente (si aún no lo has hecho) y mueve todos los estados necesarios para crear un nuevo blog a este componente.
 
-El componente debe funcionar como el componente <i>NoteForm</i> del [material](/es/part5/props_children_y_proptypes) de esta parte.
+El componente debe funcionar como el componente <i>NoteForm</i> del [material](/es/part5/props_children_y_la_ref_del_componente#estado-de-los-formularios) de esta parte.
 
 #### 5.7 Frontend de la Lista de Blogs, paso 7
 
