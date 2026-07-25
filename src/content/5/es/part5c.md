@@ -5,12 +5,6 @@ letter: c
 lang: es
 ---
 
-<div class="tasks">
-
-La librería de pruebas utilizada en esta parte se cambió el 3 de marzo de 2024 de Jest a Vitest. Si ya comenzaste esta parte usando Jest, puedes ver [aquí](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/02d8be28b1c9190f48976fbbd2435b63261282df/src/content/5/es/part5c.md) el contenido antiguo.
-
-</div>
-
 <div class="content">
 
 Hay muchas formas diferentes de probar aplicaciones React. Echemos un vistazo a ellas a continuación.
@@ -139,49 +133,41 @@ Ejecuta el test con el comando _npm test_:
 $ npm test
 
 > notes-frontend@0.0.0 test
-> vitest
+> vitest run
 
 
- DEV  v1.3.1 /Users/mluukkai/opetus/2024-fs/part3/notes-frontend
+ RUN  v3.2.3 /home/vejolkko/repot/fullstack-examples/notes-frontend
 
- ✓ src/components/Note.test.jsx (1)
-   ✓ renders content
+ ✓ src/components/Note.test.jsx (1 test) 19ms
+   ✓ renders content 18ms
 
  Test Files  1 passed (1)
       Tests  1 passed (1)
-   Start at  17:05:37
-   Duration  812ms (transform 31ms, setup 220ms, collect 11ms, tests 14ms, environment 395ms, prepare 70ms)
-
-
- PASS  Waiting for file changes...
+   Start at  14:31:54
+   Duration  874ms (transform 51ms, setup 169ms, collect 19ms, tests 19ms, environment 454ms, prepare 87ms)
 ```
 
-Eslint se queja de las palabras clave _test_ y _expect_ en las pruebas. El problema se puede resolver instalando [eslint-plugin-vitest-globals](https://www.npmjs.com/package/eslint-plugin-vitest-globals):
-
-```
-npm install --save-dev eslint-plugin-vitest-globals
-```
-
-y habilitando el plugin al editar el archivo _.eslint.cjs_ de la siguiente manera:
+ESLint se queja de las palabras clave _test_ y _expect_ en las pruebas. El problema se resuelve añadiendo la siguiente configuración al archivo <i>eslint.config.js</i>:
 
 ```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2020: true,
-    "vitest-globals/env": true // highlight-line
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'plugin:vitest-globals/recommended', // highlight-line
-  ],
+// ...
+
+export default [
   // ...
-}
+  // highlight-start
+  {
+    files: ['**/*.test.{js,jsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.vitest
+      }
+    }
+  }
+  // highlight-end
+]
 ```
+
+Así se informa a ESLint de que las palabras clave de Vitest están disponibles globalmente en los archivos de prueba.
 
 ### Ubicación del archivo de prueba
 
@@ -189,7 +175,7 @@ En React hay (al menos) [dos convenciones diferentes](https://medium.com/@JeffLo
 
 La otra convención es almacenar los archivos de prueba "normalmente" en su propio directorio separado _test_. Cualquiera que sea la convención que elijamos, es casi seguro que estará equivocada según la opinión de alguien.
 
-Personalmente, no me gusta esta forma de almacenar pruebas y código de aplicación en el mismo directorio. La razón por la que elegimos seguir esta convención es que está configurada de forma predeterminada en las aplicaciones creadas por Vite o create-react-app.
+Personalmente, no me gusta almacenar las pruebas y el código de la aplicación en el mismo directorio. Sin embargo, seguiremos este enfoque por ahora, ya que es la práctica más habitual en proyectos pequeños.
 
 ### Búsqueda de contenido en un componente
 
@@ -214,6 +200,77 @@ test('renders content', () => {
 ```
 
 La prueba falla si _getByText_ no encuentra el elemento que está buscando.
+
+De forma predeterminada, _getByText_ busca un elemento que contenga **exactamente el texto proporcionado como parámetro**, y nada más. Supongamos que un componente renderiza texto en un elemento HTML de la siguiente manera:
+
+```js
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important
+    ? 'make not important' : 'make important'
+
+  return (
+    <li className='note'>
+      Your awesome note: {note.content} // highlight-line
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
+  )
+}
+
+export default Note
+```
+
+El método _getByText_ utilizado por la prueba <i>no</i> encuentra el elemento:
+
+```js
+test('renders content', () => {
+  const note = {
+    content: 'Does not work anymore :(',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.getByText('Does not work anymore :(')
+
+  expect(element).toBeDefined()
+})
+```
+
+Si queremos buscar un elemento que <i>contenga</i> el texto, podemos utilizar una opción adicional:
+
+```js
+const element = screen.getByText(
+  'Does not work anymore :(', { exact: false }
+)
+```
+
+También podemos utilizar el método _findByText_:
+
+```js
+const element = await screen.findByText('Does not work anymore :(')
+```
+
+Es importante observar que, a diferencia de los demás métodos _ByText_, _findByText_ devuelve una promesa.
+
+En otras situaciones resulta útil _queryByText_: el método devuelve el elemento, pero <i>no lanza una excepción</i> si no lo encuentra.
+
+Podemos emplearlo, por ejemplo, para comprobar que algo <i>no se renderiza</i> en el componente:
+
+```js
+test('does not render this', () => {
+  const note = {
+    content: 'This is a reminder',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.queryByText('do not want this thing to be rendered')
+  expect(element).toBeNull()
+})
+```
+
+También existen otros métodos, como [getByTestId](https://testing-library.com/docs/queries/bytestid/), que busca elementos mediante identificadores creados expresamente para las pruebas.
 
 También podríamos usar [selectores CSS](https://developer.mozilla.org/es/docs/Web/CSS/Selectores_CSS) para encontrar elementos renderizados mediante el uso del método [querySelector](https://developer.mozilla.org/es/docs/Web/API/Document/querySelector) del objeto [container](https://testing-library.com/docs/react-testing-library/api/#container-1), que es uno de los campos devueltos por el renderizado:
 
@@ -342,7 +399,7 @@ test('clicking the button calls event handler once', async () => {
     content: 'Component testing is done with react-testing-library',
     important: true
   }
-
+  
   const mockHandler = vi.fn()  // highlight-line
 
   render(
@@ -392,29 +449,7 @@ En nuestro ejemplo, la función simulada es una opción perfecta ya que se puede
 
 ### Pruebas para el componente <i>Togglable</i>
 
-Escribamos algunas pruebas para el componente <i>Togglable</i>. Agreguemos el nombre de clase CSS <i>togglableContent</i> al div que devuelve los componentes hijos.
-
-```js
-const Togglable = forwardRef((props, ref) => {
-  // ...
-
-  return (
-    <div>
-      <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>
-          {props.buttonLabel}
-        </button>
-      </div>
-      <div style={showWhenVisible} className="togglableContent"> // highlight-line
-        {props.children}
-        <button onClick={toggleVisibility}>cancel</button>
-      </div>
-    </div>
-  )
-})
-```
-
-Las pruebas se muestran a continuación:
+Escribamos algunas pruebas para el componente <i>Togglable</i>. Las pruebas se muestran a continuación:
 
 ```js
 import { render, screen } from '@testing-library/react'
@@ -422,25 +457,21 @@ import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
 
 describe('<Togglable />', () => {
-  let container
-
   beforeEach(() => {
-    container = render(
+    render(
       <Togglable buttonLabel="show...">
-        <div className="testDiv" >
-          togglable content
-        </div>
+        <div>togglable content</div>
       </Togglable>
-    ).container
+    )
   })
 
-  test('renders its children', async () => {
-    await screen.findAllByText('togglable content')
+  test('renders its children', () => {
+    screen.getByText('togglable content')
   })
 
   test('at start the children are not displayed', () => {
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 
   test('after clicking the button, children are displayed', async () => {
@@ -448,23 +479,23 @@ describe('<Togglable />', () => {
     const button = screen.getByText('show...')
     await user.click(button)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).not.toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).toBeVisible()
   })
 })
 ```
 
-La función _beforeEach_ se llama antes de cada prueba, la cual luego renderiza el componente <i>Togglable</i> y guarda el campo _container_ del valor devuelto.
+La función _beforeEach_ se llama antes de cada prueba y renderiza el componente <i>Togglable</i>.
 
 La primera prueba verifica que el componente <i>Togglable</i> renderiza su componente hijo.
 
 ```js
-<div className="testDiv">
+<div>
   togglable content
 </div>
 ```
 
-Las pruebas restantes utilizan el método [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) para verificar que el componente hijo del componente <i>Togglable</i> no es visible inicialmente, comprobando que el estilo del elemento <i>div</i> contiene _{ display: 'none' }_. Otra prueba verifica que cuando se presiona el botón, el componente es visible, lo que significa que el estilo para ocultarlo <i>ya no está</i> asignado al componente.
+Las pruebas restantes utilizan _toBeVisible_ para comprobar que el componente hijo de <i>Togglable</i> no es visible al principio, es decir, que el estilo del elemento <i>div</i> contiene _{ display: 'none' }_. Otra prueba verifica que, al pulsar el botón, el componente pasa a ser visible y deja de tener asignado el estilo que lo oculta.
 
 Agreguemos también una prueba que se pueda usar para verificar que el contenido visible se puede ocultar haciendo clic en el segundo botón del componente:
 
@@ -481,8 +512,8 @@ describe('<Togglable />', () => {
     const closeButton = screen.getByText('cancel')
     await user.click(closeButton)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 })
 ```
@@ -507,28 +538,24 @@ import { useState } from 'react'
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('')
 
-  const handleChange = (event) => {
-    setNewNote(event.target.value)
-  }
-
-  const addNote = (event) => {
+  const addNote = event => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: true,
+      important: true
     })
 
     setNewNote('')
   }
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         <button type="submit">save</button>
       </form>
@@ -606,13 +633,13 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         // highlight-start
         <input
@@ -647,6 +674,40 @@ await user.type(inputs[0], 'testing a form...')
 
 El método <i>getAllByRole</i> ahora devuelve un array y el campo de input correcto es el primer elemento del array. Sin embargo, este enfoque es un poco sospechoso ya que depende del orden de los campos de input.
 
+Si el campo <i>input</i> tuviera definido un <i>label</i>, podríamos localizarlo mediante getByLabelText. Por ejemplo, si añadimos una etiqueta al campo:
+
+```js
+  // ...
+  <label> // highlight-line
+    content // highlight-line
+    <input
+      value={newNote}
+      onChange={event => setNewNote(event.target.value)}
+    />
+  </label> // highlight-line
+  // ...
+```
+
+La prueba podría localizar el campo de la siguiente manera:
+
+```js
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
+  const createNote = vi.fn()
+
+  render(<NoteForm createNote={createNote} />) 
+
+  const input = screen.getByLabelText('content') // highlight-line
+  const sendButton = screen.getByText('save')
+
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
+
+  expect(createNote.mock.calls).toHaveLength(1)
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
+})
+```
+
 A menudo, los campos de input tienen un texto de <i>placeholder</i> que indica al usuario qué tipo de input se espera. Agreguemos un placeholder a nuestro formulario:
 
 ```js
@@ -654,13 +715,13 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
           placeholder='write note content here' // highlight-line 
         />
         <input
@@ -677,7 +738,8 @@ const NoteForm = ({ createNote }) => {
 Ahora encontrar el campo de input correcto es fácil con el método [getByPlaceholderText](https://testing-library.com/docs/queries/byplaceholdertext):
 
 ```js
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
   const createNote = vi.fn()
 
   render(<NoteForm createNote={createNote} />) 
@@ -685,8 +747,8 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...')
-  userEvent.click(sendButton)
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
@@ -702,13 +764,13 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
           id='note-input' // highlight-line 
         />
         <input
@@ -732,75 +794,6 @@ const input = container.querySelector('#note-input')
 
 Sin embargo, nos adheriremos al enfoque de usar _getByPlaceholderText_ en la prueba.
 
-Antes de continuar, analicemos un par de detalles. Supongamos que un componente renderiza texto en un elemento HTML de la siguiente manera:
-
-```js
-const Note = ({ note, toggleImportance }) => {
-  const label = note.important
-    ? 'make not important' : 'make important'
-
-  return (
-    <li className='note'>
-      Your awesome note: {note.content} // highlight-line
-      <button onClick={toggleImportance}>{label}</button>
-    </li>
-  )
-}
-
-export default Note
-```
-
-el método _getByText_ que la prueba utiliza <i>no</i> encuentra al elemento
-
-```js
-test('renders content', () => {
-  const note = {
-    content: 'Does not work anymore :(',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.getByText('Does not work anymore :(')
-
-  expect(element).toBeDefined()
-})
-```
-
-El método _getByText_ busca a un elemento que tenga **exactamente el mismo texto** que se proporciona como parámetro, y nada más. Si queremos buscar un elemento que <i>contenga</i> el texto, podríamos usar una opción adicional:
-
-```js
-const element = screen.getByText(
-  'Does not work anymore :(', { exact: false }
-)
-```
-
-o podríamos usar el método _findByText_:
-
-```js
-const element = await screen.findByText('Does not work anymore :(')
-```
-
-Es importante tener en cuenta que, a diferencia de los otros métodos _ByText_, _findByText_ ¡devuelve una promesa!
-
-Existen situaciones en las que otra forma del método _queryByText_ es útil. El método devuelve el elemento pero <i>no genera una excepción</i> si no se lo encuentra.
-
-Por ejemplo, podríamos utilizar el método para asegurarnos de que algo <i>no se está renderizando</i> en el componente:
-
-```js
-test('does not render this', () => {
-  const note = {
-    content: 'This is a reminder',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.queryByText('do not want this thing to be rendered')
-  expect(element).toBeNull()
-})
-```
-
 ### Cobertura de las pruebas
 
 Podemos encontrar fácilmente la [cobertura](https://vitest.dev/guide/coverage.html#coverage) de nuestras pruebas ejecutándolas con el comando
@@ -817,6 +810,14 @@ Se generará un informe HTML en el directorio <i>coverage</i>.
 El informe nos dirá las líneas de código no probado en cada componente:
 
 ![reporte HTML de cobertura de las pruebas](../../images/5/19newer.png)
+
+Añadamos el directorio <i>coverage/</i> al archivo <i>.gitignore</i> para excluir su contenido del control de versiones:
+
+```js
+//...
+
+coverage/
+```
 
 Puedes encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-8 </i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8).
 
