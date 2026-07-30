@@ -532,7 +532,7 @@ const useNoteStore = create(set => ({
 export const useNotes = () => useNoteStore(state => state.notes)
 ```
 
-For now, the application does not have the functionality to add new notes, and the strore does not yet support it. The state has been initialized with one note already added so that we can verify the application can successfully render the state.
+For now, the application does not have the functionality to add new notes, and the store does not yet support it. The state has been initialized with one note already added so that we can verify the application can successfully render the state.
 
 ### Pure functions and immutable objects
 
