@@ -697,7 +697,7 @@ React's built-in [Context API](https://react.dev/learn/passing-data-deeply-with-
 
 Let's now create a context in the application that stores the counter state management.
 
-A context is created using React's [createContext](https://react.dev/reference/react/createContext) hook. Let's create the context in a file <i>src/CounterContext.jsx</i>:
+A context is created using React's [createContext](https://react.dev/reference/react/createContext) factory function. Let's create the context in a file <i>src/CounterContext.jsx</i>:
 
 ```js
 import { createContext } from 'react'
