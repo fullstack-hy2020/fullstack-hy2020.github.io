@@ -856,7 +856,7 @@ In the previous part of the course material, we wrote integration tests for the 
 So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
 We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server.
-We chose to concentrate on making end-to-end tests to test the whole application. We will work on the end-to-end tests in the last chapter of this part.
+We chose to concentrate on making end-to-end tests to test the whole application. We will work on the end-to-end tests in the next chapter of this part.
 
 ### Snapshot testing
 
