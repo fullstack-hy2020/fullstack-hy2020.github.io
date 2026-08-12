@@ -216,7 +216,7 @@ Browsers understand standard JavaScript, but JSX is not valid JavaScript, no bro
 const element = <App />
 ```
 
-it must be transpiled it into something the browser can run:
+it must be transpiled into something the browser can run:
 
 ```js
 const element = React.createElement(App, null)
