@@ -73,7 +73,7 @@ Document databases differ from relational databases in how they organize data as
 
 You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately, the material is currently only available in Finnish.
 
-Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea of how a document database stores data.
+Read now the chapters on [collections](https://www.mongodb.com/docs/manual/core/databases-and-collections/) and [documents](www.mongodb.com/docs/manual/core/document/) from the MongoDB manual to get a basic idea of how a document database stores data.
 
 Naturally, you can install and run MongoDB on your computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
