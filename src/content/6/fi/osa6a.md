@@ -124,7 +124,7 @@ Storessa oleva laskurin arvo saadaan siis talletettua muuttujaan seuraavasti:
 const counter = useCounterStore(state => state.counter)
 ```
 
-Käytössä on selektorifunktio, <i>state => state.counter</i> joka määrää mitä storen sisätä palautetaan. Vastaavalla tavalla saadaan muuttujaan <i>increment</i> storessa oleva funktio.
+Käytössä on selektorifunktio, <i>state => state.counter</i> joka määrää mitä storen sisältä palautetaan. Vastaavalla tavalla saadaan muuttujaan <i>increment</i> storessa oleva funktio.
 
 Napin "plus" klikkauksenkäsittelijäksi on annettu tilan funktio <i>increment</i>, joka  määriteltiin seuraavasti:
 
@@ -278,7 +278,7 @@ const App = () => {
 export default App
 ```
 
-Huomioinarvoista, tässä on se, että komponentti <i>App</i> ei nyt välitä tilaa lapsikomponenteilleen, Itse asiassa komponentti ei edes millään tavalla koske tilaan, storen määrittely on eriytetty täysin komponentin ulkopuolelle.
+Huomionarvoista, tässä on se, että komponentti <i>App</i> ei nyt välitä tilaa lapsikomponenteilleen, Itse asiassa komponentti ei edes millään tavalla koske tilaan, storen määrittely on eriytetty täysin komponentin ulkopuolelle.
 
 Laskurin arvon näyttävä komponentti on yksinkertainen
 
@@ -334,7 +334,7 @@ Voisimme myös ottaa käyttöömme koko tilan, seuraavasti:
   // tekee saman asian kuin useCounterStore(state => state) eli valitsee koko tilan
 ```
 
-Nyt  laskurin arvoon ja funktioinin voisi viitata pistenotaatiolla, eli <i>state.counter</i> ja <i>state.counter</i>.
+Nyt  laskurin arvoon ja funktioihin voisi viitata pistenotaatiolla, eli <i>state.counter</i> ja <i>state.increment</i>.
 
 Herääkin kysymys olisiko mahdollista ottaa useita tilan osia käyttöön destrukturoimalla:
 
@@ -361,7 +361,9 @@ Ratkaisu toimii, mutta siinä on eräs merkittävä heikkous. Destrukturointi ai
 Zustandin paras käytäntö onkin valita tilasta täsmälleen vain ne osat, joita kyseisessä komponentissa tarvitaan. Komponentti renderöityy uudelleen ainoastaan silloin, kun sen valitseman tilan osa muuttuu. Kun sen sijaan kirjoitetaan:
 
 ```js
-  const { increment, decrement, zero } = useCounterStore() 
+  const increment = useCounterStore(state => state.increment)
+  const decrement = useCounterStore(state => state.decrement)
+  const zero = useCounterStore(state => state.zero) 
 ```
 
 komponentti ei enää reagoi laskurin arvon muutoksiin, koska se ei ole valinnut sitä tilastaan.
@@ -400,7 +402,7 @@ const Controls = () => {
 
 Nyt uudelleenrenderöitymistä ei tapahdu, sillä tilasta on valittu ainoastaan funktiot, jotka pysyvät koko tilan elinajan samana.
 
-Joidenkin [parhaiden käytänteiden](https://tkdodo.eu/blog/working-with-zustand#only-export-custom-hooks) mukaan, koko tilan määrittelevää funktiota ei kannata exportata koko ohjelman käyttöön. Sensijaan kannattaa luoda siitä pienempiä näkymiä, jotka paljastavat vain tarvittavat osat tilasta. Muokataan tilaa <i>state.js</i> seuraavasti:
+Joidenkin [parhaiden käytänteiden](https://tkdodo.eu/blog/working-with-zustand#only-export-custom-hooks) mukaan, koko tilan määrittelevää funktiota ei kannata exportata koko ohjelman käyttöön. Sen sijaan kannattaa luoda siitä pienempiä näkymiä, jotka paljastavat vain tarvittavat osat tilasta. Muokataan tiedostoa <i>store.js</i> seuraavasti:
 
 ```js
 import { create } from 'zustand'
@@ -419,7 +421,7 @@ export const useCounter = () => useCounterStore(state => state.counter) // highl
 export const useCounterControls = () => useCounterStore(state => state.actions) // highlight-line
 ```
 
-Nyt siis storen määrittelevän moduulin ulkopuolella on käytössä funktiot <i>useCounter</i>, jota kutsumalla saadaan laskurin arvo, sekä  <i>useCounterControls</i> jota kutsumalla saadaan laskurin arvoa muuttavat funktiot. Käyttö muuttuu hieman:
+Nyt siis storen määrittelevän moduulin ulkopuolella on käytössä funktiot <i>useCounter</i>, jota kutsumalla saadaan laskurin arvo, sekä  <i>useCounterControls</i>, jota kutsumalla saadaan laskurin arvoa muuttavat funktiot. Käyttö muuttuu hieman:
 
 ```js
 import { useCounter } from './store' // highlight-line
@@ -535,7 +537,7 @@ Toistaiseksi sovelluksessa ei siis ole toiminnallisuutta uusien muistiinpanojen 
 
 ### Puhtaat funktiot ja muuttumattomat (immutable) oliot
 
-Ensimmäinen yritys muistiinpanon lisäävästsä actionista on seuraava:
+Ensimmäinen yritys muistiinpanon lisäävästä actionista on seuraava:
 
 ```js
 note => set(
@@ -548,7 +550,7 @@ note => set(
 
 Funktio saa parametrikseen muistiinpanon, ja palauttaa tilan, missä vanhaan tilaan <i>state</i> on lisätty uusi muistiinpano.
 
-Yrityksemme on kuitenkin sääntöjen vastainen. Zustandin [dokumentaatio](https://zustand.docs.pmnd.rs/learn/guides/immutable-state-and-merging) toteaa <i>Like with React's useState, we need to update state immutably</i>, Kuten tiedämme <i>state.notes.push</i> muuttaa tila olion tilaa, eli ratkaisu ei kelpaa.
+Yrityksemme on kuitenkin sääntöjen vastainen. Zustandin [dokumentaatio](https://zustand.docs.pmnd.rs/learn/guides/immutable-state-and-merging) toteaa <i>Like with React's useState, we need to update state immutably</i>, Kuten tiedämme <i>state.notes.push</i> muuttaa tilaolion tilaa, eli ratkaisu ei kelpaa.
 
 Oikeaoppinen tapa on käyttää esimerkiksi [Array.concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) funktiota, joka ei muuta olemassaolevaa tilaa, vaan luo siitä uuden kopion, johon uusi muistiinpano on lisätty:
 
@@ -586,7 +588,7 @@ export const useNoteActions = () => useNoteStore(state => state.actions)
 > state => ({ notes: [...state.notes, note] })
 > ```
 >
-> Tässä siis muodostetaan taulukko, johon otetaan spread-syntaksilla jokainen taulukon <i>state.notes</i> alkioista sekä lisätään vielä loppuun uusi muistiinpano <i>notes</i>. On makuasia käyttääkö spreadia vai funktiota <i>concat</i>.
+> Tässä siis muodostetaan taulukko, johon otetaan spread-syntaksilla jokainen taulukon <i>state.notes</i> alkioista sekä lisätään vielä loppuun uusi muistiinpano <i>note</i>. On makuasia, käyttääkö spreadia vai funktiota <i>concat</i>.
 
 Teknisesti ilmaisten Zustandilla muodostettu tila on [muuttumaton (engl. immutable)](https://developer.mozilla.org/en-US/docs/Glossary/Immutable), ja tilaa muuttavien action-funktioiden tulee olla [puhtaita funktioita](https://en.wikipedia.org/wiki/Pure_function).
 
@@ -648,7 +650,7 @@ Lomake on erittäin yksinkertainen:
 </form>
 ```
 
-Huomioinarvoista lomakkeessa on se, että syötekentällä on nimi. Tämän ansiosta käsittelijäfunktio pääsee kentän arvoon käsiksi.
+Huomionarvoista lomakkeessa on se, että syötekentällä on nimi. Tämän ansiosta käsittelijäfunktio pääsee kentän arvoon käsiksi.
 
 Lisäyksen käsittelijä on sekin suoraviivainen
 
@@ -663,7 +665,7 @@ Lisäyksen käsittelijä on sekin suoraviivainen
 
 Lomakkeen tekstikentästä haetaan sisältö <i>e.target.note.value</i> muuttujaan, jota käytetään parametrina muistiinpanon lisäysfunktion <i>add</i> kutsussa. 
 
-Viimeinen rivi eli, eli <i>e.target.reset()</i> tyhjentää lomakkeen.
+Viimeinen rivi eli <i>e.target.reset()</i> tyhjentää lomakkeen.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/zustand-notes/tree/part6-1), branchissa <i>part6-1</i>.
 
@@ -703,7 +705,7 @@ const NoteList = () => {
 }
 ```
 
-Komponentti siis hakee storesta muistiinpanojen listan, ja luo jokaista vastaavan <i>Note</i> komponentin, jolle se välittää muistiinpanon tiedot propsina:
+Komponentti siis hakee storesta muistiinpanojen listan, ja luo jokaista vastaavan <i>Note</i>-komponentin, jolle se välittää muistiinpanon tiedot propsina:
 
 ```js
 const Note = ({ note }) => (
@@ -774,7 +776,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 <div class="tasks">
 
-### Tehtävät 6.2.-6.6.
+### Tehtävät 6.2.-6.5.
 
 Toteutetaan uusi versio ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2020/zustand-anecdotes oleva projekti.
 
@@ -808,7 +810,7 @@ Voit pitää lisäyslomakkeen aiemman esimerkin tapaan [ei-kontrolloituna](/osa6
 
 #### 6.4: anekdootit, step3
 
-Eriytä uuden anekdootin luominen omaksi komponentikseen nimeltään <i>AnecdoteForm</i> ja Eriytä anekdoottilistan näyttäminen omaksi komponentikseen nimeltään <i>AnecdoteList</i>.
+Eriytä uuden anekdootin luominen omaksi komponentikseen nimeltään <i>AnecdoteForm</i> ja eriytä anekdoottilistan näyttäminen omaksi komponentikseen nimeltään <i>AnecdoteList</i>.
 
 Tämän tehtävän jälkeen komponentin <i>App</i> pitäisi näyttää seuraavalta:
 
