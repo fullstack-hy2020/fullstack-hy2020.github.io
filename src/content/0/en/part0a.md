@@ -376,7 +376,7 @@ Also, install [Node.js](https://nodejs.org/en/). The material is being updated t
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 
-### Typos in the material
+### Typos in the materials
 
 If you find a typo in the material, or something has been expressed unclearly or is simply bad grammar, submit a *pull request* to the course material in the [repository](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/part0a.md>
 
