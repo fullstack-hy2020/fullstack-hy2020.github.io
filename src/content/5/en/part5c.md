@@ -811,12 +811,13 @@ report by default. To also include uncovered source files, add the following
 to the _test_ configuration in _vite.config.js_:
 
 ```js
-test: {
+export default defineConfig({
   // ...
-  coverage: {
-    include: ['src/**/*.{js,jsx}'],
+  test: {
+    // ...
+    coverage: { include: ['src/**/*.{js,jsx}'] },
   },
-},
+})
 ```
 
 A HTML report will be generated to the <i>coverage</i> directory.
