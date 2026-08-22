@@ -894,8 +894,8 @@ Promise.all executes the promises it receives in parallel. If the promises need 
 beforeEach(async () => {
   await Note.deleteMany({})
 
-  for (let note of helper.initialNotes) {
-    let noteObject = new Note(note)
+  for (const note of helper.initialNotes) {
+    const noteObject = new Note(note)
     await noteObject.save()
   }
 })
