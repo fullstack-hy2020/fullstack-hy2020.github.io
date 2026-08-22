@@ -318,9 +318,9 @@ app.get('/', (request, response) => {
 })
 ```
 
-The event handler function accepts two parameters. The first [request](http://expressjs.com/en/4x/api.html#req) parameter contains all of the information of the HTTP request, and the second [response](http://expressjs.com/en/4x/api.html#res) parameter is used to define how the request is responded to.
+The event handler function accepts two parameters. The first [request](https://expressjs.com/en/5x/api/request/) parameter contains all of the information of the HTTP request, and the second [response](https://expressjs.com/en/5x/api/response/) parameter is used to define how the request is responded to.
 
-In our code, the request is answered by using the [send](http://expressjs.com/en/4x/api.html#res.send) method of the _response_ object. Calling the method makes the server respond to the HTTP request by sending a response containing the string <code>\<h1>Hello World!\</h1></code> that was passed to the _send_ method. Since the parameter is a string, Express automatically sets the value of the <i>Content-Type</i> header to be <i>text/html</i>. The status code of the response defaults to 200.
+In our code, the request is answered by using the [send](https://expressjs.com/en/5x/api/response/#ressendbody) method of the _response_ object. Calling the method makes the server respond to the HTTP request by sending a response containing the string <code>\<h1>Hello World!\</h1></code> that was passed to the _send_ method. Since the parameter is a string, Express automatically sets the value of the <i>Content-Type</i> header to be <i>text/html</i>. The status code of the response defaults to 200.
 
 We can verify this from the <i>Network</i> tab in developer tools:
 
@@ -334,7 +334,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-The request is responded to with the [json](http://expressjs.com/en/4x/api.html#res.json) method of the _response_ object. Calling the method will send the __notes__ array that was passed to it as a JSON formatted string. Express automatically sets the <i>Content-Type</i> header with the appropriate value of <i>application/json</i>.
+The request is responded to with the [json](https://expressjs.com/en/5x/api/response/#resjsonbody) method of the _response_ object. Calling the method will send the __notes__ array that was passed to it as a JSON formatted string. Express automatically sets the <i>Content-Type</i> header with the appropriate value of <i>application/json</i>.
 
 ![api/notes gives the formatted JSON data again](../../images/3/6new.png)
 
@@ -428,11 +428,11 @@ In some places (see e.g. [Richardson, Ruby: RESTful Web Services](http://shop.or
 
 ### Fetching a single resource
 
-Let's expand our application so that it offers a REST interface for operating on individual notes. First, let's create a [route](http://expressjs.com/en/guide/routing.html) for fetching a single resource.
+Let's expand our application so that it offers a REST interface for operating on individual notes. First, let's create a [route](https://expressjs.com/en/5x/guide/routing/) for fetching a single resource.
 
 The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.
 
-We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in Express by using the colon syntax:
+We can define [parameters](https://expressjs.com/en/5x/guide/routing/#route-parameters) for routes in Express by using the colon syntax:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -444,7 +444,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Now <code>app.get('/api/notes/:id', ...)</code> will handle all HTTP GET requests that are of the form <i>/api/notes/SOMETHING</i>, where <i>SOMETHING</i> is an arbitrary string.
 
-The <i>id</i> parameter in the route of a request can be accessed through the [request](http://expressjs.com/en/api.html#req) object:
+The <i>id</i> parameter in the route of a request can be accessed through the [request](https://expressjs.com/en/5x/api/request/) object:
 
 ```js
 const id = request.params.id
@@ -484,7 +484,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Since no data is attached to the response, we use the [status](http://expressjs.com/en/4x/api.html#res.status) method for setting the status and the [end](http://expressjs.com/en/4x/api.html#res.end) method for responding to the request without sending any data.
+Since no data is attached to the response, we use the [status](https://expressjs.com/en/5x/api/response/#resstatuscode) method for setting the status and the [end](https://expressjs.com/en/5x/api/response/#resenddata-encoding-callback) method for responding to the request without sending any data.
 
 The if-condition leverages the fact that all JavaScript objects are [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), meaning that they evaluate to true in a comparison operation. However, _undefined_ is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) meaning that it will evaluate to false.
 
@@ -549,7 +549,7 @@ If you use *IntelliJ WebStorm* instead, you can use a similar procedure with its
 
 Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.rfc-editor.org/rfc/rfc9112#name-message-body) in JSON format.
 
-To access the data easily, we need the help of the Express [json-parser](https://expressjs.com/en/api.html) that we can use with the command _app.use(express.json())_.
+To access the data easily, we need the help of the Express [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) that we can use with the command _app.use(express.json())_.
 
 Let's activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:
 
@@ -630,7 +630,7 @@ Postman also allows users to save requests, but the situation can get quite chao
 
 > **Important sidenote**
 >
-> Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.
+> Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](https://expressjs.com/en/5x/api/request/#reqgetfield) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.
 >
 > Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which leads to the backend server not knowing that the data it has received is in the JSON format.
 >
@@ -861,7 +861,7 @@ POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent
 
 ### Middleware
 
-The Express [json-parser](https://expressjs.com/en/api.html) used earlier is a [middleware](http://expressjs.com/en/guide/using-middleware.html).
+The Express [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) used earlier is a [middleware](https://expressjs.com/en/resources/middleware/body-parser/).
 
 Middleware are functions that can be used for handling _request_ and _response_ objects.
 

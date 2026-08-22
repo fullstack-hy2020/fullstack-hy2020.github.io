@@ -355,10 +355,10 @@ app.get('/', (request, response) => {
 ```
 
 
-La fonction de gestion d'événement accepte deux paramètres. Le premier paramètre [request](http://expressjs.com/en/4x/api.html#req) contient toutes les informations de la demande HTTP, et le second paramètre [response](http://expressjs.com/en/4x/api.html#res) est utilisé pour définir la réponse à la demande.
+La fonction de gestion d'événement accepte deux paramètres. Le premier paramètre [request](https://expressjs.com/en/5x/api/request/) contient toutes les informations de la demande HTTP, et le second paramètre [response](https://expressjs.com/en/5x/api/response/) est utilisé pour définir la réponse à la demande.
 
 
-Dans notre code, on répond à la requête en utilisant la méthode [send](http://expressjs.com/en/4x/api.html#res.send) de l'objet _response_. L'appel de la méthode fait que le serveur répond à la requête HTTP en envoyant une réponse contenant la chaîne de caractères <code>\<h1>Hello World!\</h1></code> qui a été passée à la méthode _send_. Comme le paramètre est une chaîne de caractères, express définit automatiquement la valeur du header <i>Content-Type</i> comme étant <i>text/html</i>. Le code d'état de la réponse a la valeur 200 par défaut.
+Dans notre code, on répond à la requête en utilisant la méthode [send](https://expressjs.com/en/5x/api/response/#ressendbody) de l'objet _response_. L'appel de la méthode fait que le serveur répond à la requête HTTP en envoyant une réponse contenant la chaîne de caractères <code>\<h1>Hello World!\</h1></code> qui a été passée à la méthode _send_. Comme le paramètre est une chaîne de caractères, express définit automatiquement la valeur du header <i>Content-Type</i> comme étant <i>text/html</i>. Le code d'état de la réponse a la valeur 200 par défaut.
 
 
 Nous pouvons le vérifier à partir de l'onglet <i>Network</i> dans les outils de développement :
@@ -375,7 +375,7 @@ app.get('/api/notes', (request, response) => {
 ```
 
 
-La requête est traitée avec la méthode [json](http://expressjs.com/en/4x/api.html#res.json) de l'objet _réponse_. L'appel de cette méthode enverra le tableau __notes__ qui lui a été transmis sous la forme d'une chaîne de caractères formatée en JSON. Express définit automatiquement le header <i>Content-Type</i> avec la valeur appropriée de <i>application/json</i>.
+La requête est traitée avec la méthode [json](https://expressjs.com/en/5x/api/response/#resjsonbody) de l'objet _réponse_. L'appel de cette méthode enverra le tableau __notes__ qui lui a été transmis sous la forme d'une chaîne de caractères formatée en JSON. Express définit automatiquement le header <i>Content-Type</i> avec la valeur appropriée de <i>application/json</i>.
 
 ![](../../images/3/6ea.png)
 
@@ -530,13 +530,13 @@ Cette façon d'interpréter REST relève du [deuxième niveau de maturité RESTf
 ### Récupération d'une seule ressource
 
 
-Développons notre application de manière à ce qu'elle offre une interface REST pour opérer sur des notes individuelles. Tout d'abord, créons une [route](http://expressjs.com/en/guide/routing.html) pour récupérer une seule ressource.
+Développons notre application de manière à ce qu'elle offre une interface REST pour opérer sur des notes individuelles. Tout d'abord, créons une [route](https://expressjs.com/en/5x/guide/routing/) pour récupérer une seule ressource.
 
 
 L'adresse unique que nous utiliserons pour une note individuelle est de la forme <i>notes/10</i>, où le nombre à la fin fait référence au numéro d'identification unique de la note.
 
 
-Nous pouvons définir des [paramètres](http://expressjs.com/en/guide/routing.html#route-parameters) pour les routes dans express en utilisant la syntaxe des deux points :
+Nous pouvons définir des [paramètres](https://expressjs.com/en/5x/guide/routing/#route-parameters) pour les routes dans express en utilisant la syntaxe des deux points :
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -550,7 +550,7 @@ app.get('/api/notes/:id', (request, response) => {
 Maintenant, <code>app.get('/api/notes/:id', ...)</code> traitera toutes les requêtes HTTP GET qui sont de la forme <i>/api/notes/SOMETHING</i>, où <i>SOMETHING</i> est une chaîne arbitraire.
 
 
-Le paramètre <i>id</i> dans la route d'une demande, est accessible par l'objet [request](http://expressjs.com/en/api.html#req) :
+Le paramètre <i>id</i> dans la route d'une demande, est accessible par l'objet [request](https://expressjs.com/en/5x/api/request/) :
 
 ```js
 const id = request.params.id
@@ -658,7 +658,7 @@ app.get('/api/notes/:id', (request, response) => {
 ```
 
 
-Comme aucune donnée n'est jointe à la réponse, nous utilisons la méthode [status](http://expressjs.com/en/4x/api.html#res.status) pour définir l'état et la méthode [end](http://expressjs.com/en/4x/api.html#res.end) pour répondre à la demande sans envoyer de données.
+Comme aucune donnée n'est jointe à la réponse, nous utilisons la méthode [status](https://expressjs.com/en/5x/api/response/#resstatuscode) pour définir l'état et la méthode [end](https://expressjs.com/en/5x/api/response/#resenddata-encoding-callback) pour répondre à la demande sans envoyer de données.
 
 
 La condition if exploite le fait que tous les objets JavaScript sont [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), ce qui signifie qu'ils sont évalués à true dans une opération de comparaison. Cependant, _undefined_ est [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), ce qui signifie qu'il sera évalué comme faux.
@@ -726,7 +726,7 @@ Si vous utilisez *IntelliJ WebStorm* à la place, vous pouvez utiliser une proc�
 
 Ensuite, rendons possible l'ajout de nouvelles notes sur le serveur. L'ajout d'une note se fait par une requête HTTP POST à l'adresse http://localhost:3001/api/notes, et par l'envoi de toutes les informations relatives à la nouvelle note dans la requête [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) au format JSON.
 
-Afin d'accéder facilement aux données, nous avons besoin de l'aide de l'express [json-parser](https://expressjs.com/en/api.html) qui est utilisé avec la commande _app.use(express.json())_.
+Afin d'accéder facilement aux données, nous avons besoin de l'aide de l'express [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) qui est utilisé avec la commande _app.use(express.json())_.
 
 Activons le json-parser et implémentons un gestionnaire initial pour traiter les requêtes HTTP POST :
 
@@ -808,7 +808,7 @@ Postman permet également aux utilisateurs de sauvegarder leurs demandes, mais l
 
 > **Remarque importante**
 >
-> Parfois, lors d'un débogage, vous pouvez vouloir savoir quels en-têtes ont été définis dans la requête HTTP.Une façon d'y parvenir est d'utiliser la méthode [get](http://expressjs.com/en/4x/api.html#req.get) de l'objet _request_, qui peut être utilisée pour obtenir la valeur d'un seul header. L'objet _request_ possède également la propriété <i>headers</i>, qui contient tous les en-têtes d'une requête spécifique.
+> Parfois, lors d'un débogage, vous pouvez vouloir savoir quels en-têtes ont été définis dans la requête HTTP.Une façon d'y parvenir est d'utiliser la méthode [get](https://expressjs.com/en/5x/api/request/#reqgetfield) de l'objet _request_, qui peut être utilisée pour obtenir la valeur d'un seul header. L'objet _request_ possède également la propriété <i>headers</i>, qui contient tous les en-têtes d'une requête spécifique.
 >
 
 > Des problèmes peuvent survenir avec le client VS REST si vous ajoutez accidentellement une ligne vide entre la ligne supérieure et la ligne spécifiant les en-têtes HTTP. Dans cette situation, le client REST interprète cela comme signifiant que tous les en-têtes sont laissés vides, ce qui conduit le serveur backend à ne pas savoir que les données qu'il a reçues sont au format JSON.>
@@ -1086,7 +1086,7 @@ POST est le seul type de requête HTTP qui n'est ni <i>sûr</i> ni <i>idempotent
 
 ### Middleware
 
-Le [json-parser](https://expressjs.com/en/api.html) d'express que nous avons utilisé précédemment est un [middleware](http://expressjs.com/en/guide/using-middleware.html).
+Le [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) d'express que nous avons utilisé précédemment est un [middleware](https://expressjs.com/en/resources/middleware/body-parser/).
 
 
 Les Middleware sont des fonctions qui peuvent être utilisées pour traiter les objets _requête_ et _réponse_.

@@ -318,9 +318,9 @@ app.get('/', (request, response) => {
 })
 ```
 
-La función del controlador de eventos acepta dos parámetros. El primer parámetro [request](http://expressjs.com/en/4x/api.html#req) contiene toda la información de la solicitud HTTP y el segundo parámetro [response](http://expressjs.com/en/4x/api.html#res) se utiliza para definir cómo se responde a la solicitud.
+La función del controlador de eventos acepta dos parámetros. El primer parámetro [request](https://expressjs.com/en/5x/api/request/) contiene toda la información de la solicitud HTTP y el segundo parámetro [response](https://expressjs.com/en/5x/api/response/) se utiliza para definir cómo se responde a la solicitud.
 
-En nuestro código, la solicitud se responde utilizando el método [send](http://expressjs.com/en/4x/api.html#res.send) del objeto _response_. Llamar al método hace que el servidor responda a la solicitud HTTP enviando una respuesta que contiene el string <code>\<h1>Hello World!\</h1></code>, que se pasó al método _send_. Dado que el parámetro es un string, Express establece automáticamente el valor de la cabecera <i>Content-Type</i> en <i>text/html</i>. El código de estado de la respuesta predeterminado es 200.
+En nuestro código, la solicitud se responde utilizando el método [send](https://expressjs.com/en/5x/api/response/#ressendbody) del objeto _response_. Llamar al método hace que el servidor responda a la solicitud HTTP enviando una respuesta que contiene el string <code>\<h1>Hello World!\</h1></code>, que se pasó al método _send_. Dado que el parámetro es un string, Express establece automáticamente el valor de la cabecera <i>Content-Type</i> en <i>text/html</i>. El código de estado de la respuesta predeterminado es 200.
 
 Podemos verificar esto desde la pestaña <i>Network</i> en las herramientas para desarrolladores:
 
@@ -334,7 +334,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-La solicitud se responde con el método [json](http://expressjs.com/en/4x/api.html#res.json) del objeto _response_. Llamar al método enviará el array __notes__ que se le pasó como un string con formato JSON. Express establece automáticamente la cabecera <i>Content-Type</i> con el valor apropiado de <i>application/json</i>.
+La solicitud se responde con el método [json](https://expressjs.com/en/5x/api/response/#resjsonbody) del objeto _response_. Llamar al método enviará el array __notes__ que se le pasó como un string con formato JSON. Express establece automáticamente la cabecera <i>Content-Type</i> con el valor apropiado de <i>application/json</i>.
 
 ![api/notes devuelve los datos en formato JSON otra vez](../../images/3/6new.png)
 
@@ -460,11 +460,11 @@ En algunos lugares (ver por ejemplo, [Richardson, Ruby: RESTful Web Services](ht
 
 ### Obteniendo un solo recurso
 
-Ampliemos nuestra aplicación para que ofrezca una interfaz REST para operar con notas individuales. Primero, creemos una [ruta](http://expressjs.com/en/guide/routing.html) para buscar un solo recurso.
+Ampliemos nuestra aplicación para que ofrezca una interfaz REST para operar con notas individuales. Primero, creemos una [ruta](https://expressjs.com/en/5x/guide/routing/) para buscar un solo recurso.
 
 La dirección única que usaremos para una nota individual es de la forma <i>notes/10</i>, donde el número al final se refiere al número de id único de la nota.
 
-Podemos definir [parámetros](http://expressjs.com/en/guide/routing.html#route-parameters) para rutas en Express usando la sintaxis de dos puntos:
+Podemos definir [parámetros](https://expressjs.com/en/5x/guide/routing/#route-parameters) para rutas en Express usando la sintaxis de dos puntos:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -476,7 +476,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Ahora <code>app.get('/api/notes/:id', ...)</code> manejará todas las solicitudes HTTP GET, que tienen el formato <i>/api/notes/SOMETHING</i>, donde <i>SOMETHING</i> es una cadena arbitraria.
 
-Se puede acceder al parámetro <i>id</i> en la ruta de una solicitud a través del objeto [request](http://expressjs.com/en/api.html#req):
+Se puede acceder al parámetro <i>id</i> en la ruta de una solicitud a través del objeto [request](https://expressjs.com/en/5x/api/request/):
 
 ```js
 const id = request.params.id
@@ -569,7 +569,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Dado que no se adjuntan datos a la respuesta, utilizamos el método [status](http://expressjs.com/en/4x/api.html#res.status) para establecer el estado y el método [end](http://expressjs.com/en/4x/api.html#res.end) para responder a la solicitud sin enviar ningún dato.
+Dado que no se adjuntan datos a la respuesta, utilizamos el método [status](https://expressjs.com/en/5x/api/response/#resstatuscode) para establecer el estado y el método [end](https://expressjs.com/en/5x/api/response/#resenddata-encoding-callback) para responder a la solicitud sin enviar ningún dato.
 
 La condición if aprovecha el hecho de que todos los objetos JavaScript son [truthy](https://developer.mozilla.org/es/docs/Glossary/Truthy), lo que significa que se evalúan como verdaderos en una operación de comparación. Sin embargo, _undefined_ es [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), lo que significa que se evaluará como falso.
 
@@ -634,7 +634,7 @@ Si usas *IntelliJ WebStorm* en cambio, puedes usar un procedimiento similar con 
 
 A continuación, hagamos posible agregar nuevas notas al servidor. La adición de una nota ocurre al hacer una solicitud HTTP POST a la dirección <http://localhost:3001/api/notes>, y al enviar toda la información de la nueva nota en el [body](https://www.rfc-editor.org/rfc/rfc9112#name-message-body) de la solicitud en formato JSON.
 
-Para acceder a los datos fácilmente, necesitamos la ayuda del [json-parser](https://expressjs.com/en/api.html) de Express, que se usa con el comando _app.use(express.json())_.
+Para acceder a los datos fácilmente, necesitamos la ayuda del [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) de Express, que se usa con el comando _app.use(express.json())_.
 
 Activemos json-parser e implementemos un controlador inicial para manejar las solicitudes HTTP POST:
 
@@ -715,7 +715,7 @@ Postman también permite a los usuarios guardar solicitudes, pero la situación 
 
 > **Nota al margen importante**
 >
-> A veces, cuando estas depurando, es posible que desees averiguar qué cabeceras se han configurado en la solicitud HTTP. Una forma de lograr esto es mediante el método [get](http://expressjs.com/en/4x/api.html#req.get) del objeto _request_, que se puede usar para obtener el valor de una sola cabecera. El objeto _request_ también tiene la propiedad <i>headers (cabeceras)</i>, que contiene todas los cabeceras de una solicitud específica.
+> A veces, cuando estas depurando, es posible que desees averiguar qué cabeceras se han configurado en la solicitud HTTP. Una forma de lograr esto es mediante el método [get](https://expressjs.com/en/5x/api/request/#reqgetfield) del objeto _request_, que se puede usar para obtener el valor de una sola cabecera. El objeto _request_ también tiene la propiedad <i>headers (cabeceras)</i>, que contiene todas los cabeceras de una solicitud específica.
 >
 > Pueden ocurrir problemas con el cliente VS REST si agrega accidentalmente una línea vacía entre la fila superior y la fila que especifica los cabeceras HTTP. En esta situación, el cliente REST interpreta que esto significa que todos los cabeceras se dejan vacíos, lo que hace que el servidor backend no sepa que los datos que ha recibido están en formato JSON.
 >
@@ -950,7 +950,7 @@ POST es el único tipo de solicitud HTTP que no es ni <i>seguro</i> ni <i>idempo
 
 ### Middleware
 
-El [json-parser](https://expressjs.com/en/api.html) de Express que utilizamos anteriormente es un [middleware](https://expressjs.com/es/guide/using-middleware.html).
+El [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) de Express que utilizamos anteriormente es un [middleware](https://expressjs.com/en/resources/middleware/body-parser/).
 
 Los middleware son funciones que se pueden utilizar para manejar objetos de _request_ y _response_.
 
