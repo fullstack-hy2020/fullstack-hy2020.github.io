@@ -941,7 +941,7 @@ const Controls = () => {
 }
 ```
 
-Voimme viedä ratkaisun aseleen pidemmälle muodostamalla custom hookin, joka palauttaa suoraan oikean kontekstin. Lisätään se tiedostoon <i>hooks/useCoutet.js</i>:
+Voimme viedä ratkaisun aseleen pidemmälle muodostamalla custom hookin, joka palauttaa suoraan oikean kontekstin. Lisätään se tiedostoon <i>hooks/useCounter.js</i>:
 
 ```js
 import { useContext } from 'react'
