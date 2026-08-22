@@ -478,7 +478,7 @@ export default Note
 
 ```
 
-Eräs tapa on selvittää näytettävän muistiinpanon <i>id</i> komponentissa jo <i>App</i> React Routerin hook-funktion [useMatch](https://reactrouter.com/en/main/hooks/use-match) avulla.
+Eräs tapa on selvittää näytettävän muistiinpanon <i>id</i> komponentissa jo <i>App</i> React Routerin hook-funktion [useMatch](https://reactrouter.com/api/hooks/useMatch) avulla.
 
 <i>useMatch</i>-hookin käyttö ei ole mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretään <i>Router</i> komponentin <i>App</i> ulkopuolelle:
 

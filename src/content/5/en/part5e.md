@@ -477,7 +477,7 @@ const Note = ({ note, id, toggleImportanceOf, deleteNote }) => {  // highlight-l
 export default Note
 ```
 
-One way is to determine the <i>id</i> of the note to be displayed within the component using React Router's [useMatch](https://reactrouter.com/en/main/hooks/use-match) hook function.
+One way is to determine the <i>id</i> of the note to be displayed within the component using React Router's [useMatch](https://reactrouter.com/api/hooks/useMatch) hook function.
 
 It is not possible to use the <i>useMatch</i> hook in the same component that defines the routable part of the application. Let’s move the <i>Router</i> component outside of <i>App</i>:
 
