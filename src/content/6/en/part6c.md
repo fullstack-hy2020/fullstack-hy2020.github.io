@@ -964,7 +964,7 @@ const Display = () => {
   // ...
 }
 
-import { useCounter } from '../hooks/useCounter'
+import useCounter from '../hooks/useCounter'
 
 const Controls = () => {
   const { increment, decrement, zero } = useCounter()
