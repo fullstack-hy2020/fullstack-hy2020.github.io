@@ -888,7 +888,7 @@ The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 > The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.
 
-Promise.all executes the promises it receives in parallel. If the promises need to be executed in a particular order, this will be problematic. In situations like this, the operations can be executed inside of a [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) block, that guarantees a specific execution order.
+`Promise.all` waits for the promises it receives to settle concurrently. If the operations need to happen in a particular order, this would be problematic. In situations like this, the operations can be executed in a [for...of loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) using the `await` operator, which ensures that each operation completes before the next one starts.
 
 ```js
 beforeEach(async () => {
