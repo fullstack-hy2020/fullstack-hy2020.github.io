@@ -133,7 +133,7 @@ Käytännöt selviävät osien materiaalista:
 
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">osa 8</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">osa 9</a>
-- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">osa 110</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">osa 10</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">osa 11</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">osa 12</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">osa 13</a>
@@ -280,7 +280,7 @@ Viimeaikaisia isompia muutoksia
 - Osa 6 (5.4.2026): Redux korvattu Zustandilla
 - Osa 5 (31.3.2026): Cypressiä käsittelevä osuus poistettu. React Router ja tyylikirjastot siirretty osasta 7 tähän osaan
 - Osat 9 ja 11-13 (maaliskuu 2026): sisältö päivitetty ja materiaali siirretty uuteen osoitteeseen
-- Osa 8: (3.1.2026) Apollo Server päivitetty versioon v5. Apollo Client päivitetty versioon v4. Backend-koodin refaktorointi siirretty osaan 8c. Lukuisia muita pieniä parannuksia.
+- Osa 8 (3.1.2026): Apollo Server päivitetty versioon v5. Apollo Client päivitetty versioon v4. Backend-koodin refaktorointi siirretty osaan 8c. Lukuisia muita pieniä parannuksia.
 - Osa 4 (13.8.2025): Express päivitetty versioon 5 ja kirjasto express-async-errors poistettu osasta 4b
 
 ### Aiemmin suoritetun kurssin täydentäminen
