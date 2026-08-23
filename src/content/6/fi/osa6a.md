@@ -461,27 +461,72 @@ Custom hookeihin taas liittyy joukko sääntöjä, esimerkiksi niiden nimeämise
 
 <div class="tasks">
 
-### Tehtävä 6.1.
 
-Tehdään uusi versio osan 1 Unicafe-tehtävästä. Hoidetaan sovelluksen tilan käsittely Zustandin avulla.
+### Tehtävärepositorio
 
-Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy2020/unicafe-zustand olevan projektin.
+Toisin kuin aiemmissa osissa, tulee tämän osan tehtävät palauttaa omaan repositorioonsa.
 
-<i>Aloita poistamalla kloonatun sovelluksen Git-konfiguraatio ja asentamalla riippuvuudet:</i>
+Luo siis nyt uusi repositorio, johon kopioit repositorion https://github.com/fullstack-hy2020/fs-statemanagement sisällön.
+
+Kaiken repositorion sisällön (paitsi .git-hakemiston) tulee olla kopioituna palautusrepositoriosi juurihakemistoon. Palautusrepositoriosi juuren sisällön tulee siis olla täsmälleen seuraava:
 
 ```bash
-cd unicafe-zustand   // mene kloonatun repositorion hakemistoon
-rm -rf .git
-npm install
+.git 
+.github
+.gitignore
+unicafe
+unicafe-tests
+anecdotes
+anecdotes-tests
+query-anecdotes
+query-anecdotes-tests
 ```
+
+Myös kaikille tämän osan tehtävissä kehitettäville sovelluksille on olemassa automatisoidut testit.
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+### Tehtävä 1
 
 #### 6.1: Unicafe revisited
 
-Toteuta sitten sovellukseen koko sen varsinainen toiminnallisuus. 
+Tehdään uusi versio osan 1 Unicafe-tehtävästä. Hoidetaan sovelluksen tilan käsittely Zustandin avulla.
 
 Sovelluksesi ulkonäkö ja toiminnallisuus on sama kuin osassa 1:
 
 ![](../../images/1/16e.png)
+
+#### Extra: Unicafe testit
+
+Tehtävärepositorio https://github.com/fullstack-hy2020/fs-statemanagement sisältää testit kaikille tämän osan tehtävissä kehitettäville sovelluksille. Suorita edellisen tehtävän testit nyt paikallisesti:
+
+```bash
+cd unicafe-tests
+npm install
+npx playwright install chromium
+npm test
+```
+
+Kaikkien testien pitäisi mennä läpi, jos näin ei ole, korjaa koodisi.
+
+Tiedosto .github/workflows/unicafe-tests.yaml määrittelee GitHub Actions -työnkulun, joka ajaa testit GitHubissa koodin pushatessasi sinne.
+
+Ota testit käyttöön muokkaamalla tiedostoa seuraavasti:
+
+```bash
+name: Unicafe tests
+
+on:
+  push:
+  // highlight-start
+    branches: [main] 
+      // highlight-end
+```
+
+Pushaa koodisi GitHubiin ja varmista, että testit menevät läpi:
+
+![](../../images/6/tests1.png)
+
 
 </div>
 
@@ -490,7 +535,6 @@ Sovelluksesi ulkonäkö ja toiminnallisuus on sama kuin osassa 1:
 ### Zustand-muistiinpanot
 
 Tavoitteenamme on tehdä vanhasta kunnon muistiinpanosovelluksesta Zustandia käyttävä versio.
-
 
 Sovelluksen ensimmäinen versio on seuraava. Komponentti <i>App</i>:
 
@@ -778,27 +822,12 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### Tehtävät 6.2.-6.5.
 
-Toteutetaan uusi versio ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2020/zustand-anecdotes oleva projekti.
+Toteutetaan uusi versio ensimmäisen osan anekdoottien äänestyssovelluksesta. 
 
-Jos kloonaat projektin olemassaolevan Git-repositorion sisälle, <i>poista kloonatun sovelluksen Git-konfiguraatio:</i>
-
-```bash
-cd zustand-anecdotes  // mene kloonatun repositorion hakemistoon
-rm -rf .git
-```
-
-Sovellus käynnistyy normaaliin tapaan, mutta joudut ensin asentamaan sen riippuvuudet:
-
-```bash
-npm install
-npm run dev
-```
-
-Kun teet seuraavat tehtävät, tulisi sovelluksen näyttää seuraavalta:
-
-![Sovellus renderöi anekdootit. Jokaisen anekdootin yhteydessä myös tieto sen saamien äänien määrästä sekä nappi "vote" anekdootin äänestämiselle](../../images/6/u2.png)
+Ota ratkaisusi pohjaksi palautusrepositorion hakemistossa *anecdotes* oleva projekti.
 
 #### 6.2: anekdootit, step1
+
 
 Toteuta mahdollisuus anekdoottien äänestämiseen. Äänien määrä tulee tallettaa Zustand-storeen.
 
@@ -836,5 +865,10 @@ export default App
 Huolehdi siitä, että anekdootit pysyvät äänten mukaisessa suuruusjärjestyksessä.
 
 **HUOM** tässä tehtävässä kannattanee hyödyntää funktiota [Array.toSorted](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted), joka ei järjestä alkuperäistä taulukkoa vaan luo siitä järjestetyn kopion. Tämä sen takia, että Zustand-tilaa ei saa muuttaa!
+
+Tehtävien jälkeen sovelluksen näyttää seuraavalta:
+
+![Sovellus renderöi anekdootit. Jokaisen anekdootin yhteydessä myös tieto sen saamien äänien määrästä sekä nappi "vote" anekdootin äänestämiselle](../../images/6/u2.png)
+
 
 </div>

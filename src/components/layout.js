@@ -14,7 +14,7 @@ import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
 
-const BANNER_TO_KEY = 'part_10_changes';
+const BANNER_TO_KEY = 'part_6_upcomming_changes';
 const BANNER3_TO_KEY = 'part_7_changes';
 const BANNER2_TO_KEY = 'part_6_changes';
 const BANNER4_TO_KEY = 'part_8_changes';
@@ -35,7 +35,7 @@ const Layout = (props) => {
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY);
     if (!key) {
-      const relevant = window.location.href.includes('en/part10') || window.location.href.includes('osa10');
+      const relevant = window.location.href.includes('en/part6') || window.location.href.includes('osa6');
       setVisible(relevant);
     }
   }, []);
@@ -109,11 +109,11 @@ const Layout = (props) => {
 
       <InfoBanner onHide={() => hideNote()} visible={visible} />
 
-      <InfoBanner2 onHide={() => hideNote2()} visible={visible2} />
+      <InfoBanner2 onHide={() => hideNote2()} visible={false} />
 
-      <InfoBanner3 onHide={() => hideNote3()} visible={visible3} />
+      <InfoBanner3 onHide={() => hideNote3()} visible={false} />
 
-      <InfoBanner4 onHide={() => hideNote4()} visible={visible4} />
+      <InfoBanner4 onHide={() => hideNote4()} visible={false} />
 
       <InfoBannerNextJs
         language={siteLanguage}

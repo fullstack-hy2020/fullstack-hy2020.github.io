@@ -49,11 +49,28 @@ const InfoBanner = ({ visible, onHide }) => {
       <div style={textStyle}>
         <div style={{ marginBottom: 20 }}>
           <div style={{ marginBottom: 10 }}>
-            Material of Part 10 has been moved to <a style={linkStyle} 
-                href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native"
-              >
-                https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native
-              </a>
+            The format of submission repository in the part 6 has changed, see {' '}
+            <a
+              style={linkStyle}
+              href="https://fullstackopen.com/en/part6/flux_architecture_and_zustand#submission-repository"
+              target="_blank"
+              rel="noreferrer"
+            >
+              here
+            </a>{' '}
+            for more
+          </div>
+
+          <div>
+            Osan 6 tehtävien palautusrepositorion formaatti on muuttunut, katso tarkemmin {' '}
+            <a
+              style={linkStyle}
+              href="https://fullstackopen.com/flux_arkkitehtuuri_ja_zustand#tehtavarepositorio"
+              target="_blank"
+              rel="noreferrer"
+            >
+              täältä
+            </a>
           </div>
         </div>
       </div>
