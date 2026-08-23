@@ -65,7 +65,7 @@ const InfoBanner = ({ visible, onHide }) => {
             Osan 6 tehtävien palautusrepositorion formaatti on muuttunut, katso tarkemmin {' '}
             <a
               style={linkStyle}
-              href="https://fullstackopen.com/flux_arkkitehtuuri_ja_zustand#tehtavarepositorio"
+              href="https://fullstackopen.com/osa6/flux_arkkitehtuuri_ja_zustand#tehtavarepositorio"
               target="_blank"
               rel="noreferrer"
             >
