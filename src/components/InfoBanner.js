@@ -10,16 +10,12 @@ const InfoBanner = ({ visible, onHide, language }) => {
 
   const text =
     language === 'fi'
-      ? 'Osan 6 tehtävien palautusrepositorion formaatti on muuttunut, katso tarkemmin '
-      : 'The format of submission repository in the part 6 has changed, see ';
-  const text_after_link =
-    language === 'fi'
-      ? 'täältä.'
-      : 'more information.';
+      ? 'Osan 6 tehtävien palautusrepositorion formaatti on muuttunut, '
+      : 'The format of submission repository in the part 6 has changed, ';
   const text_here =
     language === 'fi'
-      ? 'täältä'
-      : 'here';
+      ? 'katso tarkemmin täältä'
+      : 'see more details here';
   const style = {
     padding: 10,
     borderStyle: 'solid',
@@ -74,8 +70,7 @@ const InfoBanner = ({ visible, onHide, language }) => {
               rel="noreferrer">
               {text_here}
             </a>
-            {' '}
-            {text_after_link}
+            .
           </div>
         </div>
       </div>
