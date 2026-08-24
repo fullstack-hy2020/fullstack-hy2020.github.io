@@ -37,7 +37,6 @@ const InfoBanner = ({ visible, onHide, language }) => {
   };
 
   const buttonStyle = {
-    outline: 'none',
     backgroundColor: 'transparent',
     border: 'none',
     color: 'var(--color-text)',
@@ -81,6 +80,7 @@ const InfoBanner = ({ visible, onHide, language }) => {
       <div style={buttonDiv}>
         <button
           style={buttonStyle}
+          className="info-banner__close"
           aria-label={language === 'fi' ? 'Sulje kurssi-ilmoitus' : 'Close course notice'}
           onClick={onHide}
         >
