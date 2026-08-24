@@ -107,7 +107,7 @@ const Layout = (props) => {
 
       <Header lang={siteLanguage} />
 
-      <InfoBanner onHide={() => hideNote()} visible={visible} />
+      <InfoBanner onHide={() => hideNote()} visible={visible} language={siteLanguage} />
 
       <InfoBanner2 onHide={() => hideNote2()} visible={false} />
 
