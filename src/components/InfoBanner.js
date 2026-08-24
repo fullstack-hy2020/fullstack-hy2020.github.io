@@ -63,7 +63,7 @@ const InfoBanner = ({ visible, onHide, language }) => {
         <div style={{ marginBottom: 20 }}>
           <div style={{ marginBottom: 10 }}>
             {text} {' '}
-            <a 
+            <a
               style={linkStyle}
               href={SUBMISSION_REPO_URL}
               target="_blank"
