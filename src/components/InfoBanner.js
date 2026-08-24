@@ -1,8 +1,21 @@
 import React from 'react';
 
-const InfoBanner = ({ visible, onHide }) => {
+const InfoBanner = ({ visible, onHide, language }) => {
   if (!visible) return null;
 
+  const SUBMISSION_REPO_URL =
+    language === 'fi'
+      ? 'https://fullstackopen.com/osa6/flux_arkkitehtuuri_ja_zustand#tehtavarepositorio'
+      : 'https://fullstackopen.com/en/part6/flux_architecture_and_zustand#submission-repository';
+
+  const text =
+    language === 'fi'
+      ? 'Osan 6 tehtävien palautusrepositorion formaatti on muuttunut, '
+      : 'The format of submission repository in the part 6 has changed, ';
+  const text_here =
+    language === 'fi'
+      ? 'katso tarkemmin täältä'
+      : 'see more details here';
   const style = {
     padding: 10,
     borderStyle: 'solid',
@@ -49,28 +62,15 @@ const InfoBanner = ({ visible, onHide }) => {
       <div style={textStyle}>
         <div style={{ marginBottom: 20 }}>
           <div style={{ marginBottom: 10 }}>
-            The format of submission repository in the part 6 has changed, see {' '}
+            {text} {' '}
             <a
               style={linkStyle}
-              href="https://fullstackopen.com/en/part6/flux_architecture_and_zustand#submission-repository"
+              href={SUBMISSION_REPO_URL}
               target="_blank"
-              rel="noreferrer"
-            >
-              here
-            </a>{' '}
-            for more
-          </div>
-
-          <div>
-            Osan 6 tehtävien palautusrepositorion formaatti on muuttunut, katso tarkemmin {' '}
-            <a
-              style={linkStyle}
-              href="https://fullstackopen.com/osa6/flux_arkkitehtuuri_ja_zustand#tehtavarepositorio"
-              target="_blank"
-              rel="noreferrer"
-            >
-              täältä
+              rel="noreferrer">
+              {text_here}
             </a>
+            .
           </div>
         </div>
       </div>
