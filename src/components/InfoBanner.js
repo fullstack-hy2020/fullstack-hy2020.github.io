@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InfoBanner = ({ visible, onHide }) => {
+const InfoBanner = ({ visible, onHide, language }) => {
   if (!visible) return null;
 
   const style = {
@@ -37,7 +37,6 @@ const InfoBanner = ({ visible, onHide }) => {
   };
 
   const buttonStyle = {
-    outline: 'none',
     backgroundColor: 'transparent',
     border: 'none',
     color: 'var(--color-text)',
@@ -45,7 +44,11 @@ const InfoBanner = ({ visible, onHide }) => {
   };
 
   return (
-    <div style={style}>
+    <aside
+     style={style}
+     role="status"
+     aria-label={language === 'fi' ? 'Kurssi-ilmoitus' : 'Course notice'}
+    >
       <div style={textStyle}>
         <div style={{ marginBottom: 20 }}>
           <div style={{ marginBottom: 10 }}>
@@ -75,11 +78,16 @@ const InfoBanner = ({ visible, onHide }) => {
         </div>
       </div>
       <div style={buttonDiv}>
-        <button style={buttonStyle} onClick={onHide}>
+        <button
+          style={buttonStyle}
+          className="info-banner__close"
+          aria-label={language === 'fi' ? 'Sulje kurssi-ilmoitus' : 'Close course notice'}
+          onClick={onHide}
+        >
           <div style={textStyle}>x</div>
         </button>
       </div>
-    </div>
+    </aside>
   );
 };
 
