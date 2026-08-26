@@ -255,7 +255,7 @@ Lomakkeiden ehdolliseen renderöintiin käytetään hyväksi aluksi hieman eriko
 {!user && loginForm()}
 ```
 
-Jos ensimmäinen osa evaluoituu epätodeksi eli on [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) (eli <i>user</i> on jo määritelty, jolloin !user on falsy), ei toista osaa eli login lomakkeen generoivaa koodia suoriteta ollenkaan.
+Jos ensimmäinen osa evaluoituu epätodeksi eli on [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) (eli <i>user</i> on jo määritelty, jolloin !user on falsy), ei toista osaa eli login-lomakkeen generoivaa koodia suoriteta ollenkaan.
 
 Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, renderöidään kirjautuneen käyttäjän nimi:
 
