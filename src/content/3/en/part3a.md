@@ -888,6 +888,7 @@ At the end of the function body, the _next_ function that was passed as a parame
 Middleware is used like this:
 
 ```js
+app.use(express.json())
 app.use(requestLogger)
 ```
 
