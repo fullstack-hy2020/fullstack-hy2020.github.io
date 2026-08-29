@@ -608,7 +608,7 @@ npm run dev
 
 #### 7.1: useField hook
 
-Copy the <i>useField</i> custom hook in the file <i>src/hooks/index.js</i>. The hook should manage the state of a single form input field and return an object with the following properties: <i>type</i>, <i>value</i>, and <i>onChange</i>.
+Create a custom hook <i>useField</i> in the file <i>src/hooks/index.js</i>. The hook should manage the state of a single form input field and return an object with the following properties: <i>type</i>, <i>value</i>, and <i>onChange</i>.
 
 If you use the [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) instead of the default export:
 
