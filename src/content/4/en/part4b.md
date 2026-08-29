@@ -441,7 +441,7 @@ Thanks to the new syntax, the code is a lot simpler than the previous then-chain
 
 There are a few important details to pay attention to when using async/await syntax. To use the await operator with asynchronous operations, they have to return a promise. This is not a problem as such, as regular asynchronous functions using callbacks are easy to wrap around promises.
 
-The await keyword can't be used just anywhere in JavaScript code. Using await is possible only inside of an [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) function.
+The await keyword can't be used just anywhere in JavaScript code. In CommonJS, await can be used only inside an [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) function. _(In ESM modules, [top-level await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await#top_level_await) is also supported.)_
 
 This means that in order for the previous examples to work, they have to be using async functions. Notice the first line in the arrow function definition:
 
