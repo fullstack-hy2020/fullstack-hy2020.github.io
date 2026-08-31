@@ -29,9 +29,12 @@ These exercises assume that you have already completed the exercises [5.24-5.28]
 
 During the course, the frontend and backend of the BlogList application have lived in separate repositories. A common real-world practice is to place both into a single repository, which simplifies deployment and makes it easier to share code between the two.
 
-Read the section [Frontend and backend in the same repository](/en/part7/miscellaneous#frontend-and-backend-in-the-same-repository) from the course material and restructure your application accordingly. Place the frontend and backend source code in the same repository while keeping their <i>package.json</i> files separate.
+Read the section [Frontend and backend in the same repository](/en/part7/miscellaneous#frontend-and-backend-in-the-same-repository) from the course material and restructure your application accordingly. Place the frontend and backend source code under the directory bloglist of your submission repository.
 
-Make sure that the development workflow still works: running <i>npm run dev</i> in the frontend directory should start the Vite dev server with hot reload as before. Also verify that the production build works: the backend should be able to serve the built frontend as a static site using a command such as <i>npm run build && npm start</i> (or equivalent scripts you define).
+Make sure that the development workflow still works:
+
+Running <i>npm run dev</i> in the directory *bloglist* should start the Vite dev server with hot reload as before.
+Also verify that the production build works: the backend should be able to serve the built frontend as a static site when <i>npm run build && npm start</i> is run in the directory *bloglist*.
 
 <i>Note:</i> if you run into strange dependency errors after reorganising the repository, the safest fix is often to delete all <i>node_modules</i> directories and run <i>npm install</i> again from scratch in each of the relevant directories.
 
@@ -126,6 +129,8 @@ Expand your solution so that it is again possible to like and delete a blog.
 
 Use the Context API to manage the data for the logged in user.
 
+*The rest of the tasks are common to both the Zustand and React Query versions.*
+
 #### 7.15: Cleaning the code
 
 Your application most likely contains code that handles the logged-in user via <i>localStorage</i> in several places:
@@ -153,8 +158,6 @@ const removeUser = () => { ... }
 Replace all direct <i>localStorage</i> access in the application with calls to these functions.
 
 Also take the [useField](/en/part7/more_about_react_hooks) hook introduced earlier in this part into use in the forms.
-
-The rest of the tasks are common to both the Zustand and React Query versions.
 
 #### 7.16: Users view
 
@@ -196,5 +199,36 @@ Extend your application so that users can add comments to blog posts from the fr
 Improve the visual appearance of the new features of your application using the techniques covered in [part 5](/en/part5/react_router_ui_frameworks). 
  
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+#### Bonus: tests
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+The exercise repository https://github.com/fullstack-hy2020/fs-extension contains tests also for the Bloglist app. Run the tests locally now:
+
+```bash
+cd bloglist-tests
+npm install
+npx playwright install chromium
+npm test
+```
+
+All the tests should pass, if not, fix your code.
+
+The file .github/workflows/bloglist-tests.yaml defines a GitHub Actions workflow that runs the tests on GitHub when you push code there.
+
+Enable the tests by modifying the file as follows:
+
+```bash
+name: Bloglist tests
+
+on:
+  push:
+  // highlight-start
+    branches: [main] 
+      // highlight-end
+```
+
+Push your code to GitHub and make sure the tests pass.
 
 </div>

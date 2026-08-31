@@ -9,6 +9,7 @@ import InfoBanner from './InfoBanner';
 import InfoBanner2 from './InfoBanner2';
 import InfoBanner3 from './InfoBanner3';
 import InfoBanner4 from './InfoBanner4';
+import InfoBanner5 from './InfoBanner5';
 import InfoBannerNextJs from './InfoBannerNextJs';
 import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
@@ -18,6 +19,7 @@ const BANNER_TO_KEY = 'part_6_upcomming_changes';
 const BANNER3_TO_KEY = 'part_7_changes';
 const BANNER2_TO_KEY = 'part_6_changes';
 const BANNER4_TO_KEY = 'part_8_changes';
+const BANNER5_TO_KEY = 'part_7_submission_repository_change';
 const BANNER_NEXT_JS_KEY = 'part_14_changes';
 
 const Layout = (props) => {
@@ -30,6 +32,7 @@ const Layout = (props) => {
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
   const [visible4, setVisible4] = useState(false);
+  const [visible5, setVisible5] = useState(false);
   const [nextJsVisible, setNextJsVisible] = useState(false);
 
   useEffect(() => {
@@ -65,6 +68,14 @@ const Layout = (props) => {
   }, []);
 
   useEffect(() => {
+    const key = localStorage.getItem(BANNER5_TO_KEY);
+    if (!key) {
+      const relevant = window.location.href.includes('en/part7');
+      setVisible5(relevant);
+    }
+  }, []);
+
+  useEffect(() => {
     const key = localStorage.getItem(BANNER_NEXT_JS_KEY);
     if (!key) {
       setNextJsVisible(true);
@@ -95,6 +106,12 @@ const Layout = (props) => {
     setVisible4(false);
   };
 
+  const hideNote5 = () => {
+    console.log('hideNote');
+    localStorage.setItem(BANNER5_TO_KEY, 'yes');
+    setVisible5(false);
+  };
+
   const hideNextJsNote = () => {
     console.log('hideNote');
     localStorage.setItem(BANNER_NEXT_JS_KEY, 'yes');
@@ -118,6 +135,8 @@ const Layout = (props) => {
       <InfoBanner3 onHide={() => hideNote3()} visible={false} />
 
       <InfoBanner4 onHide={() => hideNote4()} visible={false} />
+
+      <InfoBanner5 onHide={() => hideNote5()} visible={visible5} />
 
       <InfoBannerNextJs
         language={siteLanguage}

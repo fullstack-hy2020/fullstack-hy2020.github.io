@@ -597,6 +597,28 @@ Will install react-scripts@5.0.0, which is a breaking change
 
 Running <i>npm audit fix --force</i> would upgrade the library version but would also upgrade the library <i>react-scripts</i> and that would potentially break down the development environment. So we will leave the library upgrades for later...
 
+A modern Node/React project can easily depend, directly and transitively, on hundreds or even thousands of packages published by people the developer has never met. This is exactly what makes <i>supply chain attacks</i> possible: instead of attacking an application directly, an attacker compromises one of the dependencies it relies on, and the malicious code then gets pulled into every project that installs that dependency.
+
+There are several common ways this happens:
+
+- a maintainer's npm account gets hijacked (e.g. through a phishing email or a leaked, unprotected access token) and a malicious version of an otherwise trustworthy package is published,
+- a package's <i>postinstall</i> script or the code itself is modified to quietly steal environment variables, tokens or SSH keys during <i>npm install</i>,
+- a malicious package is published under a name that closely resembles a popular one (<i>typosquatting</i>), hoping developers will misspell a command and install it by mistake,
+- a project relies on an unmaintained dependency whose ownership is transferred to a new, malicious maintainer.
+
+Since the code of a compromised dependency runs with the same privileges as the rest of the application (and, during installation, often with the privileges of the developer's own machine or CI pipeline), the consequences can be severe: stolen credentials, backdoored production builds, or exfiltrated user data.
+
+A few practical ways to reduce the risk:
+
+- Keep the number of dependencies as small as reasonable; every added package is added attack surface.
+- Commit the lock file (<i>package-lock.json</i>) and use <i>npm ci</i> instead of <i>npm install</i> in CI/production environments, so that the exact previously verified dependency versions and their integrity hashes are used.
+- Run <i>npm audit</i> (or an equivalent, e.g. [Socket](https://socket.dev) or [Snyk](https://snyk.io)) regularly, and let tools such as [Dependabot](https://docs.github.com/en/code-security/dependabot) or [Renovate](https://docs.renovatebot.com) open pull requests automatically when new versions are released.
+- Be extra careful when adding a brand-new dependency: check how actively it is maintained, how many other projects depend on it, and whether the package name is exactly the one intended.
+- Consider disabling the execution of install scripts for dependencies you don't fully trust, e.g. with <i>npm install --ignore-scripts</i>.
+- Avoid installing a package version the moment it is published. Most malicious releases are caught and unpublished within the first hours or days, so a short delay filters out a large share of them. Starting from npm version 11.10.0, this can be enforced with the [min-release-age](https://docs.npmjs.com/cli/v11/using-npm/config/#min-release-age) <code>.npmrc</code> setting (given in days), which makes npm ignore any version that isn't old enough yet.
+
+None of these steps make an application immune to supply chain attacks, but together they significantly shrink the window in which a compromised dependency can do damage before it is noticed.
+
 One of the threats mentioned in the list from OWASP is <i>Broken Authentication</i> and the related <i>Broken Access Control</i>. The token-based authentication we have been using is fairly robust if the application is being used on the traffic-encrypting HTTPS protocol. When implementing access control, one should e.g. remember to not only check a user's identity in the browser but also on the server. Bad security would be to prevent some actions to be taken only by hiding the execution options in the code of the browser.
 
 On Mozilla's MDN, there is a very good [Website security guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), which brings up this very important topic:
