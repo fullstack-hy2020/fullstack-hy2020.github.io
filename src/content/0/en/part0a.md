@@ -113,7 +113,7 @@ You can only take the exam after submitting enough exercises for five credits. I
 By submitting at least 135 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
 - Submit at least 135 exercises for parts 0-7.
-- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-759cfee1-370b-4200-8e11-dc86b1a8ed88).
+- [Enroll in part 6](https://sisu.helsinki.fi/student/courseunit/otm-e11e0495-239c-442b-a5cf-cc42462ef373/open-university/otm-e97e9254-7519-4a13-b2dd-1e45268d99f1?token=VN2HK964AK).
 - [Request credits for part 6](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
@@ -121,7 +121,7 @@ By submitting at least 135 of the exercises for parts 0-7 while working on the c
 By submitting at least 150 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
 - Submit at least 150 exercises for parts 0-7.
-- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4142645d-5690-4527-9d57-79bd1fbc8770).
+- [Enroll in part 7](https://sisu.helsinki.fi/student/courseunit/otm-2f7374db-2a29-448e-9d96-63a0618a4266/open-university/otm-ac172cd4-d67d-49ab-a88a-8add8774f91a?token=UYYRAFHNZF).
 - [Request credits for part 7](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
@@ -151,8 +151,6 @@ Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 #### Part 14 - Full Stack Web Development: Next.js
 
 Material in address <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs</a>
-
-Note that university credits of this part are available starting 1st August 2026
 
 ### Studying the course in a nutshell
 

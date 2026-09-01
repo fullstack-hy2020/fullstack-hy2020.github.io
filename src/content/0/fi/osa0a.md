@@ -70,14 +70,14 @@ Voit osallistua kokeeseen vasta siinä vaiheessa, kun olet tehnyt riittävästi 
 #### Osa 6 - Full Stack ‑websovelluskehitys, lisäosa 1 (1 op, CSM141082)
 Suorittamalla vähintään 127 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
 -	Tee vähintään 135 tehtävää osista 0–7. 
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-759cfee1-370b-4200-8e11-dc86b1a8ed88)
+-	[Ilmoittaudu tähän osaan Sisun kautta.](https://sisu.helsinki.fi/student/courseunit/otm-e11e0495-239c-442b-a5cf-cc42462ef373/open-university/otm-e97e9254-7519-4a13-b2dd-1e45268d99f1?token=VN2HK964AK)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 #### Osa 7 - Full Stack ‑websovelluskehitys, lisäosa 2 (1 op, CSM141083)
 
 Suorittamalla vähintään 150 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
 -	Tee vähintään 150 tehtävää osista 0–7. 
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4142645d-5690-4527-9d57-79bd1fbc8770)
+-	[Ilmoittaudu tähän osaan Sisun yliopiston kautta.](https://sisu.helsinki.fi/student/courseunit/otm-2f7374db-2a29-448e-9d96-63a0618a4266/open-university/otm-ac172cd4-d67d-49ab-a88a-8add8774f91a?token=UYYRAFHNZF)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 #### Osa 8 - Full Stack ‑websovelluskehitys: GraphQL (1 op, CSM14113)
@@ -107,8 +107,6 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 #### Osa 14 - Full Stack Web Development: Next.js
 
 Materiaali osoitteessa <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs</a>
-
-Opintopisteitä tästä osasta on mahdollista saada 1.8.2026 alkaen.
 
 ### Suoritusohjeet pähkinänkuoressa
 
