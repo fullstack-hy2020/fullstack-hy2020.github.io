@@ -888,14 +888,14 @@ The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 > The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.
 
-Promise.all executes the promises it receives in parallel. If the promises need to be executed in a particular order, this will be problematic. In situations like this, the operations can be executed inside of a [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) block, that guarantees a specific execution order.
+`Promise.all` waits for the promises it receives to settle concurrently. If the operations need to happen in a particular order, this would be problematic. In situations like this, the operations can be executed in a [for...of loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) using the `await` operator, which ensures that each operation completes before the next one starts.
 
 ```js
 beforeEach(async () => {
   await Note.deleteMany({})
 
-  for (let note of helper.initialNotes) {
-    let noteObject = new Note(note)
+  for (const note of helper.initialNotes) {
+    const noteObject = new Note(note)
     await noteObject.save()
   }
 })
@@ -930,7 +930,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 - <i>I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems</i>
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything is still working
 - <i>If a test does not pass, I make sure that the tested functionality for sure works in the application</i>
-- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
+- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [how to ask for help](/en/part0/general_info#how-to-get-help-in-discord)
 
 </div>
 

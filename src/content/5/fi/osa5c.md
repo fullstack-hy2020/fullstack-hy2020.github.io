@@ -9,7 +9,7 @@ lang: fi
 
 Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin tutustuminen nyt.
 
-Kurssilla käytettiin aiemmin React-komponenttien testaamiseen Facebookin kehittämää [Jest](http://jestjs.io/)-kirjastoa. Käytämme kurssilla nyt Viten kehittäjien uuden generaation testikirjastoa [Vitestiä](https://vitest.dev/). Konfigurointia lukuunottamatta kirjastot tarjoavat saman ohjelmointirajapinnan, joten testauskoodissa ei käytännössä ole mitään eroa.
+Kurssilla käytettiin aiemmin React-komponenttien testaamiseen Facebookin kehittämää [Jest](http://jestjs.io/)-kirjastoa. Käytämme kurssilla nyt Viten kehittäjien uuden generaation testikirjastoa [Vitestiä](https://vitest.dev/). Konfigurointia lukuun ottamatta kirjastot tarjoavat saman ohjelmointirajapinnan, joten testauskoodissa ei käytännössä ole mitään eroa.
 
 Aloitetaan asentamalla Vitest sekä Web-selainta simuloiva [jsdom](https://github.com/jsdom/jsdom)-kirjasto:
 
@@ -569,7 +569,7 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä funktiota _createNote_ uuden muistiinpanon tiedot parametrina.
+Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä createNote-funktiota ja antaa sille uuden muistiinpanon tiedot parametrina.
 
 Testi on seuraavassa:
 
@@ -597,7 +597,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
 
 Syötekenttä etsitään metodin [getByRole](https://testing-library.com/docs/queries/byrole) avulla. Syötekenttään kirjoitetaan metodin [type](https://testing-library.com/docs/user-event/utility#type) avulla. Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän _createNote_ kutsumisen. Toinen ekspektaatio tarkistaa, että tapahtumankäsittelijää kutsutaan oikealla parametrilla, eli että luoduksi tulee samansisältöinen muistiinpano kuin lomakkeelle kirjoitetaan.
 
-Kannattaa huomata, että vanha kunnon _console.log_ toimii testeissä normaaliin tapaan. Jos esim. halutaan takastella miltä mock-olion tallettamat kutsut näyttävät, voidaan tehdä seuraavasti
+Kannattaa huomata, että vanha kunnon _console.log_ toimii testeissä normaaliin tapaan. Jos esim. halutaan tarkastella miltä mock-olion tallettamat kutsut näyttävät, voidaan tehdä seuraavasti
 
 ```js
 test('<NoteForm /> updates parent state and calls onSubmit', async () => {

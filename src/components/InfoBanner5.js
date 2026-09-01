@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InfoBanner = ({ visible, onHide, language }) => {
+const InfoBanner5 = ({ visible, onHide }) => {
   if (!visible) return null;
 
   const style = {
@@ -37,6 +37,7 @@ const InfoBanner = ({ visible, onHide, language }) => {
   };
 
   const buttonStyle = {
+    outline: 'none',
     backgroundColor: 'transparent',
     border: 'none',
     color: 'var(--color-text)',
@@ -44,18 +45,14 @@ const InfoBanner = ({ visible, onHide, language }) => {
   };
 
   return (
-    <aside
-     style={style}
-     role="status"
-     aria-label={language === 'fi' ? 'Kurssi-ilmoitus' : 'Course notice'}
-    >
+    <aside style={style} role="status" aria-label="Course notice">
       <div style={textStyle}>
         <div style={{ marginBottom: 20 }}>
-          <div style={{ marginBottom: 10 }}>
-            The format of submission repository in the part 6 has changed, see {' '}
+          <div>
+            The format of submission repository in part 7 has changed, see {' '}
             <a
               style={linkStyle}
-              href="https://fullstackopen.com/en/part6/flux_architecture_and_zustand#submission-repository"
+              href="https://fullstackopen.com/en/part7/more_about_react_hooks#submission-repository"
               target="_blank"
               rel="noreferrer"
             >
@@ -63,25 +60,13 @@ const InfoBanner = ({ visible, onHide, language }) => {
             </a>{' '}
             for more
           </div>
-
-          <div>
-            Osan 6 tehtävien palautusrepositorion formaatti on muuttunut, katso tarkemmin {' '}
-            <a
-              style={linkStyle}
-              href="https://fullstackopen.com/osa6/flux_arkkitehtuuri_ja_zustand#tehtavarepositorio"
-              target="_blank"
-              rel="noreferrer"
-            >
-              täältä
-            </a>
-          </div>
         </div>
       </div>
       <div style={buttonDiv}>
         <button
           style={buttonStyle}
           className="info-banner__close"
-          aria-label={language === 'fi' ? 'Sulje kurssi-ilmoitus' : 'Close course notice'}
+          aria-label="Close course notice"
           onClick={onHide}
         >
           <div style={textStyle}>x</div>
@@ -91,4 +76,4 @@ const InfoBanner = ({ visible, onHide, language }) => {
   );
 };
 
-export default InfoBanner;
+export default InfoBanner5;

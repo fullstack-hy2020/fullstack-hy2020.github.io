@@ -8,7 +8,9 @@ lang: es
 
 En esta parte volvemos al frontend, primero mirando a diferentes posibilidades para probar el código React. También implementaremos la autenticación basada en tokens que permitirá a los usuarios iniciar sesión en nuestra aplicación.
 
-<i>Parte actualizada el 3 de Marzo de 2024</i>
-- <i>Jest reemplazado por Vitest</i>
+<i>Parte actualizada el 31 de marzo de 2026</i>
+
+- <i>Se ha eliminado Cypress</i>
+- <i>Los temas sobre React Router y las librerías de estilos se han trasladado de la parte 7 a esta parte</i>
 
 </div>

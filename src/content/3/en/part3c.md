@@ -73,7 +73,7 @@ Document databases differ from relational databases in how they organize data as
 
 You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately, the material is currently only available in Finnish.
 
-Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea of how a document database stores data.
+Read now the chapters on [collections](https://www.mongodb.com/docs/manual/core/databases-and-collections/) and [documents](https://www.mongodb.com/docs/manual/core/document/) from the MongoDB manual to get a basic idea of how a document database stores data.
 
 Naturally, you can install and run MongoDB on your computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
@@ -638,7 +638,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 - I will have my browser developer console open all the time
 - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
 - I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
-- <i>I will keep an eye on the database: does the backend save data there in the right format</i>
+- <i>I will keep an eye on the database; whether the data is saved in the expected state</i>
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working

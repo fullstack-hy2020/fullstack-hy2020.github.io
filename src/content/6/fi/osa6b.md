@@ -757,6 +757,34 @@ Käytä notifikaation tilanhallintaan Zustandia. Notifikaatioita varten kannatta
 
 Huomaamme, että osa käyttäjien lisäämistä anekdooteista on huonoja. Toteuta sovellukseen ominaisuus, joka mahdollistaa sellaisten anekdoottien poiston, joilla ei ole yhtään ääntä.
 
+#### Bonus: anekdoottien testit
+
+**21.9. lähtien tehtävien palautuksissa vaaditaan läpimenevät testit**
+
+Tehtävärepositorio https://github.com/fullstack-hy2020/fs-statemanagement sisältää testit myös anekdoottisovellukselle.
+
+Varmista, että testit menevät nyt läpi paikallisesti:
+
+```bash
+cd anecdotes-tests
+npm install
+npx playwright install chromium
+npm test
+```
+
+Tiedosto .github/workflows/anecdotes-tests.yaml määrittelee GitHub Actions -työnkulun, joka ajaa testit myös GitHubissa. Ota testit käyttöön muokkaamalla tiedostoa seuraavasti:
+
+Highlighted lines: 5
+name: Anecdotes tests
+
+```bash
+on:
+  push:
+    branches: [main] // highlight-line
+```
+
+Pushaa koodisi GitHubiin ja varmista, että testit toimivat!
+
 </div>
 
 <div class="content">
@@ -1298,5 +1326,33 @@ Tee testi, joka varmistaa, että oikea React-komponentti saa oikein filtteröidy
 #### 6.15 anekdootit, step14
 
 Tee testi, joka varmistaa, että äänestäminen korottaa anekdootin äänien määrää.
+
+#### Bonus: testien testaus
+
+**21.9. lähtien tehtävien palautuksissa vaaditaan läpimenevät testit**
+
+Tehtävärepositorio https://github.com/fullstack-hy2020/fs-typescript sisältää myös joitain "testejä" edellisissä tehtävissä tekemillesi testeille.
+
+Varmista, että tarkistukset menevät läpi paikallisesti:
+
+```bash
+cd anecdotes-tests
+npm run verify:tests-are-real
+```
+
+Tiedosto .github/workflows/anecdotes-tests.yaml määrittelee GitHub Actions -työnkulun tarkistuksia varten. Ota ne käyttöön muokkaamalla tiedostoa seuraavasti:
+
+```bash
+name: Anecdotes tests check
+
+on:
+  push:
+    branches: [main] // highlight-line
+```
+
+Pushaa koodisi GitHubiin ja varmista, että kaikki työnkulut ovat vihreitä:
+
+![](../../images/6/tests2.png)
+
 
 </div>

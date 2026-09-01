@@ -468,8 +468,8 @@ const Note = ({ note }) => {
 }
 ```
 
-<!-- One way to do this would be to use React Router's [useMatch](https://reactrouter.com/en/main/hooks/use-match) hook to figure out the id of the note to be displayed in the _App_ component.-->
- 一种方法是使用React Router's [useMatch](https://reactrouter.com/en/main/hooks/use-match)钩子来计算出要在_App_组件中显示的笔记的id。
+<!-- One way to do this would be to use React Router's [useMatch](https://reactrouter.com/api/hooks/useMatch) hook to figure out the id of the note to be displayed in the _App_ component.-->
+ 一种方法是使用React Router's [useMatch](https://reactrouter.com/api/hooks/useMatch)钩子来计算出要在_App_组件中显示的笔记的id。
 
 <!-- It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:-->
  在定义应用的路由部分的组件中不可能使用<i>useMatch</i>钩。让我们把_Router_组件的使用从_App_移开。

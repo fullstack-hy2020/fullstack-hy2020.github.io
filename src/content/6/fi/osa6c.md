@@ -540,13 +540,11 @@ TanStack Query on siis kirjasto, joka ylläpitää frontendissä <i>palvelimen t
 
 ### Tehtävät 6.16.-6.19.
 
-Tehdään nyt anekdoottisovelluksesta uusi, TanStack Query ‑kirjastoa hyödyntävä versio. Ota lähtökohdaksesi [täällä](https://github.com/fullstack-hy2020/query-anecdotes) oleva projekti. Projektissa on valmiina asennettuna JSON Server, jonka toimintaa on hieman modifioitu. Käynnistä palvelin komennolla <i>npm run server</i>.
-
-Käytä pyyntöjen tekemiseen Fetch APIa. 
-
 #### Tehtävä 6.16
 
-Toteuta anekdoottien hakeminen palvelimelta TanStack Queryn avulla.
+Tehdään nyt anekdoottisovelluksesta uusi, TanStack Query ‑kirjastoa hyödyntävä versio.
+
+Ota ratkaisusi pohjaksi palautusrepositoriosi hakemistossa *query-anecdotes* oleva projekti.
 
 Sovelluksen tulee toimia siten, että jos palvelimen kanssa kommunikoinnissa ilmenee ongelmia, tulee näkyviin ainoastaan virhesivu:
 
@@ -589,6 +587,33 @@ Toteuta anekdoottien äänestäminen hyödyntäen jälleen TanStack Queryä. Sov
 #### Tehtävä 6.19
 
 Eriytä TanStack Queryn yksityiskohdat custom hook -funktioon.
+
+#### Bonus: testit, osa 1
+
+**21.9. lähtien tehtävien palautuksissa vaaditaan läpimenevät testit**
+
+Tehtävärepositorio https://github.com/fullstack-hy2020/fs-statemanagement sisältää testit myös edellisissä tehtävissä tehdylle sovellukselle.
+
+Varmista, että testit menevät nyt läpi paikallisesti:
+
+```bash
+cd query-anecdote-tests
+npm install
+npx playwright install chromium
+npm run test:anecdotes
+```
+
+Tiedosto .github/workflows/anecdotes-tests1.yaml määrittelee GitHub Actions -työnkulun, joka ajaa testit myös GitHubissa. Ota testit käyttöön muokkaamalla tiedostoa seuraavasti:
+
+```bash
+name: Query anecdotes tests 1
+
+on:
+  push:
+    branches: [main] // highlight-line
+```
+
+Pushaa koodisi GitHubiin ja varmista, että testit menevät läpi!
 
 </div>
 
@@ -941,7 +966,7 @@ const Controls = () => {
 }
 ```
 
-Voimme viedä ratkaisun aseleen pidemmälle muodostamalla custom hookin, joka palauttaa suoraan oikean kontekstin. Lisätään se tiedostoon <i>hooks/useCoutet.js</i>:
+Voimme viedä ratkaisun aseleen pidemmälle muodostamalla custom hookin, joka palauttaa suoraan oikean kontekstin. Lisätään se tiedostoon <i>hooks/useCounter.js</i>:
 
 ```js
 import { useContext } from 'react'
@@ -1004,6 +1029,33 @@ Virhetilanne kannattaa käsitellä sille rekisteröidyssä takaisinkutsufunktios
 Jos et jo niin tehnyt, siirrä notifikaatioon liittyvä konteksti omaan tiedostoonsa <i>NotificationContext.jsx</i>, samaan tapaan kuin laskurisovelluksessa konteksti siirrettiin tiedostoon <i>CounterContext.jsx</i>. Luo myös custom hook <i>useNotify</i>, joka kapseloi notifikaatioon liittyvän logiikan. Yksinkertaista notifikaatiota käyttäviä komponentteja siten, että ne käyttävät hookia suoraan sen sijaan, että kutsuvat <i>useContext</i>ia erikseen.
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+#### Bonus: testit, osa 2
+
+**21.9. lähtien tehtävien palautuksissa vaaditaan läpimenevät testit**
+
+Tehtävärepositorio https://github.com/fullstack-hy2020/fs-statemanagement sisältää testit myös edellisille tehtäville.
+
+Varmista, että testit menevät nyt läpi paikallisesti:
+
+```bash
+cd query-anecdote-tests
+npm run test:notifications
+```
+
+Tiedosto .github/workflows/anecdotes-tests12yaml määrittelee GitHub Actions -työnkulun, joka ajaa testit myös GitHubissa. Ota testit käyttöön muokkaamalla tiedostoa seuraavasti:
+
+
+```bash
+name: Query anecdotes tests 2
+
+on:
+  push:
+
+    branches: [main] // highlight-line
+```
+
+Pushaa koodisi GitHubiin ja varmista, että testit menevät läpi!
 
 </div>
 

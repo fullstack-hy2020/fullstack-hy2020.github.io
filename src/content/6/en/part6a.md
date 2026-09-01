@@ -363,7 +363,9 @@ The solution works, but it has a significant drawback. Destructuring causes the 
 The best practice in Zustand is therefore to select from the state exactly only those parts that are needed in the given component. A component re-renders only when the part of the state it has selected changes. When instead writing:
 
 ```js
-  const { increment, decrement, zero } = useCounterStore() 
+  const increment = useCounterStore((state) => state.increment)
+  const decrement = useCounterStore((state) => state.decrement)
+  const zero = useCounterStore((state) => state.zero) 
 ```
 
 the component no longer reacts to changes in the counter value, because it has not selected it from the state.
@@ -461,27 +463,74 @@ Custom hooks come with a set of rules, for example, their names are expected to 
 
 <div class="tasks">
 
-### Exercise 6.1.
+### Submission repository
 
-Let's make a new version of the Unicafe exercise from Part 1. We'll handle the application's state management using Zustand.
+Unlike in previous course parts, the exercises for this part are made in a separate repository.
 
-You can use the project at https://github.com/fullstack-hy2020/unicafe-zustand as the base for your application.
+So create now a new repository, inside of which you copy the contents of this repository https://github.com/fullstack-hy2020/fs-statemanagement
 
-<i>Start by removing the Git configuration of the cloned application and installing the dependencies:</i>
+All of the repository content (except the .git directory) must be copied to the root directory of your repository. So the content of your submission repository root should be exactly as follows:
 
 ```bash
-cd unicafe-zustand   // go to the cloned repository directory
-rm -rf .git
-npm install
+.git 
+.github
+.gitignore
+unicafe
+unicafe-tests
+anecdotes
+anecdotes-tests
+query-anecdotes
+query-anecdotes-tests
 ```
+
+There are also automated tests for all the apps that are developed in the exercises of this part.
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+### Exercise 1
 
 #### 6.1: Unicafe revisited
 
-Then implement the full original functionality of the application.
+As the first exercise, you should now create a new version of the Unicafe exercise from Part 1. The application's state management should use Zustand.
+
+Implement the full original functionality of the application in the directory unicafe.
 
 Your application's appearance and functionality should be the same as in Part 1:
 
 ![](../../images/1/16e.png)
+
+#### Bonus: Unicafe tests
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+The exercise repository https://github.com/fullstack-hy2020/fs-statemanagement contains tests for all the apps that are developed in the exercises of this part. Run the tests for the previous exercise locally now:
+
+```bash
+cd unicafe-tests
+npm install
+npx playwright install chromium
+npm test
+```
+
+All the tests should pass, if not, fix your code.
+
+The file .github/workflows/unicafe-tests.yaml defines a GitHub Actions workflow that runs the tests on GitHub when you push code there.
+
+Enable the tests by modifying the file as follows:
+
+```bash
+name: Unicafe tests
+
+on:
+  push:
+  // highlight-start
+    branches: [main] 
+      // highlight-end
+```
+
+Push your code to GitHub and make sure the tests pass:
+
+![](../../images/6/tests1.png)
 
 </div>
 
@@ -532,7 +581,7 @@ const useNoteStore = create(set => ({
 export const useNotes = () => useNoteStore(state => state.notes)
 ```
 
-For now, the application does not have the functionality to add new notes, and the strore does not yet support it. The state has been initialized with one note already added so that we can verify the application can successfully render the state.
+For now, the application does not have the functionality to add new notes, and the store does not yet support it. The state has been initialized with one note already added so that we can verify the application can successfully render the state.
 
 ### Pure functions and immutable objects
 
@@ -774,29 +823,14 @@ The current code of the application is available in its entirety on [GitHub](htt
 
 <div class="tasks">
 
-### Exercises 6.2.-6.6.
+### Exercises 6.2.-6.5.
 
-Let's implement a new version of the anecdote voting application from Part 1. Use the project at https://github.com/fullstack-hy2020/zustand-anecdotes as the base for your solution.
+Let's implement a new version of the anecdote voting application from Part 1. 
 
-If you clone the project inside an existing Git repository, <i>remove the Git configuration of the cloned application:</i>
-
-```bash
-cd zustand-anecdotes  // go to the cloned repository directory
-rm -rf .git
-```
-
-The application starts normally, but you need to install the dependencies first:
-
-```bash
-npm install
-npm run dev
-```
-
-When completing the following exercises, the application should look like this:
-
-![The application renders anecdotes. Each anecdote also shows the number of votes it has received and a vote button](../../images/6/u2.png)
+Use the project in the *anecdotes* directory of the submission repository as the base for your solution.
 
 #### 6.2: anecdotes, step1
+
 
 Implement the ability to vote for anecdotes. The number of votes must be stored in the Zustand store.
 
@@ -834,5 +868,9 @@ export default App
 Ensure that the anecdotes are kept in descending order by number of votes.
 
 **NOTE** In this exercise it is advisable to use the [Array.toSorted](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted) function, which does not sort the original array but creates a sorted copy of it. This is because the Zustand state must not be mutated!
+
+When completing the previous exercises, the application should look like this:
+
+![The application renders anecdotes. Each anecdote also shows the number of votes it has received and a vote button](../../images/6/u2.png)
 
 </div>

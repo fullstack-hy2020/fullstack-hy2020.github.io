@@ -119,7 +119,7 @@ Al enviar al menos 127 ejercicios de las partes 0 a 7 mientras trabajas en el cu
 Al enviar al menos 138 ejercicios para las partes 0-7 mientras trabajas en el curso base, puedes recibir un crédito adicional a través de esta extensión.
 
 - Envía al menos 138 ejercicios para las partes 0-7.
-- [Inscríbete en la parte 7 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-759cfee1-370b-4200-8e11-dc86b1a8ed88).
+- [Inscríbete en la parte 7 a través de la Open University](https://sisu.helsinki.fi/student/courseunit/otm-e11e0495-239c-442b-a5cf-cc42462ef373/open-university/otm-e97e9254-7519-4a13-b2dd-1e45268d99f1?token=VN2HK964AK).
 - [Solicita los créditos para la parte 7](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Parte 8 - Desarrollo Web Full Stack: GraphQL (1 crédito, CSM14113)
@@ -368,7 +368,7 @@ Consulta [más información sobre el proyecto](https://github.com/fullstack-hy20
 
 ### Promesa de entrevista
 
-Nuestros colaboradores, [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) y [Smartly.io](https://www.smartly.io/), han dado la *promesa de una entrevista de trabajo* para todos los que completen el curso y el proyecto de trabajo con créditos máximos (14 + 10).
+Nuestros colaboradores [Terveystalo](https://www.terveystalo.com/en/) y [Smartly.io](https://www.smartly.io/), han dado la *promesa de una entrevista de trabajo* para todos los que completen el curso y el proyecto de trabajo con créditos máximos (14 + 10).
 
 Esto significa que el alumno puede, si así lo desea, apuntarse a una entrevista de trabajo con un colaborador que haya hecho la promesa. El profesor del curso, Matti Luukkainen, enviará instrucciones al alumno una vez que los cursos se hayan completado con los créditos máximos.
 

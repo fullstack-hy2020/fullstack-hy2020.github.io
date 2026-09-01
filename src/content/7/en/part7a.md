@@ -15,7 +15,7 @@ In addition, this part contains a larger exercise series that extends the BlogLi
 
 React offers 18 different [built-in hooks](https://react.dev/reference/react/hooks), of which the most popular ones are the [useState](https://react.dev/reference/react/useState) and [useEffect](https://react.dev/reference/react/useEffect) hooks that we have already been using extensively.
 
-In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useRef](https://react.dev/reference/react/useRef) and [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) which allowed a component to provide access to their functions to other components. In [part 6](/en/part6/react_query_use_reducer_and_the_context) we used [useContext](https://react.dev/reference/react/useContext) to implement a global state.
+In [part 5](/en/part5/props_children_and_component_refs#references-to-components-with-ref) we used the [useRef](https://react.dev/reference/react/useRef) and [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) which allowed a component to provide access to their functions to other components. In [part 6](/en/part6/react_query_use_reducer_and_the_context) we used [useContext](https://react.dev/reference/react/useContext) to implement a global state.
 
 Within the last couple of years, hooks have become the standard way for libraries to expose their APIs. Throughout this course we have already seen several examples of this: [Zustand](https://zustand-demo.pmnd.rs/) provides <i>useStore</i> for accessing global state, [React Router](https://reactrouter.com/) exposes <i>useNavigate</i> and <i>useParams</i> for programmatic navigation and URL parameter access, and [React Query](https://tanstack.com/query/latest) offers <i>useQuery</i> and <i>useMutation</i> for server state management.
 
@@ -588,23 +588,31 @@ The internet is starting to fill up with more and more helpful material related 
 
 <div class="tasks">
 
+### Submission repository
+
+Unlike in previous course parts, the exercises for this part are made in a separate repository.
+
+So create now a new repository, inside of which you copy the contents of this repository https://github.com/fullstack-hy2020/fs-extension
+
+All of the repository content (except the .git directory) must be copied to the root directory of your repository. So the content of your submission repository root should be exactly as follows:
+
+```bash
+.git 
+.github
+.gitignore
+routed-anecdotes
+routed-anecdotes-tests
+bloglist
+bloglist-tests
+```
+
+There are also automated tests for all the apps that are developed in the exercises of this part.
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
 ### Exercises 7.1.-7.6.
 
-Let's once again return to working with anecdotes. Use the app found in the repository https://github.com/fullstack-hy2020/routed-anecdotes as the starting point for the exercises.
-
-If you clone the project into an existing git repository, remember to delete the git configuration of the cloned application:
-
-```bash
-cd routed-anecdotes   // go first to directory of the cloned repository
-rm -rf .git
-```
-
-The application starts the usual way, but first, you need to install its dependencies:
-
-```bash
-npm install
-npm run dev
-```
+Let's once again return to working with anecdotes. Use the app found in the repository directory *routed-anecdotes* of the repository https://github.com/fullstack-hy2020/fs-extension as the starting point for the exercises.
 
 #### 7.1: useField hook
 
@@ -806,5 +814,36 @@ const App = () => {
   )
 }
 ```
+
+#### Bonus: tests
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+The exercise repository https://github.com/fullstack-hy2020/fs-extension contains tests for all the apps that are developed in the exercises of this part. Run the tests for the previous exercises locally now:
+
+```bash
+cd routed-anecdotes-tests
+npm install
+npx playwright install chromium
+npm test
+```
+
+All the tests should pass, if not, fix your code.
+
+The file .github/workflows/unicafe-tests.yaml defines a GitHub Actions workflow that runs the tests on GitHub when you push code there.
+
+Enable the tests by modifying the file as follows:
+
+```bash
+name: Routed anecdotes tests
+
+on:
+  push:
+  // highlight-start
+    branches: [main] 
+      // highlight-end
+```
+
+Push your code to GitHub and make sure the tests pass.
 
 </div>

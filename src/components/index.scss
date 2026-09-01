@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&display=swap');
 @import './common.scss';
-
 :root,
 html[data-theme='light'] {
   --color-background: #{$white};
@@ -507,9 +506,17 @@ a {
   }
 }
 
-
 .embed-ltr, span[dir="ltr"] {
   unicode-bidi: isolate;
   direction: ltr !important;
   text-align: left !important;
+}
+
+.info-banner__close {
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid #005fcc;
+    outline-offset: 2px;
+  }
 }

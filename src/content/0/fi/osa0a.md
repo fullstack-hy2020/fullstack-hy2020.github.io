@@ -69,23 +69,20 @@ Voit osallistua kokeeseen vasta siinä vaiheessa, kun olet tehnyt riittävästi 
 
 #### Osa 6 - Full Stack ‑websovelluskehitys, lisäosa 1 (1 op, CSM141082)
 Suorittamalla vähintään 127 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
--	Tee vähintään 127 tehtävää osista 0–7. 
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-759cfee1-370b-4200-8e11-dc86b1a8ed88)
+-	Tee vähintään 135 tehtävää osista 0–7. 
+-	[Ilmoittaudu tähän osaan Sisun kautta.](https://sisu.helsinki.fi/student/courseunit/otm-e11e0495-239c-442b-a5cf-cc42462ef373/open-university/otm-e97e9254-7519-4a13-b2dd-1e45268d99f1?token=VN2HK964AK)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 #### Osa 7 - Full Stack ‑websovelluskehitys, lisäosa 2 (1 op, CSM141083)
 
-Suorittamalla vähintään 138 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
--	Tee vähintään 138 tehtävää osista 0–7. 
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4142645d-5690-4527-9d57-79bd1fbc8770)
+Suorittamalla vähintään 150 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
+-	Tee vähintään 150 tehtävää osista 0–7. 
+-	[Ilmoittaudu tähän osaan Sisun yliopiston kautta.](https://sisu.helsinki.fi/student/courseunit/otm-2f7374db-2a29-448e-9d96-63a0618a4266/open-university/otm-ac172cd4-d67d-49ab-a88a-8add8774f91a?token=UYYRAFHNZF)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 #### Osa 8 - Full Stack ‑websovelluskehitys: GraphQL (1 op, CSM14113)
 
-Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen, sillä sen sisältö ei riipu osista 6 ja 7.
--	Tee vähintään 22/26 tehtävää osasta 8. 
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f29bbf9e-3dfd-42d3-bdb8-c62be94932f8)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql</a>
 
 #### Osa 9 - Full Stack ‑websovelluskehitys: TypeScript (1 op, CSM14110, englanniksi)
 
@@ -93,11 +90,7 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 
 #### Osa 10 - Full Stack ‑websovelluskehitys: React Native (2 op, CSM14111, englanniksi)
 
-Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteellä. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
-
--	Tee vähintään 25 tehtävää osasta 10. 
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-af7b3535-d187-4999-985e-518c66a4a09b)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native</a>. 
 
 #### Osa 11 - Full Stack ‑websovelluskehitys: jatkuva integraatio (1 op, CSM14112, englanniksi)
 
@@ -111,6 +104,10 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 
 Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases</a>.
 
+#### Osa 14 - Full Stack Web Development: Next.js
+
+Materiaali osoitteessa <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs</a>
+
 ### Suoritusohjeet pähkinänkuoressa
 
 #### Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081) 
@@ -121,21 +118,24 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 - Tee kurssikoe palautusjärjestelmässä, lue lisää [täältä](/osa0/yleista#kurssikoe).
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6–8 ja 10) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6 ja 7) 
 
-- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8 ja 10 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. 
+- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osa 8 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. 
 
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 9 ja 11-13) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 8-14) 
 
 Käytännöt selviävät osien materiaalista:
 
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">osa 8</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">osa 9</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">osa 10</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">osa 11</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">osa 12</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">osa 13</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">osa 14</a>
 
 ### Tehtävien palauttaminen
 
@@ -272,11 +272,13 @@ Kurssilla ei ole vuosittaisia versiota. Kurssi on siis käynnissä koko ajan. Jo
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
+- Osa 14 (25.4.2026): uusi osa lisätty
+- Osa 10 (21.4.2026): Expo-versio ja kirjastot päivitetty
 - Osa 7 (6.4.2026): Webpack korvattu esbuildilla
 - Osa 6 (5.4.2026): Redux korvattu Zustandilla
 - Osa 5 (31.3.2026): Cypressiä käsittelevä osuus poistettu. React Router ja tyylikirjastot siirretty osasta 7 tähän osaan
 - Osat 9 ja 11-13 (maaliskuu 2026): sisältö päivitetty ja materiaali siirretty uuteen osoitteeseen
-- Osa 8: (3.1.2026) Apollo Server päivitetty versioon v5. Apollo Client päivitetty versioon v4. Backend-koodin refaktorointi siirretty osaan 8c. Lukuisia muita pieniä parannuksia.
+- Osa 8 (3.1.2026): Apollo Server päivitetty versioon v5. Apollo Client päivitetty versioon v4. Backend-koodin refaktorointi siirretty osaan 8c. Lukuisia muita pieniä parannuksia.
 - Osa 4 (13.8.2025): Express päivitetty versioon 5 ja kirjasto express-async-errors poistettu osasta 4b
 
 ### Aiemmin suoritetun kurssin täydentäminen
@@ -305,7 +307,7 @@ Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaneille.
+Kurssin yhteistyökumppaneista [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaneille.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. 
 

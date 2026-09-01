@@ -757,6 +757,34 @@ Use Zustand for notification state management. It may be a good idea to create a
 
 We notice that some of the anecdotes added by users are not very good. Implement a feature that allows deleting anecdotes that have zero votes.
 
+#### Bonus: anecdotes tests
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+The exercise repository https://github.com/fullstack-hy2020/fs-statemanagement also contains tests for the Anecdotes app. 
+
+Ensure that the tests now pass locally:
+
+```bash
+cd anecdotes-tests
+npm install
+npx playwright install chromium
+npm test
+```
+
+The file .github/workflows/anecdotes-tests.yaml defines a GitHub Actions workflow that runs the tests also on GitHub. Enable the tests by modifying the file as follows:
+
+Highlighted lines: 5
+name: Anecdotes tests
+
+```bash
+on:
+  push:
+    branches: [main] // highlight-line
+```
+
+Push your code to GitHub and make sure the tests work!
+
 </div>
 
 <div class="content">
@@ -1010,7 +1038,7 @@ act(() => {
 })
 ```
 
-Lopuksi tapahtuu testin ekspektaatio:
+Finally, the test expectation occurs:
 
 ```js
 expect(counter.current).toBe(0)
@@ -1295,5 +1323,33 @@ Write a test that verifies the correct React component receives a properly filte
 #### 6.15 Anecdotes, step14
 
 Write a test that verifies that voting increases the number of votes for an anecdote.
+
+#### Bonus: testing the tests
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+The exercise repository https://github.com/fullstack-hy2020/fs-typescript also contains some "tests" for the tests you did in previous exercises.
+
+Ensure that the checks pass locally:
+
+```bash
+cd anecdotes-tests
+npm run verify:tests-are-real
+```
+
+The file .github/workflows/anecdotes-tests.yaml defines a GitHub Actions workflow for the checks. Enable them by modifying the file as follows:
+
+```bash
+name: Anecdotes tests check
+
+on:
+  push:
+    branches: [main] // highlight-line
+```
+
+Push your code to GitHub and make sure the all the workflows are green:
+
+![](../../images/6/tests2.png)
+
 
 </div>

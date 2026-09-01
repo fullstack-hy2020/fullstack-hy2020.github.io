@@ -318,9 +318,9 @@ app.get('/', (request, response) => {
 })
 ```
 
-A função de gerência de evento aceita dois parâmetros. O primeiro parâmetro [request](http://expressjs.com/en/4x/api.html#req) (requisição) contém todas as informações da requisição HTTP, e o segundo parâmetro [response](http://expressjs.com/en/4x/api.html#res) (resposta) é usado para definir como a requisição é respondida.
+A função de gerência de evento aceita dois parâmetros. O primeiro parâmetro [request](https://expressjs.com/en/5x/api/request/) (requisição) contém todas as informações da requisição HTTP, e o segundo parâmetro [response](https://expressjs.com/en/5x/api/response/) (resposta) é usado para definir como a requisição é respondida.
 
-Em nosso código, a requisição é respondida usando o método [send](http://expressjs.com/en/4x/api.html#res.send) (enviar) do objeto _response_. Ao chamar o método, o servidor responde à requisição HTTP enviando uma resposta contendo a string <code>\<h1>Hello World!\</h1></code> que foi passada para o método _send_. Como o parâmetro é uma string, o express define automaticamente o valor do cabeçalho <i>Content-Type</i> como <i>text/html</i>. O código de status da resposta é definido como 200 por padrão.
+Em nosso código, a requisição é respondida usando o método [send](https://expressjs.com/en/5x/api/response/#ressendbody) (enviar) do objeto _response_. Ao chamar o método, o servidor responde à requisição HTTP enviando uma resposta contendo a string <code>\<h1>Hello World!\</h1></code> que foi passada para o método _send_. Como o parâmetro é uma string, o express define automaticamente o valor do cabeçalho <i>Content-Type</i> como <i>text/html</i>. O código de status da resposta é definido como 200 por padrão.
 
 Podemos verificar isso na guia <i>Rede</i> nas Ferramentas do Desenvolvedor:
 
@@ -334,7 +334,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-A requisição é respondida com o método [json](http://expressjs.com/en/4x/api.html#res.json) do objeto _response_. Quando chamado, o método enviará o array __notes__ que foi passado como uma string formatada em JSON. O express define automaticamente o cabeçalho <i>Content-Type</i> com o valor apropriado de <i>application/json</i>.
+A requisição é respondida com o método [json](https://expressjs.com/en/5x/api/response/#resjsonbody) do objeto _response_. Quando chamado, o método enviará o array __notes__ que foi passado como uma string formatada em JSON. O express define automaticamente o cabeçalho <i>Content-Type</i> com o valor apropriado de <i>application/json</i>.
 
 ![api/notes fornece os dados JSON formatados novamente](../../images/3/6new.png)
 
@@ -460,11 +460,11 @@ Em alguns lugares (ver, por exemplo, [Richardson, Ruby: RESTful Web Services](ht
 
 ### Buscando um único recurso
 
-Vamos expandir nossa aplicação para que ela ofereça uma interface REST para operar em notas individuais. Primeiro, vamos criar uma [rota](http://expressjs.com/en/guide/routing.html) para buscar um único recurso.
+Vamos expandir nossa aplicação para que ela ofereça uma interface REST para operar em notas individuais. Primeiro, vamos criar uma [rota](https://expressjs.com/en/5x/guide/routing/) para buscar um único recurso.
 
 O endereço único que usaremos para uma nota individual é na forma <i>notes/10</i>, onde o número no final refere-se ao número de identificação único da nota.
 
-Podemos definir [parâmetros](http://expressjs.com/en/guide/routing.html#route-parameters) para rotas no Express usando a sintaxe de dois-pontos:
+Podemos definir [parâmetros](https://expressjs.com/en/5x/guide/routing/#route-parameters) para rotas no Express usando a sintaxe de dois-pontos:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -476,7 +476,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Agora, <code>app.get('/api/notes/:id', ...)</code> gerenciará todas as requisições HTTP GET que estão na forma <i>/api/notes/X</i>, onde <i>X</i> é uma string arbitrária.
 
-O parâmetro <i>id</i> na rota de uma requisição pode ser acessado por meio do objeto [request](http://expressjs.com/en/api.html#req):
+O parâmetro <i>id</i> na rota de uma requisição pode ser acessado por meio do objeto [request](https://expressjs.com/en/5x/api/request/):
 
 ```js
 const id = request.params.id
@@ -569,7 +569,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Como nenhum dado está anexado à resposta, usamos o método [status](http://expressjs.com/en/4x/api.html#res.status) para definir o status e o método [end](http://expressjs.com/en/4x/api.html#res.end) para responder à requisição sem enviar nenhum dado.
+Como nenhum dado está anexado à resposta, usamos o método [status](https://expressjs.com/en/5x/api/response/#resstatuscode) para definir o status e o método [end](https://expressjs.com/en/5x/api/response/#resenddata-encoding-callback) para responder à requisição sem enviar nenhum dado.
 
 A condição <em>if</em> aproveita o fato de que todos os objetos JavaScript são [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) (verdade/verdadeiro), o que significa que eles avaliam como verdadeiros em uma operação de comparação. No entanto, _undefined_ é [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) (falso/falsidade), o que significa que ele avaliará como falso.
 
@@ -632,7 +632,7 @@ Se você usar o *IntelliJ WebStorm*, é possível fazer um procedimento semelhan
 
 Em seguida, vamos implementar a funcionalidade de adicionar novas notas ao servidor. É possível adicionar uma nota fazendo uma requisição HTTP POST para o endereço http://localhost:3001/api/notes e enviando todas as informações para a nova nota no [corpo](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) (body) da requisição em formato JSON.
 
-Para que possamos acessar os dados facilmente, precisamos da ajuda do [json-parser](https://expressjs.com/en/api.html) do Express, que é usado com o comando _app.use(express.json())_.
+Para que possamos acessar os dados facilmente, precisamos da ajuda do [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) do Express, que é usado com o comando _app.use(express.json())_.
 
 Vamos ativar o json-parser e implementar um gerenciador inicial para lidar com requisições HTTP POST:
 
@@ -713,7 +713,7 @@ O Postman também permite que os usuários salvem requisições, mas a situaçã
 
 > **Observação importante**
 >
-> Às vezes, ao depurar, é possível que você queira descobrir quais cabeçalhos foram definidos na requisição HTTP. Uma maneira de fazer isso é através do método [get](http://expressjs.com/en/4x/api.html#req.get) do objeto _request_, que pode ser usado para obter o valor de um único cabeçalho. O objeto _request_ também possui a propriedade <i>headers</i>, que contém todos os cabeçalhos de uma requisição específica.
+> Às vezes, ao depurar, é possível que você queira descobrir quais cabeçalhos foram definidos na requisição HTTP. Uma maneira de fazer isso é através do método [get](https://expressjs.com/en/5x/api/request/#reqgetfield) do objeto _request_, que pode ser usado para obter o valor de um único cabeçalho. O objeto _request_ também possui a propriedade <i>headers</i>, que contém todos os cabeçalhos de uma requisição específica.
 >
 
 > Podem ocorrer problemas com o cliente REST do VS Code se você adicionar acidentalmente uma linha vazia entre a linha superior e a linha que especifica os cabeçalhos HTTP. Nessa situação, o cliente REST interpreta como se todos os cabeçalhos estivessem vazios, o que faz com que o servidor back-end não saiba que os dados que recebeu estão no formato JSON.
@@ -948,7 +948,7 @@ POST é o único tipo de requisição HTTP que não é nem <i>seguro</i> nem <i>
 
 ### Middleware
 
-O [json-parser](https://expressjs.com/en/api.html) do Express que usamos anteriormente é um [middleware](http://expressjs.com/en/guide/using-middleware.html).
+O [json-parser](https://expressjs.com/en/5x/api/express/#expressjsonoptions) do Express que usamos anteriormente é um [middleware](https://expressjs.com/en/resources/middleware/body-parser/).
 
 <i>Middleware</i> são funções que podem ser usadas para lidar com objetos de _request_ e _response_.
 

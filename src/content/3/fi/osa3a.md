@@ -315,9 +315,9 @@ app.get('/', (request, response) => {
 })
 ```
 
-Tapahtumankäsittelijäfunktiolla on kaksi parametria. Näistä ensimmäinen eli [request](http://expressjs.com/en/4x/api.html#req) sisältää kaikki HTTP-pyynnön tiedot ja toisen parametrin [response](http://expressjs.com/en/4x/api.html#res):n avulla määritellään, miten pyyntöön vastataan.
+Tapahtumankäsittelijäfunktiolla on kaksi parametria. Näistä ensimmäinen eli [request](https://expressjs.com/en/5x/api/request/) sisältää kaikki HTTP-pyynnön tiedot ja toisen parametrin [response](https://expressjs.com/en/5x/api/response/):n avulla määritellään, miten pyyntöön vastataan.
 
-Koodissa pyyntöön vastataan käyttäen _response_-olion metodia [send](http://expressjs.com/en/4x/api.html#res.send), jonka kutsumisen seurauksena palvelin vastaa HTTP-pyyntöön lähettämällä selaimelle vastaukseksi _send_:in parametrina olevan merkkijonon <code>\<h1>Hello World!\</h1></code>. Koska parametri on merkkijono, asettaa Express vastauksessa <i>Content-Type</i>-headerin arvoksi <i>text/html</i>. Statuskoodiksi tulee oletusarvoisesti 200. 
+Koodissa pyyntöön vastataan käyttäen _response_-olion metodia [send](https://expressjs.com/en/5x/api/response/#ressendbody), jonka kutsumisen seurauksena palvelin vastaa HTTP-pyyntöön lähettämällä selaimelle vastaukseksi _send_:in parametrina olevan merkkijonon <code>\<h1>Hello World!\</h1></code>. Koska parametri on merkkijono, asettaa Express vastauksessa <i>Content-Type</i>-headerin arvoksi <i>text/html</i>. Statuskoodiksi tulee oletusarvoisesti 200. 
 
 Asian voi varmistaa konsolin välilehdeltä <i>Network</i>:
 
@@ -331,7 +331,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4x/api.html#res.json), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa JavaScript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-Type</i> arvoksi <i>application/json</i>.
+Pyyntöön vastataan _response_-olion metodilla [json](https://expressjs.com/en/5x/api/response/#resjsonbody), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa JavaScript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-Type</i> arvoksi <i>application/json</i>.
 
 ![Selain renderöi json-muotoiset muistiinpanot](../../images/3/6new.png)
 
@@ -429,7 +429,7 @@ Laajennetaan nyt sovellusta siten, että se tarjoaa muistiinpanojen operointiin 
 
 Yksittäisen muistiinpanon identifioi URL, joka on muotoa <i>/api/notes/10</i>. Lopussa oleva luku vastaa resurssin muistiinpanon id:tä.
 
-Voimme määritellä Expressin routejen poluille [parametreja](http://expressjs.com/en/guide/routing.html) käyttämällä kaksoispistesyntaksia:
+Voimme määritellä Expressin routejen poluille [parametreja](https://expressjs.com/en/5x/guide/routing/) käyttämällä kaksoispistesyntaksia:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -441,7 +441,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Nyt <code>app.get('/api/notes/:id', ...)</code> käsittelee kaikki HTTP GET ‑pyynnöt, jotka ovat muotoa <i>/api/notes/JOTAIN</i>, jossa <i>JOTAIN</i> on mielivaltainen merkkijono.
 
-Polun parametrin <i>id</i> arvoon päästään käsiksi pyynnön tiedot kertovan olion [request](http://expressjs.com/en/api.html#req) kautta:
+Polun parametrin <i>id</i> arvoon päästään käsiksi pyynnön tiedot kertovan olion [request](https://expressjs.com/en/5x/api/request/) kautta:
 
 ```js
 const id = request.params.id
@@ -478,7 +478,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Koska vastaukseen ei nyt liity mitään dataa, käytetään statuskoodin asettavan metodin [status](http://expressjs.com/en/4x/api.html#res.status) lisäksi metodia [end](http://expressjs.com/en/4x/api.html#res.end) ilmoittamaan siitä, että pyyntöön tulee vastata ilman dataa.
+Koska vastaukseen ei nyt liity mitään dataa, käytetään statuskoodin asettavan metodin [status](https://expressjs.com/en/5x/api/response/#resstatuscode) lisäksi metodia [end](https://expressjs.com/en/5x/api/response/#resenddata-encoding-callback) ilmoittamaan siitä, että pyyntöön tulee vastata ilman dataa.
 
 Koodin haarautumisessa hyväksikäytetään sitä, että mikä tahansa JavaScript-olio on [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), eli katsotaan todeksi vertailuoperaatiossa. _undefined_ taas on [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) eli epätosi.
 
@@ -536,7 +536,7 @@ Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn H
 
 Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST ‑pyyntö osoitteeseen http://localhost:3001/api/notes ja liittämällä pyynnön [bodyyn](https://fastapi.tiangolo.com/tutorial/body/) luotavan muistiinpanon tiedot JSON-muodossa.
 
-Jotta pääsisimme pyynnön mukana lähetettyyn dataan helposti käsiksi, tarvitsemme Expressin tarjoaman [json-parserin](https://expressjs.com/en/api.html) apua. Tämä tapahtuu lisäämällä koodiin komento _app.use(express.json())_.
+Jotta pääsisimme pyynnön mukana lähetettyyn dataan helposti käsiksi, tarvitsemme Expressin tarjoaman [json-parserin](https://expressjs.com/en/5x/api/express/#expressjsonoptions) apua. Tämä tapahtuu lisäämällä koodiin komento _app.use(express.json())_.
 
 Otetaan json-parseri käyttöön ja luodaan alustava määrittely HTTP POST ‑pyynnön käsittelyyn:
 
@@ -602,7 +602,7 @@ REST clientin eräs suuri etu Postmaniin verrattuna on se, että pyynnöt saa k�
 
 > **Tärkeä sivuhuomio**
 >
-> Välillä debugatessa tulee vastaan tilanteita, joissa backendissä on tarve selvittää, mitä headereja HTTP-pyynnöille on asetettu. Eräs menetelmä tähän on _request_-olion melko kehnosti nimetty metodi [get](http://expressjs.com/en/4x/api.html#req.get), jonka avulla voi selvittää yksittäisen headerin arvon. _request_-oliolla on myös kenttä <i>headers</i>, jonka arvona ovat kaikki pyyntöön liittyvät headerit.
+> Välillä debugatessa tulee vastaan tilanteita, joissa backendissä on tarve selvittää, mitä headereja HTTP-pyynnöille on asetettu. Eräs menetelmä tähän on _request_-olion melko kehnosti nimetty metodi [get](https://expressjs.com/en/5x/api/request/#reqgetfield), jonka avulla voi selvittää yksittäisen headerin arvon. _request_-oliolla on myös kenttä <i>headers</i>, jonka arvona ovat kaikki pyyntöön liittyvät headerit.
 >
 > Ongelmia voi syntyä esim., jos jätät vahingossa VS Coden REST clientillä ylimmän rivin ja headerit määrittelevien rivien väliin tyhjän rivin. Tällöin REST client tulkitsee, että millekään headerille ei aseteta arvoa ja näin backend ei osaa tulkita pyynnön mukana olevaa dataa JSON:iksi.
 >
@@ -801,7 +801,7 @@ HTTP-pyyntötyypeistä POST on ainoa, joka ei ole <i>safe</i> eikä <i>idempoten
 
 ### Middlewaret
 
-Äsken käyttöönottamamme Expressin [json-parseri](https://expressjs.com/en/api.html) on terminologiassa niin sanottu [middleware](http://expressjs.com/en/guide/using-middleware.html).
+Äsken käyttöönottamamme Expressin [json-parseri](https://expressjs.com/en/5x/api/express/#expressjsonoptions) on terminologiassa niin sanottu [middleware](https://expressjs.com/en/resources/middleware/body-parser/).
 
 Middlewaret ovat funktioita, joiden avulla voidaan käsitellä _request_- ja _response_-olioita.
 

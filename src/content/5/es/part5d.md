@@ -22,23 +22,15 @@ También tienen algunos inconvenientes. Configurar las pruebas E2E es más compl
 Las pruebas E2E también pueden ser [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359) (inestables).
 Algunas pruebas pueden pasar una vez y fallar en otra, incluso si el código no cambia en absoluto.
 
-Quizás las dos librerías más fáciles para pruebas de extremo a extremo en este momento son [Cypress](https://www.cypress.io/) y [Playwright](https://playwright.dev/).
+Quizás las dos librerías más sencillas para realizar pruebas de extremo a extremo en este momento sean [Playwright](https://playwright.dev/) y [Cypress](https://www.cypress.io/).
 
-De las estadísticas en [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) vemos que Cypress, que dominó el mercado durante los últimos cinco años, sigue siendo claramente el número uno, pero Playwright está en un rápido ascenso:
+Las estadísticas de [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) muestran que Playwright superó a Cypress en número de descargas durante 2024 y que su popularidad continúa creciendo:
 
-![cypress vs playwright en tendencias de npm](../../images/5/cvsp.png)
+![cypress vs playwright en tendencias de npm](../../images/5/pwc.png)
 
-Este curso ha estado usando Cypress durante años. Ahora Playwright es una nueva adición. Puedes elegir si completar la parte de pruebas E2E del curso con Cypress o Playwright. Los principios operativos de ambas librerías son muy similares, así que tu elección no es muy importante. Sin embargo, ahora Playwright es la librería E2E preferida para el curso.
-
-Si tu elección es Playwright, por favor continúa. Si terminas usando Cypress, ve [aquí](/es/part5/pruebas_de_extremo_a_extremo_cypress).
-
-### Playwright
+Este curso utilizó Cypress durante años. Ahora nuestra elección es Playwright.
 
 [Playwright](https://playwright.dev/) es un recién llegado a las pruebas de extremo a extremo, que comenzó a explotar en popularidad hacia finales de 2023. Playwright está aproximadamente a la par con Cypress en términos de facilidad de uso. Las librerías son ligeramente diferentes en términos de cómo funcionan. Cypress es radicalmente diferente de la mayoría de las librerías de pruebas E2E, ya que las pruebas de Cypress se ejecutan completamente dentro del navegador. Las pruebas de Playwright, por otro lado, se ejecutan en el proceso de Node, que está conectado al navegador a través de interfaces de programación.
-
-Se han escrito muchos blogs sobre comparaciones de librerías, por ejemplo, [este](https://www.lambdatest.com/blog/cypress-vs-playwright/) y [este](https://www.browserstack.com/guide/playwright-vs-cypress).
-
-Es difícil decir qué librería es mejor. Una ventaja de Playwright es su soporte de navegadores; Playwright soporta Chrome, Firefox y navegadores basados en Webkit como Safari. Actualmente, Cypress incluye soporte para todos estos navegadores, aunque el soporte de Webkit es experimental y no soporta todas las funcionalidades de Cypress. Al momento de escribir (1.3.2024), mi preferencia personal se inclina ligeramente hacia Playwright.
 
 Ahora exploremos Playwright.
 
@@ -53,6 +45,43 @@ npm init playwright@latest
 El script de instalación hará algunas preguntas, responde de la siguiente manera:
 
 ![respuesta: javascript, tests, false, true](../../images/5/play0.png)
+
+Ten en cuenta que, al instalar Playwright, es posible que tu sistema operativo no admita todos los navegadores que ofrece y aparezca un mensaje de error como el siguiente:
+
+```
+Webkit 18.0 (playwright build v2070) downloaded to /home/user/.cache/ms-playwright/webkit-2070
+Playwright Host validation warning: 
+╔══════════════════════════════════════════════════════╗
+║ Host system is missing dependencies to run browsers. ║
+║ Missing libraries:                                   ║
+║     libicudata.so.66                                 ║
+║     libicui18n.so.66                                 ║
+║     libicuuc.so.66                                   ║
+║     libjpeg.so.8                                     ║
+║     libwebp.so.6                                     ║
+║     libpcre.so.3                                     ║
+║     libffi.so.7                                      ║
+╚══════════════════════════════════════════════════════╝
+```
+
+En ese caso, puedes especificar los navegadores que se probarán mediante `--project=` en el archivo _package.json_:
+
+```js
+    "test": "playwright test --project=chromium --project=firefox",
+```
+
+También puedes eliminar del archivo _playwright.config.js_ la entrada de los navegadores problemáticos:
+
+```js
+  projects: [
+    // ...
+    //{
+    //  name: 'webkit',
+    //  use: { ...devices['Desktop Safari'] },
+    //},
+    // ...
+  ]
+```
 
 Definamos un script npm para ejecutar pruebas e informes de pruebas en _package.json_:
 
@@ -107,10 +136,11 @@ Las pruebas también pueden ejecutarse a través de la interfaz gráfica con el 
 npm run test -- --ui
 ```
 
-Las pruebas de muestra se ven así:
+Las pruebas de muestra del archivo _tests/example.spec.js_ se ven así:
 
 ```js
-const { test, expect } = require('@playwright/test');
+// @ts-check
+import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/'); // highlight-line
@@ -144,15 +174,12 @@ Hagamos un script npm para el <i>backend</i>, que permitirá iniciarlo en modo d
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "NODE_ENV=test node --test",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
@@ -166,9 +193,9 @@ const { test, expect } = require('@playwright/test')
 test('front page can be opened', async ({ page }) => {
   await page.goto('http://localhost:5173')
 
-  const locator = await page.getByText('Notes')
+  const locator = page.getByText('Notes')
   await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
 })
 ```
 
@@ -178,21 +205,7 @@ El método [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions
 
 La segunda comprobación se realiza sin usar la variable auxiliar.
 
-Nos damos cuenta de que el año ha cambiado. Cambiemos la prueba de la siguiente manera:
-
-```js
-const { test, expect } = require('@playwright/test')
-
-test('front page can be opened', async ({ page }) => {
-  await page.goto('http://localhost:5173')
-
-  const locator = await page.getByText('Notes')
-  await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible() // highlight-line
-})
-```
-
-Como se esperaba, la prueba falla. Playwright abre el informe de la prueba en el navegador y se hace evidente que Playwright ha realizado las pruebas con tres navegadores diferentes: Chrome, Firefox y Webkit, es decir, el motor de navegador utilizado por Safari:
+La prueba falla porque contiene un año antiguo. Playwright abre el informe en el navegador y deja claro que ha ejecutado las pruebas con tres navegadores diferentes: Chrome, Firefox y Webkit, es decir, el motor de Safari:
 
 ![informe de prueba mostrando la prueba fallida en tres navegadores diferentes](../../images/5/play2.png)
 
@@ -206,9 +219,7 @@ Generalmente, es por supuesto algo muy bueno que las pruebas se lleven a cabo co
 npm test -- --project chromium
 ```
 
-Ahora corrijamos el año desactualizado en el código del frontend que causó el error.
-
-Antes de continuar, agreguemos un bloque _describe_ a las pruebas:
+Corrijamos la prueba con el año adecuado y añadamos un bloque _describe_:
 
 ```js
 const { test, describe, expect } = require('@playwright/test')
@@ -217,9 +228,9 @@ describe('Note app', () => {  // highlight-line
   test('front page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 })
 ```
@@ -229,7 +240,8 @@ Antes de continuar, rompamos las pruebas una vez más. Notamos que la ejecución
 Al desarrollar pruebas, puede ser más prudente reducir el tiempo de espera a unos pocos segundos. Según la [documentación](https://playwright.dev/docs/test-timeouts), esto se puede hacer cambiando el archivo _playwright.config.js_ de la siguiente manera:
 
 ```js
-module.exports = defineConfig({
+export default defineConfig({
+  // ...
   timeout: 3000, // highlight-line
   fullyParallel: false, // highlight-line
   workers: 1, // highlight-line
@@ -249,10 +261,10 @@ Comencemos abriendo el formulario de inicio de sesión.
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
   })
 })
 ```
@@ -279,10 +291,10 @@ Cuando se abre el formulario, la prueba debe buscar los campos de texto e introd
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByRole('textbox').fill('mluukkai')  // highlight-line
   })
 })
@@ -302,10 +314,10 @@ El problema ahora es que _getByRole_ encuentra dos campos de texto, y al llamar 
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     // highlight-start
     await page.getByRole('textbox').first().fill('mluukkai')
     await page.getByRole('textbox').last().fill('salainen')
@@ -324,10 +336,10 @@ Si hubiera más de dos campos de texto, utilizar los métodos _first_ y _last_ n
 ```js
 describe('Note app', () => {
   // ...
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     // highlight-start
     const textboxes = await page.getByRole('textbox').all()
 
@@ -344,54 +356,50 @@ describe('Note app', () => {
 
 Ambas versiones de la prueba funcionan. Sin embargo, ambas son problemáticas en la medida en que si el formulario de registro cambia, las pruebas pueden fallar, ya que dependen de que los campos estén en la página en un cierto orden.
 
-Una mejor solución es definir atributos de id de prueba únicos para los campos, y buscarlos en las pruebas utilizando el método [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id).
+Si un elemento resulta difícil de localizar en las pruebas, podemos asignarle un atributo <i>test-id</i> y encontrarlo mediante [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id).
 
-Ampliemos el formulario de inicio de sesión de la siguiente manera
+Aprovechemos ahora los elementos que ya existen en el formulario de inicio de sesión. Sus campos tienen asignados <i>labels</i> únicos:
 
 ```js
-const LoginForm = ({ ... }) => {
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            data-testid='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            data-testid='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button type="submit">
-          login
-        </button>
-      </form>
-    </div>
-  )
-}
+// ...
+<form onSubmit={handleSubmit}>
+  <div>
+    <label> // highlight-line
+      username // highlight-line
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+    </label> // highlight-line
+  </div>
+  <div>
+    <label> // highlight-line
+      password // highlight-line
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+    </label> // highlight-line
+  </div>
+  <button type="submit">login</button>
+</form>
+// ...
 ```
 
-La prueba cambia de la siguiente manera:
+Los campos pueden y deben localizarse en las pruebas mediante sus <i>labels</i> y el método [getByLabel](https://playwright.dev/docs/api/class-page#page-get-by-label):
 
 ```js
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai') // highlight-line
-    await page.getByTestId('password').fill('salainen')  // highlight-line
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai') // highlight-line
+    await page.getByLabel('password').fill('salainen')  // highlight-line
   
     await page.getByRole('button', { name: 'login' }).click() 
   
@@ -400,7 +408,11 @@ describe('Note app', () => {
 })
 ```
 
+Al localizar elementos conviene utilizar el contenido que el usuario ve en la interfaz, ya que así las pruebas simulan mejor cómo encontraría realmente cada campo al navegar por la aplicación.
+
 Ten en cuenta que para que la prueba pase en esta etapa, es necesario que haya un usuario en la base de datos de <i>test</i> del backend con el nombre de usuario <i>mluukkai</i> y la contraseña <i>salainen</i>. ¡Crea un usuario si es necesario!
+
+### Inicialización de las pruebas
 
 Dado que ambas pruebas comienzan de la misma manera, es decir, abriendo la página <i>http://localhost:5173</i>, se recomienda aislar la parte común en el bloque <i>beforeEach</i> que se ejecuta antes de cada prueba:
 
@@ -415,15 +427,15 @@ describe('Note app', () => {
   // highlight-end
 
   test('front page can be opened', async ({ page }) => {
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 
-  test('login form can be opened', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -442,9 +454,9 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -485,18 +497,18 @@ describe('Note app', () => {
   // ....
 
   test('user can log in', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -506,7 +518,7 @@ describe('Note app', () => {
       await page.getByRole('button', { name: 'save' }).click()
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
-  })  
+  })
 })
 ```
 
@@ -523,18 +535,18 @@ Podemos vaciar la base de datos usando estos endpoints.
 Creemos un nuevo enrutador para las pruebas dentro del directorio <i>controllers</i>, en el archivo <i>testing.js</i>
 
 ```js
-const testingRouter = require('express').Router()
+const router = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
 
-testingRouter.post('/reset', async (request, response) => {
+router.post('/reset', async (request, response) => {
   await Note.deleteMany({})
   await User.deleteMany({})
 
   response.status(204).end()
 })
 
-module.exports = testingRouter
+module.exports = router
 ```
 
 y agrégalo al backend solo <i>si la aplicación se ejecuta en modo de prueba</i>:
@@ -574,7 +586,7 @@ Actualmente no es posible agregar nuevos usuarios a través de la interfaz de us
 ```js
 describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
-    await request.post('http:localhost:3001/api/testing/reset')
+    await request.post('http://localhost:3001/api/testing/reset')
     await request.post('http://localhost:3001/api/users', {
       data: {
         name: 'Matti Luukkainen',
@@ -652,16 +664,16 @@ describe('Note app', () => {
   // ...
 
   test('login fails with wrong password', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('wrong')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('wrong')
     await page.getByRole('button', { name: 'login' }).click()
 
     await expect(page.getByText('wrong credentials')).toBeVisible()
   })
 
   // ...
-)}
+})
 ```
 
 La prueba verifica con el método [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) que la aplicación muestra un mensaje de error.
@@ -685,10 +697,10 @@ const Notification = ({ message }) => {
 Podríamos refinar la prueba para asegurar que el mensaje de error se muestre exactamente en el lugar correcto, es decir, en el elemento que contiene a la clase CSS <i>error</i>:
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
-  const errorDiv = await page.locator('.error') // highlight-line
+  const errorDiv = page.locator('.error') // highlight-line
   await expect(errorDiv).toContainText('wrong credentials')
 })
 ```
@@ -698,13 +710,13 @@ La prueba utiliza el método [page.locator](https://playwright.dev/docs/api/clas
 Es posible probar los estilos CSS de la aplicación con el comparador [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css). Podemos, por ejemplo, asegurarnos de que el color del mensaje de error sea rojo y que haya un borde alrededor de él:
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
-    const errorDiv = await page.locator('.error')
-    await expect(errorDiv).toContainText('wrong credentials')
-    await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
-    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
+  const errorDiv = page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
 })
 ```
 
@@ -714,12 +726,12 @@ Terminemos la prueba para que también asegure que la aplicación **no renderiza
 
 ```js
 test('login fails with wrong password', async ({ page }) =>{
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill('mluukkai')
-  await page.getByTestId('password').fill('wrong')
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill('mluukkai')
+  await page.getByLabel('password').fill('wrong')
   await page.getByRole('button', { name: 'login' }).click()
 
-  const errorDiv = await page.locator('.error')
+  const errorDiv = page.locator('.error')
   await expect(errorDiv).toContainText('wrong credentials')
   await expect(errorDiv).toHaveCSS('border-style', 'solid')
   await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
@@ -734,15 +746,15 @@ Por defecto, Playwright siempre ejecuta todas las pruebas, y a medida que el nú
 
 ```js
 describe(() => {
-  // esta es la única prueba ejecutada!
+  // this is the only test executed!
   test.only('login fails with wrong password', async ({ page }) => {  // highlight-line
     // ...
   })
 
-  // esta prueba es omitida...
+  // this test is skipped...
   test('user can login with correct credentials', async ({ page }) => {
     // ...
-  }
+  })
 
   // ...
 })
@@ -767,9 +779,9 @@ describe('Note app', () => {
   // ...
 
   test('user can login with correct credentials', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -780,9 +792,9 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page, request }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -803,9 +815,9 @@ También vale la pena esforzarse por tener un código no repetitivo en las prueb
 
 ```js 
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill(username)
-  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
 }
 
@@ -815,12 +827,22 @@ export { loginWith }
 La prueba se vuelve mucho más simple y clara:
 
 ```js
-const { loginWith } = require('./helper')
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { loginWith } = require('./helper') // highlight-line
 
 describe('Note app', () => {
+  // ...
+
   test('user can log in', async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+
+  test('login fails with wrong password', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'wrong') // highlight-line
+
+    const errorDiv = page.locator('.error')
+    // ...
   })
 
   describe('when logged in', () => {
@@ -828,11 +850,8 @@ describe('Note app', () => {
       await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
 
-  test('a new note can be created', () => {
     // ...
   })
-
-  // ...
 })
 ```
 
@@ -871,9 +890,9 @@ La creación de una nota también es aislada como una función auxiliar. El arch
 
 ```js
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill(username)
-  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
 }
 
@@ -885,12 +904,15 @@ const createNote = async (page, content) => {
 }
 // highlight-end
 
-export { loginWith, createNote }
+export { loginWith, createNote } // highlight-line
 ```
 
 Las pruebas se simplifican de la siguiente manera:
 
 ```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { createNote, loginWith } = require('./helper') // highlight-line
+
 describe('Note app', () => {
   // ...
 
@@ -900,13 +922,13 @@ describe('Note app', () => {
     })
 
     test('a new note can be created', async ({ page }) => {
-      await createNote(page, 'a note created by playwright', true) // highlight-line
+      await createNote(page, 'a note created by playwright') // highlight-line
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
 
     describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
-        await createNote(page, 'another note by playwright', true) // highlight-line
+        await createNote(page, 'another note by playwright') // highlight-line
       })
   
       test('importance can be changed', async ({ page }) => {
@@ -939,27 +961,28 @@ Así que podemos reemplazar todas las direcciones en las pruebas de _http://loca
 Ahora podemos definir la _baseUrl_ para la aplicación en el archivo de configuración de las pruebas <i>playwright.config.js</i>:
 
 ```js
-module.exports = defineConfig({
+export default defineConfig({
   // ...
   use: {
     baseURL: 'http://localhost:5173',
+    // ...
   },
   // ...
-}
+})
 ```
 
 Todos los comandos en las pruebas que usan la URL de la aplicación, por ejemplo:
 
 ```js
 await page.goto('http://localhost:5173')
-await page.post('http://localhost:5173/api/tests/reset')
+await request.post('http://localhost:5173/api/testing/reset')
 ```
 
 se pueden transformar en:
 
 ```js
 await page.goto('/')
-await page.post('/api/tests/reset')
+await request.post('/api/testing/reset')
 ```
 
 El código actual para las pruebas está en [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), en la rama <i>part5-2</i>.
@@ -973,16 +996,16 @@ Cambiemos el bloque de inicialización de la prueba para que cree dos notas en l
 ```js
 describe('when logged in', () => {
   // ...
-  describe('and several notes exists', () => {
+  describe('and several notes exists', () => { // highlight-line
     beforeEach(async ({ page }) => {
       // highlight-start
-      await createNote(page, 'first note', true)
-      await createNote(page, 'second note', true)
+      await createNote(page, 'first note')
+      await createNote(page, 'second note')
       // highlight-end
     })
 
     test('one of those can be made nonimportant', async ({ page }) => {
-      const otherNoteElement = await page.getByText('first note')
+      const otherNoteElement = page.getByText('first note')
 
       await otherNoteElement
         .getByRole('button', { name: 'make not important' }).click()
@@ -998,7 +1021,7 @@ La prueba también podría haberse escrito sin la variable auxiliar:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  await page.getByText('first note')
+  page.getByText('first note')
     .getByRole('button', { name: 'make not important' }).click()
 
   await expect(page.getByText('first note').getByText('make important'))
@@ -1028,8 +1051,8 @@ Una forma de solucionar el problema es la siguiente:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const otherNoteText = await page.getByText('first note') // highlight-line
-  const otherNoteElement = await otherNoteText.locator('..') // highlight-line
+  const otherNoteText = page.getByText('first note') // highlight-line
+  const otherNoteElement = otherNoteText.locator('..') // highlight-line
 
   await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(otherNoteElement.getByText('make important')).toBeVisible()
@@ -1042,7 +1065,7 @@ Por supuesto, la prueba también puede escribirse usando solo una variable auxil
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const secondNoteElement = await page.getByText('second note').locator('..')
+  const secondNoteElement = page.getByText('second note').locator('..')
   await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
@@ -1061,19 +1084,19 @@ describe('when logged in', () => {
     await expect(page.getByText('a note created by playwright')).toBeVisible()
   })
 
-  describe('and a note exists', () => {
+  describe('and several notes exists', () => {
     beforeEach(async ({ page }) => {
-      await createNote(page, 'first note', true)
-      await createNote(page, 'second note', true)
-      await createNote(page, 'third note', true) // highlight-line
+      await createNote(page, 'first note')
+      await createNote(page, 'second note')
+      await createNote(page, 'third note') // highlight-line
     })
 
-    test('importance can be changed', async ({ page }) => {
-      const otherNoteText = await page.getByText('second note') // highlight-line
-      const otherdNoteElement = await otherNoteText.locator('..')
+    test('one of those can be made nonimportant', async ({ page }) => {
+      const otherNoteText = page.getByText('second note') // highlight-line
+      const otherNoteElement = otherNoteText.locator('..')
     
-      await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
-      await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+      await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+      await expect(otherNoteElement.getByText('make important')).toBeVisible()
     })
   })
 }) 
@@ -1088,7 +1111,7 @@ Si, y cuando las pruebas no pasan y sospechas que la falla está en las pruebas 
 El siguiente comando ejecuta la prueba problemática en modo debug:
 
 ```
-npm test -- -g'importance can be changed' --debug
+npm test -- -g'one of those can be made nonimportant' --debug
 ```
 
 El inspector de Playwright muestra el progreso de las pruebas paso a paso. El botón de flecha-punto en la parte superior lleva las pruebas un paso más adelante. Los elementos encontrados por los localizadores y la interacción con el navegador se visualizan en el navegador:
@@ -1101,7 +1124,7 @@ Por defecto, el debug avanza a través de la prueba comando por comando. Si es u
 describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
     // ...
-  }
+  })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
@@ -1117,11 +1140,11 @@ describe('Note app', () => {
   
       test('one of those can be made nonimportant', async ({ page }) => {
         await page.pause() // highlight-line
-        const otherNoteText = await page.getByText('second note')
-        const otherdNoteElement = await otherNoteText.locator('..')
+        const otherNoteText = page.getByText('second note')
+        const otherNoteElement = otherNoteText.locator('..')
       
-        await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
-        await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+        await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+        await expect(otherNoteElement.getByText('make important')).toBeVisible()
       })
     })
   })
@@ -1164,7 +1187,7 @@ npm run test -- --trace on
 Si es necesario, Trace puede verse con el comando
 
 ```
-npx playwright show report
+npx playwright show-report
 ```
 
 o con el script npm que definimos _npm run test:report_
@@ -1256,8 +1279,8 @@ const { test, expect, beforeEach, describe } = require('@playwright/test')
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
-    // vacía la base de datos aquí
-    // crea un usuario para el backend aquí
+    // empty the db here
+    // create a user for the backend here
     // ...
   })
 

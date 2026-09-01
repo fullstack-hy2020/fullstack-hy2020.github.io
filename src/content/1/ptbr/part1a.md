@@ -11,7 +11,7 @@ Agora, começaremos a nos familiarizar com provavelmente o tópico mais importan
 
 A maneira mais simples de começar é usando uma ferramenta chamada [create-react-app](https://github.com/facebook/create-react-app). É possível (mas não necessário) instalar o <i>create-react-app</i> em sua máquina se a ferramenta <i>npm</i> instalada junto com o Node estiver na versão <i>5.3</i>, pelo menos.
 
-<i>Durante o curo, você também pode utilizar a nova ferramenta frontend chamada [Vite](https://vitejs.dev/), se desejar. O create-react-app ainda é a ferramenta recomendada pelo time do React e é por isso que continua sendo a ferramenta padrão para configurar um projeto React neste curso. Leia [aqui](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) como o time React enxerga o futuro das ferramentas React.</i>
+<i>Durante o curso, você também pode utilizar a nova ferramenta frontend chamada [Vite](https://vitejs.dev/), se desejar. O create-react-app ainda é a ferramenta recomendada pelo time do React e é por isso que continua sendo a ferramenta padrão para configurar um projeto React neste curso. Leia [aqui](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) como o time React enxerga o futuro das ferramentas React.</i>
 
 Vamos criar uma aplicação chamada <i>part1</i> e navegar até o seu diretório.
 
@@ -531,7 +531,7 @@ const App = () => {
 }
 ```
 
-Nesta parte, nem vale a pena tentar usar a renderização direta de tabelas. Voltaremos a discutir isso na próxima parte.
+Nesta parte, nem vale a pena tentar usar a renderização direta de arrays. Voltaremos a discutir isso na próxima parte.
 
 </div>
 

@@ -368,7 +368,7 @@ Veja [mais informações sobre o projeto](https://github.com/fullstack-hy2020/mi
 
 ### Promessa de entrevista
 
-Nossos parceiros [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) e [Smartly.io](https://www .smartly.io/), <i>prometeram uma entrevista de emprego</i> para todos que concluírem o curso e o trabalho do projeto com o máximo de créditos (14 + 10).
+Nossos parceiros [Terveystalo](https://www.terveystalo.com/en/) e [Smartly.io](https://www .smartly.io/), <i>prometeram uma entrevista de emprego</i> para todos que concluírem o curso e o trabalho do projeto com o máximo de créditos (14 + 10).
 
 Isso significa que o aluno pode, se assim desejar, inscrever-se para uma entrevista de emprego com um colaborador que tenha feito a promessa. O professor do curso, Matti Luukkainen, enviará instruções ao aluno após a conclusão dos cursos com o máximo de créditos.
 

@@ -15,7 +15,7 @@ The course is totally free of charge. You can get a certificate and even the Uni
 
 ### Prerequisites
 
-Participants are expected to have good programming skills, basic knowledge of web programming and databases, and know the basics of the Git version control system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently
+Participants are expected to have good programming skills, basic knowledge of web programming and databases, and know the basics of the Git version control system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently.
 
 Previous knowledge of JavaScript or other course topics is not required.
 
@@ -110,27 +110,23 @@ You can only take the exam after submitting enough exercises for five credits. I
 
 #### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
 
-By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
+By submitting at least 135 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
-- Submit at least 127 exercises for parts 0-7.
-- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-759cfee1-370b-4200-8e11-dc86b1a8ed88).
+- Submit at least 135 exercises for parts 0-7.
+- [Enroll in part 6](https://sisu.helsinki.fi/student/courseunit/otm-e11e0495-239c-442b-a5cf-cc42462ef373/open-university/otm-e97e9254-7519-4a13-b2dd-1e45268d99f1?token=VN2HK964AK).
 - [Request credits for part 6](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
 
-By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
+By submitting at least 150 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
-- Submit at least 138 exercises for parts 0-7.
-- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4142645d-5690-4527-9d57-79bd1fbc8770).
+- Submit at least 150 exercises for parts 0-7.
+- [Enroll in part 7](https://sisu.helsinki.fi/student/courseunit/otm-2f7374db-2a29-448e-9d96-63a0618a4266/open-university/otm-ac172cd4-d67d-49ab-a88a-8add8774f91a?token=UYYRAFHNZF).
 - [Request credits for part 7](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
 
-By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5 because its contents are independent of parts 6 and 7.
-
-- Submit at least 22/26 exercises for part 8.
-- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f29bbf9e-3dfd-42d3-bdb8-c62be94932f8).
-- [Request credits for part 8](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 8 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql</a>. 
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
 
@@ -138,11 +134,7 @@ Material of part 9 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
 
-By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
-
-- Submit at least 25 exercises for part 10.
-- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-af7b3535-d187-4999-985e-518c66a4a09b).
-- [Request credits for part 10](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 10 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native</a>
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
@@ -155,6 +147,10 @@ Material of part 12 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 #### Part 13 - Full Stack Web Development: Relational databases (1 cr, CSM14114)
 
 Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases</a>. All practicalities are explained there.
+
+#### Part 14 - Full Stack Web Development: Next.js
+
+Material in address <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs</a>
 
 ### Studying the course in a nutshell
 
@@ -170,22 +166,18 @@ Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 
 Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
-#### How to study the course – instructions in a nutshell: parts 8 and 10
-
-- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8 and 10 have a separate instance in the submission system
-    - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
-- If you want to get University of Helsinki credits
-    - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately.
-- Mark the part completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
-
-#### How to study the course – instructions in a nutshell: parts 9 and 11-13
+#### How to study the course – instructions in a nutshell: parts 8-14
 
 All practicalities are explained in the new course pages
 
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">part 8</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">part 9</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">part 10</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">part 11</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">part 12</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">part 13</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">part 14</a>
+
 
 ### Submitting exercises
 
@@ -327,8 +319,10 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
-- Part 7 (5th April): Webpack replaced with esbuild, error boundaries and keeping the frontend and backend in a single repository covered
-- Part 6 (5th April): Redux replaced with Zustand
+- Part 14 (25th April 2026): new part added
+- Part 10 (21st April 2026): Expo version and libraries updated
+- Part 7 (5th April 2026): Webpack replaced with esbuild, error boundaries and keeping the frontend and backend in a single repository covered
+- Part 6 (5th April 2026): Redux replaced with Zustand
 - Part 5 (31st March 2026): React Router and style libraries have been moved from Part 7 to this part
 - Parts 9, 11-13 (March 2026): content updated and material moved to new platform
 - Part 8: (3th January 2026) Apollo Server updated to v5. Apollo Client updated to v4. Refactoring backend code moved to part8c. Lot's of other small improvements.
@@ -360,7 +354,7 @@ See [more information on the project](https://github.com/fullstack-hy2020/misc/b
 
 ### Interview promise
 
-Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the *promise of a job interview* for everyone who completes the course and the project work with maximum credits (14 + 10).
+Our collaborators [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the *promise of a job interview* for everyone who completes the course and the project work with maximum credits (14 + 10).
 
 This means that the student can, if they so choose to, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 

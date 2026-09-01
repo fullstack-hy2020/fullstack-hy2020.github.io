@@ -334,7 +334,7 @@ Voir [plus d'informations sur le projet](https://github.com/fullstack-hy2020/mis
 
 ### Promesse d'entretien
 
-Nos collaborateurs, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) et [Smartly.io](https://www.smartly.io/), ont fait la <i>promesse d'un entretien d'embauche</i> pour tous ceux qui terminent le cours et le projet avec un maximum de crédits (14 + 10).
+Nos collaborateurs [Terveystalo](https://www.terveystalo.com/en/) et [Smartly.io](https://www.smartly.io/), ont fait la <i>promesse d'un entretien d'embauche</i> pour tous ceux qui terminent le cours et le projet avec un maximum de crédits (14 + 10).
 
 Cela signifie que l'étudiant peut, s'il le souhaite, s'inscrire à un entretien d'embauche avec un collaborateur qui en a fait la promesse. L'enseignant du cours, Matti Luukkainen, enverra des instructions à l'étudiant une fois les cours terminés avec un maximum de crédits.
 

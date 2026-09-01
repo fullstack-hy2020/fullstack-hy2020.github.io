@@ -6,12 +6,9 @@ lang: en
 
 <div class="intro">
 
-This part of the course is about GraphQL, Facebook's alternative to REST for communication between browser and server.
+Note that the material of Part 8 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">
+    https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql</a>
 
-<i>Part updated 3rd January 2026</i>
-- <i>Apollo Server updated from v4 to v5</i>
-- <i>Apollo Client updated from v3 to v4</i>
-- <i>Node updated to version 22.18.0</i>
-- <i>Added instructions for enabling syntax highlighting for the GraphQL server schema in VS Code</i>
+You can still access the old content [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/0ab0b72f8dddd35ca43c812abd15675a92a1abaa/src/content/8/en).
 
 </div>

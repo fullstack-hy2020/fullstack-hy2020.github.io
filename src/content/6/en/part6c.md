@@ -541,13 +541,15 @@ Most React applications need not only a way to temporarily store the served data
 
 ### Exercises 6.16.-6.19.
 
-Now let's make a new version of the anecdote application that uses the TanStack Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified (Review the _server.js_ file for more details. Make sure you're connecting to the correct _PORT_). Start the server with <i>npm run server</i>.
-
-Use the Fetch API to make requests.
 
 #### Exercise 6.16
 
-Implement retrieving anecdotes from the server using TanStack Query.
+Now let's make a new version of the anecdote application that uses the TanStack Query library. 
+
+Use the project in the *query-anecdotes* directory of the submission repository as the base for your solution.
+
+The project has a ready-installed JSON Server, the operation of which has been slightly modified (Review the server.js file for more details. Make sure you're connecting to the correct PORT). Start the server with npm run server.
+
 
 The application should work in such a way that if there are problems communicating with the server, only an error page will be displayed:
 
@@ -590,6 +592,33 @@ Implement voting for anecdotes using again the TanStack Query. The application s
 #### Exercise 6.19
 
 Extract the TanStack Query details into a custom hook function.
+
+#### Bonus: tests, part1
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+The exercise repository https://github.com/fullstack-hy2020/fs-statemanagement also contains tests for the app done in previous exercises. 
+
+Ensure that the tests now pass locally:
+
+```bash
+cd query-anecdote-tests
+npm install
+npx playwright install chromium
+npm run test:anecdotes
+```
+
+The file .github/workflows/anecdotes-tests1.yaml defines a GitHub Actions workflow that runs the tests also on GitHub. Enable the tests by modifying the file as follows:
+
+```bash
+name: Query anecdotes tests 1
+
+on:
+  push:
+    branches: [main] // highlight-line
+```
+
+Push your code to GitHub and make sure the tests pass!
 
 </div>
 
@@ -697,7 +726,7 @@ React's built-in [Context API](https://react.dev/learn/passing-data-deeply-with-
 
 Let's now create a context in the application that stores the counter state management.
 
-A context is created using React's [createContext](https://react.dev/reference/react/createContext) hook. Let's create the context in a file <i>src/CounterContext.jsx</i>:
+A context is created using React's [createContext](https://react.dev/reference/react/createContext) factory function. Let's create the context in a file <i>src/CounterContext.jsx</i>:
 
 ```js
 import { createContext } from 'react'
@@ -957,14 +986,14 @@ export default useCounter
 Using the context is now one step simpler:
 
 ```js
-import { useCounter } from '../hooks/useCounter'
+import useCounter from '../hooks/useCounter'
 
 const Display = () => {
   const { counter } = useCounter()
   // ...
 }
 
-import { useCounter } from '../hooks/useCounter'
+import useCounter from '../hooks/useCounter'
 
 const Controls = () => {
   const { increment, decrement, zero } = useCounter()
@@ -1005,6 +1034,33 @@ The error condition should be handled in the callback function registered for it
 If you haven't done so already, move the notification-related context into its own file <i>NotificationContext.jsx</i>, in the same way as the counter application's context was moved to <i>CounterContext.jsx</i> in the material. Also create a custom hook <i>useNotify</i> that encapsulates the notification logic. Simplify the components that use the notification so that they call the hook directly instead of calling <i>useContext</i> separately.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+#### Bonus: tests, part 2
+
+**From 21st September it is mandatory to have passing tests for submissions**
+
+The exercise repository https://github.com/fullstack-hy2020/fs-statemanagement also contains tests for the previous exercises.
+
+Ensure that the tests now pass locally:
+
+```bash
+cd query-anecdote-tests
+npm run test:notifications
+```
+
+The file .github/workflows/anecdotes-tests12yaml defines a GitHub Actions workflow that runs the tests on GitHub as well. Enable the tests by modifying the file as follows:
+
+
+```bash
+name: Query anecdotes tests 2
+
+on:
+  push:
+
+    branches: [main] // highlight-line
+```
+
+Push your code to GitHub and make sure the tests pass!
 
 </div>
 

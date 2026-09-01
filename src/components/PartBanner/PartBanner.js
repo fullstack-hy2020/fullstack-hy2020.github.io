@@ -21,6 +21,7 @@ const partNameTranslations = {
     'CI/CD',
     'Konttiteknologia',
     'Relaatiotietokannan käyttö',
+    'Next.JS'
   ],
   en: [
     'Fundamentals of Web apps',
@@ -37,6 +38,7 @@ const partNameTranslations = {
     'CI/CD',
     'Containers',
     'Using relational databases',
+    'Next.JS'
   ],
   es: [
     'Fundamentos de las aplicaciones web',

@@ -13,7 +13,7 @@ Por el momento, el frontend muestra las notas existentes y permite a los usuario
 
 Ahora implementaremos una parte de la funcionalidad de administración de usuarios requerida en el frontend. Comencemos con el inicio de sesión del usuario. A lo largo de esta parte, asumiremos que no se agregarán nuevos usuarios desde el frontend.
 
-### Controlando el inicio de sesión
+### Añadir un formulario de inicio de sesión
 
 Ahora se ha agregado un formulario de inicio de sesión en la parte superior de la página.
 
@@ -51,28 +51,30 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
-
+      
       // highlight-start
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          username
+          <label>
+            username
             <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
+              type="text"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </label>
         </div>
         <div>
-          password
+          <label>
+            password
             <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
+              type="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </label>
         </div>
         <button type="submit">login</button>
       </form>
@@ -88,7 +90,7 @@ export default App
 
 El código de aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-1), en la rama <i>part5-1</i>. Si clonas el repositorio, no olvides ejecutar el comando _npm install_ antes de intentar ejecutar el frontend.
 
-El frontend no mostrara ninguna nota si no se conecta al backend. Puedes iniciar el backend con el comando _npm run dev_ en su directorio de la Parte 4. Esto ejecutara el backend en el puerto 3001. Mientras esté activo, en una ventana diferente del terminal puedes ejecutar el frontend con _npm start_, y ahora veras las notas que están guardadas en tu base de datos MongoDB de la Parte 4.
+El frontend no mostrará ninguna nota si no está conectado al backend. Puedes iniciar el backend con _npm run dev_ en su directorio de la parte 4. Se ejecutará en el puerto 3001. Mientras esté activo, abre otra ventana del terminal e inicia el frontend con _npm run dev_; entonces podrás ver las notas guardadas en tu base de datos MongoDB de la parte 4.
 
 Recuerda esto de ahora en más.
 
@@ -99,6 +101,8 @@ El formulario de inicio de sesión se maneja de la misma manera que manejamos lo
 ```
 
 El método _handleLogin_, que se encarga de manejar los datos en el formulario, aún no se ha implementado.
+
+### Añadir la lógica al formulario de inicio de sesión
 
 El inicio de sesión se realiza enviando una solicitud HTTP POST a la dirección del servidor <i>api/login</i>. Separemos el código responsable de esta solicitud en su propio módulo, en el archivo <i>services/login.js</i>.
 
@@ -128,21 +132,20 @@ const App = () => {
 // highlight-start
   const [user, setUser] = useState(null)
 // highlight-end
-  
-  // highlight-start
-  const handleLogin = async (event) => {
+
+  // ...
+
+  const handleLogin = async event => { // highlight-line
     event.preventDefault()
     
+    // highlight-start
     try {
-      const user = await loginService.login({
-        username, password,
-      })
-
+      const user = await loginService.login({ username, password })
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
-      setErrorMessage('Wrong credentials')
+    } catch {
+      setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -158,6 +161,8 @@ Si la conexión es exitosa, los campos de formulario se vacían <i>y</i> la resp
 
 Si el inicio de sesión falla, o la ejecución de la función _loginService.login_ da como resultado un error, se notifica al usuario.
 
+### Renderizado condicional del formulario de inicio de sesión
+
 No se notifica al usuario acerca de un inicio de sesión exitoso de ninguna manera. Modifiquemos la aplicación para que muestre el formulario de inicio de sesión solo <i>si el usuario no ha iniciado sesión</i>, cuando _user === null_. El formulario para agregar nuevas notas se muestra solo si el <i>usuario ha iniciado sesión</i>, por lo que <i>user</i> contiene los detalles del usuario.
 
 Agreguemos dos funciones auxiliares al componente <i>App</i> para generar los formularios:
@@ -169,35 +174,34 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        username
+        <label>
+          username
           <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
+            type="text"
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </label>
       </div>
       <div>
-        password
+        <label>
+          password
           <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
+            type="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </label>
       </div>
       <button type="submit">login</button>
-    </form>      
+    </form>
   )
 
   const noteForm = () => (
     <form onSubmit={addNote}>
-      <input
-        value={newNote}
-        onChange={handleNoteChange}
-      />
+      <input value={newNote} onChange={handleNoteChange} />
       <button type="submit">save</button>
-    </form>  
+    </form>
   )
 
   return (
@@ -223,11 +227,10 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
 
-      {user === null && loginForm()} // highlight-line
-      {user !== null && noteForm()} // highlight-line
+      {!user && loginForm()} // highlight-line
+      {user && noteForm()} // highlight-line
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
@@ -235,13 +238,13 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map((note, i) => 
+        {notesToShow.map(note => (
           <Note
-            key={i}
-            note={note} 
+            key={note.id}
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
-        )}
+        ))}
       </ul>
 
       <Footer />
@@ -253,36 +256,10 @@ const App = () => {
 Un [truco de React](https://es.react.dev/learn/conditional-rendering#logical-and-operator-) ligeramente extraño, pero de uso común, se usa para renderizar los formularios de forma condicional:
 
 ```js
-{
-  user === null && loginForm()
-}
+{!user && loginForm()}
 ```
 
 Si la primera declaración se evalúa como falsa, o es [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), la segunda declaración (que genera el formulario) no se ejecuta en absoluto.
-
-Podemos hacer esto aún más sencillo usando el [operador condicional](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
-
-```js
-return (
-  <div>
-    <h1>Notes</h1>
-
-    <Notification message={errorMessage}/>
-
-    {user === null ?
-      loginForm() :
-      noteForm()
-    }
-
-    <h2>Notes</h2>
-
-    // ...
-
-  </div>
-)
-```
-
-Si _user === null_ es [truthy](https://developer.mozilla.org/es/docs/Glossary/Truthy) (verdadero), se ejecuta _loginForm()_. Si no es así, se ejecuta _noteForm()_.
 
 Hagamos una modificación más. Si el usuario ha iniciado sesión, su nombre se muestra en la pantalla:
 
@@ -290,23 +267,21 @@ Hagamos una modificación más. Si el usuario ha iniciado sesión, su nombre se 
 return (
   <div>
     <h1>Notes</h1>
-
     <Notification message={errorMessage} />
 
-    {user === null ?
-      loginForm() :
+    {!user && loginForm()}
+    // highlight-start
+    {user && (
       <div>
-        <p>{user.name} logged-in</p>
+        <p>{user.name} logged in</p>
         {noteForm()}
       </div>
-    }
+    )}
+    // highlight-end
 
-    <h2>Notes</h2>
-
+    <div>
+      <button onClick={() => setShowAll(!showAll)}>
     // ...
-
-  </div>
-)
 ```
 
 La solución no es perfecta, pero la dejaremos así por ahora.
@@ -314,6 +289,44 @@ La solución no es perfecta, pero la dejaremos así por ahora.
 Nuestro componente principal <i>App</i> es demasiado grande en este momento. Los cambios que hicimos ahora son una clara señal de que los formularios deben ser refactorizados en sus propios componentes. Sin embargo, lo dejaremos para un ejercicio opcional.
 
 El código de la aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), en la rama <i>part5-2</i>.
+
+### Nota sobre el uso del elemento label
+
+Hemos utilizado el elemento [label](https://developer.mozilla.org/es/docs/Web/HTML/Element/label) para los campos <i>input</i> del formulario de inicio de sesión. El campo del nombre de usuario está dentro de su elemento <i>label</i> correspondiente:
+
+```js
+<div>
+  <label>
+    username
+    <input
+      type="text"
+      value={username}
+      onChange={({ target }) => setUsername(target.value)}
+    />
+  </label>
+</div>
+// ...
+```
+
+¿Por qué hemos implementado así el formulario? Visualmente podríamos obtener el mismo resultado con un código más sencillo y sin un elemento <i>label</i> independiente:
+
+```js
+<div>
+  username
+  <input
+    type="text"
+    value={username}
+    onChange={({ target }) => setUsername(target.value)}
+  />
+</div>
+// ...
+```
+
+El elemento <i>label</i> se utiliza en los formularios para describir y nombrar los campos <i>input</i>. Ayuda al usuario a entender qué información debe introducir en cada campo. Esta descripción queda vinculada mediante el código al campo correspondiente, lo que mejora la accesibilidad del formulario.
+
+De este modo, los lectores de pantalla pueden leer el nombre del campo cuando el usuario lo selecciona, y al hacer clic en el texto de la etiqueta se enfoca automáticamente el campo correcto. Siempre se recomienda utilizar <i>label</i> con los campos <i>input</i>, incluso cuando se pueda conseguir el mismo resultado visual sin él.
+
+Hay [varias formas](https://react.dev/reference/react-dom/components/input#providing-a-label-for-an-input) de asociar un <i>label</i> concreto a un elemento <i>input</i>. La más sencilla es colocar el <i>input</i> dentro de su <i>label</i>, como hemos hecho aquí. Así quedan asociados automáticamente y no hace falta ninguna configuración adicional.
 
 ### Creando nuevas notas
 
@@ -357,10 +370,10 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-// highlight-start
 const create = async newObject => {
+  // highlight-start
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: token }
   }
 // highlight-end
 
@@ -383,16 +396,14 @@ El controlador de eventos responsable del inicio de sesión debe cambiarse para 
 ```js
 const handleLogin = async (event) => {
   event.preventDefault()
-  try {
-    const user = await loginService.login({
-      username, password,
-    })
 
+  try {
+    const user = await loginService.login({ username, password })
     noteService.setToken(user.token) // highlight-line
     setUser(user)
     setUsername('')
     setPassword('')
-  } catch (exception) {
+  } catch {
     // ...
   }
 }
@@ -434,9 +445,7 @@ Los cambios en el método de inicio de sesión son los siguientes:
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username, password,
-      })
+      const user = await loginService.login({ username, password })
 
       // highlight-start
       window.localStorage.setItem(
@@ -467,21 +476,20 @@ Podemos tener múltiples effect hooks, así que creemos otro para manejar la pri
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
-  const [user, setUser] = useState(null) 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    noteService
-      .getAll().then(initialNotes => {
-        setNotes(initialNotes)
-      })
+    noteService.getAll().then(initialNotes => {
+      setNotes(initialNotes)
+    })
   }, [])
-
+  
   // highlight-start
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
@@ -544,7 +552,7 @@ git clone https://github.com/fullstack-hy2020/bloglist-frontend
 <i>Elimina la configuración de git de la aplicación clonada</i>
 
 ```bash
-cd bloglist-frontend   // ve al repositorio clonado
+cd bloglist-frontend   // go to cloned repository
 rm -rf .git
 ```
 
