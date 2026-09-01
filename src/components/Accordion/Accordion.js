@@ -7,6 +7,7 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import ReactGA from 'react-ga';
 import snakeCase from 'lodash/fp/snakeCase';
+import i18n from 'i18next'
 
 ReactGA.initialize('UA-135975842-1');
 
@@ -50,9 +51,11 @@ class Accordion extends Component {
 
     const identifier = snakeCase(title);
 
+    const isRtl = i18n.dir() === 'rtl';
+
     return (
       <div
-        className={`accordion__container col-8 push-right-1 ${containerClassName}`}
+        className={`accordion__container col-8 ${isRtl ? 'push-left-1' : 'push-right-1'} ${containerClassName}`}
       >
         <button
           className={`accordion accordion__title ${
@@ -68,7 +71,7 @@ class Accordion extends Component {
         {isOpened && (
           <div className="panel" id={identifier}>
             {content && (
-              <BodyText className="col-8 push-right-1" text={content} />
+              <BodyText className={`col-8 ${isRtl ? 'push-left-1' : 'push-right-1'}`} text={content} />
             )}
             {list && (
               <ul>

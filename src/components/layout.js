@@ -3,6 +3,7 @@ import './index.scss';
 
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next'
 
 import Header from './Header/Header';
 import InfoBanner from './InfoBanner';
@@ -58,6 +59,12 @@ const Layout = (props) => {
       setVisible3(relevant);
     }
   }, []);
+  
+  useEffect(() => {
+    if (i18n.dir() === 'rtl') {
+      document.body.className = 'rtl'
+    }
+  }, [siteLanguage])
 
   useEffect(() => {
     const key = localStorage.getItem(BANNER4_TO_KEY);
