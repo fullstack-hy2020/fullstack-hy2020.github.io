@@ -39,7 +39,7 @@ const InfoBanner = ({ visible, onHide, language }) => {
   const buttonStyle = {
     backgroundColor: 'transparent',
     border: 'none',
-    color: 'var(--color-text)',
+    color: '#33332D',
     cursor: 'pointer',
   };
 
