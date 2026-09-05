@@ -289,6 +289,24 @@ Note that the _name_ of a step is optional, if you define a step as follows
 
 the command that is run is used as the default name.
 
+If you use VS code on windows then you should fix the line endings to the correct format.
+```
+git config core.autocrlf false 
+git rm --cached -r . 
+git reset --hard
+```
+
+Windows users should change the eslint scirpt on package.json to the next syntax.
+```
+  "scripts": {
+    "start": "webpack-dev-server --open --mode development",
+    "start-prod": "node app.js",
+    "test": "jest",
+    "eslint": "eslint \"./**/*.{js,jsx}\"",  # highlight-line
+    "build": "webpack --mode production"
+  },
+```
+
 </div>
 
 <div class="tasks">
