@@ -830,7 +830,7 @@ npm test
 
 All the tests should pass, if not, fix your code.
 
-The file .github/workflows/unicafe-tests.yaml defines a GitHub Actions workflow that runs the tests on GitHub when you push code there.
+The file .github/workflows/routed-anecdotes.yml defines a GitHub Actions workflow that runs the tests on GitHub when you push code there.
 
 Enable the tests by modifying the file as follows:
 
