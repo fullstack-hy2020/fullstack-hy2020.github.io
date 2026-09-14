@@ -11,6 +11,8 @@ import InfoBanner3 from './InfoBanner3';
 import InfoBanner4 from './InfoBanner4';
 import InfoBanner5 from './InfoBanner5';
 import InfoBannerNextJs from './InfoBannerNextJs';
+import InfoBannerPart6Migration from './InfoBannerPart6Migration';
+import InfoBannerPart7Migration from './InfoBannerPart7Migration';
 import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
@@ -21,6 +23,8 @@ const BANNER2_TO_KEY = 'part_6_changes';
 const BANNER4_TO_KEY = 'part_8_changes';
 const BANNER5_TO_KEY = 'part_7_submission_repository_change';
 const BANNER_NEXT_JS_KEY = 'part_14_changes';
+const BANNER_PART6_MIGRATION_KEY = 'part_6_platform_migration_2025_09';
+const BANNER_PART7_MIGRATION_KEY = 'part_7_platform_migration_2025_09';
 
 const Layout = (props) => {
   const { i18n } = useTranslation();
@@ -34,6 +38,8 @@ const Layout = (props) => {
   const [visible4, setVisible4] = useState(false);
   const [visible5, setVisible5] = useState(false);
   const [nextJsVisible, setNextJsVisible] = useState(false);
+  const [part6MigrationVisible, setPart6MigrationVisible] = useState(false);
+  const [part7MigrationVisible, setPart7MigrationVisible] = useState(false);
 
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY);
@@ -82,6 +88,22 @@ const Layout = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    const key = localStorage.getItem(BANNER_PART6_MIGRATION_KEY);
+    if (!key) {
+      const relevant = window.location.href.includes('en/part6') || window.location.href.includes('osa6');
+      setPart6MigrationVisible(relevant);
+    }
+  }, []);
+
+  useEffect(() => {
+    const key = localStorage.getItem(BANNER_PART7_MIGRATION_KEY);
+    if (!key) {
+      const relevant = window.location.href.includes('en/part7') || window.location.href.includes('osa7');
+      setPart7MigrationVisible(relevant);
+    }
+  }, []);
+
   const hideNote = () => {
     console.log('hideNote');
     localStorage.setItem(BANNER_TO_KEY, 'yes');
@@ -118,6 +140,16 @@ const Layout = (props) => {
     setNextJsVisible(false);
   };
 
+  const hidePart6MigrationNote = () => {
+    localStorage.setItem(BANNER_PART6_MIGRATION_KEY, 'yes');
+    setPart6MigrationVisible(false);
+  };
+
+  const hidePart7MigrationNote = () => {
+    localStorage.setItem(BANNER_PART7_MIGRATION_KEY, 'yes');
+    setPart7MigrationVisible(false);
+  };
+
   return (
     <div className="main-wrapper">
       <SkipToContent isCoursePage={isCoursePage} />
@@ -137,6 +169,18 @@ const Layout = (props) => {
       <InfoBanner4 onHide={() => hideNote4()} visible={false} />
 
       <InfoBanner5 onHide={() => hideNote5()} visible={visible5} />
+
+      <InfoBannerPart6Migration
+        onHide={() => hidePart6MigrationNote()}
+        visible={part6MigrationVisible}
+        language={siteLanguage}
+      />
+
+      <InfoBannerPart7Migration
+        onHide={() => hidePart7MigrationNote()}
+        visible={part7MigrationVisible}
+        language={siteLanguage}
+      />
 
       <InfoBannerNextJs
         language={siteLanguage}
