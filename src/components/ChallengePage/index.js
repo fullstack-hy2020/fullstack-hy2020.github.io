@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next'
 
 import { Banner } from '../Banner/Banner';
 import { BodyText } from '../BodyText/BodyText';
@@ -21,6 +22,8 @@ const ChallengePage = ({
   joinContent,
 }) => {
   const { t } = useTranslation();
+
+  const isRtl = i18n.dir() === 'rtl';
 
   return (
     <Layout>
@@ -56,12 +59,12 @@ const ChallengePage = ({
 
       <Element className="container spacing">
         <SubHeader
-          className="col-10col-8 push-right-1"
+          className={`col-10col-8 ${isRtl ? 'push-left-1' : 'push-right-1'}`}
           text={t('challengePage:aboutTitle')}
           headingLevel="h1"
         />
 
-        <Element className="spacing--after col-6 push-right-2">
+        <Element className={`spacing--after col-6 ${isRtl ? 'push-left-2' : 'push-right-2'}`}>
           <BodyText headingFont text={aboutContent} />
 
           <BodyText
@@ -84,6 +87,10 @@ const ChallengePage = ({
         className="col-10 spacing--after centered"
         text="#fullstackchallenge"
         headingLevel="h3"
+        style={{
+          direction: 'ltr',
+          fontFamily: 'IBM Plex Mono, monospace'
+        }}
       />
     </Layout>
   );
