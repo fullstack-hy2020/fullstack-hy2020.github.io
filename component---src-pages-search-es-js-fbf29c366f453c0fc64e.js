@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[49],{uuvY:function(a,e,n){"use strict";n.r(e);var t=n("q1tI"),c=n.n(t),l=n("D9jW");e.default=({data:a})=>c.a.createElement(l.a,{localSearch:a.localSearchSpanish,title:"Buscar en el material",inputPlaceholder:"Introduce un término de búsqueda",lang:"es"})}}]);
+//# sourceMappingURL=component---src-pages-search-es-js-fbf29c366f453c0fc64e.js.map
