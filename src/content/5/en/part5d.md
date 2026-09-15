@@ -220,9 +220,9 @@ npm test -- --project chromium
 Now let's fix the test with the correct year and let's add a _describe_ block to the tests:
 
 ```js
-const { test, describe, expect } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 
-describe('Note app', () => {  // highlight-line
+test.describe('Note app', () => {  // highlight-line
   test('front page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
@@ -256,7 +256,7 @@ Let's write a new test that tries to log into the application. Let's assume that
 Let's start by opening the login form.
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('user can log in', async ({ page }) => {
@@ -286,7 +286,7 @@ After clicking, the form will appear
 When the form is opened, the test should look for the text fields and enter the username and password in them. Let's make the first attempt using the method [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role):
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('user can log in', async ({ page }) => {
@@ -309,7 +309,7 @@ Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved
 The problem now is that _getByRole_ finds two text fields, and calling the [fill](https://playwright.dev/docs/api/class-locator#locator-fill) method fails, because it assumes that there is only one text field found. One way around the problem is to use the methods [first](https://playwright.dev/docs/api/class-locator#locator-first) and [last](https://playwright.dev/docs/api/class-locator#locator-last):
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('user can log in', async ({ page }) => {
@@ -332,7 +332,7 @@ After writing in the text fields, the test presses the _login_ button and checks
 If there were more than two text fields, using the methods _first_ and _last_ would not be enough. One possibility would be to use the [all](https://playwright.dev/docs/api/class-locator#locator-all) method, which turns the found locators into an array that can be indexed:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
   test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
@@ -389,7 +389,7 @@ Let's now take advantage of the existing elements of the login form. The input f
 Input fields can and should be located in tests using <i>labels</i> with the [getByLabel](https://playwright.dev/docs/api/class-page#page-get-by-label) method:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('user can log in', async ({ page }) => {
@@ -415,11 +415,11 @@ Note that passing the test at this stage requires that there is a user in the <i
 Since both tests start in the same way, i.e. by opening the page <i>http://localhost:5173</i>, it is recommended to isolate the common part in the <i>beforeEach</i> block that is executed before each test:
 
 ```js
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // highlight-start
-  beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:5173')
   })
   // highlight-end
@@ -445,13 +445,13 @@ describe('Note app', () => {
 Next, let's create a test that adds a new note to the application:
 
 ```js
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
-  describe('when logged in', () => {
-    beforeEach(async ({ page }) => {
+  test.describe('when logged in', () => {
+    test.beforeEach(async ({ page }) => {
       await page.getByRole('button', { name: 'login' }).click()
       await page.getByLabel('username').fill('mluukkai')
       await page.getByLabel('password').fill('salainen')
@@ -489,9 +489,9 @@ causes problems when the same note is created in the application more than once.
 The structure of the tests looks like this:
 
 ```js
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ....
 
   test('user can log in', async ({ page }) => {
@@ -502,8 +502,8 @@ describe('Note app', () => {
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
-  describe('when logged in', () => {
-    beforeEach(async ({ page }) => {
+  test.describe('when logged in', () => {
+    test.beforeEach(async ({ page }) => {
       await page.getByRole('button', { name: 'login' }).click()
       await page.getByLabel('username').fill('mluukkai')
       await page.getByLabel('password').fill('salainen')
@@ -582,8 +582,8 @@ Next, we will change the _beforeEach_ block so that it empties the server's data
 Currently, it is not possible to add new users through the frontend's UI, so we add a new user to the backend from the beforeEach block.
 
 ```js
-describe('Note app', () => {
-  beforeEach(async ({ page, request }) => {
+test.describe('Note app', () => {
+  test.beforeEach(async ({ page, request }) => {
     await request.post('http://localhost:3001/api/testing/reset')
     await request.post('http://localhost:3001/api/users', {
       data: {
@@ -604,7 +604,7 @@ describe('Note app', () => {
     // ...
   })
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     // ...
   })
 })
@@ -621,15 +621,15 @@ There are a few different approaches to taking the test.
 In the following, we first look for a note and click on its button that has text <i>make not important</i>. After this, we check that the note contains the button with <i>make important</i>.
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     // ...
 
     // highlight-start
-    describe('and a note exists', () => {
-      beforeEach(async ({ page }) => {
+    test.describe('and a note exists', () => {
+      test.beforeEach(async ({ page }) => {
         await page.getByRole('button', { name: 'new note' }).click()
         await page.getByRole('textbox').fill('another note by playwright')
         await page.getByRole('button', { name: 'save' }).click()
@@ -658,7 +658,7 @@ Now let's do a test that ensures that the login attempt fails if the password is
 The first version of the test looks like this:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('login fails with wrong password', async ({ page }) => {
@@ -743,7 +743,7 @@ test('login fails with wrong password', async ({ page }) =>{
 By default, Playwright always runs all tests, and as the number of tests increases, it becomes time-consuming. When developing a new test or debugging a broken one, the test can be defined instead than with the command <i>test</i>, with the command <i>test.only</i>, in which case Playwright will run only that test:
 
 ```js
-describe(() => {
+test.describe(() => {
   // this is the only test executed!
   test.only('login fails with wrong password', async ({ page }) => {  // highlight-line
     // ...
@@ -771,9 +771,9 @@ npm test -- -g "login fails with wrong password"
 Our application tests currently look like this:
 
 ```js 
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('user can login with correct credentials', async ({ page }) => {
@@ -788,8 +788,8 @@ describe('Note app', () => {
     // ...
   })
 
-  describe('when logged in', () => {
-    beforeEach(async ({ page, request }) => {
+  test.describe('when logged in', () => {
+    test.beforeEach(async ({ page, request }) => {
       await page.getByRole('button', { name: 'login' }).click()
       await page.getByLabel('username').fill('mluukkai')
       await page.getByLabel('password').fill('salainen')
@@ -825,10 +825,10 @@ export { loginWith }
 The tests becomes simpler and clearer:
 
 ```js
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 const { loginWith } = require('./helper') // highlight-line
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('user can log in', async ({ page }) => {
@@ -843,8 +843,8 @@ describe('Note app', () => {
     // ...
   })
 
-  describe('when logged in', () => {
-    beforeEach(async ({ page }) => {
+  test.describe('when logged in', () => {
+    test.beforeEach(async ({ page }) => {
       await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
 
@@ -858,10 +858,10 @@ Playwright also offers a [solution](https://playwright.dev/docs/auth) where the 
 The corresponding repeating code actually also applies to creating a new note. For that, there is a test that creates a note using a form. Also in the _beforeEach_ initialization block of the test that tests changing the importance of the note, a note is created using the form:
 
 ```js
-describe('Note app', function() {
+test.describe('Note app', function() {
   // ...
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     test('a new note can be created', async ({ page }) => {
       await page.getByRole('button', { name: 'new note' }).click()
       await page.getByRole('textbox').fill('a note created by playwright')
@@ -869,8 +869,8 @@ describe('Note app', function() {
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
   
-    describe('and a note exists', () => {
-      beforeEach(async ({ page }) => {
+    test.describe('and a note exists', () => {
+      test.beforeEach(async ({ page }) => {
         await page.getByRole('button', { name: 'new note' }).click()
         await page.getByRole('textbox').fill('another note by playwright')
         await page.getByRole('button', { name: 'save' }).click()
@@ -908,14 +908,14 @@ export { loginWith, createNote } // highlight-line
 The tests are simplified as follows:
 
 ```js
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 const { createNote, loginWith } = require('./helper') // highlight-line
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
-  describe('when logged in', () => {
-    beforeEach(async ({ page }) => {
+  test.describe('when logged in', () => {
+    test.beforeEach(async ({ page }) => {
       await loginWith(page, 'mluukkai', 'salainen')
     })
 
@@ -924,8 +924,8 @@ describe('Note app', () => {
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
 
-    describe('and a note exists', () => {
-      beforeEach(async ({ page }) => {
+    test.describe('and a note exists', () => {
+      test.beforeEach(async ({ page }) => {
         await createNote(page, 'another note by playwright') // highlight-line
       })
   
@@ -992,10 +992,10 @@ Let's take a look at the test we did earlier, which verifies that it is possible
 Let's change the initialization block of the test so that it creates two notes instead of one:
 
 ```js
-describe('when logged in', () => {
+test.describe('when logged in', () => {
   // ...
-  describe('and several notes exists', () => { // highlight-line
-    beforeEach(async ({ page }) => {
+  test.describe('and several notes exists', () => { // highlight-line
+    test.beforeEach(async ({ page }) => {
       // highlight-start
       await createNote(page, 'first note')
       await createNote(page, 'second note')
@@ -1072,8 +1072,8 @@ test('one of those can be made nonimportant', async ({ page }) => {
 Let's change the test so that three notes are created, the importance is changed in the second created note:
 
 ```js
-describe('when logged in', () => {
-  beforeEach(async ({ page }) => {
+test.describe('when logged in', () => {
+  test.beforeEach(async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen')
   })
 
@@ -1082,8 +1082,8 @@ describe('when logged in', () => {
     await expect(page.getByText('a note created by playwright')).toBeVisible()
   })
 
-  describe('and several notes exists', () => {
-    beforeEach(async ({ page }) => {
+  test.describe('and several notes exists', () => {
+    test.beforeEach(async ({ page }) => {
       await createNote(page, 'first note')
       await createNote(page, 'second note')
       await createNote(page, 'third note') // highlight-line
@@ -1119,18 +1119,18 @@ Playwright-inspector shows the progress of the tests step by step. The arrow-dot
 By default, debug steps through the test command by command. If it is a complex test, it can be quite a burden to step through the test to the point of interest. This can be avoided by using the command _await page.pause()_:
 
 ```js
-describe('Note app', () => {
-  beforeEach(async ({ page, request }) => {
+test.describe('Note app', () => {
+  test.beforeEach(async ({ page, request }) => {
     // ...
   })
 
-  describe('when logged in', () => {
-    beforeEach(async ({ page }) => {
+  test.describe('when logged in', () => {
+    test.beforeEach(async ({ page }) => {
       // ...
     })
 
-    describe('and several notes exists', () => {
-      beforeEach(async ({ page }) => {
+    test.describe('and several notes exists', () => {
+      test.beforeEach(async ({ page }) => {
         await createNote(page, 'first note')
         await createNote(page, 'second note')
         await createNote(page, 'third note')
@@ -1252,10 +1252,10 @@ Make a test to ensure that the application displays the login form by default.
 The body of the test should be as follows:
 
 ```js 
-const { test, expect, beforeEach, describe } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 
-describe('Blog app', () => {
-  beforeEach(async ({ page }) => {
+test.describe('Blog app', () => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:5173')
   })
 
@@ -1273,10 +1273,10 @@ Do the tests for login. Test both successful and failed login. For tests, create
 The body of the tests expands as follows
 
 ```js 
-const { test, expect, beforeEach, describe } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 
-describe('Blog app', () => {
-  beforeEach(async ({ page, request }) => {
+test.describe('Blog app', () => {
+  test.beforeEach(async ({ page, request }) => {
     // empty the db here
     // create a user for the backend here
     // ...
@@ -1286,7 +1286,7 @@ describe('Blog app', () => {
     // ...
   })
 
-  describe('Login', () => {
+  test.describe('Login', () => {
     test('succeeds with correct credentials', async ({ page }) => {
       // ...
     })
@@ -1305,8 +1305,8 @@ The _beforeEach_ block must empty the database using, for example, the reset met
 Create a test that verifies that a logged in user can create a blog. The body of the test may look like the following
 
 ```js 
-describe('When logged in', () => {
-  beforeEach(async ({ page }) => {
+test.describe('When logged in', () => {
+  test.beforeEach(async ({ page }) => {
     // ...
   })
 
