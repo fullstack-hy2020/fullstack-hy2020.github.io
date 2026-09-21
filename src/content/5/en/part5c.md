@@ -806,6 +806,20 @@ The first time you run the command, Vitest will ask you if you want to install t
 
 ![terminal output of test coverage](../../images/5/18new.png)
 
+With Vitest 4, only files covered by tests are included in the coverage
+report by default. To also include uncovered source files, add the following
+to the _test_ configuration in _vite.config.js_:
+
+```js
+export default defineConfig({
+  // ...
+  test: {
+    // ...
+    coverage: { include: ['src/**/*.{js,jsx}'] },
+  },
+})
+```
+
 A HTML report will be generated to the <i>coverage</i> directory.
 The report will tell us the lines of untested code in each component:
 
