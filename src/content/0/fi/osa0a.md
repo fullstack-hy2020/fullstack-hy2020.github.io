@@ -43,42 +43,34 @@ Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät komme
 
 ### Osat ja suorittaminen
 
-Full Stack –opinnot koostuvat ydinkurssista sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
+Full Stack –opinnot koostuvat ydinkurssista sekä useista lisäosista.  Voit suorittaa opinnot 5-15 opintopisteen laajuisena. 
 
 #### Osat 0-5 (ydinkurssi) - Full Stack ‑websovelluskehitys (5 op, CSM141081)
 
-Suorituksen opintopistemäärä ja arvosana määräytyvät kurssin osien 0–7 kaikkien tehtyjen tehtävien (myös tähdellä merkittyjen) perusteella.
+Suorituksen opintopistemäärä ja arvosana määräytyvät kurssin osien 0–5 kaikkien tehtyjen tehtävien (myös tähdellä merkittyjen) perusteella.
 
 Arvosana/opintopisterajat:
 
 | tehtäviä     | opintopisteitä | arvosana | 
 | ------------ | :------------: | :------: |
-| 150          |       7        | 5        |
-| 135          |       6        | 5        |
 | 116          |       5        | 5        |
 | 105          |       5        | 4        |
 | 94           |       5        | 3        |
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-6 ja 7 opintopisteen rajaa muutettu osan 5 uusien tehtävien myötä.
 
 Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Lisää tietoa kurssikokeesta [täällä](/osa0/yleista/#kurssikoe).
 
 Voit osallistua kokeeseen vasta siinä vaiheessa, kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti, kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5–14 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 75 % kokeen tarjolla olevista pisteistä.
 
-#### Osa 6 - Full Stack ‑websovelluskehitys, lisäosa 1 (1 op, CSM141082)
-Suorittamalla vähintään 127 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
--	Tee vähintään 135 tehtävää osista 0–7. 
--	[Ilmoittaudu tähän osaan Sisun kautta.](https://sisu.helsinki.fi/student/courseunit/otm-e11e0495-239c-442b-a5cf-cc42462ef373/open-university/otm-e97e9254-7519-4a13-b2dd-1e45268d99f1?token=VN2HK964AK)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+#### Osa 6 - Full Stack ‑websovelluskehitys, Tilanhallinta (1 op, CSM141082)
 
-#### Osa 7 - Full Stack ‑websovelluskehitys, lisäosa 2 (1 op, CSM141083)
+Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-state-management">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-state-management</a>
 
-Suorittamalla vähintään 150 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
--	Tee vähintään 150 tehtävää osista 0–7. 
--	[Ilmoittaudu tähän osaan Sisun yliopiston kautta.](https://sisu.helsinki.fi/student/courseunit/otm-2f7374db-2a29-448e-9d96-63a0618a4266/open-university/otm-ac172cd4-d67d-49ab-a88a-8add8774f91a?token=UYYRAFHNZF)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+#### Osa 7 - Full Stack ‑websovelluskehitys, lisäosa (1 op, CSM141083)
+
+Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-extension">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-extension</a>
 
 #### Osa 8 - Full Stack ‑websovelluskehitys: GraphQL (1 op, CSM14113)
 
@@ -118,17 +110,12 @@ Materiaali osoitteessa <a href="https://courses.mooc.fi/org/uh-cs/courses/full-s
 - Tee kurssikoe palautusjärjestelmässä, lue lisää [täältä](/osa0/yleista#kurssikoe).
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6 ja 7) 
-
-- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osa 8 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. 
-
-- Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
-- Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
-
-#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 8-14) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6-14) 
 
 Käytännöt selviävät osien materiaalista:
 
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-state-management">osa 6</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-extension">osa 7</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">osa 8</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">osa 9</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">osa 10</a>
@@ -307,7 +294,7 @@ Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaneille.
+Kurssin yhteistyökumppaneista [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (15+10 op) suorittaneille.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. 
 
@@ -323,7 +310,7 @@ Asenna myös joku järkevä web-devausta tukeva tekstieditori. Enemmän kuin suo
 
 Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan web-devauksessa, ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
-Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaalia ollaan päivittämässä Noden versioon v22. Osat 0-6 ja 8 on tehty käyttäen Noden versiota 22, osa 10 käyttäen versiota 20.11.0 ja loput osat käyttäen versiota 18.13.0. Käytä aina vähintään yhtä tuoretta Node-versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
+Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Suosituksena on käyttää vähintään versiota 24. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
 
 Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä <i>Node Package Manager</i> ‑nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 

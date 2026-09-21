@@ -23,8 +23,8 @@ const BANNER2_TO_KEY = 'part_6_changes';
 const BANNER4_TO_KEY = 'part_8_changes';
 const BANNER5_TO_KEY = 'part_7_submission_repository_change';
 const BANNER_NEXT_JS_KEY = 'part_14_changes';
-const BANNER_PART6_MIGRATION_KEY = 'part_6_platform_migration_2025_09';
-const BANNER_PART7_MIGRATION_KEY = 'part_7_platform_migration_2025_09';
+const BANNER_PART6_MIGRATION_KEY = 'part_6_platform_migrated_2025_09';
+const BANNER_PART7_MIGRATION_KEY = 'part_7_platform_migrated_2025_09';
 
 const Layout = (props) => {
   const { i18n } = useTranslation();
@@ -156,9 +156,9 @@ const Layout = (props) => {
 
       <Header lang={siteLanguage} />
 
-      <InfoBanner 
+      <InfoBanner
         onHide={() => hideNote()}
-        visible={visible}
+        visible={false}
         language={siteLanguage}
       />
 
@@ -168,7 +168,7 @@ const Layout = (props) => {
 
       <InfoBanner4 onHide={() => hideNote4()} visible={false} />
 
-      <InfoBanner5 onHide={() => hideNote5()} visible={visible5} />
+      <InfoBanner5 onHide={() => hideNote5()} visible={false} />
 
       <InfoBannerPart6Migration
         onHide={() => hidePart6MigrationNote()}

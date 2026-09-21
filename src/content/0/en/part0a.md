@@ -80,49 +80,38 @@ A better question could be
 
 ### Parts and completion
 
-Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 14 credits.
+Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 15 credits.
 
 #### Parts 0-5 (core course) - Full Stack Web Development (5 cr, CSM141081)
 
-The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-7 (including exercises marked with an asterisk).
+The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-5 (including exercises marked with an asterisk).
 
 Credits and grades are calculated as follows:
 
 | exercises    | credits        | grade    |
 | ------------ | :------------: | :------: |
-| 150          |       7        | 5        |
-| 135          |       6        | 5        |
 | 116          |       5        | 5        |
 | 105          |       5        | 4        |
 | 94           |       5        | 3        |
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-The 6- and 7-credit thresholds have been adjusted to reflect the new exercises in Part 5.
 
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 If you wish to receive university credits, you must complete the course exam. The exam does not count toward your final grade, but you must pass it. More information about the exam [here](/en/part0/general_info#the-course-exam).
 
-You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count toward your grade.
+You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-15 credits and does not count toward your grade.
 
 *You do not need to attend the course exam or register for the Open University course to obtain the course certificate.*
 
-#### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
+#### Part 6 - Full Stack Web Development: State management (1 cr, CSM141082)
 
-By submitting at least 135 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
+Material of part 6 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-state-management">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-state-management</a>. 
 
-- Submit at least 135 exercises for parts 0-7.
-- [Enroll in part 6](https://sisu.helsinki.fi/student/courseunit/otm-e11e0495-239c-442b-a5cf-cc42462ef373/open-university/otm-e97e9254-7519-4a13-b2dd-1e45268d99f1?token=VN2HK964AK).
-- [Request credits for part 6](/en/part0/general_info/#how-to-get-your-credits).
+#### Part 7 - Full Stack Web Development: extension (1 cr, CSM141083)
 
-#### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
-
-By submitting at least 150 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
-
-- Submit at least 150 exercises for parts 0-7.
-- [Enroll in part 7](https://sisu.helsinki.fi/student/courseunit/otm-2f7374db-2a29-448e-9d96-63a0618a4266/open-university/otm-ac172cd4-d67d-49ab-a88a-8add8774f91a?token=UYYRAFHNZF).
-- [Request credits for part 7](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 7 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-extension">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-extension</a>. 
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
 
@@ -164,12 +153,13 @@ Material in address <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stac
     - Do the online exam in the submission system. Read more [here](/en/part0/general_info#the-course-exam)
     - Mark the course completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
 
-Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
-#### How to study the course – instructions in a nutshell: parts 8-14
+#### How to study the course – instructions in a nutshell: parts 6-14
 
 All practicalities are explained in the new course pages
 
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-state-management">part 6</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-extension">part 7</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-graphql">part 8</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript">part 9</a>
 - <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-react-native">part 10</a>
@@ -354,7 +344,7 @@ See [more information on the project](https://github.com/fullstack-hy2020/misc/b
 
 ### Interview promise
 
-Our collaborators [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the *promise of a job interview* for everyone who completes the course and the project work with maximum credits (14 + 10).
+Our collaborators [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the *promise of a job interview* for everyone who completes the course and the project work with maximum credits (15 + 10).
 
 This means that the student can, if they so choose to, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 
@@ -370,7 +360,7 @@ Install a sensible text editor that supports web development. [Visual Studio Cod
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to [Visual Studio Code](https://code.visualstudio.com/).
 
-Also, install [Node.js](https://nodejs.org/en/). The material is being updated to Node version v22. Parts 0-6 and 8 are made using Node version 22, part 10 using version 20.11.0, and the remaining parts using version 18.13.0. Always use at least as recent a Node version. Installation instructions can be found on the [Node.js website](https://nodejs.org/en/download/package-manager/).
+Also, install [Node.js](https://nodejs.org/en/). Use at least asthe version 24. Installation instructions can be found on the [Node.js website](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 

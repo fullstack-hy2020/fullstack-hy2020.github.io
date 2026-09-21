@@ -6,6 +6,7 @@ lang: fi
 
 <div class="intro">
 
-Kurssin seitsemäs osa löytyy [englanninkielisestä kurssimateriaalista](/en/part7).
+Huomaa, että osan 7 materiaali on siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-extension">
+    https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-extension</a>
 
 </div>

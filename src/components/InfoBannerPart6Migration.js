@@ -43,7 +43,7 @@ const InfoBannerPart6Migration = ({ visible, onHide, language }) => {
     outline: 'none',
     backgroundColor: 'transparent',
     border: 'none',
-    color: 'var(--color-text)',
+    color: style.color,
     cursor: 'pointer',
   };
 
@@ -54,8 +54,7 @@ const InfoBannerPart6Migration = ({ visible, onHide, language }) => {
           <div>
             {language === 'fi' ? (
               <>
-                Tämä osa kurssi siirtyy uudelle alustalle 21. syyskuuta. Jos et ehdi suorittaa
-                osaa 6 ennen sitä, suosittelemme jatkamaan uudella alustalla, katso{' '}
+                Osan 6 materiaali on siirretty uudelle alustalle, katso{' '}
                 <a
                   style={linkStyle}
                   href={PART_6_NEW_COURSE_URL}
@@ -68,8 +67,7 @@ const InfoBannerPart6Migration = ({ visible, onHide, language }) => {
               </>
             ) : (
               <>
-                This course part is migrating to a new platform on September 21st. If you are
-                not able to finish part 6 before that, we recommend continuing there, see the{' '}
+                The material of part 6 has been moved to a new platform, see the{' '}
                 <a
                   style={linkStyle}
                   href={PART_6_NEW_COURSE_URL}
