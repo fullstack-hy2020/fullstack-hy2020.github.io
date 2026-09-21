@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next'
 import { PropTypes } from 'prop-types';
 
 import { BodyText } from '../BodyText/BodyText';
@@ -14,11 +15,13 @@ export const DeveloperStory = (props) => {
   const [readMore, setReadMore] = useState(false);
   const { t } = useTranslation();
 
+  const isRtl = i18n.dir() === 'rtl'
+
   return (
     <Element
       flex
       spaceBetween
-      className="col-8 col-10--mobile push-right-1 spacing--small spacing--after"
+      className={`col-8 col-10--mobile ${isRtl ? 'push-left-1' : 'push-right-1'} spacing--small spacing--after`}
     >
       <TripleBorder
         largeMargin

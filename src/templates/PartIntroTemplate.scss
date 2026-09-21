@@ -1,7 +1,7 @@
 @import '../components/common.scss';
 
 .part-intro {
-  font-family: $font-heading !important;
+  font-family: var(--font-heading) !important;
 
   p {
     color: $black;
@@ -19,6 +19,10 @@
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center right;
+
+    @include rtl {
+      background-position: center left;
+    }
 
     @include to($tablet) {
       background-position: top center;

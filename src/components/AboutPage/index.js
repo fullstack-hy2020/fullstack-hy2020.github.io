@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 import { Banner } from '../Banner/Banner';
 import { BodyText } from '../BodyText/BodyText';
@@ -17,6 +18,8 @@ const AboutPage = ({ title, lang }) => {
   const { t } = useTranslation();
   const { intro } = content[lang] || content.en;
   const seoDescription = mainSEOdescription[lang] || mainSEOdescription.en;
+
+  const isRtl = i18n.dir() === 'rtl'
 
   return (
     <Layout>
@@ -41,7 +44,7 @@ const AboutPage = ({ title, lang }) => {
           className="container"
         >
           <Image
-            className="col-4 push-right-2"
+            className={`col-4 ${isRtl ? 'push-left-2' : 'push-right-2'}`}
             contain
             style={{ margin: 0 }}
             alt="Stacked cubes with React logo and JavaScript text"
@@ -51,7 +54,7 @@ const AboutPage = ({ title, lang }) => {
       </Banner>
 
       <Element className="container spacing spacing--mobile--large">
-        <Element className="col-8 push-right-1">
+        <Element className={`col-8 ${isRtl ? 'push-left-1' : 'push-right-1'}`}>
           <BodyText
             heading={{ level: 'h1', title: t('aboutPage:generalTitle') }}
             headingFontSize="2.3rem"

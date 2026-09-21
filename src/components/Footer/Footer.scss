@@ -28,12 +28,17 @@
       font-size: 1rem;
       line-height: 18px;
       white-space: nowrap;
-      font-family: $font-heading;
+      font-family: var(--font-heading);
       margin-left: 0 !important;
       margin-right: auto;
 
       @include to($tablet) {
         line-height: 8px;
+      }
+
+      @include rtl {
+        margin-left: auto !important;
+        margin-right: 0 !important;
       }
 
       &:hover {
