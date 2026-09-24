@@ -13,6 +13,7 @@ import InfoBanner5 from './InfoBanner5';
 import InfoBannerNextJs from './InfoBannerNextJs';
 import InfoBannerPart6Migration from './InfoBannerPart6Migration';
 import InfoBannerPart7Migration from './InfoBannerPart7Migration';
+import InfoBannerNewPlatform from './InfoBannerNewPlatform';
 import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
@@ -40,6 +41,7 @@ const Layout = (props) => {
   const [nextJsVisible, setNextJsVisible] = useState(false);
   const [part6MigrationVisible, setPart6MigrationVisible] = useState(false);
   const [part7MigrationVisible, setPart7MigrationVisible] = useState(false);
+  const [newPlatformVisible, setNewPlatformVisible] = useState(false);
 
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY);
@@ -104,6 +106,12 @@ const Layout = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    const match = window.location.href.match(/\/(?:part|osa)(\d+)/);
+    const partNumber = match ? parseInt(match[1], 10) : null;
+    setNewPlatformVisible(partNumber !== null && partNumber >= 6);
+  }, []);
+
   const hideNote = () => {
     console.log('hideNote');
     localStorage.setItem(BANNER_TO_KEY, 'yes');
@@ -150,6 +158,10 @@ const Layout = (props) => {
     setPart7MigrationVisible(false);
   };
 
+  const hideNewPlatformNote = () => {
+    setNewPlatformVisible(false);
+  };
+
   return (
     <div className="main-wrapper">
       <SkipToContent isCoursePage={isCoursePage} />
@@ -186,6 +198,12 @@ const Layout = (props) => {
         language={siteLanguage}
         onHide={() => hideNextJsNote()}
         visible={nextJsVisible}
+      />
+
+      <InfoBannerNewPlatform
+        language={siteLanguage}
+        onHide={() => hideNewPlatformNote()}
+        visible={newPlatformVisible}
       />
 
       <main id="main-content">{children}</main>
