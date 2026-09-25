@@ -1510,7 +1510,7 @@ Realice los cambios de base de datos necesarios para esta tarea mediante migraci
 
 ### Envío de ejercicios y obtención de créditos.
 
-Los ejercicios de esta parte se envían al igual que en las partes anteriores, pero a diferencia de las partes 0 a 7, la presentación va a una [instancia del curso propia](https://studies.cs.helsinki.fi/stats/courses/fs-psql). ¡Recuerda que tienes que terminar todos los ejercicios para aprobar esta parte!
+Los ejercicios de esta parte se envían al igual que en las partes anteriores, pero a diferencia de las partes 0 a 7, la presentación va a una [instancia del curso propia](/es/new-platform/). ¡Recuerda que tienes que terminar todos los ejercicios para aprobar esta parte!
 
 Una vez que hayas completado los ejercicios y quieras obtener los créditos, infórmanos a través del sistema de envío de ejercicios que has completado el curso:
 

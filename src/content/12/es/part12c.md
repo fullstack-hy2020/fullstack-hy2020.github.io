@@ -772,9 +772,9 @@ Estructura la aplicación en tu repositorio de envío de la siguiente manera:
 
 ### Envío de ejercicios y obtención de créditos.
 
-Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos sus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fs-containers).
+Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos sus ejercicios terminados en el [sistema de envío de ejercicios](/es/new-platform/).
 
-Los ejercicios de esta parte se envían al igual que en las partes anteriores, pero a diferencia de las partes 0 a 7, la presentación va a una [instancia propia del curso](https://studies.cs.helsinki.fi/stats/courses/fs-containers). ¡Recuerda que tienes que terminar <i>todos los ejercicios</i> para aprobar esta parte!
+Los ejercicios de esta parte se envían al igual que en las partes anteriores, pero a diferencia de las partes 0 a 7, la presentación va a una [instancia propia del curso](/es/new-platform/). ¡Recuerda que tienes que terminar <i>todos los ejercicios</i> para aprobar esta parte!
 
 Una vez que hayas completado los ejercicios y quieras obtener los créditos, infórmanos a través del sistema de envío de ejercicios que has completado el curso:
 

@@ -195,6 +195,6 @@ Amplía tu aplicación para que los usuarios puedan añadir comentarios a las en
 
 Mejora la apariencia visual de las nuevas funcionalidades de tu aplicación utilizando las técnicas tratadas en la [parte 5](/es/part5/react_router_librerias_de_ui).
 
-Este era el último ejercicio de esta parte del curso. Es hora de subir tu código a GitHub y marcar todos los ejercicios que hayas completado en el [sistema de entrega de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Este era el último ejercicio de esta parte del curso. Es hora de subir tu código a GitHub y marcar todos los ejercicios que hayas completado en el [sistema de entrega de ejercicios](/es/new-platform/).
 
 </div>

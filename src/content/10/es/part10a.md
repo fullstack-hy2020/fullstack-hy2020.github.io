@@ -31,7 +31,7 @@ Esta parte se basará en gran medida en los conceptos cubiertos en las partes an
 
 ### Envío de ejercicios y obtención de créditos
 
-Los ejercicios se envían a través del [sistema de presentaciones](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) al igual que en las partes anteriores. Tenga en cuenta que los ejercicios de esta parte se envían <i>a una instancia de curso diferente</i> que en las partes 0-9. Las partes 1 a 4 en el sistema de presentación se refieren a las secciones a-d en esta parte. Esto significa que enviará los ejercicios de una sola sección a la vez, comenzando con esta sección, "Introducción a React Native", que es la parte 1 del sistema de envío.
+Los ejercicios se envían a través del [sistema de presentaciones](/es/new-platform/) al igual que en las partes anteriores. Tenga en cuenta que los ejercicios de esta parte se envían <i>a una instancia de curso diferente</i> que en las partes 0-9. Las partes 1 a 4 en el sistema de presentación se refieren a las secciones a-d en esta parte. Esto significa que enviará los ejercicios de una sola sección a la vez, comenzando con esta sección, "Introducción a React Native", que es la parte 1 del sistema de envío.
 
 Durante esta parte, obtendrá créditos en función de la cantidad de ejercicios que complete. Si completa <i>al menos 19 ejercicios</i> en esta parte, obtendrá <i>1 crédito</i>. Si completa <i>al menos 26 ejercicios</i> en esta parte, obtendrá <i>2 créditos</i>.
 
@@ -185,7 +185,7 @@ La configuración de ESLint proporcionada contiene solo la base para la configur
 
 Configure ESLint en su proyecto para que pueda realizar comprobaciones de linter ejecutando <em>npm run lint</em>. Para aprovechar al máximo el linting, también se recomienda integrar ESLint con su editor.
 
-Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 1 del sistema de envío de ejercicios.
+Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](/es/new-platform/). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 1 del sistema de envío de ejercicios.
 
 </div>
 

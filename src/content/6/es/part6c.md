@@ -1002,7 +1002,7 @@ La condición de error debe manejarse en la función de callback registrada para
 
 Si aún no lo has hecho, mueve el contexto de las notificaciones a su propio archivo <i>NotificationContext.jsx</i>, del mismo modo que el contexto de la aplicación del contador se trasladó a <i>CounterContext.jsx</i>. Crea también un hook personalizado <i>useNotify</i> que encapsule la lógica de las notificaciones. Simplifica los componentes que las utilizan para que llamen directamente al hook en lugar de llamar a <i>useContext</i> por separado.
 
-Este fue el último ejercicio para esta parte del curso y es hora de enviar tu código a GitHub y marcar todos tus ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Este fue el último ejercicio para esta parte del curso y es hora de enviar tu código a GitHub y marcar todos tus ejercicios completados en el [sistema de envío de ejercicios](/es/new-platform/).
 
 </div>
 

@@ -163,6 +163,6 @@ Améliorez l'apparence de votre application en appliquant l'une des méthodes pr
 
 Vous pouvez marquer cet exercice comme terminé si vous utilisez une heure ou plus pour styliser votre application.
 
-C'était le dernier exercice de cette partie du cours et il est temps de pousser votre code sur GitHub et de marquer tous vos exercices terminés dans le [système de soumission des exercices](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+C'était le dernier exercice de cette partie du cours et il est temps de pousser votre code sur GitHub et de marquer tous vos exercices terminés dans le [système de soumission des exercices](/fr/new-platform/).
 
 </div>

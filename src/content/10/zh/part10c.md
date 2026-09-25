@@ -903,6 +903,6 @@ apolloClient.resetStore();
 <!-- Pressing the "Sign out" tab should remove the user's access token from the storage and reset the Apollo Client's store with the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore) method. Calling the <em>resetStore</em> method should automatically re-execute all active queries which means that the <em>me</em> query should be re-executed. Note that the order of execution is crucial: access token must be removed from the storage <i>before</i> the Apollo Client's store is reset.-->
  按下 "签出 "标签应该从存储中删除用户的访问令牌，并用[resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore)方法重置Apollo客户端的存储。调用<em>resetStore</em>方法应该自动重新执行所有活动的查询，这意味着<em>me</em>查询应该被重新执行。请注意，执行的顺序是至关重要的：访问令牌必须在<i></i>Apollo客户端的存储被重置之前从存储中移除。
 
-<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 3 in the exercise submission system.-->
- 这是本节的最后一个练习。现在是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)。注意，本节的练习应该提交到练习提交系统中的第3章节。
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](/zh/new-platform/). Note that exercises in this section should be submitted to the part 3 in the exercise submission system.-->
+ 这是本节的最后一个练习。现在是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](/zh/new-platform/)。注意，本节的练习应该提交到练习提交系统中的第3章节。
 </div>

@@ -968,9 +968,9 @@ export default Button
 
 触发的错误情境应在回调函数中处理——被注册的回调函数会专门处理该种错误情境，你可以在[这里](https://tanstack.com/query/latest/docs/react/reference/useMutation)了解如何注册一个函数。
 
-<!--This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!--This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](/zh/new-platform/).-->
 
-这是该部分课程的最后一个练习，现在是时候将你的代码推送至 GitHub，并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中将所有你已完成的练习进行标注。
+这是该部分课程的最后一个练习，现在是时候将你的代码推送至 GitHub，并在[练习提交系统](/zh/new-platform/)中将所有你已完成的练习进行标注。
 
 </div>
 

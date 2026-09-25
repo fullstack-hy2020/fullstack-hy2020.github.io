@@ -745,11 +745,11 @@ todo-app
 ```
 ### Submitting exercises and getting the credits
 
-<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers).-->
- 这是本章节的最后一个练习。现在是时候将你的代码推送到GitHub，并将你所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-containers)。
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](/zh/new-platform/).-->
+ 这是本章节的最后一个练习。现在是时候将你的代码推送到GitHub，并将你所有完成的练习标记到[练习提交系统](/zh/new-platform/)。
 
-<!-- Exercises of this part are submitted just like in the previous parts, but unlike parts 0 to 7, the submission goes to an own [course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers). Remember that you have to finish <i>all the exercises</i> to pass this part!-->
- 这一部分的练习就像前面几部分一样提交，但与第0到7部分不同的是，提交到一个自己的[课程实例](https://studies.cs.helsinki.fi/stats/courses/fs-containers)。记住，你必须完成<i>所有的练习</i>，才能通过这部分的考试!
+<!-- Exercises of this part are submitted just like in the previous parts, but unlike parts 0 to 7, the submission goes to an own [course instance](/zh/new-platform/). Remember that you have to finish <i>all the exercises</i> to pass this part!-->
+ 这一部分的练习就像前面几部分一样提交，但与第0到7部分不同的是，提交到一个自己的[课程实例](/zh/new-platform/)。记住，你必须完成<i>所有的练习</i>，才能通过这部分的考试!
 
 <!-- Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:-->
 一旦你完成了练习并想获得学分，请通过练习提交系统让我们知道你已经完成了该课程。

@@ -1151,8 +1151,8 @@ const GET_CURRENT_USER = gql`
 <!-- You can delete a review using the <em>deleteReview</em> mutation. This mutation has a single argument, which is the id of the review to be deleted. After the mutation has been performed, the easiest way to update the review list's query is to call the [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching) function.-->
  你可以使用<em>deleteReview</em>改变来删除一个评论。这个改变有一个参数，就是要删除的评论的ID。在执行了改变之后，更新评论列表's 查询的最简单的方法是调用 [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching) 函数。
 
-<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 4 in the exercise submission system.-->
- 这是本节的最后一个练习。现在是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)。请注意，本节的练习应提交给练习提交系统中的第4章节。
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](/zh/new-platform/). Note that exercises in this section should be submitted to the part 4 in the exercise submission system.-->
+ 这是本节的最后一个练习。现在是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](/zh/new-platform/)。请注意，本节的练习应提交给练习提交系统中的第4章节。
 
 </div>
 

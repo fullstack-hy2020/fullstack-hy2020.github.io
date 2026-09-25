@@ -165,7 +165,7 @@ const User = () => {
 <!-- You can mark this exercise as finished if you use an hour or more for styling your application.-->
  如果你用一个小时或更多的时间来设计你的应用的风格，你可以把这个练习标记为完成。
 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
- 这是这部分课程的最后一个练习，是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](/zh/new-platform/).-->
+ 这是这部分课程的最后一个练习，是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](/zh/new-platform/)。
 
 </div>

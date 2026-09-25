@@ -1060,6 +1060,6 @@ const PlatformSpecificButton = () => {
 <!-- Currently the font family of our application is set to <i>System</i> in the theme configuration located in the <i>theme.js</i> file. Instead of the <i>System</i> font, use a platform specific [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) font. In the Android platform use the <i>Roboto</i> font and in the iOS platform use the <i>Arial</i> font. The default font can be <i>System</i>.-->
  目前，在位于<i>theme.js</i>文件的主题配置中，我们应用的字体家族被设置为<i>System</i>。不使用<i>System</i>字体，而使用平台特定的[Sans-serif](https://en.wikipedia.org/wiki/Sans-serif)字体。在Android平台上使用<i>Roboto</i>字体，在iOS平台上使用<i>Arial</i>字体。默认字体可以是<i>System</i>。
 
-<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 2 in the exercise submission system.-->
- 这是本节的最后一个练习。现在是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)。注意，本节的练习应该提交到练习提交系统中的第二章节。
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](/zh/new-platform/). Note that exercises in this section should be submitted to the part 2 in the exercise submission system.-->
+ 这是本节的最后一个练习。现在是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](/zh/new-platform/)。注意，本节的练习应该提交到练习提交系统中的第二章节。
 </div>

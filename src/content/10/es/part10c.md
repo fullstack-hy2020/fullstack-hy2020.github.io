@@ -750,6 +750,6 @@ Abra el componente <em>AppBar</em> en el archivo <i>AppBar.jsx</i> donde actualm
 
 Al presionar la pestaña "Sign out" se debe eliminar el token de acceso del usuario del almacenamiento y restablecer la tienda del Cliente Apollo con [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore). Llamar al método <em>resetStore</em> debería volver a ejecutar automáticamente todas las consultas activas, lo que significa que la consulta <em>me</em> debería volver a ejecutarse. Tenga en cuenta que el orden de ejecución es crucial: el token de acceso debe eliminarse del almacenamiento <i>antes</i> que se restablezca la tienda del cliente Apollo.
 
-Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 3 del sistema de envío de ejercicios.
+Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](/es/new-platform/). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 3 del sistema de envío de ejercicios.
 
 </div>

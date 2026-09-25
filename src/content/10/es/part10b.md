@@ -1018,6 +1018,6 @@ Ahora, el paquete de Android de la aplicación tendrá el componente definido en
 
 Actualmente, la familia de fuentes de nuestra aplicación está configurada en <i>System</i> en la configuración del tema ubicada en el archivo <i>theme.js</i>. En lugar de la fuente <i>System</i>, utilice una fuente [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) específica de la plataforma. En la plataforma Android use la fuente <i> Roboto </i> y en la plataforma iOS use la fuente <i> Arial </i>. La fuente predeterminada puede ser <i>System</i>.
 
-Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 2 del sistema de envío de ejercicios.
+Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](/es/new-platform/). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 2 del sistema de envío de ejercicios.
 
 </div>

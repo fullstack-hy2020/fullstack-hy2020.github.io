@@ -12,8 +12,8 @@ lang: zh
 <!-- [Intro to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql).-->
  [可汗学院的SQL介绍](https://www.khanacademy.org/computing/computer-programming/sql)。
 
-<!-- There are 24 exercises in this part, and you need to complete each exercise for completing the course. Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-psql) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".-->
- 这一部分有24个练习，你需要完成每个练习才能完成课程。练习是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-psql)提交的，就像前几部分一样，但与第0至7部分不同的是，提交到一个不同的 "课程实例"。
+<!-- There are 24 exercises in this part, and you need to complete each exercise for completing the course. Exercises are submitted via the [submissions system](/zh/new-platform/) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".-->
+ 这一部分有24个练习，你需要完成每个练习才能完成课程。练习是通过[提交系统](/zh/new-platform/)提交的，就像前几部分一样，但与第0至7部分不同的是，提交到一个不同的 "课程实例"。
 
 ### Advantages and disadvantages of document databases
 

@@ -40,8 +40,8 @@ lang: zh
 
 ### Submitting exercises and earning credits
 
-<!-- Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i> than in parts 0-9. The parts 1-4 in the submission system refer to the sections a-d in this part. This means that you will be submitting exercises a single section at a time starting with this section, "Introduction to React Native", which is part 1 in the submission system.-->
- 练习是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)提交的，就像前面的部分。请注意，这一部分的习题与第0-9部分相比，是提交给不同的课程实例</i>。提交系统中的1-4部分是指本章节的a-d部分。这意味着，你将从这部分 "React Native简介 "开始，每次提交一个部分的练习，这部分是提交系统中的第1章节。
+<!-- Exercises are submitted via the [submissions system](/zh/new-platform/) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i> than in parts 0-9. The parts 1-4 in the submission system refer to the sections a-d in this part. This means that you will be submitting exercises a single section at a time starting with this section, "Introduction to React Native", which is part 1 in the submission system.-->
+ 练习是通过[提交系统](/zh/new-platform/)提交的，就像前面的部分。请注意，这一部分的习题与第0-9部分相比，是提交给不同的课程实例</i>。提交系统中的1-4部分是指本章节的a-d部分。这意味着，你将从这部分 "React Native简介 "开始，每次提交一个部分的练习，这部分是提交系统中的第1章节。
 
 <!-- During this part you will earn credits based on the number of exercises you complete. Completing <i>at least 25 exercises</i> in this part will earn you <i>2 credits</i>. Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:-->
  在这部分中，你将根据你完成的练习的数量获得学分。在这部分完成<i>至少25个练习</i>将获得<i>2学分</i>。一旦你完成了练习并想获得学分，请通过练习提交系统告诉我们你已经完成了该课程。
@@ -224,8 +224,8 @@ npm install --save-dev eslint @babel/eslint-parser eslint-plugin-react eslint-pl
 <!-- Set up ESLint in your project so that you can perform linter checks by running <em>npm run lint</em>. To get most of linting it is also recommended to integrate ESLint with your editor.-->
  在你的项目中设置ESLint，这样你就可以通过运行<em>npm run lint</em>来进行linter检查。为了获得大部分的linting，我们还建议将ESLint与你的编辑器集成。
 
-<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 1 in the exercise submission system.-->
- 这是本节的最后一个练习。现在是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)。注意，本节的练习应该提交给练习提交系统中的第1章节。
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](/zh/new-platform/). Note that exercises in this section should be submitted to the part 1 in the exercise submission system.-->
+ 这是本节的最后一个练习。现在是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](/zh/new-platform/)。注意，本节的练习应该提交给练习提交系统中的第1章节。
 </div>
 
 <div class="content">

@@ -793,7 +793,7 @@ Comme indiqué dans l'exercice 6.21, le serveur exige que le contenu de l'anecdo
 
 La condition d'erreur doit être gérée dans la fonction de rappel enregistrée à cet effet, voir [ici](https://tanstack.com/query/latest/docs/react/reference/useMutation) comment enregistrer une fonction.
 
-C'était le dernier exercice pour cette partie du cours et il est temps de pousser votre code sur GitHub et de marquer tous vos exercices complétés dans le [système de soumission des exercices](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+C'était le dernier exercice pour cette partie du cours et il est temps de pousser votre code sur GitHub et de marquer tous vos exercices complétés dans le [système de soumission des exercices](/fr/new-platform/).
 
 </div>
 

@@ -75,8 +75,8 @@ lang: zh
 
 ### Submitting exercises and earning credits ###
 
-<!-- Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>.-->
- 通过[提交系统](https://studies.cs.helsinki.fi/stats/)提交练习，就像在前面的部分一样。这一部分的练习被提交<i>到其[自己的课程实例](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>。
+<!-- Submit the exercises via the [submissions system](/zh/new-platform/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](/zh/new-platform/)</i>.-->
+ 通过[提交系统](/zh/new-platform/)提交练习，就像在前面的部分一样。这一部分的练习被提交<i>到其[自己的课程实例](/zh/new-platform/)</i>。
 
 <!-- Completing this part on containers will get you 1 credit. Note that you need to do all the exercises for earning the credit or the certificate.-->
  在集装箱上完成这部分内容将得到1个学分。注意，你需要做所有的练习来获得学分或证书。

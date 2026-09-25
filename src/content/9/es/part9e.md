@@ -447,7 +447,7 @@ Los códigos de diagnóstico ahora se configuran con el elemento de Material UI 
 
 ### Envío de ejercicios y obtención de créditos
 
-Los ejercicios de esta parte son enviados a través de [el sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fs-typescript) al igual que en las partes anteriores, con la diferencia de que esta vez el envío se realiza en una "instancia del curso" diferente. ¡Recuerda que tienes que terminar al menos 24 ejercicios para aprobar esta parte!
+Los ejercicios de esta parte son enviados a través de [el sistema de envío de ejercicios](/es/new-platform/) al igual que en las partes anteriores, con la diferencia de que esta vez el envío se realiza en una "instancia del curso" diferente. ¡Recuerda que tienes que terminar al menos 24 ejercicios para aprobar esta parte!
 
 Una vez que hayas completado los ejercicios y quieras obtener los créditos, háznoslo saber a través de el sistema de envío de ejercicios que has completado el curso:
 

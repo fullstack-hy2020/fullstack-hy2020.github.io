@@ -162,8 +162,8 @@ lang: zh
 
 ### Submitting exercises and getting the credits
 
-<!-- Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 7, the submission goes to different "course instance". Remember that you have to finish <i>all the exercises</i> to pass this part!-->
- 这一部分的练习是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-cicd)提交的，就像前面几部分一样，但与0到7部分不同的是，提交到不同的 "课程实例"。请记住，你必须完成<i>所有的练习</i>才能通过这一部分!
+<!-- Exercises of this part are submitted via [the submissions system](/zh/new-platform/) just like in the previous parts, but unlike parts 0 to 7, the submission goes to different "course instance". Remember that you have to finish <i>all the exercises</i> to pass this part!-->
+ 这一部分的练习是通过[提交系统](/zh/new-platform/)提交的，就像前面几部分一样，但与0到7部分不同的是，提交到不同的 "课程实例"。请记住，你必须完成<i>所有的练习</i>才能通过这一部分!
 
 <!-- Your solutions are in two repositories (pokedex and your own project), and since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form!-->
  你的解决方案在两个仓库中（pokedex和你自己的项目），由于你只能向提交系统返回一个仓库，请将<i>另一个</i>仓库的链接放在你填写的提交表格中

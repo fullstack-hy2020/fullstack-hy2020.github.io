@@ -66,7 +66,7 @@ Paso 3: Ejecuta <i>curl http://helsinki.fi</i> y guarda el resultado en un archi
 
 ### Enviar los ejercicios y recibir los créditos ###
 
-Envía los ejercicios utilizando el [sistema de envío](https://studies.cs.helsinki.fi/stats/) igual que en las partes anteriores. Los ejercicios de esta parte son enviados <i>a su [propia instancia del curso](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>.
+Envía los ejercicios utilizando el [sistema de envío](/es/new-platform/) igual que en las partes anteriores. Los ejercicios de esta parte son enviados <i>a su [propia instancia del curso](/es/new-platform/)</i>.
 
 Completar esta parte supondrá la obtención de 1 crédito. Ten en cuenta que debes realizar todos los ejercicios para obtener el crédito o el certificado.
 

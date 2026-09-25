@@ -948,7 +948,7 @@ Aquí está la alerta de confirmación que debería aparecer una vez que el usua
 
 Puede eliminar una revisión mediante la mutación <em>deleteReview</em>. Esta mutación tiene un solo argumento, que es el id de la revisión que se eliminará. Una vez realizada la mutación, la forma más sencilla de actualizar la consulta de la lista de revisión es llamar a la función [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching).
 
-Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 4 del sistema de envío de ejercicios.
+Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](/es/new-platform/). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 4 del sistema de envío de ejercicios.
 
 </div>
 
