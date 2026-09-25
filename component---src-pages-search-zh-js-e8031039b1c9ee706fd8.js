@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[59],{HmxX:function(a,e,n){"use strict";n.r(e);var t=n("q1tI"),c=n.n(t),l=n("D9jW");e.default=({data:a})=>c.a.createElement(l.a,{localSearch:a.localSearchChinese,title:"搜索课程",inputPlaceholder:"输入关键词",lang:"zh"})}}]);
+//# sourceMappingURL=component---src-pages-search-zh-js-e8031039b1c9ee706fd8.js.map

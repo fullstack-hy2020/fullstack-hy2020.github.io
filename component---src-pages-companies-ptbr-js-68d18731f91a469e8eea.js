@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[34],{wU2w:function(e,a,t){"use strict";t.r(a);var s=t("q1tI"),r=t.n(s),n=t("xEVu");a.default=()=>r.a.createElement(n.a,{lang:"ptbr",title:"Empresas Parceiras | Full Stack Aberto",seoDescription:"Desenvolvimento Full Stack em empresas parceiras"})}}]);
+//# sourceMappingURL=component---src-pages-companies-ptbr-js-68d18731f91a469e8eea.js.map

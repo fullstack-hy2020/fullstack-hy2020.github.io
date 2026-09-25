@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[18],{aVVY:function(e,t,n){"use strict";n.r(t);var a=n("q1tI"),o=n.n(a),c=n("Q7S0");t.default=()=>o.a.createElement(c.a,{lang:"en",title:"About the course | Full Stack open"})}}]);
+//# sourceMappingURL=component---src-pages-about-en-js-23e05eb8bd148e66a402.js.map
