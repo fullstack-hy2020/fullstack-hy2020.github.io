@@ -1112,7 +1112,7 @@ Linkkejä:
 
 - Reactin [dokumentaatio](https://react.dev/learn) kannattaa ehdottomasti käydä jossain vaiheessa läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa ja kaikki Class-komponentteihin liittyvä on kurssin kannalta epärelevanttia.
 - Reactin sivuilla oleva [tutoriaali](https://react.dev/learn/tutorial-tic-tac-toe) sen sijaan on aika huono.
-- [Egghead.io](https://egghead.io):n kursseista [Start learning React](https://egghead.io/courses/start-learning-react) on laadukas, ja hieman uudempi [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) on myös kohtuullisen hyvä; molemmat sisältävät myös asioita, jotka tulevat tällä kurssilla vasta myöhemmissä osissa. Molemmissa on toki se ongelma, että ne käyttävät Class-komponentteja.
+- [Egghead.io](https://egghead.io):n kursseista [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-react) on kohtuullisen hyvä; kurssi sisältää myös asioita, jotka tulevat tällä kurssilla vasta myöhemmissä osissa. Kurssissa on toki se ongelma, että siinä käytetään Class-komponentteja.
 
 ### Webohjelmoijan vala
 
