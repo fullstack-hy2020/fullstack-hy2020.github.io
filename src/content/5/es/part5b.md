@@ -632,7 +632,7 @@ Por supuesto, es posible que ya hayas hecho todo correctamente y el problema no 
 
 #### 5.10: Frontend de la Lista de Blogs, paso 10
 
-Modifica la aplicación para enumerar las publicaciones de blog por el número de <i>likes</i>. La clasificación se puede hacer con el método de array [sort](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+Modifica la aplicación para ordenar las publicaciones por el número de <i>likes</i>. La clasificación se puede hacer con el método de array [sort](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
 #### 5.11: Frontend de la Lista de Blogs, paso 11
 
