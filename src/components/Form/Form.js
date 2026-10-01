@@ -3,6 +3,7 @@ import './Form.scss';
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withTranslation } from 'react-i18next';
+import i18n from 'i18next'
 
 import { BodyText } from '../BodyText/BodyText';
 import Element from '../Element/Element';
@@ -87,6 +88,8 @@ class Form extends Component {
     } = this.state;
 
     const { t } = this.props;
+
+    const isRtl = i18n.dir() === 'rtl'
 
     return (
       <>
@@ -175,7 +178,7 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
                 <button
-                  className="submit spacing spacing--after push-right-4"
+                  className={`submit spacing spacing--after ${isRtl ? 'push-left-4' : 'push-right-4'}`}
                   type="submit"
                 >
                   {t('challengePage:submitButton')}

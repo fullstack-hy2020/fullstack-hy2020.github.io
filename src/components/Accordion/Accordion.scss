@@ -61,6 +61,11 @@
   width: 100%;
   margin-left: unset;
 
+  @include rtl {
+    margin-left: initial;
+    margin-right: unset;
+  }
+
   .accordion {
     border: none;
     padding: 0 !important;

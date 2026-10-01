@@ -13,6 +13,13 @@
     left: 0;
     top: -100px;
     padding-top: 200px;
+
+    @include rtl {
+      margin-left: -100%;
+      margin-right: initial;
+      right: 0;
+      left: initial
+    }
   }
 }
 
@@ -34,6 +41,11 @@
 
   padding-right: 1rem;
   z-index: 30;
+
+  @include rtl {
+    padding-left: 1rem;
+    padding-right: initial;
+  }
 
   li {
     list-style-type: none;

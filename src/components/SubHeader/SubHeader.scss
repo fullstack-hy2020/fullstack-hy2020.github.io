@@ -2,7 +2,7 @@
 
 .sub-header {
   color: var(--color-text);
-  font-family: $font-body;
+  font-family: var(--font-body);
   padding-bottom: 1.357rem;
 
   @include from($desktop) {

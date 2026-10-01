@@ -105,5 +105,23 @@
     "houston": "A Houston Inc. é uma empresa finlandesa de software ágil fundada em 2003. Desenvolvemos e implementamos serviços digitais personalizados para nossos clientes.",
     "contacts": ["Full stack open", "matti.luukkainen@helsinki.fi"],
     "licenced": "O material é licenciado sob a Licença Creative Commons BY-NC-SA 3.0."
+  },
+  "ar": {
+    "mainTitle": "غُص عميقا في عالم تطوير الويب الحديث",
+    "intro": "تعلم GraphQL ،MongoDB ،Node.js ،Redux ،React وTypeScript في آنٍ واحد! سيكون تركيزنا الأساسي على تطوير تطبيقات الصفحة الواحدة (single-page applications) باستخدام ReactJS والتي ستستخدم الـREST API المعدَّة بواسطة Node.js.",
+    "current": [
+      "هل لديك أي أسئلة عن الدورة؟ اقراء <a href='/en/part0/general_info'>الجزء الصفر</a> بدقة إذ يحتوي على أجوبة لمعظمها...",
+      "توقفنا عن إصدار نسخ سنوية من الآن فصاعدًا؛ سيتم توسيع الدورة من دون أي توقف! زر <a href='/en/part0/general_info/#no-more-yearly-versions'>هذا الرابط</a> للمزيد من التفاصيل.",
+      "بإمكانك مناقشة الدورة والمواضيع المرتبطة في مجموعتنا المخصصة على تطبيق دسكورد <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>. يسرنا مشاركتك النقاش! <ul><li>انظر <a href='/en/part0/general_info#how-to-get-help-in-discord'>هنا</a> كيف يمكنك أن تسأل بطريقة مناسبة.</li><ul>"
+    ],
+    "notice": "انتبه: التصريحات غير اللائقة بما فيها التي تدل على التمييز أو تقليل شأن الآخرين ممنوعة منعًا باتًا. سيتم طرد أي شخص يرسل رسائل من  هذا القبيل من النقاش بشكل دائم.",
+    "licence": [
+      "الأجزاء رقم 0 إلى 8 والجزء الثالث عشر من تأليف <a href='https://github.com/mluukkai'>Matti Luukkainen</a>.  الجزء التاسع من تأليف عدة مطورين من <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. الجزء العاشر من تأليف <a href='https://github.com/Kaltsoon'>Kalle Ilves</a>.  الجزء الحادي عشر من تأليف عدة مطورين من <a href='https://www.smartly.io/'>Smartly</a> والجزء الثاني عشر من تأليف <a href='https://github.com/jakousa'>Jami Kousa</a>. ساهم العديد من  <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>الأشخاص</a> في تصحيح وتحسين الدورة إمّا من حيث المحتوى أو الإملاء. يمكنك أيضًا أن تقوم ببعض التعديلات على المحتوى بنفسك. قامت شركة <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a> بتصميم وإنشاء موقع الدورة والتي أيضًا قامت بمراجعة المحتوى. قام <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a> بترجمة النسخة الصينية للدورة. الترجمة الإسبانية من  <a target='_blank' href='https://github.com/cynthiamv'>Cynthia Vico Vacca</a> ،<a target='_blank' href='https://github.com/sebastiantorres86'>Sebastian Torres</a> و<a target='_blank' href='https://github.com/pablo-maff'>Pablo Maffioli</a> بدعم من <a target='_blank' href='https://frontend.cafe/'>FrontendCafé</a>.",
+      "محتوى الدورة مُرخص بموجب <a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'> رخصة Creative Commons BY-NC-SA 3.0 </a> مما يعني أنه يحق لك استخدام وتوزيع المحتوى بحرية طالما تبقى أسماء المؤلفين الأصليين غير محذوفة. إذا أجريت أي تعديلات على المحتوى وأردت أن تقوم بتوزيعه، يجب أن يكون المحتوى مرخصًا بنفس الرخصة. يُمنع استخدام المحتوى الدراسي لأغراض تجارية بدون إذن من المؤلف."
+    ],
+    "university": "جامعة هلسنكي هي أقدم وأكبر جامعة علمية في فنلندا؛ تضم مجتمعًا علميًا يتكون من 40000 شخص من كافة أنحاء العالم. ",
+    "houston": "الشركة الفنلندية  Houston Inc شركة برمجيات مرنة تأسست عام 2003. نصمم وننفذ خدمات رقمية لأعمالك حسب الطلب.",
+    "contacts": ["فول ستاك أوبن", "matti.luukkainen@helsinki.fi"],
+    "licenced": "المحتوى مرخص بموجب Creative Commons BY-NC-SA 3.0 License."
   }
 }
