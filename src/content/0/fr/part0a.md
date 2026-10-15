@@ -187,7 +187,7 @@ Comment étudier le cours – instructions en bref : autres parties du cours
 
 Les exercices sont soumis via GitHub et marqués comme effectués sur le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Si vous soumettez des exercices de différentes parties dans le même référentiel Git, utilisez un système approprié pour nommer vos répertoires. Vous pouvez bien sûr créer un nouveau référentiel pour chaque partie. Si vous utilisez un référentiel privé, ajoutez <i>mluukkai</i> en tant que collaborateur.
+Si vous soumettez des exercices de différentes parties dans le même référentiel Git, utilisez un système approprié pour nommer vos répertoires. Vous pouvez bien sûr créer un nouveau référentiel pour chaque partie. Si vous utilisez un référentiel privé, ajoutez <i>mattiluukkainen</i> en tant que collaborateur.
 
 Les exercices sont soumis **une partie à la fois**. Une fois que vous avez soumis des exercices pour une partie, vous ne pouvez plus soumettre d'autres exercices pour cette partie.
 

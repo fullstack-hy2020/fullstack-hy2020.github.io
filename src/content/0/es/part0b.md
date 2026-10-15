@@ -618,7 +618,7 @@ Tú mismo sufrirás fatiga de JavaScript durante este curso. Afortunadamente par
 
 Los ejercicios se envían a través de GitHub y marcando los ejercicios como realizados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Puedes enviar todos los ejercicios al mismo repositorio o utilizar varios repositorios diferentes. Si envías ejercicios de diferentes partes al mismo repositorio, nombra bien sus directorios. Si utilizas un repositorio privado para enviar los ejercicios, agrega a _mluukkai_ como colaborador.
+Puedes enviar todos los ejercicios al mismo repositorio o utilizar varios repositorios diferentes. Si envías ejercicios de diferentes partes al mismo repositorio, nombra bien sus directorios. Si utilizas un repositorio privado para enviar los ejercicios, agrega a _mattiluukkainen_ como colaborador.
 
 Una buena forma de nombrar los directorios en tu repositorio de entrega es la siguiente:
 

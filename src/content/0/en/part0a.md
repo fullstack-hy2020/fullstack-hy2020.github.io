@@ -173,7 +173,7 @@ All practicalities are explained in the new course pages
 
 The exercises are submitted through GitHub and marked as done on the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add *mluukkai* as a collaborator.
+If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add *mattiluukkainen* as a collaborator.
 
 Exercises are submitted **one part at a time**. You will mark the number of exercises you have completed from that module. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part.
 

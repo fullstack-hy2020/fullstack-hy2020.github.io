@@ -772,8 +772,8 @@ var sendToServer = function(note) {
 <!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
  练习通过GitHub提交，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记练习完成。
 
-<!-- You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add _mluukkai_ as a collaborator to it.-->
-你可以将所有的练习提交到同一个仓库，或者使用多个不同的仓库。如果你将不同部分的练习提交到同一个仓库中，请将你的目录命名好。如果你使用一个私人仓库来提交练习，把_mluukkai_作为合作者加入其中。
+<!-- You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add _mattiluukkainen_ as a collaborator to it.-->
+你可以将所有的练习提交到同一个仓库，或者使用多个不同的仓库。如果你将不同部分的练习提交到同一个仓库中，请将你的目录命名好。如果你使用一个私人仓库来提交练习，把_mattiluukkainen_作为合作者加入其中。
 
 <!-- One good way to name the directories in your submission repository is as follows:-->
 在你的提交仓库中命名目录的一个好方法如下：

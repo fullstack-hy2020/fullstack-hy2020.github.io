@@ -613,7 +613,7 @@ Vous souffrirez vous-même de JavaScript fatigue pendant ce cours. Heureusement 
 
 Les exercices doivent être soumis via GitHub, et en marquant les exercices comme effectués dans le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Vous pouvez soumettre tous les exercices dans le même dépôt ou utiliser plusieurs dépôts différents. Si vous soumettez des exercices de différentes parties dans le même dépôt, nommez bien vos répertoires. Si vous utilisez un dépôt privé pour soumettre les exercices, ajoutez-y _mluukkai_ en tant que collaborateur.
+Vous pouvez soumettre tous les exercices dans le même dépôt ou utiliser plusieurs dépôts différents. Si vous soumettez des exercices de différentes parties dans le même dépôt, nommez bien vos répertoires. Si vous utilisez un dépôt privé pour soumettre les exercices, ajoutez-y _mattiluukkainen_ en tant que collaborateur.
 
 Une bonne façon de nommer les répertoires de votre dépôt de soumission est la suivante :
 

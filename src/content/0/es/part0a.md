@@ -196,7 +196,7 @@ Cómo estudiar el curso: instrucciones resumidas para otras partes del curso
 
 Los ejercicios se envían a través de GitHub y se marcan como completados en la pestaña "mis envíos" de la [aplicación de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Si envías ejercicios de diferentes partes al mismo repositorio, utiliza un sistema adecuado para nombrar tus directorios. Por supuesto, puedes crear un nuevo repositorio para cada parte. Si utilizas un repositorio privado, agrega a *mluukkai* como colaborador.
+Si envías ejercicios de diferentes partes al mismo repositorio, utiliza un sistema adecuado para nombrar tus directorios. Por supuesto, puedes crear un nuevo repositorio para cada parte. Si utilizas un repositorio privado, agrega a *mattiluukkainen* como colaborador.
 
 Los ejercicios se envían **una parte a la vez**. Marcarás la cantidad de ejercicios que has completado de ese módulo. Una vez que hayas enviado ejercicios para una parte, ya no podrás enviar más ejercicios para esa parte.
 
