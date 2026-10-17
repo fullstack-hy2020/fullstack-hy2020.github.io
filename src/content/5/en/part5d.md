@@ -1298,7 +1298,7 @@ describe('Blog app', () => {
 })
 ```
 
-The _beforeEach_ block must empty the database using, for example, the reset method we used in the [material](/en/part5/end_to_end_testing_playwright#controlling-the-state-of-the-database).
+The _beforeEach_ block must empty the database using, for example, the reset method we used in the [material](/en/part5/end_to_end_testing#controlling-the-state-of-the-database).
 
 #### 5.19: Blog List End To End Testing, step 3
 
