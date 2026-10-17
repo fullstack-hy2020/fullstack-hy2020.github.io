@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[56],{vh9U:function(e,n,a){"use strict";a.r(n);var c=a("q1tI"),r=a.n(c),t=a("D9jW");n.default=({data:e})=>r.a.createElement(t.a,{localSearch:e.localSearchFinnish,title:"Rechercher du contenu",inputPlaceholder:"Entrez un terme de recherche",lang:"fr"})}}]);
+//# sourceMappingURL=component---src-pages-search-fr-js-379a8696e72f390a9a6b.js.map
