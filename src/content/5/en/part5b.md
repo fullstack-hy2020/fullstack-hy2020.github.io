@@ -583,7 +583,7 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**NB:** Even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, it can't be used directly to achieve the desired behavior. The easiest solution would be to add a state to the blog component that controls if the details are being displayed or not.
+**NB:** You can reuse the togglable element for this functionality
 
 #### 5.8: Blog List Frontend, step 8
 
