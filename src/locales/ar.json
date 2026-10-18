@@ -1,0 +1,59 @@
+{
+  "common": {
+    "nextPart": "الجزء التالي",
+    "previousPart": "الجزء السابق",
+    "readMore": "اقرأ المزيد",
+    "proposeChanges": "اقترح تعديلات على المحتوى"
+  },
+  "searchPage": {
+    "noMatches": "لا توجد أي نتيجة",
+    "matchesTitle": "تم العثور على {{count}} نتيجة لـ\"{{query}}\""
+  },
+  "aboutPage": {
+    "generalTitle": "نظرة عامة"
+  },
+  "navigation": {
+    "skipToContent": "انتقل إلى المحتوى الدارسي",
+    "aboutCourse": "عن الدورة",
+    "courseContents": "محتوى الدورة",
+    "faq": "الأسئلة المتكررة",
+    "partners": "شركاؤنا",
+    "challenge": "التحدي",
+    "searchLinkSrLabel": "ابحث في داخل المحتوى الدراسي",
+    "ThemeSwitcherSrLabel": "فعّل الوضع الداكن",
+    "LanguagePickerSrLabel": "اختر لغة"
+  },
+  "challengePage": {
+    "aboutTitle": "هذا تحدي فول ستاك",
+    "joinTitle": "يا شركات، لبوا النداء!",
+    "registerButton": "سجل اسم شركتك في تحدي فول ستاك",
+    "nameLabel": "الاسم",
+    "namePlaceholder": "أدخل اسمك هنا",
+    "titleLabel": "المسمى الوظيفي",
+    "companyLabel": "الشركة",
+    "companyPlaceholder": "أدخل اسم شركتك هنا",
+    "phoneLabel": "رقم الهاتف",
+    "emailLabel": "البريد الإلكتروني",
+    "whereDidYouHearLabel": "من أين تعرفت على التحدي",
+    "submitButton": "أرسل",
+    "submitSuccessMessage": "شكراً! سنتصل بك لاحقاً",
+    "participantsTitle": "قد انضمت هذه الشركات إلى تحدي فول ستاك",
+    "coOperationTitle": "نعتاون مع",
+    "infoButton": "المزيد عن التحدي"
+  },
+  "companiesPage": {
+    "storiesTitle": "شركاؤنا يروون تجاربهم في مجال التطوير"
+  },
+  "faqPage": {
+    "faqTitle": "الأسئلة المتكررة"
+  },
+  "homePage": {
+    "startCourseButton": "ابدأ الدورة",
+    "announcementsTitle": "المستجدات",
+    "authorsTitle": "المؤلفون ورخصة النشر",
+    "courseNameTitle": "فول ستاك أوبن"
+  },
+  "notFoundPage": {
+    "title": "لم نقدر العثور على هذه الصفحة"
+  }
+}

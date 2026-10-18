@@ -10,6 +10,7 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 import snakeCase from 'lodash/fp/snakeCase';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 import getTranslationPath from '../../utils/getTranslationPath';
 
 const partners = [
@@ -100,6 +101,8 @@ const inChallenge = [
 export const CompaniesBanner = ({ isFrontPage, lang }) => {
   const { t } = useTranslation();
 
+  const isRtl = i18n.dir() === 'rtl'
+
   return (
     <Banner
       backgroundColor={isFrontPage && 'var(--color-background)'}
@@ -109,13 +112,13 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => {
       <Element className="container" flex>
         <BodyText
           centered
-          className="col-4 push-right-3 challenge-title"
+          className={`col-4 ${isRtl ? 'push-left-3' : 'push-right-3'} challenge-title`}
           text={t('challengePage:coOperationTitle')}
         />
         <Element
           flex
           spaceBetween
-          className="col-6 push-right-2 flex-fix-aligning space-between--mobile"
+          className={`col-6 ${isRtl ? 'push-left-2' : 'push-right-2'} flex-fix-aligning space-between--mobile`}
         >
           {partners.map((company, i) => (
             <ContentLiftup
@@ -138,7 +141,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => {
           <>
             <BodyText
               centered
-              className="col-4 spacing push-right-3 challenge-title"
+              className={`col-4 spacing ${isRtl ? 'push-left-3' : 'push-right-3'} challenge-title`}
               text={t('challengePage:participantsTitle')}
             />
             <Element
@@ -153,7 +156,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => {
                     `../../images/company_logos/${snakeCase(company)}.svg`
                   )}
                   alt={company}
-                  className={`company__logo push-right-1 col-3--mobile col-3--tablet`}
+                  className={`company__logo ${isRtl ? 'push-left-1' : 'push-right-1'} col-3--mobile col-3--tablet`}
                   backdrop
                 />
               ))}

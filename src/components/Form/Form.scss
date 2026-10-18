@@ -2,7 +2,7 @@
 
 .form {
   p {
-    font-family: $font-heading;
+    font-family: var(--font-heading);
     font-size: 0.9rem;
     margin-bottom: 10px;
   }
