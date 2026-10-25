@@ -76,7 +76,7 @@ A better question could be
 >
 > [screenshot from the network console]
 >
-> All the code can be found here (a link to GitHub)
+> All the code can be found here [a link to GitHub](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/part0a.md)
 
 ### Parts and completion
 
