@@ -475,8 +475,8 @@ Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/AP
 
 If the <em>newName</em> variable holds the value <i>Arto Hellas</i>, the template string expression returns the string
 
-```js
-`Arto Hellas is already added to phonebook`
+```
+Arto Hellas is already added to phonebook
 ```
 
 The same could be done in a more Java-like fashion by using the plus operator:
