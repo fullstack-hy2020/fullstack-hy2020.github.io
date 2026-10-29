@@ -182,8 +182,8 @@ module.exports = notesRouter
 <!-- This is almost an exact copy-paste of our previous <i>index.js</i> file.-->
 这几乎是我们之前的<i>index.js</i>文件的完全复制粘贴。
 
-<!-- However, there are a few significant changes. At the very beginning of the file we create a new [router](http://expressjs.com/en/api.html#router) object:-->
- 然而，有几个重要的变化。在文件的最开始，我们创建了一个新的[router](http://expressjs.com/en/api.html#router)对象。
+<!-- However, there are a few significant changes. At the very beginning of the file we create a new [router](https://expressjs.com/en/5x/api/router/) object:-->
+ 然而，有几个重要的变化。在文件的最开始，我们创建了一个新的[router](https://expressjs.com/en/5x/api/router/)对象。
 
 ```js
 const notesRouter = require('express').Router()

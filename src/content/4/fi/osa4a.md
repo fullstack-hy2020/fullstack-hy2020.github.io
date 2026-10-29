@@ -142,7 +142,7 @@ module.exports = notesRouter
 
 Kyseessä on käytännössä melkein suora copy-paste edellisen osan materiaalin tiedostosta <i>index.js</i>.
 
-Muutoksia on muutama. Tiedoston alussa luodaan [router](http://expressjs.com/en/api.html#router)-olio:
+Muutoksia on muutama. Tiedoston alussa luodaan [router](https://expressjs.com/en/5x/api/router/)-olio:
 
 ```js
 const notesRouter = require('express').Router()

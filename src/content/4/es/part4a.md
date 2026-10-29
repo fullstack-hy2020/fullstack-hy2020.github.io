@@ -163,7 +163,7 @@ module.exports = notesRouter
 
 Esto es casi una copia exacta de nuestro archivo <i>index.js</i> anterior.
 
-Sin embargo, hay algunos cambios importantes. Al principio del archivo, creamos un nuevo objeto [router](http://expressjs.com/en/api.html#router):
+Sin embargo, hay algunos cambios importantes. Al principio del archivo, creamos un nuevo objeto [router](https://expressjs.com/en/5x/api/router/):
 
 ```js
 const notesRouter = require('express').Router()
