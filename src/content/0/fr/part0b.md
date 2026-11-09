@@ -592,7 +592,7 @@ Preque toutes les applications Web ont (au moins) deux "couches": le navigateur,
 
 Souvent, on parle aussi du [frontend et du backend](https://en.wikipedia.org/wiki/Front_and_back_ends). Le navigateur est le frontend, la partie client, et le code JavaScript qui s'exécute sur le navigateur est le code de la partie client. Le serveur, quant à lui, est le backend.
 
-Dans le cadre de ce cours, le développement web full stack signifie que nous nous concentrons sur toutes les parties de l'application : le frontend, le backend et la base de données. Parfois, le logiciel sur le serveur et son système d'exploitation sont considérés comme une partie distincte de l'application, mais nous ne les aborderons pas dans ici.
+Dans le cadre de ce cours, le développement web full stack signifie que nous nous concentrons sur toutes les parties de l'application : le frontend, le backend et la base de données. Parfois, le logiciel sur le serveur et son système d'exploitation sont considérés comme une partie distincte de l'application, mais nous ne les aborderons pas ici.
 
 Nous allons coder le backend avec JavaScript, en utilisant l'environnement d'exécution [Node.js](https://nodejs.org/en/). L'utilisation du même langage de programmation pour le backend et le frontend confère au développement d'une application web complète une toute nouvelle dimension. Cependant, il n'est pas obligatoire pour le développement Web "full-stack" d'utiliser le même langage de programmation (JavaScript) pour toutes les parties de  l'application.
 
