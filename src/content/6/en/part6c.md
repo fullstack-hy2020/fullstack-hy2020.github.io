@@ -127,7 +127,7 @@ const App = () => {
 }
 ```
 
-Fetching data from the server is done, as in the previous chapter, using the Fetch API's <i>fetch</i> function. However, the function call is now wrapped into a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed by the [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) function. The call to <i>useQuery</i> takes as its parameter an object with the fields <i>queryKey</i> and <i>queryFn</i>. The value of the <i>queryKey</i> field is an array containing the string <i>notes</i>. It acts as the [key](https://tanstack.com/query/latest/docs/react/guides/query-keys) for the defined query, i.e. the list of notes.
+Fetching data from the server is done, as in the previous chapter, using the Fetch API's <i>fetch</i> function. However, the function call is now wrapped into a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed by the [useQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery) function. The call to <i>useQuery</i> takes as its parameter an object with the fields <i>queryKey</i> and <i>queryFn</i>. The value of the <i>queryKey</i> field is an array containing the string <i>notes</i>. It acts as the [key](https://tanstack.com/query/latest/docs/react/guides/query-keys) for the defined query, i.e. the list of notes.
 
 The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation:
 
@@ -238,7 +238,7 @@ const App = () => {
 }
 ```
 
-To create a new note, a [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) is defined using the function [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutation):
+To create a new note, a [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) is defined using the function [useMutation](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation):
 
 ```js
 const newNoteMutation = useMutation({
@@ -417,7 +417,7 @@ Finally, note an interesting detail. TanStack Query refetches all notes when we 
 
 ![dev tools notes app with an arrow in a new tab and another arrow on console's network tab over notes request as 200](../../images/6/t5.png)
 
-What is going on? By reading the [documentation](https://tanstack.com/query/latest/docs/react/reference/useQuery), we notice that the default functionality of TanStack Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i> changes. If we want, we can turn off the functionality by creating a query as follows:
+What is going on? By reading the [documentation](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery), we notice that the default functionality of TanStack Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i> changes. If we want, we can turn off the functionality by creating a query as follows:
 
 ```js
 const App = () => {
@@ -1027,7 +1027,7 @@ As stated in exercise 6.17, the server requires that the content of the anecdote
 
 ![browser showing error notification for trying to add too short of an anecdoate](../../images/6/67new.png)
 
-The error condition should be handled in the callback function registered for it, see [here](https://tanstack.com/query/latest/docs/react/reference/useMutation) how to register a function.
+The error condition should be handled in the callback function registered for it, see [here](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation) how to register a function.
 
 #### Exercise 6.22.
 

@@ -127,7 +127,7 @@ const App = () => {
 }
 ```
 
-Datan hakeminen palvelimelta tapahtuu edellisen luvun tapaan Fetch APIn <i>fetch</i>-funktiolla. Funktiokutsu on kuitenkin nyt kääritty [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery)-funktiolla muodostetuksi [kyselyksi](https://tanstack.com/query/latest/docs/react/guides/queries). <i>useQuery</i>-funktiokutsun parametrina on olio, jolla on kentät <i>queryKey</i> ja <i>queryFn</i>. Kentän <i>queryKey</i> arvona on taulukko, joka sisältää merkkijonon <i>notes</i>. Se toimii [avaimena](https://tanstack.com/query/latest/docs/react/guides/query-keys) määriteltyyn kyselyyn, eli muistiinpanojen listaan.
+Datan hakeminen palvelimelta tapahtuu edellisen luvun tapaan Fetch APIn <i>fetch</i>-funktiolla. Funktiokutsu on kuitenkin nyt kääritty [useQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery)-funktiolla muodostetuksi [kyselyksi](https://tanstack.com/query/latest/docs/react/guides/queries). <i>useQuery</i>-funktiokutsun parametrina on olio, jolla on kentät <i>queryKey</i> ja <i>queryFn</i>. Kentän <i>queryKey</i> arvona on taulukko, joka sisältää merkkijonon <i>notes</i>. Se toimii [avaimena](https://tanstack.com/query/latest/docs/react/guides/query-keys) määriteltyyn kyselyyn, eli muistiinpanojen listaan.
 
 Funktion <i>useQuery</i> paluuarvo on olio, joka kertoo kyselyn tilan. Konsoliin tehty tulostus havainnollistaa tilannetta:
 
@@ -238,7 +238,7 @@ const App = () => {
 }
 ```
 
-Uuden muistiinpanon luomista varten määritellään siis [mutaatio](https://tanstack.com/query/latest/docs/react/guides/mutations) funktion [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutatio) avulla:
+Uuden muistiinpanon luomista varten määritellään siis [mutaatio](https://tanstack.com/query/latest/docs/react/guides/mutations) funktion [useMutation](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation) avulla:
 
 ```js
 const newNoteMutation = useMutation({
@@ -418,7 +418,7 @@ Kiinnitetään lopuksi huomio erikoiseen yksityiskohtaan. TanStack Query hakee k
 
 ![](../../images/6/t5.png)
 
-Mistä on kyse? Hieman [dokumentaatiota](https://tanstack.com/query/latest/docs/react/reference/useQuery)
+Mistä on kyse? Hieman [dokumentaatiota](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery)
 tutkimalla huomataan, että TanStack Queryn kyselyjen oletusarvoinen toiminnallisuus on se, että kyselyt (joiden tila on <i>stale</i>) päivitetään kun <i>window focus</i> vaihtuu. Voimme halutessamme kytkeä toiminnallisuuden pois luomalla kyselyn seuraavasti:
 
 ```js
@@ -1022,7 +1022,7 @@ Kuten tehtävässä 6.17 todettiin, palvelin vaatii, että lisättävän anekdoo
 
 ![](../../images/6/67new.png)
 
-Virhetilanne kannattaa käsitellä sille rekisteröidyssä takaisinkutsufunktiossa, ks [täältä](https://tanstack.com/query/latest/docs/react/reference/useMutation) miten rekisteröit funktion.
+Virhetilanne kannattaa käsitellä sille rekisteröidyssä takaisinkutsufunktiossa, ks [täältä](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation) miten rekisteröit funktion.
 
 #### Tehtävä 6.22.
 

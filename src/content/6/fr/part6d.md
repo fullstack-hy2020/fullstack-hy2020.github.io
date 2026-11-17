@@ -113,7 +113,7 @@ const App = () => {
 }
 ```
 
-Récupérer les données depuis le serveur se fait encore de manière familière avec la méthode <i>get</i> d'Axios. Cependant, l'appel de méthode Axios est maintenant encapsulé dans une [requête](https://tanstack.com/query/latest/docs/react/guides/queries) formée avec la fonction [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery). Le premier paramètre de l'appel de fonction est une chaîne <i>notes</i> qui agit comme une [clé](https://tanstack.com/query/latest/docs/react/guides/query-keys) pour la requête définie, c'est-à-dire la liste des notes.
+Récupérer les données depuis le serveur se fait encore de manière familière avec la méthode <i>get</i> d'Axios. Cependant, l'appel de méthode Axios est maintenant encapsulé dans une [requête](https://tanstack.com/query/latest/docs/react/guides/queries) formée avec la fonction [useQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery). Le premier paramètre de l'appel de fonction est une chaîne <i>notes</i> qui agit comme une [clé](https://tanstack.com/query/latest/docs/react/guides/query-keys) pour la requête définie, c'est-à-dire la liste des notes.
 
 La valeur de retour de la fonction <i>useQuery</i> est un objet qui indique le statut de la requête. La sortie vers la console illustre la situation:
 
@@ -197,7 +197,7 @@ const App = () => {
 }
 ```
 
-Pour créer une nouvelle note, une [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) est définie en utilisant la fonction [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutation):
+Pour créer une nouvelle note, une [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) est définie en utilisant la fonction [useMutation](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation):
 
 ```js
 const newNoteMutation = useMutation({ mutationFn: createNote })
@@ -331,7 +331,7 @@ Si nous suivons attentivement l'onglet réseau du navigateur, nous remarquons qu
 
 ![outil de développement notes app avec champ de texte en surbrillance et flèche sur le réseau au-dessus de la requête des notes comme 200](../../images/6/62new.png)
 
-Qu'est-ce qui se passe? En lisant la [documentation](https://tanstack.com/query/latest/docs/react/reference/useQuery), nous remarquons que la fonctionnalité par défaut des requêtes de React Query est que les requêtes (dont le statut est <i>stale</i>) sont mises à jour lorsque le <i>window focus</i>, c'est-à-dire l'élément actif de l'interface utilisateur de l'application, change. Si nous le souhaitons, nous pouvons désactiver la fonctionnalité en créant une requête comme suit:
+Qu'est-ce qui se passe? En lisant la [documentation](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery), nous remarquons que la fonctionnalité par défaut des requêtes de React Query est que les requêtes (dont le statut est <i>stale</i>) sont mises à jour lorsque le <i>window focus</i>, c'est-à-dire l'élément actif de l'interface utilisateur de l'application, change. Si nous le souhaitons, nous pouvons désactiver la fonctionnalité en créant une requête comme suit:
 
 ```js
 const App = () => {
@@ -791,7 +791,7 @@ Comme indiqué dans l'exercice 6.21, le serveur exige que le contenu de l'anecdo
 
 ![navigateur affichant une notification d'erreur pour avoir tenté d'ajouter une anecdote trop courte](../../images/6/67new.png)
 
-La condition d'erreur doit être gérée dans la fonction de rappel enregistrée à cet effet, voir [ici](https://tanstack.com/query/latest/docs/react/reference/useMutation) comment enregistrer une fonction.
+La condition d'erreur doit être gérée dans la fonction de rappel enregistrée à cet effet, voir [ici](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation) comment enregistrer une fonction.
 
 C'était le dernier exercice pour cette partie du cours et il est temps de pousser votre code sur GitHub et de marquer tous vos exercices complétés dans le [système de soumission des exercices](/fr/new-platform/).
 
