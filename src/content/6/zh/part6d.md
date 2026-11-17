@@ -124,9 +124,9 @@ const App = () => {
 }
 ```
 
-<!--Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed with the [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)  to the query defined, i.e. the list of notes.-->
+<!--Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed with the [useQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)  to the query defined, i.e. the list of notes.-->
 
-从服务器中获取数据的方式和 Axios 的 *get* 方法类似。然而，Axios 的调用方法现在被包装在一个用 [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) 函数形成的 [query](https://tanstack.com/query/latest/docs/react/guides/queries) 查询中。在这个函数调用中，第一个参数（字符串 "<i>notes</i>" ）是已定义查询的 [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)，即笔记列表。
+从服务器中获取数据的方式和 Axios 的 *get* 方法类似。然而，Axios 的调用方法现在被包装在一个用 [useQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery) 函数形成的 [query](https://tanstack.com/query/latest/docs/react/guides/queries) 查询中。在这个函数调用中，第一个参数（字符串 "<i>notes</i>" ）是已定义查询的 [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)，即笔记列表。
 
 <!--The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation:--> 
 
@@ -229,9 +229,9 @@ const App = () => {
 }
 ```
 
-<!--To create a new note, a [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) is defined using the function [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutation):-->
+<!--To create a new note, a [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) is defined using the function [useMutation](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation):-->
 
-为了新增一条笔记，我们需要用 [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutation) 创建一个 [mutation（突变）](https://tanstack.com/query/latest/docs/react/guides/mutations)。
+为了新增一条笔记，我们需要用 [useMutation](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation) 创建一个 [mutation（突变）](https://tanstack.com/query/latest/docs/react/guides/mutations)。
 
 ```js
 const newNoteMutation = useMutation(createNote)
@@ -399,9 +399,9 @@ export const createNote = newNote =>
 
 ![dev tools notes app with input text field highlighted and arrow on network over notes request as 200](../../images/6/62new.png)
 
-<!--What is going on? By reading the [documentation](https://tanstack.com/query/latest/docs/react/reference/useQuery), we notice that the default functionality of React Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i>, i.e. the active element of the application's user interface, changes. If we want, we can turn off the functionality by creating a query as follows:-->
+<!--What is going on? By reading the [documentation](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery), we notice that the default functionality of React Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i>, i.e. the active element of the application's user interface, changes. If we want, we can turn off the functionality by creating a query as follows:-->
 
-发生了什么？通过阅读 [文档](https://tanstack.com/query/latest/docs/react/reference/useQuery) ，我们注意到 React Query 查询的默认功能是：当窗口焦点，即应用中用户界面的活动元素，发生变化时，查询（其状态为 *stale*）会被更新。如果我们希望，我们可以按以下方式创建查询，以关闭这个功能：
+发生了什么？通过阅读 [文档](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery) ，我们注意到 React Query 查询的默认功能是：当窗口焦点，即应用中用户界面的活动元素，发生变化时，查询（其状态为 *stale*）会被更新。如果我们希望，我们可以按以下方式创建查询，以关闭这个功能：
 
 ```js
 const App = () => {
@@ -964,9 +964,9 @@ export default Button
 
 ![browser showing error notification for trying to add too short of an anecdoate](../../images/6/67new.png)
 
-<!--The error condition should be handled in the callback function registered for it, see [here](https://tanstack.com/query/latest/docs/react/reference/useMutation) how to register a function.-->
+<!--The error condition should be handled in the callback function registered for it, see [here](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation) how to register a function.-->
 
-触发的错误情境应在回调函数中处理——被注册的回调函数会专门处理该种错误情境，你可以在[这里](https://tanstack.com/query/latest/docs/react/reference/useMutation)了解如何注册一个函数。
+触发的错误情境应在回调函数中处理——被注册的回调函数会专门处理该种错误情境，你可以在[这里](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation)了解如何注册一个函数。
 
 <!--This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](/zh/new-platform/).-->
 

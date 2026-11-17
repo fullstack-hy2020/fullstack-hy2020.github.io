@@ -127,7 +127,7 @@ const App = () => {
 }
 ```
 
-La obtención de datos del servidor se realiza, como en el capítulo anterior, usando el método <i>fetch</i> de la Fetch API. Sin embargo, la llamada al método ahora está envuelta en una [query](https://tanstack.com/query/latest/docs/react/guides/queries) (consulta) formada con la función [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery). La llamada a <i>useQuery</i> toma como parámetro un objeto con los campos <i>queryKey</i> y <i>queryFn</i>. El valor del campo <i>queryKey</i> es un array que contiene el string <i>notes</i>. Actúa como la [clave](https://tanstack.com/query/latest/docs/react/guides/query-keys) para la query definida, es decir, la lista de notas.
+La obtención de datos del servidor se realiza, como en el capítulo anterior, usando el método <i>fetch</i> de la Fetch API. Sin embargo, la llamada al método ahora está envuelta en una [query](https://tanstack.com/query/latest/docs/react/guides/queries) (consulta) formada con la función [useQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery). La llamada a <i>useQuery</i> toma como parámetro un objeto con los campos <i>queryKey</i> y <i>queryFn</i>. El valor del campo <i>queryKey</i> es un array que contiene el string <i>notes</i>. Actúa como la [clave](https://tanstack.com/query/latest/docs/react/guides/query-keys) para la query definida, es decir, la lista de notas.
 
 El valor devuelto por la función <i>useQuery</i> es un objeto que indica el estado de la query. La salida a la consola ilustra la situación:
 
@@ -238,7 +238,7 @@ const App = () => {
 }
 ```
 
-Para crear una nueva nota, se define una [mutación](https://tanstack.com/query/latest/docs/react/guides/mutations) usando la función [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutation):
+Para crear una nueva nota, se define una [mutación](https://tanstack.com/query/latest/docs/react/guides/mutations) usando la función [useMutation](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation):
 
 ```js
 const newNoteMutation = useMutation({
@@ -417,7 +417,7 @@ Finalmente, nota un detalle interesante. TanStack Query vuelve a obtener todas l
 
 ![aplicación de notas y solicitud notes con estado 200 en la pestaña de red](../../images/6/t5.png)
 
-¿Qué está pasando? Al leer la [documentación](https://tanstack.com/query/latest/docs/react/reference/useQuery), nos damos cuenta de que la funcionalidad predeterminada de las queries de TanStack Query es que las queries (cuyo estado es <i>stale</i>) se actualicen cuando cambia el <i>window focus</i>. Si queremos, podemos desactivar la funcionalidad creando una consulta de la siguiente manera:
+¿Qué está pasando? Al leer la [documentación](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery), nos damos cuenta de que la funcionalidad predeterminada de las queries de TanStack Query es que las queries (cuyo estado es <i>stale</i>) se actualicen cuando cambia el <i>window focus</i>. Si queremos, podemos desactivar la funcionalidad creando una consulta de la siguiente manera:
 
 ```js
 const App = () => {
@@ -996,7 +996,7 @@ Como se indicó en el ejercicio 6.17, el servidor exige que el contenido de la a
 
 ![navegador mostrando notificación de error por tratar de crear una anécdota muy corta](../../images/6/67new.png)
 
-La condición de error debe manejarse en la función de callback registrada para ello, consulta [aquí](https://tanstack.com/query/latest/docs/react/reference/useMutation) cómo registrar una función.
+La condición de error debe manejarse en la función de callback registrada para ello, consulta [aquí](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation) cómo registrar una función.
 
 #### Ejercicio 6.22.
 
