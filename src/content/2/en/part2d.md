@@ -49,6 +49,13 @@ const addNote = event => {
 
 We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources.
 
+
+> <i>The format of automatically generated IDs may differ between versions of json-server. For example, newer versions generate string IDs rather than incrementing the numeric IDs in the example data.</i>
+>
+> <i>This is expected behaviour and does not change how the application should identify resources. Treat IDs as unique identifiers without assuming that they are sequential or numeric. When creating a resource, use the ID returned by the server rather than generating one in the frontend.</i>
+>
+> <i>The same ID can then be used when retrieving, updating or deleting the resource.</i>
+
 The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.
 
 When we try to create a new note, the following output pops up in the console:
