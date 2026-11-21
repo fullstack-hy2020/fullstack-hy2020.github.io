@@ -100,7 +100,7 @@ const http = require('http')
 
 const app = http.createServer((request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/plain' })
-  response.end('Hello World')
+  response.send('Hello World')
 })
 
 const PORT = 3001
@@ -163,7 +163,7 @@ The next chunk in our code looks like this:
 ```js
 const app = http.createServer((request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/plain' })
-  response.end('Hello World')
+  response.send('Hello World')
 })
 ```
 
@@ -205,7 +205,7 @@ let notes = [
 
 const app = http.createServer((request, response) => {
   response.writeHead(200, { 'Content-Type': 'application/json' })
-  response.end(JSON.stringify(notes))
+  response.send(JSON.stringify(notes))
 })
 // highlight-end
 
@@ -216,7 +216,7 @@ console.log(`Server running on port ${PORT}`)
 
 Let's restart the server (you can shut the server down by pressing _Ctrl+C_ in the console) and let's refresh the browser.
 
-The <i>application/json</i> value in the <i>Content-Type</i> header informs the receiver that the data is in the JSON format. The _notes_ array gets transformed into JSON formatted string with the <em>JSON.stringify(notes)</em> method. This is necessary because the response.end() method expects a string or a buffer to send as the response body.
+The <i>application/json</i> value in the <i>Content-Type</i> header informs the receiver that the data is in the JSON format. The _notes_ array gets transformed into JSON formatted string with the <em>JSON.stringify(notes)</em> method. This is necessary because the response.send() method expects a string or a buffer to send as the response body.
 
 When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:
 
@@ -343,7 +343,7 @@ Next, let's take a quick look at the data sent in JSON format.
 In the earlier version where we were only using Node, we had to transform the data into the JSON formatted string with the _JSON.stringify_ method:
 
 ```js
-response.end(JSON.stringify(notes))
+response.send(JSON.stringify(notes))
 ```
 
 With Express, this is no longer required, because this transformation happens automatically.
@@ -478,7 +478,7 @@ app.get('/api/notes/:id', (request, response) => {
   if (note) {
     response.json(note)
   } else {
-    response.status(404).end()
+    response.status(404).send()
   }
   // highlight-end
 })
@@ -501,7 +501,7 @@ app.delete('/api/notes/:id', (request, response) => {
   const id = request.params.id
   notes = notes.filter(note => note.id !== id)
 
-  response.status(204).end()
+  response.status(204).send()
 })
 ```
 
