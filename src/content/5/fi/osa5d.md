@@ -1157,7 +1157,7 @@ Playwright ehdottaa siis kolmannen muistiinpanon lokaattoriksi seuraavaa
 page.locator('li').filter({ hasText: 'third note' }).getByRole('button')
 ```
 
-Metodia [page.locator](https://playwright.dev/docs/api/class-page#page-locator) kutsutaan parametrilla _li_ eli etsitään sivulta kaikki li-elementit, joita sivulla on yhteensä kolme. Tämän jälkeen rajaudutaan metodia [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) käyttäen siihen li-elementtiin, joka sisältää tekstin <i>third notemake not important</i> ja otetaan sen sisällä oleva button-elementti metodia [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) käyttäen.
+Metodia [page.locator](https://playwright.dev/docs/api/class-page#page-locator) kutsutaan parametrilla _li_ eli etsitään sivulta kaikki li-elementit, joita sivulla on yhteensä kolme. Tämän jälkeen rajaudutaan metodia [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) käyttäen siihen li-elementtiin, joka sisältää tekstin <i>third note</i> ja otetaan sen sisällä oleva button-elementti metodia [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) käyttäen.
 
 Playwrightin generoima lokaattori poikkeaa jossain määrin testien käyttämästä lokaattorista, joka oli
 
